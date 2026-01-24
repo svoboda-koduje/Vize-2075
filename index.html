@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hradec Králové 2075 | Plná Analýza</title>
+    <style>
+        :root {
+            --bg-body: #121212;
+            --bg-card: #1e1e1e;
+            --bg-modal: #252525;
+            --primary: #00e676;
+            --secondary: #2979ff;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --border: #333;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 { color: white; margin-top: 0; }
+        h1 { font-size: 2.8rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
+        h2 { border-left: 4px solid var(--primary); padding-left: 15px; margin-bottom: 30px; margin-top: 40px; }
+        h3 { color: var(--primary); margin-bottom: 10px; }
+        h4 { color: var(--secondary); margin-top: 25px; margin-bottom: 10px; font-size: 1.2rem; border-bottom: 1px solid #444; padding-bottom: 5px; }
+        p { margin-bottom: 15px; text-align: justify; font-size: 1.05rem; }
+        strong { color: white; font-weight: 700; }
+        em { color: var(--secondary); font-style: normal; font-weight: 600; }
+        
+        a { color: var(--primary); text-decoration: none; transition: 0.3s; }
+        a:hover { text-decoration: underline; color: white; }
+
+        /* --- HEADER --- */
+        header {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), var(--bg-body)), url('https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            padding: 120px 20px 80px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        header p {
+            text-align: center;
+            font-size: 1.3rem; 
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- CONTROLS --- */
+        .controls {
+            position: sticky;
+            top: 0;
+            background: rgba(18, 18, 18, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 15px 20px;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav-links button {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            cursor: pointer;
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+        .nav-links button:hover { color: white; background: rgba(255,255,255,0.1); }
+        .nav-links button.active { color: black; background: var(--primary); box-shadow: 0 0 15px rgba(0, 230, 118, 0.4); }
+
+        /* --- SEARCH & TRANSLATE --- */
+        .search-area {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-grow: 1;
+            max-width: 600px;
+            justify-content: flex-end;
+        }
+
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+        .search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #1e1e1e;
+    border: 1px solid var(--primary);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none; /* Skryté, dokud se nehledá */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #1e1e1e;
+    border: 1px solid var(--primary);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none; /* Skryté, dokud se nehledá */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+        .search-wrapper input {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .search-wrapper input:focus { border-color: var(--primary); outline: none; background: #333; }
+
+        .search-clear {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #777;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+        .search-clear:hover { color: white; }
+
+        /* Google Translate Customization */
+        #google_translate_element {
+            border-radius: 6px;
+            overflow: hidden;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            min-width: 160px;
+            height: 42px;
+        }
+        .goog-te-gadget-simple {
+            background-color: transparent !important;
+            border: none !important;
+            padding: 10px !important;
+            line-height: 20px !important;
+        }
+        .goog-te-gadget-simple span { color: white !important; font-weight: bold !important; }
+        .goog-te-gadget-icon { display: none !important; }
+
+        /* --- GRID --- */
+        .section-content { display: none; padding-top: 20px; animation: fadeIn 0.4s ease-in-out; }
+        .section-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 30px;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer; /* Celá karta je klikací */
+            position: relative;
+        }
+
+        .card:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--primary); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .card-header { display: flex; align-items: center; margin-bottom: 20px; }
+        .card-icon { font-size: 2.5rem; margin-right: 20px; width: 50px; text-align: center; }
+        .card-header h3 { margin: 0; font-size: 1.4rem; line-height: 1.3; }
+        
+        .card-preview {
+            flex-grow: 1;
+            margin-bottom: 25px;
+            color: var(--text-muted);
+            font-size: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-more-btn {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 12px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 4px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .card:hover .read-more-btn { background: var(--primary); color: black; }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 2000;
+            display: none; justify-content: center; align-items: flex-start;
+            padding: 40px 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--bg-modal); 
+            width: 100%; max-width: 1000px; 
+            max-height: 90vh;
+            border-radius: 12px; 
+            border: 1px solid #444;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8); 
+            display: flex; flex-direction: column;
+            animation: slideUp 0.3s;
+        }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .modal-header {
+            padding: 25px 40px; 
+            border-bottom: 1px solid #444; 
+            background: #1a1a1a;
+            border-radius: 12px 12px 0 0;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-shrink: 0;
+        }
+
+        .modal-body { 
+            padding: 40px 50px; 
+            font-size: 1.15rem; 
+            color: #dcdcdc; 
+            overflow-y: auto;
+            line-height: 1.8;
+        }
+        
+        .close-modal {
+            background: none; border: none; color: #999; font-size: 2.5rem; cursor: pointer;
+            padding: 0; line-height: 1; transition: 0.2s;
+        }
+        .close-modal:hover { color: var(--primary); transform: rotate(90deg); }
+
+        /* --- DICTIONARY & TABLE --- */
+        .dict-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        .dict-item { background: #222; padding: 25px; border-radius: 8px; border-left: 4px solid var(--secondary); }
+        .dict-term { color: var(--primary); font-weight: bold; font-size: 1.3rem; margin-bottom: 10px; display: block; }
+        
+        .scenario-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #222; font-size: 0.95rem; }
+        .scenario-table th, .scenario-table td { padding: 15px; border: 1px solid #444; text-align: left; vertical-align: top; }
+        .scenario-table th { background: #111; color: var(--primary); position: sticky; top: 0; }
+        .scenario-table tr:hover { background: #2a2a2a; }
+
+        /* --- FOOTER --- */
+        #references {
+            background: #080808; padding: 60px 20px; margin-top: 100px; border-top: 1px solid var(--border);
+        }
+        .ref-item { 
+            margin-bottom: 10px; padding: 15px; border-radius: 4px; 
+            display: flex; gap: 15px; align-items: flex-start;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .ref-id { color: var(--secondary); font-weight: bold; min-width: 40px; }
+        .ref-content { display: flex; flex-direction: column; }
+        .ref-title { color: white; font-weight: bold; font-size: 1.1rem; }
+        .ref-meta { color: #888; font-style: italic; font-size: 0.95rem; margin-top: 4px;}
+
+        @media (max-width: 900px) {
+            .controls { flex-direction: column; align-items: stretch; }
+            .nav-links { justify-content: center; }
+            .search-area { max-width: 100%; margin-top: 15px; }
+            h1 { font-size: 2rem; }
+            .modal-body { padding: 20px; }
+        }
+        /* --- COPYRIGHT BAR --- */
+.copyright-bar {
+    background-color: #000000; /* Úplně černé pozadí */
+    color: #666;              /* Tmavší šedá pro text (decentní) */
+    text-align: center;       /* Zarovnání na střed */
+    padding: 20px;            /* Odstupy */
+    font-size: 0.85rem;       /* Menší písmo */
+    border-top: 1px solid #1a1a1a; /* Jemná linka nahoře */
+    letter-spacing: 1px;      /* Jemné rozestupy písmen */
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Hradec Králové 2075</h1>
+    <p>Dynamika městského ekosystému v éře environmentální, psychologické, sociologické a technologické diskontinuity</p>
+</header>
+
+<div class="controls">
+    <div class="nav-links">
+        <button onclick="switchTab('intro')" id="btn-intro" class="active">Úvod & Teorie</button>
+        <button onclick="switchTab('analysis')" id="btn-analysis">Analýza 17 tematických oblastí</button>
+        <button onclick="switchTab('scenarios')" id="btn-scenarios">Scénáře</button>
+        <button onclick="switchTab('dictionary')" id="btn-dictionary">Slovník</button>
+        <button onclick="document.getElementById('references').scrollIntoView({behavior: 'smooth'})">Zdroje</button>
+    </div>
+    
+    <div class="search-area">
+        <div class="search-wrapper">
+    <input type="text" id="searchInput" placeholder="Hledat v analýze..." onkeyup="handleSearch()">
+    <button class="search-clear" onclick="clearSearch()" title="Vymazat hledání">✖</button>
+    <div id="searchResults" class="search-results"></div>
+</div>
+        <div id="google_translate_element" title="Přeložit stránku"></div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div id="intro" class="section-content active">
+        <div class="grid">
+            <div class="card" onclick="openModal('intro')" style="grid-column: 1 / -1; border-color: var(--secondary);">
+                <div class="card-header">
+                    <span class="card-icon">📄</span>
+                    <h3>1. Úvod: Metodologický rámec</h3>
+                </div>
+                <div class="card-preview">
+                    Rok 2075 představuje pro Hradec Králové, stejně jako pro celý středoevropský prostor, horizont ležící za hranicí konvenčního strategického plánování, avšak stále v dosahu demografické projekce života současné nejmladší generace. Tato prezentace si klade za cíl analyzovat trajektorie vývoje krajského města na soutoku Labe a Orlice v kontextu globálních megatrendů, lokálních specifik a hlubokých očekávatelných strukturálních změn. Analýza vychází z průniku sedmnácti definovaných tematických oblastí, od energetiky a klimatu po sociální strukturu, psychické zdraví a technologie, a je pevně rámována teoretickými koncepty Františka Koukolíka (sociální patologie, stupidita moci), Václava Cílka (kolaps, regenerace a resilience) a Martina Reese (existenční civilizační rizika). Svět roku 2075 je definován důsledky rozhodnutí – a často nerozhodnutí – učiněných v první polovině 21. století. Klimatické modely pro Českou republiku, které byly v minulosti považovány za varování, se staly fyzickou realitou projevující se výrazným oteplením a dramatickou změnou distribuce srážek. Demografické projekce, jež dlouhodobě avizovaly stárnutí populace, došly svého naplnění, čímž zásadně proměnily sociální a ekonomickou strukturu regionu. Technologický vývoj, směřující k bodu singularity, přinesl nástroje s bezprecedentním potenciálem tvoření i destrukce. V tomto dynamickém a často turbulentním prostředí se Hradec Králové transformoval ze „salonu republiky“ na entitu, jejíž primárním imperativem se stala adaptabilita a přežití v podmínkách, které Václav Cílek trefně nazývá „věkem nerovnováhy“. Předkládaná prezentace není pouhým souhrnem statistických dat, nýbrž pokusem o hloubkovou syntézu, která zohledňuje nelinearitu vývoje a komplexitu interakcí mezi jednotlivými systémy. Vychází z předpokladu, že město není jen souborem budov a infrastruktury, ale živým organismem – sociálním a biologickým systémem, jehož osud je determinován nejen fyzikálními zákony, ale i kvalitou lidského rozhodování. Právě zde, v průsečíku tvrdých dat a měkkých faktorů lidské psychiky, se odehrává drama budoucnosti.
+                </div>
+                <div class="read-more-btn">Číst detailní úvod</div>
+            </div>
+
+            <div class="card" onclick="openModal('theory-koukolik')">
+                <div class="card-header">
+                    <span class="card-icon">🧠</span>
+                    <h3>2.1 Homo sapiens stupidus a patologie moci (F. Koukolík)</h3>
+                </div>
+                <div class="card-preview">
+                    Analýza vychází ze stěžejního předpokladu, že technologický pokrok není automaticky doprovázen pokrokem morálním či kognitivním. Neuropatolog František Koukolík ve svých dílech Mocenská posedlost a Vzpoura deprivantů popisuje mechanismy, které formují politické rozhodování nezávisle na letopočtu. Klíčovým konceptem pro pochopení správy Hradce Králové v horizontu padesáti let je „syndrom mocenské pýchy“ (hybris), který postihuje jedince ve vrcholových funkcích. Tito jedinci, často vykazující znaky antisociální poruchy osobnosti (deprivanti), mají tendenci v krizových situacích – ať už jde o sucho, energetický kolaps nebo sociální nepokoje – upřednostnit vlastní mocenské přežití a zisk před zájmem komunity. Koukolík varuje před procesem „debilizace“ společnosti, která se projevuje růstem iracionality, neschopností kritického myšlení a podléháním propagandě. V kontextu Hradce Králové to naznačuje riziko, že i přes dostupnost sofistikovaných dat o klimatické změně či demografii budou politická rozhodnutí ovlivněna „skupinovou hloupostí“ – neschopností kolektivu jednat racionálně v zájmu vlastního dlouhodobého přežití. Fenomén „demokratury“, tedy formální demokracie ovládané oligarchickými strukturami, představuje pro město roku 2075 zásadní riziko, zejména v oblastech územního plánování, kde se střetávají zájmy developerů s potřebou ochrany veřejných statků, jako je voda či zeleň.
+                </div>
+                <div class="read-more-btn">Číst teorii</div>
+            </div>
+
+            <div class="card" onclick="openModal('theory-cilek')">
+                <div class="card-header">
+                    <span class="card-icon">🌑</span>
+                    <h3>2.2 Kolaps, regenerace a resilience (V. Cílek)</h3>
+                </div>
+                <div class="card-preview">
+                    Václav Cílek poskytuje nezbytný historický a filosofický rámec pro chápání cyklické povahy civilizací. Jeho pojetí „kolapsu“ není nutně katastrofickým koncem, nýbrž zjednodušením složitého systému, který narazil na své limity a vyčerpal své zdroje. Pro Hradec Králové roku 2075 je naprosto klíčový pojem „resilience“ (odolnost) – schopnost systému absorbovat šok, reorganizovat se a zachovat si přitom svou základní funkci a identitu. Cílek ve své knize Ruka noci podaná zdůrazňuje význam „něžného prepperství“ a budování malých, soběstačných komunit. Vize budoucnosti města tedy musí zohlednit, zda se Hradec dokáže vnitřně decentralizovat, zda vzniknou a udrží se funkční sousedské sítě (jak naznačují současné projekty typu komunitní zahrada Na Střeláku), a zda bude zachována „paměť krajiny“ a elementární řemeslné dovednosti nutné pro přežití v případě selhání globálních dodavatelských řetězců.
+                </div>
+                <div class="read-more-btn">Číst teorii</div>
+            </div>
+
+            <div class="card" onclick="openModal('theory-rees')">
+                <div class="card-header">
+                    <span class="card-icon">⚠️</span>
+                    <h3>2.3 Technologická rizika a „Naše poslední hodina“ (M. Rees)</h3>
+                </div>
+                <div class="card-preview">
+                    Martin Rees, britský kosmolog a astrofyzik, varuje, že 21. století je prvním obdobím v historii Země, kdy jeden biologický druh – člověk – má schopnost zničit biosféru i sám sebe, a to ať už omylem, nebo zlým úmyslem. V roce 2075 budou technologie jako pokročilé biotechnologie, nanotechnologie a umělá inteligence (AI) plně rozvinuty a integrovány do městské infrastruktury. Pro Hradec Králové, jakožto univerzitní a výzkumné centrum (UHK, Lékařská fakulta UK, Farmaceutická fakulta), to přináší specifická, lokálně generovaná rizika. Rees upozorňuje na demokratizaci destrukce – fakt, že malá skupina nebo dokonce jedinec může pomocí bioinženýrství (např. syntetický virus) nebo kybernetického útoku způsobit katastrofu lokálního i globálního rozsahu. V kontextu města roku 2075 to znamená, že bezpečnostní architektura musí počítat nejen s tradičními vnějšími hrozbami, ale i s riziky plynoucími z „laboratoře v garáži“ či z chyb v kódu, který řídí kritickou infrastrukturu.
+                </div>
+                <div class="read-more-btn">Číst teorii</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="analysis" class="section-content">
+        <h2>3. Detailní analýza 17 tematických oblastí</h2>
+        <p style="margin-bottom: 30px; color: #888;">Kliknutím na kartu zobrazíte kompletní, nezkrácený text analýzy daného tématu.</p>
+        <div class="grid" id="topics-grid">
+            </div>
+    </div>
+
+    <div id="scenarios" class="section-content">
+        <h2>4. Scénáře vývoje pro rok 2075</h2>
+        <div class="grid">
+            <div class="card" onclick="openModal('scenario-a')" style="border-color: var(--primary);">
+                <div class="card-header">
+                    <span class="card-icon">☀️</span>
+                    <h3>Scénář A: RESILIENTNÍ MĚSTO</h3>
+                </div>
+                <div class="card-preview">Optimistická vize. Vítězství rozumu a adaptace. Hradec jako „Modro-zelené město“ s decentralizovanou energetikou a silnou komunitou.</div>
+                <div class="read-more-btn">Číst detailní scénář</div>
+            </div>
+
+            <div class="card" onclick="openModal('scenario-b')" style="border-color: #f1c40f;">
+                <div class="card-header">
+                    <span class="card-icon">⚖️</span>
+                    <h3 style="color:#f1c40f">Scénář B: MĚSTO ADAPTACE</h3>
+                </div>
+                <div class="card-preview">Realistická vize. „Muddling through“. Město kontrastů, drahé vody a technokracie. Společnost polarizovaná, ale funkční.</div>
+                <div class="read-more-btn">Číst detailní scénář</div>
+            </div>
+
+            <div class="card" onclick="openModal('scenario-c')" style="border-color: #e74c3c;">
+                <div class="card-header">
+                    <span class="card-icon">☠️</span>
+                    <h3 style="color:#e74c3c">Scénář C: FRAGMENTOVANÉ MĚSTO</h3>
+                </div>
+                <div class="card-preview">Pesimistická vize. Kolaps systémů, nadvláda gangů a toxické prostředí. Rozpad města na izolované enklávy.</div>
+                <div class="read-more-btn">Číst detailní scénář</div>
+            </div>
+        </div>
+
+        <h3 style="margin-top:50px">Srovnávací tabulka scénářů</h3>
+        <div style="overflow-x: auto;">
+            <table class="scenario-table">
+                <thead>
+                    <tr>
+                        <th>Oblast</th>
+                        <th>Scénář A: Resilientní město</th>
+                        <th>Scénář B: Město adaptace</th>
+                        <th>Scénář C: Fragmentované město</th>
+                    </tr>
+                </thead>
+                <tbody id="scenario-table-body">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="dictionary" class="section-content">
+        <h2>Výkladový slovník pojmů</h2>
+        <div class="dict-grid" id="dict-grid">
+            </div>
+    </div>
+
+</div>
+
+<footer id="references">
+    <div class="container">
+        <h2>Seznam použitých zdrojů a literatury</h2>
+        <div id="ref-container">
+            </div>
+    </div>
+</footer>
+<div class="copyright-bar">
+    &copy; Jaroslav Svoboda, Hradec Králové
+</div>
+
+<div class="modal-overlay" id="modal" onclick="if(event.target === this) closeModal()">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modal-title" style="margin:0; font-size: 1.5rem; color: white;">Titulek</h2>
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body" id="modal-body">
+            </div>
+    </div>
+</div>
+
+<script>
+    // --- DATABASE: PLNÉ TEXTY Z DOCX (Zdroje 300-610) ---
+    const DB = {
+        intro: `
+            <p>Rok 2075 představuje pro Hradec Králové, stejně jako pro celý středoevropský prostor, horizont ležící za hranicí konvenčního strategického plánování, avšak stále v dosahu demografické projekce života současné nejmladší generace. Tato zpráva si klade za cíl analyzovat trajektorie vývoje krajského města na soutoku Labe a Orlice v kontextu globálních megatrendů, lokálních specifik a hlubokých strukturálních změn.</p>
+            <p>Analýza vychází z průniku šestnácti definovaných tematických oblastí, od energetiky a klimatu po sociální strukturu a technologie, a je pevně rámována teoretickými koncepty Františka Koukolíka (sociální patologie, stupidita moci), Václava Cílka (kolaps, regenerace a resilience) a Martina Reese (existenční rizika).</p>
+            <p>Svět roku 2075 je definován důsledky rozhodnutí – a často nerozhodnutí – učiněných v první polovině 21. století. Klimatické modely pro Českou republiku, které byly v minulosti považovány za varování, se staly fyzickou realitou projevující se výrazným oteplením a dramatickou změnou distribuce srážek. Demografické projekce, jež dlouhodobě avizovaly stárnutí populace, došly svého naplnění, čímž zásadně proměnily sociální a ekonomickou strukturu regionu.</p>
+            <p>Technologický vývoj, směřující k bodu singularity, přinesl nástroje s bezprecedentním potenciálem tvoření i destrukce. V tomto dynamickém a často turbulentním prostředí se Hradec Králové transformoval z „salonu republiky“ na entitu, jejíž primárním imperativem se stala adaptabilita a přežití v podmínkách, které Václav Cílek trefně nazývá „věkem nerovnováhy“.</p>
+            <p>Předkládaná zpráva není pouhým souhrnem statistických dat, nýbrž pokusem o hloubkovou syntézu, která zohledňuje nelinearitu vývoje a komplexitu interakcí mezi jednotlivými systémy. Vychází z předpokladu, že město není jen souborem budov a infrastruktury, ale živým organismem – sociálním a biologickým systémem, jehož osud je determinován nejen fyzikálními zákony, ale i kvalitou lidského rozhodování. Právě zde, v průsečíku tvrdých dat a měkkých faktorů lidské psychiky, se odehrává drama budoucnosti.</p>
+        `,
+        theories: {
+            koukolik: `
+                <h4>Homo sapiens stupidus a patologie moci</h4>
+                <p>Analýza vychází ze stěžejního předpokladu, že technologický pokrok není automaticky doprovázen pokrokem morálním či kognitivním. Neuropatolog František Koukolík ve svých dílech <em>Mocenská posedlost</em> a <em>Vzpoura deprivantů</em> popisuje mechanismy, které formují politické rozhodování nezávisle na letopočtu.</p>
+                <p>Klíčovým konceptem pro pochopení správy Hradce Králové v horizontu padesáti let je „syndrom mocenské pýchy“ (hybris), který postihuje jedince ve vrcholových funkcích. Tito jedinci, často vykazující znaky antisociální poruchy osobnosti (deprivanti), mají tendenci v krizových situacích – ať už jde o sucho, energetický kolaps nebo sociální nepokoje – upřednostnit vlastní mocenské přežití a zisk před zájmem komunity.</p>
+                <p>Koukolík varuje před procesem „debilizace“ společnosti, která se projevuje růstem iracionality, neschopností kritického myšlení a podléháním propagandě. V kontextu Hradce Králové to naznačuje riziko, že i přes dostupnost sofistikovaných dat o klimatické změně či demografii budou politická rozhodnutí ovlivněna „skupinovou hloupostí“ – neschopností kolektivu jednat racionálně v zájmu vlastního dlouhodobého přežití.</p>
+                <p>Fenomén „demokratury“, tedy formální demokracie ovládané oligarchickými strukturami, představuje pro město roku 2075 zásadní riziko, zejména v oblastech územního plánování, kde se střetávají zájmy developerů s potřebou ochrany veřejných statků, jako je voda či zeleň.</p>
+            `,
+            cilek: `
+                <h4>Kolaps, regenerace a resilience</h4>
+                <p>Václav Cílek poskytuje nezbytný historický a filosofický rámec pro chápání cyklické povahy civilizací. Jeho pojetí „kolapsu“ není nutně katastrofickým koncem, nýbrž zjednodušením složitého systému, který narazil na své limity a vyčerpal své zdroje.</p>
+                <p>Pro Hradec Králové roku 2075 je naprosto klíčový pojem „resilience“ (odolnost) – schopnost systému absorbovat šok, reorganizovat se a zachovat si přitom svou základní funkci a identitu. Cílek ve své knize <em>Ruka noci podaná</em> zdůrazňuje význam „něžného prepperství“ a budování malých, soběstačných komunit.</p>
+                <p>Vize budoucnosti města tedy musí zohlednit, zda se Hradec dokáže vnitřně decentralizovat, zda vzniknou a udrží se funkční sousedské sítě (jak naznačují současné projekty typu komunitní zahrada Na Střeláku), a zda bude zachována „paměť krajiny“ a elementární řemeslné dovednosti nutné pro přežití v případě selhání globálních dodavatelských řetězců.</p>
+            `,
+            rees: `
+                <h4>Technologická rizika a „Naše poslední hodina“</h4>
+                <p>Martin Rees, britský kosmolog a astrofyzik, varuje, že 21. století je prvním obdobím v historii Země, kdy jeden biologický druh – člověk – má schopnost zničit biosféru i sám sebe, a to ať už omylem, nebo zlým úmyslem.</p>
+                <p>V roce 2075 budou technologie jako pokročilé biotechnologie, nanotechnologie a umělá inteligence (AI) plně rozvinuty a integrovány do městské infrastruktury. Pro Hradec Králové, jakožto univerzitní a výzkumné centrum (UHK, Lékařská fakulta UK, Farmaceutická fakulta), to přináší specifická, lokálně generovaná rizika.</p>
+                <p>Rees upozorňuje na demokratizaci destrukce – fakt, že malá skupina nebo dokonce jedinec může pomocí bioinženýrství (např. syntetický virus) nebo kybernetického útoku způsobit katastrofu lokálního i globálního rozsahu. V kontextu města roku 2075 to znamená, že bezpečnostní architektura musí počítat nejen s tradičními vnějšími hrozbami, ale i s riziky plynoucími z „laboratoře v garáži“ či z chyb v kódu, který řídí kritickou infrastrukturu.</p>
+            `
+        },
+        topics: [
+            {
+                id: "energetika",
+                title: "3.1 Energetika: Od uhelné závislosti k decentralizované resilienci",
+                icon: "⚡",
+                fullText: `
+                    <p>Energetika představuje pro Hradec Králové v roce 2075 doslova „nervovou soustavu“ města. Bez ní kolabuje nejen průmysl a doprava, ale i základní životní funkce jako zásobování vodou (tlaková čerpadla), teplem a komunikace. Historie regionu je úzce spjata s Elektrárnou Opatovice (EOP), která po desetiletí zajišťovala stabilní a cenově dostupné teplo. V roce 2075 je však energetická mapa regionu radikálně odlišná. Éra uhlí skončila již kolem roku 2030, jak bylo plánováno v první polovině století, a město prošlo fází bolestivé, ale nevyhnutelné transformace.</p>
+<h4>Transformace zdroje Opatovice</h4>
+<p>Původní scénáře z počátku 21. století počítaly s masivním přechodem na zemní plyn jako „překlenovací palivo“. Avšak geopolitická nestabilita, volatilita cen a neúprosný tlak na dekarbonizaci tento plán zkomplikovaly a částečně revidovaly. V roce 2075 je areál bývalé uhelné elektrárny Opatovice (nyní „Energetický park Opatovice“) komplexním technologickým hubem. Jeho srdcem je velkokapacitní Zařízení pro energetické využití odpadu (ZEVO), které zpracovává komunální odpad nejen z Hradce a Pardubic, ale i ze širší spádové oblasti. Ačkoliv proti výstavbě ZEVO byly v minulosti vedeny silné protesty ze strany obcí a ekologických organizací, realita „věku nerovnováhy“ ukázala, že odpad je jedním z mála spolehlivých, lokálně dostupných paliv v post-fosilní éře. Koukolíkova teze o „stupiditě“ se zde projevuje v historické perspektivě – odpor proti ZEVO v dřívějších dekádách byl často veden iracionálním strachem („NIMBY efekt“), nikoli daty, což zpozdilo modernizaci a zbytečně zvýšilo náklady na transformaci.</p>
+<p>Kromě ZEVO využívá opatovický uzel také vodíkové technologie. Díky strategickému napojení na „Czech Hydrogen Backbone“, který je součástí celoevropské sítě, slouží Opatovice jako distribuční bod a úložiště zeleného vodíku pro regionální průmysl a těžkou dopravu. Nicméně, jak varují experti, vodík není všespásným řešením a jeho výroba je energeticky náročná. V realistickém scénáři roku 2075 zůstává vodík drahým palivem, vyhrazeným pro specifické, obtížně dekarbonizovatelné sektory, nikoli pro plošné vytápění domácností.</p>
+<h4>Komunitní energetika a decentralizace</h4>
+<p>Klíčovým trendem, který formuje energetiku Hradce Králové v roce 2075, je odklon od monolitické závislosti na jednom centrálním zdroji. Poučeni historickými krizemi, blackouty a cenovými šoky, obyvatelé i samospráva masivně investovali do komunitní energetiky. Veřejné budovy, školy, úřady a bytové domy jsou pokryty fotovoltaickými panely nové generace (např. na bázi perovskitů s vysokou účinností).</p>
+<p>Projekt „sdílení elektřiny“, pilotovaný na hradeckých školách ve 20. letech 21. století, se stal běžným standardem. Městské čtvrti jako Malšovice, Třebeš či Nový Hradec fungují jako tzv. „microgrids“ – energetické ostrovy, které jsou schopny v případě výpadku páteřní sítě fungovat samostatně, byť v omezeném režimu. Zde se v praxi projevuje Cílkův koncept resilience. Odolnost systému není dána robustností jedné velké zdi (jedné elektrárny), ale pružností a redundancí sítě mnoha malých zdrojů. Sídliště Moravské Předměstí prošlo hlubokou renovací v rámci evropské „renovation wave“ – panelové domy se staly „aktivními budovami“, které energii nejen spotřebovávají, ale i vyrábějí a ukládají do lokálních bateriových úložišť.</p>
+<h4>Geotermální potenciál</h4>
+<p>Hradec Králové leží v oblasti se zajímavým, byť ne špičkovým, geotermálním potenciálem. V roce 2075 jsou velké administrativní komplexy, jako je centrála ČSOB, úřady či areál Fakultní nemocnice, vytápěny a chlazeny pomocí systémů hlubinných vrtů a tepelných čerpadel země-voda. To výrazně snižuje zátěž na centrální soustavu dálkového vytápění a eliminuje lokální emise. Nicméně, masivní plošné nasazení hlubinné geotermie narazilo na geologické limity a vysokou investiční náročnost, takže zůstává doplňkovým, nikoli dominantním zdrojem.</p>
+<h4>Rizika a zranitelnost</h4>
+<p>Martin Rees ve své knize Naše poslední hodina varuje před extrémní zranitelností technologické infrastruktury. V roce 2075 je energetická síť plně digitální („ Smart Grid“), řízená autonomními algoritmy umělé inteligence. To přináší efektivitu, ale i nové, dosud nepoznané riziko. Kybernetický útok na řídící systémy nebo extrémní sluneční bouře (opakování tzv. Carringtonovy události) by mohly město uvrhnout do tmy na týdny či měsíce. Zatímco „optimistický scénář“ počítá s dokonalou kybernetickou ochranou a redundancí, „realistický scénář“ (ovlivněný Koukolíkovým Homo sapiens stupidus) naznačuje, že údržba a bezpečnostní protokoly mohou být zanedbány kvůli úsporám, korupci či nekompetenci ( deprivanti“ ve vedení energetických firem). Pokud by nastal dlouhodobý blackout v zimě, obyvatelé pasivních domů bez komínů a záložních zdrojů (Cílkova „kamna Petra“) by čelili existenčnímu ohrožení. Právě zde se ukáže, kdo byl prozíravým „prepperem“ a kdo spoléhal na všemocný stát.</p>
+                `
+            },
+            {
+                id: "klima",
+                title: "3.2 Klima: Život v „Polabské výhni“",
+                icon: "☀️",
+                fullText: `
+                    <p>Klimatické modely pro Českou republiku se do roku 2075 naplnily v horních hranicích pesimistických predikcí. Hradec Králové čelí klimatu, které svými parametry připomíná severní Afriku či nejteplejší oblasti Balkánu, avšak s výrazně vyšší nestabilitou a extremitou jevů.</p>
+<h4>Městský tepelný ostrov (UHI)</h4>
+<p>Nejpalčivějším problémem města je fenomén městského tepelného ostrova. Centrum města, s vysokým podílem historických zpevněných ploch (Velké náměstí, Ulrichovo náměstí), se stává v letních měsících tepelnou pastí. Teploty povrchů zde mohou dosahovat hodnot, které činí pobyt venku přes den zdraví nebezpečným. Počet tropických dnů (nad 30 °C) a zejména tropických nocí (nad 20 °C), které neumožňují organismu regeneraci, se znásobil. Adaptace se stala otázkou přežití. Město muselo přistoupit k radikální změně urbanismu – zavedení „zeleného prstence“ kolem města, který by ochlazoval přicházející vzduch, a masivní implementaci modro-zelené infrastruktury v ulicích. Stromy, vodní prvky a propustné povrchy nejsou v roce 2075 estetickým doplňkem, ale kritickou infrastrukturou.</p>
+<h4>Hydrologické extrémy</h4>
+<p>Přestože celkový roční úhrn srážek se podle modelů nemusí dramaticky snížit, jejich časová distribuce se změnila k nepoznání. Dlouhá období sucha, trvající týdny i měsíce, jsou střídána krátkými epizodami extrémních přívalových dešťů. Kanalizační síť, dimenzovaná na poměry 20. století, není schopna tyto nápory zvládnout. Město proto muselo vybudovat systém retenčních nádrží, poldrů a vsakovacích prvků, aby vodu zadrželo v místě dopadu. Hrozba bleskových povodní je trvalá, i když velké řeky Labe a Orlice mají v létě často kriticky nízké průtoky, což omezuje jejich schopnost ředit vypouštěné odpadní vody a ochlazovat město. Koukolíkův postřeh, že lidé si „řežou větev, na které sedí“, se zde projevuje v tlaku developerů na zastavování ploch, které by měly sloužit k přirozené retenci vody.</p>
+                `
+            },
+            {
+                id: "voda",
+                title: "3.3 Voda: Strategická surovina a limit růstu",
+                icon: "💧",
+                fullText: `
+                    <p>Voda je v Hradci Králové roku 2075 nejcennější komoditou, jejíž strategický význam převyšuje význam energií. Cena vody vzrostla na úroveň, která nutí k radikální změně chování.</p>
+<h4>Zdroje pitné vody</h4>
+<p>Hradec Králové je historicky závislý na kvalitních podzemních zdrojích z oblasti Litá a na úpravně vody na řece Orlici. V důsledku klimatické změny však dochází k dlouhodobému poklesu hladiny podzemních vod a snížení průtoků v řekách. Úpravna vody na Orlici, dříve využívaná jako doplňkový zdroj, jede v roce 2075 často na hranici kapacity. Kvalita surové vody v řece je však problematická – vyšší teploty vody vedou k eutrofizaci a přemnožení sinic, a ve vodě se kumulují mikropolutanty (farmaka, mikroplasty), jejichž odstranění vyžaduje nákladné technologie. Scénář „vodního stresu“ je reálný, pokud nedojde k efektivnímu propojení vodárenských soustav v rámci celého východočeského regionu.</p>
+<h4>Revitalizace a retence</h4>
+<p>Vědomí hodnoty vody vedlo k realizaci projektů revitalizace toků. Soutok Labe a Orlice a slepá ramena (např. Jordán) byly upraveny tak, aby plnily nejen vodohospodářskou, ale i ekologickou a rekreační funkci. V roce 2075 je řeka vnímána jako vitální tepna města. Cílkova vize „hydrologicky integrované krajiny“, kde se voda zadržuje v každém kousku půdy, se stala nutností. V okolí města vznikly nové mokřady a záplavová území, která mají za úkol zpomalit odtok vody a dotovat podzemní horizonty.</p>
+<h4>Hospodaření s vodou</h4>
+<p>V domácnostech a průmyslu je v roce 2075 standardem přísná recyklace. Nové budovy jsou povinně vybaveny systémy na využití šedé vody (např. ze sprch a umyvadel pro splachování toalet) a na zachytávání dešťové vody. Pitná voda je luxusem určeným výhradně k pití a vaření; pro ostatní účely se využívá voda užitková. Cena vodného a stočného je nástrojem regulace spotřeby.</p>
+                `
+            },
+            {
+                id: "biosfera",
+                title: "3.4 Biosféra: Nová divočina v antropocenní krajině",
+                icon: "🌿",
+                fullText: `
+                    <p>Ekosystémy v Hradci Králové a jeho okolí prošly do roku 2075 zásadní proměnou, vynucenou změnou klimatu a lidskou činností.</p>
+<h4>Proměna lesů a zeleně</h4>
+<p>Původní jehličnaté porosty (smrk, borovice) v Městských lesích, které byly po staletí pýchou města, byly zdecimovány kůrovcovými kalamitami a suchem v první polovině století. V roce 2075 jsou nahrazeny smíšenými teplomilnými lesy, v nichž dominují duby, javory, habry a nepůvodní druhy, které lépe snášejí aridní podmínky (např. dřezovec, pajasan). Městská zeleň se musela adaptovat – trávníky, které vyžadují závlahu, zmizely a byly nahrazeny suchomilnými společenstvy a štěrkovými záhony.</p>
+<h4>Invazní druhy a mikroplasty</h4>
+<p>V Labi a Orlici se v důsledku oteplení vody vyskytují teplomilné druhy ryb a invazní měkkýši, kteří vytlačují původní faunu. Ve městě se daří synantropním druhům adaptovaným na horko, jako jsou potkani či invazní druhy hmyzu (např. komáři přenášející exotické choroby). Vážným problémem je všudypřítomná kontaminace biosféry mikroplasty. Ty jsou přítomny v půdě, vodě i vzduchu. Studie potvrzují, že mikroplasty mohou snižovat fotosyntetickou aktivitu rostlin a narušovat hormonální systémy živočichů, což má kaskádovité dopady na celý ekosystém.</p>
+                `
+            },
+            {
+                id: "zemedelstvi",
+                title: "3.5 Zemědělství: Adaptace na „Polabskou poušť",
+                icon: "🌾",
+                fullText: `
+                    <p>Zemědělství v okolí Hradce Králové, v úrodném Polabí, muselo projít radikální změnou, aby se vyrovnalo s nedostatkem vláhy a vysokými teplotami.</p>
+<h4>Změna skladby plodin</h4>
+<p>Tradiční plodiny jako pšenice, ječmen a řepka, které dominovaly krajině na počátku století, ustoupily druhům odolnějším vůči suchu. V roce 2075 se na polích kolem Hradce pěstuje čirok, kukuřice na zrno, sója a slunečnice. Změna klimatu umožnila rozvoj vinařství – vinice na jižních svazích kolem Kuksu a Chlumu jsou běžnou součástí krajiny. Naopak tradiční pěstování chmele v regionu je ohroženo nebo se muselo přesunout do vyšších poloh či do řízených podmínek.</p>
+<h4>High-tech zemědělství a vertikální farmy</h4>
+<p>Zemědělství je v roce 2075 vysoce technologizované. Pole obdělávají autonomní stroje a roboty (agriboti). Zavlažování je precizně řízeno umělou inteligencí na základě dat ze satelitů a půdních senzorů, aby se neplýtvalo ani kapkou vody. Významným fenoménem je rozvoj urbánního zemědělství. V areálech bývalých továren a brownfieldů (např. ZVU, ČKD) vyrostly vertikální farmy a hydroponické skleníky. Tyto provozy zajišťují městu lokální produkci čerstvé zeleniny a bylinek celoročně, nezávisle na výkyvech počasí, a naplňují tak Cílkovu vizi potravinové bezpečnosti a „prodeje ze dvora“.</p>
+                `
+            },
+            {
+                id: "zdravi",
+                title: "3.6 Zdraví: Geriatrická výzva a technologická medicína",
+                icon: "🏥",
+                fullText: `
+                    <p>Zdravotní profil populace Hradce Králové je v roce 2075 determinován dvěma hlavními faktory: extrémním stárnutím a vlivem technologií a životního prostředí.</p>
+<h4>Stárnutí populace</h4>
+<p>Královéhradecký kraj je dlouhodobě jedním z nejstarších regionů v ČR a tento trend se do roku 2075 prohloubil. Senioři ve věku nad 65 let tvoří dominantní část populace (odhadem 30–40 %). To vytváří enormní tlak na zdravotní a sociální systém. Fakultní nemocnice Hradec Králové se transformovala na centrum specializované na geriatrii, léčbu neurodegenerativních chorob a onkologii. Nedostatek lidského personálu je kompenzován nasazením robotických asistentů v ošetřovatelství a využitím AI v diagnostice.</p>
+<h4>Nové zdravotní hrozby</h4>
+<p>Kromě klasických civilizačních chorob čelí obyvatelé novým hrozbám. Vlny veder zvyšují úmrtnost, zejména u starší populace (kardiovaskulární selhání). Šíří se nemoci přenášené vektory (klíšťata, komáři), které dříve v regionu nebyly endemické (např. západonilská horečka). Vážným problémem je rostoucí rezistence bakterií na antibiotika, což komplikuje léčbu běžných infekcí. Dalším tichým zabijákem je vliv mikroplastů a endokrinních disruptorů na lidskou plodnost, která dramaticky klesá. Asistovaná reprodukce se stala spíše standardem než výjimkou.</p>
+<h4>Digitální zdraví a demence</h4>
+<p>Technologie přinášejí pokrok v léčbě (genová terapie, telemedicína, domácí monitorování), ale mají i odvrácenou stranu. Fenomén „digitální demence“, způsobený nadužíváním digitálních technologií a ztrátou kognitivních schopností u části populace, představuje vážný sociální a zdravotní problém. To koresponduje s Koukolíkovým varováním před „debilizací“ společnosti.</p>
+                `
+            },
+            {
+                id: "tech",
+                title: "3.7 Technologie a AI: Všudypřítomná inteligence a riziko kontroly",
+                icon: "🤖",
+                fullText: `
+                    <p>V roce 2075 je Hradec Králové plně digitalizované „Smart City“. Technologie prostupují každým aspektem života, od dopravy po správu věcí veřejných.</p>
+<h4>Umělá inteligence a správa</h4>
+<p>Mnoho rozhodovacích procesů ve městě – řízení dopravy, distribuce energií, administrativa – je automatizováno a řízeno systémy umělé inteligence (AI Governance). To přináší efektivitu a optimalizaci zdrojů, ale zároveň nese riziko „technokratické slepoty“ a ztráty lidské kontroly, před čímž varuje Martin Rees. Algoritmy mohou optimalizovat město podle kritérií, která nemusí být v souladu s lidskými hodnotami či sociální spravedlností.</p>
+<h4>Technologická singularita</h4>
+<p>Otázkou zůstává, zda v roce 2075 již došlo k „technologické singularitě“, tedy bodu, kdy AI překoná lidskou inteligenci a začne se sama vylepšovat. Pokud ano, město je součástí globální superinteligentní sítě, jejíž cíle a motivace mohou být pro běžného člověka nepochopitelné. Pro Hradec Králové, jako sídlo IT firem a technologického centra, je tento vývoj bezprostřední realitou.</p>
+<h4>Bezpečnostní rizika</h4>
+<p>Rozvoj kvantových počítačů přináší hrozbu prolomení současných šifrovacích standardů, což ohrožuje bezpečnost dat v bankovnictví, zdravotnictví i státní správě. Město musí neustále investovat do kybernetické bezpečnosti, aby chránilo svou kritickou infrastrukturu.</p>
+                `
+            },
+            {
+                id: "doprava",
+                title: "3.8 Doprava: Konec éry řidičů a nástup VRT",
+                icon: "🚀",
+                fullText: `
+                    <p>Doprava v Hradci Králové roku 2075 je čistá, tichá a převážně autonomní. Individuální automobilismus v centru města prakticky zmizel.</p>
+<h4>Mobilita jako služba (MaaS)</h4>
+<p>Vlastnictví osobního automobilu se stalo luxusem nebo koníčkem. Většina obyvatel využívá systém „Mobility as a Service“ (MaaS) – integrovanou síť sdílených autonomních vozidel (robotaxi, autonomní pody), elektrobusů a trolejbusů. Doprava je plynulá, řízená centrální AI, která optimalizuje toky vozidel. Ulice v centru města jsou designovány primárně pro chodce, cyklisty a zeleň, nikoli pro parkování aut.</p>
+<h4>Vysokorychlostní železnice (VRT)</h4>
+<p>Zásadním impulsem pro rozvoj města byla realizace vysokorychlostní trati RS5 Praha – Hradec Králové – Wroclaw. Cesta do Prahy trvá pouhých 30 minut, což Hradec fakticky integrovalo do metropolitní oblasti hlavního města. To přináší ekonomické šance, příliv investic a obyvatel (Hradec jako lukrativní rezidenční zóna), ale zároveň riziko „vysávání“ talentů a růstu cen bydlení, které vytlačuje původní obyvatele.</p>
+<h4>Cyklistika</h4>
+<p>Díky rovinatému terénu a tradici je cyklistika (a zejména elektrokola) dominantním prostředkem pro vnitroměstské cesty. Síť cyklostezek, včetně „Hradecké magistrály“, je oddělena od ostatní dopravy a tvoří páteř městské mobility.</p>
+                `
+            },
+            {
+                id: "ekonomika",
+                title: "3.9 Ekonomika: Mezi globálním růstem a lokální cirkularitou",
+                icon: "💰",
+                fullText: `
+                    <p>Ekonomika Hradce Králové se musela adaptovat na svět po konci levných zdrojů. Balancuje mezi zapojením do globálních high-tech řetězců a budováním lokální odolnosti.</p>
+<h4>Struktura ekonomiky</h4>
+<p>Těžký průmysl z města prakticky vymizel. Tradiční firmy jako Petrof či ZVU se transformovaly, fúzoval nebo zanikly. Ekonomika stojí na službách s vysokou přidanou hodnotou, zdravotnictví, výzkumu a vývoji (napojení na UHK a FN HK). Rozvíjí se biotechnologie, nanotechnologie a digitální služby.</p>
+<h4>Cirkulární ekonomika</h4>
+<p>Ekonomický model je přísně cirkulární. Důraz je kladen na opravitelnost, repasi a recyklaci výrobků. „Odpad“ neexistuje, je to jen surovina na špatném místě. ZEVO Opatovice a specializovaná recyklační centra zpracovávají materiály a vracejí je do oběhu.</p>
+<h4>Lokální měny a dluh</h4>
+<p>Globální finanční systém je nestabilní, zatížený obrovskými dluhy států. Jako reakce na tuto nestabilitu a pro posílení lokální ekonomiky fungují v Hradci a okolí paralelní systémy výměny hodnot – lokální měny, systémy LETS (Local Exchange Trading Systems) a časové banky. Tyto systémy posilují odolnost komunity v dobách krizí, jak předpovídal Cílek. Oficiální měnou je digitální měna centrální banky (CBDC), která umožňuje efektivní transakce, ale také totální dohled státu nad finančními toky občanů.</p>
+                `
+            },
+            {
+                id: "spolecnost",
+                title: "3.10 Společnost: Fragmentace, kmeny a nerovnost",
+                icon: "👥",
+                fullText: `
+                    <p>Sociální struktura města je v roce 2075 složitá a fragmentovaná.</p>
+<h4>Sociální nerovnost a „digitální proletariát“ </h4>
+<p>Technologický pokrok a automatizace vedly k rozevírání nůžek mezi vysoce kvalifikovanou elitou (technokraté, vědci, vlastníci kapitálu) a tzv. „digitálním proletariátem“ – lidmi, jejichž práce byla nahrazena AI nebo je prekarizovaná a nízce ohodnocená (služby, péče). Hrozí vznik sociálně vyloučených lokalit i opevněných čtvrtí pro bohaté („gated communities ), jako jsou projekty v lokalitě Plachta či U Myslivny.</p>
+<h4>Polarizace a nové kmeny</h4>
+<p>Společnost je polarizovaná, lidé žijí v informačních a sociálních bublinách posilovaných algoritmy sociálních sítí. Koukolíkova „skupinová hloupost“ a manipulace veřejným míněním ze strany „deprivantů“ v politice ztěžují hledání celospolečenského konsensu. Jako obrana proti atomizaci a nejistotě vznikají silné lokální a zájmové komunity („ kmeny“ ), které si vzájemně pomáhají, sdílejí zdroje a v některých oblastech suplují roli státu.</p>
+<h4>Migrace a integrace</h4>
+<p>Město je domovem významné komunity klimatických a ekonomických migrantů, kteří přišli v důsledku změn v jižní Evropě, Africe a Asii. Integrace těchto skupin je klíčovou výzvou pro sociální soudržnost. Úspěšná integrace obohacuje město kulturně i ekonomicky, selhání vede ke vzniku paralelních společností a konfliktů.</p>
+                `
+            },
+            {
+                id: "mesta",
+                title: "3.11 Urbanismus pro přežití",
+                icon: "🏙️",
+                fullText: `
+                    <p>Urbanismus Hradce Králové se musel přizpůsobit novým klimatickým a demografickým podmínkám. Město se nerozšiřuje do krajiny (zákaz záboru zemědělské půdy), ale zahušťuje se a přestavuje směrem dovnitř.</p>
+<h4>Revitalizace brownfieldů</h4>
+<p>Bývalé průmyslové areály a nevyužívané zóny (ZVU, koželužna v Kuklenách, severní zóna) jsou transformovány na smíšené čtvrti s bydlením, prací a službami. Cílem je vytvořit „město krátkých vzdáleností“, kde je vše dostupné pěšky či na kole.</p>
+<h4>Bydlení</h4>
+<p>Dostupné bydlení je v roce 2075 kritickým problémem. Ceny nemovitostí jsou vysoké, což vede k rozvoji nových forem bydlení, jako je sdílené bydlení (co-housing), a to zejména pro seniory (komunitní domy) a mladé lidi. Architektura se mění – budovy jsou navrhovány tak, aby odolaly horku (stínění, zelené fasády) a byly energeticky efektivní.</p>
+                `
+            },
+            {
+                id: "vzdelavani",
+                title: "3.12 Vzdělávání: Adaptace jako klíčová kompetence",
+                icon: "🎓",
+                fullText: `
+<p>Vzdělávací systém v Hradci Králové prošel revolucí. Tradiční memorování faktů ztratilo smysl v době, kdy AI poskytuje okamžitý přístup k informacím.</p>
+<h4>Kompetence pro 21. století</h4>
+<p>Školy se zaměřují na rozvoj kompetencí, které stroje nezvládnou: kreativitu, kritické myšlení, komplexní řešení problémů, emoční inteligenci a schopnost adaptace (resilienci). Důraz je kladen také na manuální zručnost a řemesla, která jsou ceněna jako prvek nezávislosti a odolnosti.</p>
+<h4>Univerzita Hradec Králové (UHK)</h4>
+<p>Univerzita je tepajícím srdcem regionu. Kampus Na Soutoku je centrem nejen pro mladé studenty, ale pro celoživotní vzdělávání. Univerzita třetího věku (U3V) je masovou záležitostí, kde se senioři učí pracovat s novými technologiemi a udržují se mentálně fit. Univerzita hraje klíčovou roli v regionálním inovačním ekosystému, propojuje výzkum s praxí a pomáhá regionu adaptovat se na změny.</p>                    
+                `
+            },
+            {
+                id: "pravo",
+                title: "3.13 Právo: Regulace neznámého",
+                icon: "⚖️",
+                fullText: `
+                    <p>Právní systém čelí výzvám, které byly v minulosti doménou sci-fi. Legislativa je často pozadu za technologickým vývojem („Darwinova past“).</p>
+<h4>Nové právní subjekty a otázky</h4>
+<p>Diskutuje se a legislativně řeší právní status umělé inteligence a robotů (odpovědnost za škodu). Do právního řádu pronikají prvky „práv přírody“ – řeka Labe či Orlice mohou mít statut právního subjektu, který je třeba chránit. Klimatická spravedlnost a žaloby za nečinnost v oblasti klimatu jsou běžnou součástí soudní agendy.</p>
+<h4>Automatizace justice</h4>
+<p>Běžné spory (dopravní přestupky, drobné krádeže, obchodní spory) jsou řešeny „AI soudci“ a automatizovanými arbitrážními systémy, což zrychluje proces, ale vyvolává otázky o spravedlnosti a lidském rozměru práva.</p>
+                `
+            },
+            {
+                id: "odpady",
+                title: "3.14 Odpady: Konec konceptu odpadu",
+                icon: "♻️",
+                fullText: `
+                    <p>V roce 2075 je skládkování minulostí. Koncept odpadu jako něčeho nepotřebného zmizel – vše je vnímáno jako surovina.</p>
+<h4>Těžba města (Urban Mining)</h4>
+<p>Staré skládky v okolí města jsou těženy pro získání vzácných kovů a materiálů, které jsou globálně nedostatkové. Stavební materiály ze zbouraných budov jsou recyklovány a znovu využity.</p>
+<h4>Chemická recyklace</h4>
+<p>Plasty, pokud se ještě používají, jsou zpracovávány chemickou recyklací, která umožňuje jejich plnohodnotné navrácení do výroby. ZEVO Opatovice spaluje pouze tu frakci odpadu, kterou nelze materiálově využít, a teplo z tohoto procesu je cenným zdrojem energie.</p>
+                `
+            },
+            {
+                id: "vesmir",
+                title: "3.15 Vesmír: Závislost a nová perspektiva",
+                icon: "🌌",
+                fullText: `
+                    <p>I když Hradec Králové není centrem kosmického průmyslu, vesmírné technologie jsou pro jeho fungování životně důležité.</p>
+<h4>Závislost na orbitě</h4>
+<p>Město je existenčně závislé na satelitních systémech pro navigaci, komunikaci, monitoring klimatu a zemědělství. Riziko „Kesslerova syndromu“ (zamoření oběžné dráhy troskami) nebo silné sluneční bouře představuje hrozbu, která by mohla město paralyzovat.</p>
+<h4>Hledání života</h4>
+<p>V roce 2075 může být otázka mimozemského života posunuta – ať už objevem biosignatur na exoplanetách, nebo v rámci „Zoo hypotézy“, která naznačuje, že jsme pozorováni vyspělejšími civilizacemi. Takový objev by měl hluboký dopad na filosofické a náboženské vnímání lidstva, jak analyzuje Koukolík ve svých esejích o spiritualitě.</p>
+                `
+            },
+            {
+                id: "blackswans",
+                title: "3.16 Nečekané události (Black Swans tzv. Černé labutě)",
+                icon: "🦢",
+                fullText: `
+                    <p>Město musí být připraveno na události, které jsou statisticky málo pravděpodobné, ale mají devastující dopad (Talebovy „Černé labutě“).</p>
+<p>• Příklady: Náhlý kolaps Golfského proudu, který by paradoxně ochladil Evropu, globální pandemie syntetického viru s vysokou úmrtností, totální selhání internetu, nebo kontakt s mimozemskou civilizací.</p>
+<p>• Připravenost: Jak učí Cílek v Ruce noci podané, na specifické černé labutě se nelze dokonale připravit, ale lze budovat obecnou odolnost – zásoby, diverzifikaci, manuální dovednosti a funkční komunitu.</p>
+                `
+            },
+            {
+                id: "spiritualita",
+                title: "3.17 Spiritualita a náboženství: Kotvy ve věku nerovnováhy",
+                icon: "✨",
+                fullText: `
+                    <p>V roce 2075 přestává být spiritualita vnímána pouze jako relikt minulosti a stává se adaptivním mechanismem na probíhající diskontinuitu.</p>
+<h4>Spiritualita jako nástroj resilience (V. Cílek)</h4>
+<p>Václav Cílek ve svých pracích zdůrazňuje, že vnější proměna krajiny (jako je „Polabská výheň“) musí být doprovázena vnitřní proměnou člověka.</p>
+<p>• Sakrální ekologie: V reakci na klimatický rozvrat vzniká v Hradci silný proud „eko-spirituality“. Lidé se vracejí k vnímání řek Labe a Orlice jako živých entit, což koresponduje s právním statkem „práv přírody“.</p>
+<p>• Nové rituály sucha: Tradiční náboženské poutě nebo moderní sekulární rituály v Městských lesích slouží k posílení komunitní identity a psychické odolnosti proti environmentálnímu žalu.</p>
+<p>• Hledání smyslu v kolapsu: Spiritualita poskytuje narativ, který umožňuje lidem najít smysl i v podmínkách stagnace či zjednodušování systému.</p>
+<h4>Etická brzda „stupidity moci“ (F. Koukolík)</h4>
+<p>Neuropatolog František Koukolík varuje před „debilizací“ a mocenskou pýchou deprivantů. V tomto kontextu náboženské a etické systémy fungují jako korektiv:</p>
+<p>• Ochrana před hybris: Spirituální systémy, které akcentují pokoru a službu celku, jsou přímým protihráčem syndromu mocenské pýchy elit.</p>
+<p>• Základní hodnoty: V roce 2075 se v Hradci upevňují „nové kmeny“ , jejichž soudržnost není dána jen ekonomií, ale sdíleným etickým kódem, který brání iracionálnímu podléhání propagandě.</p>
+<p>• Transcendence a věda: Koukolíkova „třetí kultura“ propojuje vědecké poznání se spirituální zkušeností. V univerzitním prostředí (UHK) se rozvíjejí diskuse o spiritualitě v kontextu hledání mimozemského života (ZOO hypotéza, potvrzená a po zevrubném vědeckém zkoumání nevysvětlená a zároveň dobře zdokumentovaná pozorování reálných úkazů UFO/UAP).</p>
+<h4>Technologická víra a singularita (M. Rees)</h4>
+<p>Martin Rees varuje před existenčními riziky plynoucími z pokročilých technologií. Kolem roku 2075 se AI stává objektem „digitálního náboženství“:</p>
+<p>• AI jako božstvo: Část populace v Hradci může vnímat superinteligenci (singularitu) jako nadlidskou entitu, ke které se utíká v dobách krizí. To nese riziko technokratické slepoty.</p>
+<p>• Digitální demence vs. Duchovní disciplína: Duchovní praxe (např. meditace, digitální půst) jsou vnímány jako preventivní medicína proti „digitální demenci“ a kognitivnímu úpadku.</p>
+                `
+            }
+        ],
+        scenarios: {
+            a: `
+                <h4>Vítězství rozumu, spolupráce a adaptace</h4>
+                <p>V tomto scénáři se společnosti podařilo překonat „stupiditu moci“ a krátkozrakost. Krize poloviny století (klimatické, energetické) fungovaly jako katalyzátor pozitivní změny.</p>
+                <p>V roce 2075 je Hradec Králové „Modro-zeleným městem“. Díky masivním a včasným investicím do zadržování vody (revitalizovaná říční niva, poldry, dešťové zahrady na každém rohu) město zvládá letní vedra i přívalové deště. Zelený prstenec kolem města a vertikální zeleň na budovách fungují jako přirozená klimatizace.</p>
+                <p>Energetika je plně decentralizovaná – město je sítí propojených energetických komunit, které sdílejí čistou energii a jsou odolné vůči výpadkům. Díky VRT je Hradec napojen na evropské metropole, což přilákalo inovativní firmy a výzkumné ústavy, aniž by se z města stala jen noclehárna.</p>
+                <p>Univerzita (UHK) je živým centrem mezigeneračního vzdělávání. Senioři, tvořící významnou část populace, jsou aktivní, vážení a zapojení do komunitního života (mentorství, péče o děti, kultura). Sociální rozdíly existují, ale jsou tlumeny silnou komunitní soudržností, solidaritou a efektivním sociálním systémem (např. základní nepodmíněný příjem).</p>
+                <p>Technologie a AI slouží lidem, zvyšují kvalitu života, ale nenahrazují mezilidský kontakt. Město je bezpečné, zdravé a plné života.</p>
+                <p><strong>Klíčové faktory úspěchu:</strong> Včasná implementace adaptačních strategií, investice do vzdělání a sociálního kapitálu, efektivní a etické využití technologií, potlačení vlivu „deprivantů“ v politice.</p>
+            `,
+            b: `
+                <h4>„Muddling through“ – nějak to proplácáme</h4>
+                <p>Toto je scénář pokračování současných trendů („Business as usual“) s reaktivním řešením problémů. Společnost se nezhroutila, ale ani nevyřešila své strukturální problémy.</p>
+                <p>Hradec Králové v roce 2075 je městem kontrastů. Historické centrum a lukrativní čtvrti jsou oázami prosperity, chráněnými drahými technologiemi proti klimatickým extrémům. Starší sídliště (např. Moravské Předměstí) chátrají a jejich obyvatelé trpí tepelným stresem a horší kvalitou života.</p>
+                <p>Energetika je mixem starého a nového – ceny jsou vysoké, což vede k energetické chudobě části populace. Voda je dostupná, ale drahá a na příděl v době sucha. Labe je regulované, biodiverzita v okolí města je nízká („agrární poušť“).</p>
+                <p>Zdravotnictví je na špičkové úrovni (AI, genetika), ale plně dostupné jen pro pojištěné s nadstandardem; zbytek populace se spoléhá na základní, automatizovanou péči. Společnost je polarizovaná, „deprivanti“ v politice a byznysu využívají moderní technologie k manipulaci a udržení moci.</p>
+                <p>Lidé se často utíkají do virtuálních světů, aby unikli šedé realitě. Město funguje, ale postrádá dynamiku a vizi.</p>
+                <p><strong>Klíčové faktory:</strong> Reaktivní přístup ke krizím, technologický optimismus bez sociálního rozměru, dominance ekonomických zájmů, setrvačnost institucí.</p>
+            `,
+            c: `
+                <h4>Vítězství hybris a entropie</h4>
+                <p>Scénář kolapsu v důsledku kaskádového selhání systémů. Kombinace nezvládnuté klimatické změny, selhání technologií a sociálního rozvratu.</p>
+                <p>V roce 2075 Hradec Králové jako jednotný, funkční celek fakticky neexistuje. Po sérii „Černých labutí“ a selhání centrální správy se město rozpadlo na izolované enklávy. Bohaté „gated communities“ (např. na kopci na Novém Hradci) mají vlastní zdroje vody, energie, výrobu potravin a soukromou ochranku.</p>
+                <p>Zbytek města je „zónou nikoho“, kde nefungují služby a vládnou lokální gangy či poloozbrojené milice (často vedené agresivními deprivanty). Centrální infrastruktura (kanalizace, teplo z Opatovic) zkolabovala a není opravována. Lidé v chudinských čtvrtích spalují vše, co najdou, vzduch je toxický.</p>
+                <p>Voda z řek je znečištěná, pitná voda je vzácností dostupnou jen na černém trhu nebo pro elitu. Populace drasticky klesla v důsledku nemocí, hladu a násilí. Technologická civilizace se „zahltila“ vlastní složitostí.</p>
+                <p>Přežívají jen malé, tvrdé a odolné komunity, které se vrátily k archaickým formám existence.</p>
+                <p><strong>Klíčové faktory:</strong> Ignorování varování vědců, neschopnost elit vzdát se moci a zisku, křehkost hyper-optimalizovaných systémů, ztráta sociální solidarity a „duše“ společnosti.</p>
+            `
+        },
+        dictionary: [
+            { t: "Diskontinuita", d: "Stav, kdy vývoj neprobíhá plynule, ale skokově. V kontextu roku 2075 jde o náhlé změny v klimatu a technologiích, které narušují dosavadní řád." },
+            { t: "Resilience", d: "Odolnost systému (města, komunity) vůči šokům. Schopnost absorbovat krizi, adaptovat se a zachovat si funkčnost." },
+            { t: "Hybris", d: "Mocenská pýcha, zpupnost. Podle Koukolíka syndrom postihující elity, které ztrácejí kontakt s realitou a upřednostňují vlastní zájem." },
+            { t: "Deprivant", d: "Jedinec s antisociální poruchou osobnosti nebo jen 'citový mrzák', který touží po moci a postrádá empatii. Hrozba pro vedení města." },
+            { t: "Debilizace", d: "Proces hloupnutí společnosti, neschopnost kritického myšlení a podléhání propagandě." },
+            { t: "Demokratura", d: "Formální demokracie, která je ve skutečnosti ovládána oligarchickými strukturami nebo autoritářskými tendencemi." },
+            { t: "Něžné prepperství", d: "Koncept V. Cílek; příprava na krize nikoliv budováním bunkrů, ale zásobami, dovednostmi a posilováním sousedských vztahů." },
+            { t: "Singularita", d: "Hypotetický bod, kdy umělá inteligence překoná lidskou a začne se sama vylepšovat nepředvídatelným tempem." },
+            { t: "Antropocén", d: "Geologické období, kdy je lidská činnost hlavním faktorem ovlivňujícím zemský ekosystém." },
+            { t: "Smart Grid", d: "Inteligentní energetická síť řízená počítači, která efektivně distribuuje energii, ale je zranitelná kyberútoky." },
+            { t: "UHI (Urban Heat Island)", d: "Městský tepelný ostrov. Jev, kdy je ve městě výrazně vyšší teplota než v okolí kvůli betonu a nedostatku zeleně." },
+            { t: "Modro-zelená infrastruktura", d: "Systém prvků (stromy, jezírka, poldry), který ve městě zadržuje vodu a ochlazuje vzduch." },
+            { t: "Agriboti", d: "Autonomní zemědělští roboti, kteří obdělávají pole bez zásahu člověka." },
+            { t: "Digitální demence", d: "Pokles kognitivních schopností a paměti způsobený nadměrným spoléháním na digitální technologie." },
+            { t: "MaaS", d: "Mobility as a Service. Koncept, kdy lidé nevlastní auta, ale kupují si mobilitu jako službu (sdílená auta, MHD)." },
+            { t: "VRT", d: "Vysokorychlostní železniční trať. Spojení, které umožňuje cestovat rychlostí nad 250 km/h." },
+            { t: "Cirkulární ekonomika", d: "Hospodářský model, kde nevzniká odpad, ale vše se recykluje a vrací do výroby." },
+            { t: "Urban Mining", d: "Těžba města. Získávání surovin ze starých skládek, budov a elektroodpadu místo těžby z přírody." },
+            { t: "Kesslerův syndrom", d: "Scénář, kdy se na oběžné dráze srazí satelity, vznikne mrak trosek a znemožní lety do vesmíru." },
+            { t: "Černá labuť", d: "Metafora N. Taleba pro vysoce nepravděpodobnou událost s extrémním dopadem, kterou nelze předvídat." },
+            { t: "Zoo hypotéza", d: "Teorie, že mimozemské civilizace nás pozorují, ale záměrně nás nekontaktují, abychom se vyvíjeli přirozeně." },
+            { t: "Eko-spiritualita", d: "Duchovní směr, který vnímá přírodu a Zemi jako posvátné a klade důraz na jejich ochranu." }
+        ],
+        references: [
+            { id: "1", title: "Mocenská posedlost", meta: "Koukolík, F. (2010), Karolinum", url: "https://www.google.com/search?q=František+Koukolík+Mocenská+posedlost" },
+            { id: "2", title: "Eseje z třetí kultury", meta: "Koukolík, F. (2003)", url: "" },
+            { id: "3", title: "Jak si lidé hrají", meta: "Koukolík, F. (1991)", url: "" },
+            { id: "4", title: "Fyziologický základ chování...", meta: "Koukolík, F. (2004)", url: "" },
+            { id: "5", title: "Ruka noci podaná", meta: "Cílek, V. (2022), Dokořán", url: "https://www.google.com/search?q=Václav+Cílek+Ruka+noci+podaná" },
+            { id: "6", title: "Naše poslední hodina", meta: "Rees, M. (2005), Dokořán", url: "https://www.google.com/search?q=Martin+Rees+Naše+poslední+hodina" },
+            { id: "7", title: "Černá labuť", meta: "Taleb, N. N. (2011), Paseka", url: "https://www.google.com/search?q=Taleb+Černá+labuť" },
+            { id: "8", title: "Model klimatických změn pro Česko", meta: "ČT24", url: "https://ct24.ceskatelevize.cz" },
+            { id: "9", title: "Projekce obyvatelstva ČSÚ", meta: "CzechDemography", url: "https://czechdemography.cz" },
+            { id: "10", title: "Prognóza KHK do 2050", meta: "Rozvoj KHK", url: "https://rozvojkhk.cz" },
+            { id: "11", title: "AGI/Singularity Predictions", meta: "AIMultiple", url: "https://research.aimultiple.com" },
+            { id: "12", title: "Singularity 2025", meta: "ETC Journal", url: "https://etcjournal.com" },
+            { id: "13", title: "Jak přežít globální změnu", meta: "iLiteratura", url: "https://iliteratura.cz" },
+            { id: "14", title: "Cílek o kolapsu", meta: "Krajské listy", url: "https://krajskelisty.cz" },
+            { id: "15", title: "Cílek: Krizové scénáře", meta: "Radiožurnál", url: "https://radiozurnal.rozhlas.cz" },
+            { id: "16", title: "Komunitní zahrada Střelák", meta: "Zahrada Střelák", url: "https://zahradastrelak.cz" },
+            { id: "17", title: "Synthetic Biology Risk", meta: "CDC", url: "https://cdc.gov" },
+            { id: "18", title: "EOP Nová éra", meta: "Elektrárny Opatovice", url: "https://eop.cz" },
+            { id: "19", title: "Konec uhlí 2030", meta: "oEnergetice", url: "https://oenergetice.cz" },
+            { id: "20", title: "ZEVO Opatovice", meta: "Třetí Ruka", url: "https://tretiruka.cz" },
+            { id: "21", title: "Hydrogen Backbone", meta: "Net4Gas", url: "https://net4gas.cz" },
+            { id: "22", title: "Komunitní energetika", meta: "Salonky HK", url: "https://salonkyhk.cz" },
+            { id: "23", title: "Geotermální potenciál ČR", meta: "Ringen", url: "https://rin-gen.cz" },
+            { id: "24", title: "Urban Heat Island", meta: "PLOS One", url: "https://journals.plos.org" },
+            { id: "25", title: "Modro-zelená infrastruktura", meta: "Počítáme s vodou", url: "https://pocitamesvodou.cz" },
+            { id: "26", title: "Úpravna vody Orlice", meta: "KHP", url: "https://khp.cz" },
+            { id: "27", title: "Obnova říčních ramen", meta: "Povodí Labe", url: "https://pla.cz" },
+            { id: "28", title: "Mikroplasty a zdraví", meta: "NIH", url: "https://pmc.ncbi.nlm.nih.gov" },
+            { id: "29", title: "Klimatická změna a zemědělství", meta: "Potraviny AV21", url: "https://potravinyav21.cz" },
+            { id: "30", title: "Vertikální farmy", meta: "Europarl", url: "https://europarl.europa.eu" },
+            { id: "31", title: "Stárnutí populace KHK", meta: "KHK", url: "https://khk.cz" },
+            { id: "32", title: "Digitální demence", meta: "PubMed", url: "https://pubmed.ncbi.nlm.nih.gov" },
+            { id: "33", title: "Autonomní mobilita", meta: "MDČR", url: "https://md.gov.cz" },
+            { id: "34", title: "VRT v Česku", meta: "Ekonomický deník", url: "https://ekonomickydenik.cz" },
+            { id: "35", title: "Cirkulární řešení", meta: "Cyrkl", url: "https://cyrkl.com" },
+            { id: "36", title: "LETS systémy", meta: "CUNI", url: "https://dspace.cuni.cz" },
+            { id: "37", title: "Nová čtvrť Sousedství", meta: "HK City", url: "https://hkcity.cz" },
+            { id: "38", title: "Rozvoj kampusu UHK", meta: "Salonky", url: "https://salonkyhk.cz" }
+        ],
+        scenariosTableData: [
+            ["Energetika", "Decentralizovaná, OZE, sdílení", "Mix, drahá, dovoz", "Kolaps sítě, nedostatek, ostrovy"],
+            ["Klima", "Zvládnuté (modro-zelená infr.)", "Snesitelné (klimatizace)", "Neobyvatelné centrum, extrémy"],
+            ["Voda", "Recyklace, dostatek", "Drahá, na příděl", "Toxická, nedostupná pro většinu"],
+            ["Společnost", "Solidarita, aktivní stáří", "Polarizace, nerovnost", "Rozvrat, násilí, kmeny"],
+            ["Technologie", "Nástroj pro lidi", "Všudypřítomná, kontrola", "Trosky high-tech, digital divide"],
+            ["Politika", "Participace, racionalita", "Demokratura, technokracie", "Warlordi, autoritářství"],
+            ["Spiritualita", "Integrující síla, etika", "Únik z reality, sekty", "Fanatismus, radikalizace"]
+        ]
+    };
+
+    // --- APP LOGIC ---
+
+    function renderTopics() {
+        const grid = document.getElementById('topics-grid');
+        grid.innerHTML = DB.topics.map(topic => `
+            <div class="card" onclick="openModal('${topic.id}')">
+                <div class="card-header">
+                    <span class="card-icon">${topic.icon}</span>
+                    <h3>${topic.title}</h3>
+                </div>
+                <div class="card-preview">${topic.fullText.replace(/<[^>]*>?/gm, '').substring(0, 160)}...</div>
+                <div class="read-more-btn">Číst detailní analýzu</div>
+            </div>
+        `).join('');
+    }
+
+    function renderDictionary() {
+        const grid = document.getElementById('dict-grid');
+        grid.innerHTML = DB.dictionary.map(item => `
+            <div class="dict-item">
+                <span class="dict-term">${item.t}</span>
+                <p class="dict-def">${item.d}</p>
+            </div>
+        `).join('');
+    }
+
+    function renderReferences() {
+        const container = document.getElementById('ref-container');
+        container.innerHTML = DB.references.map(ref => `
+            <div class="ref-item" id="ref-${ref.id}">
+                <div class="ref-id">[${ref.id}]</div>
+                <div class="ref-content">
+                    <span class="ref-title">${ref.title}</span>
+                    <span class="ref-meta">${ref.meta}</span>
+                    ${ref.url ? `<a href="${ref.url}" target="_blank">Otevřít zdroj</a>` : ''}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderScenarioTable() {
+        const tbody = document.getElementById('scenario-table-body');
+        tbody.innerHTML = DB.scenariosTableData.map(row => `
+            <tr>
+                <td><strong>${row[0]}</strong></td>
+                <td>${row[1]}</td>
+                <td>${row[2]}</td>
+                <td>${row[3]}</td>
+            </tr>
+        `).join('');
+    }
+
+    // --- MODAL SYSTEM ---
+    function openModal(type) {
+        const modal = document.getElementById('modal');
+        const title = document.getElementById('modal-title');
+        const body = document.getElementById('modal-body');
+
+        modal.style.display = 'flex';
+
+        const topic = DB.topics.find(t => t.id === type);
+        
+        if (topic) {
+            title.innerText = topic.title;
+            body.innerHTML = topic.fullText;
+        } else if (type === 'intro') {
+            title.innerText = "1. Úvod: Metodologický rámec";
+            body.innerHTML = DB.intro;
+        } else if (type.startsWith('theory-')) {
+            const key = type.split('-')[1];
+            title.innerText = "Teoretické východisko";
+            body.innerHTML = DB.theories[key];
+        } else if (type.startsWith('scenario-')) {
+            const key = type.split('-')[1];
+            title.innerText = "Detailní scénář";
+            body.innerHTML = DB.scenarios[key];
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+    }
+
+    // --- TABS & NAVIGATION ---
+    function switchTab(tabId) {
+        // 1. Skryje všechny sekce
+        document.querySelectorAll('.section-content').forEach(el => el.classList.remove('active'));
+        
+        // 2. Odznačí všechna tlačítka
+        document.querySelectorAll('.nav-links button').forEach(el => el.classList.remove('active'));
+        
+        // 3. Zobrazí vybranou sekci
+        document.getElementById(tabId).classList.add('active');
+        
+        // 4. Zvýrazní aktivní tlačítko
+        const btnMap = {
+            'intro': 'btn-intro',
+            'analysis': 'btn-analysis',
+            'scenarios': 'btn-scenarios',
+            'dictionary': 'btn-dictionary'
+        };
+        if(btnMap[tabId]) document.getElementById(btnMap[tabId]).classList.add('active');
+
+        // --- NOVÁ ÚPRAVA: POSUN NAHORU ---
+        // Toto zajistí, že při přepnutí záložky stránka vyjede nahoru
+        window.scrollTo({ top: 0, behavior: 'smooth' }); 
+    }
+
+    // --- SEARCH ENGINE ---
+
+    // Pomocná funkce: Odstraní HTML značky z textu pro čisté vyhledávání
+    function stripHtml(html) {
+        let tmp = document.createElement("DIV");
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || "";
+    }
+
+    // Pomocná funkce: Vytvoří výňatek textu s nalezeným slovem
+    function getSnippet(text, term) {
+        const lowerText = text.toLowerCase();
+        const index = lowerText.indexOf(term);
+        if (index === -1) return "";
+
+        const start = Math.max(0, index - 40);
+        const end = Math.min(text.length, index + term.length + 40);
+        let snippet = text.substring(start, end);
+        
+        // Přidáme tři tečky
+        if (start > 0) snippet = "..." + snippet;
+        if (end < text.length) snippet = snippet + "...";
+
+        // Zvýrazníme hledaný výraz (zachováme původní velikost písmen v textu)
+        const regex = new RegExp(`(${term})`, 'gi');
+        return snippet.replace(regex, '<strong>$1</strong>');
+    }
+
+    function handleSearch() {
+        const input = document.getElementById('searchInput');
+        const resultsContainer = document.getElementById('searchResults');
+        const term = input.value.toLowerCase().trim();
+
+        // 1. Reset
+        resultsContainer.innerHTML = '';
+        
+        // Pokud je pole prázdné, skryjeme výsledky a obnovíme grid karet
+        if (term.length < 2) {
+            resultsContainer.style.display = 'none';
+            // Obnovit zobrazení karet (reset filtru)
+            document.querySelectorAll('#topics-grid .card').forEach(c => c.style.display = 'flex');
+            return;
+        }
+
+        resultsContainer.style.display = 'block';
+        let hits = [];
+
+        // 2. Prohledávání DB.topics (Analýza)
+        DB.topics.forEach(topic => {
+            const cleanText = stripHtml(topic.fullText);
+            if (topic.title.toLowerCase().includes(term) || cleanText.toLowerCase().includes(term)) {
+                hits.push({
+                    type: 'topic',
+                    id: topic.id,
+                    title: `Analýza: ${topic.title}`,
+                    snippet: getSnippet(cleanText, term) || "Nalezeno v názvu"
+                });
+            }
+        });
+
+        // 3. Prohledávání DB.theories (Teorie)
+        Object.keys(DB.theories).forEach(key => {
+            const cleanText = stripHtml(DB.theories[key]);
+            if (cleanText.toLowerCase().includes(term)) {
+                hits.push({
+                    type: 'theory',
+                    id: `theory-${key}`,
+                    title: `Teorie: ${key.charAt(0).toUpperCase() + key.slice(1)}`, // Např. Koukolik
+                    snippet: getSnippet(cleanText, term)
+                });
+            }
+        });
+
+        // 4. Prohledávání DB.scenarios (Scénáře)
+        Object.keys(DB.scenarios).forEach(key => {
+            const cleanText = stripHtml(DB.scenarios[key]);
+            if (cleanText.toLowerCase().includes(term)) {
+                hits.push({
+                    type: 'scenario',
+                    id: `scenario-${key}`,
+                    title: `Scénář ${key.toUpperCase()}`,
+                    snippet: getSnippet(cleanText, term)
+                });
+            }
+        });
+
+        // 5. Prohledávání Slovníku
+        DB.dictionary.forEach(item => {
+            if (item.t.toLowerCase().includes(term) || item.d.toLowerCase().includes(term)) {
+                hits.push({
+                    type: 'dict',
+                    id: null, // Slovník nemá modální okna, jen scroll
+                    title: `Slovník: ${item.t}`,
+                    snippet: getSnippet(item.d, term)
+                });
+            }
+        });
+
+        // 6. Intro
+        const introText = stripHtml(DB.intro);
+        if (introText.toLowerCase().includes(term)) {
+            hits.push({
+                type: 'intro',
+                id: 'intro',
+                title: 'Úvodní text',
+                snippet: getSnippet(introText, term)
+            });
+        }
+
+        // 7. Vykreslení výsledků
+        if (hits.length === 0) {
+            resultsContainer.innerHTML = '<div style="padding:15px; color:#777;">Žádné výsledky nenalezeny.</div>';
+        } else {
+            hits.forEach(hit => {
+                const div = document.createElement('div');
+                div.className = 'search-result-item';
+                div.innerHTML = `
+                    <span class="search-result-title">${hit.title}</span>
+                    <span class="search-result-snippet">${hit.snippet}</span>
+                `;
+                // Kliknutí na výsledek
+                div.onclick = () => navigateToResult(hit);
+                resultsContainer.appendChild(div);
+            });
+        }
+    }
+
+    function navigateToResult(hit) {
+        const resultsContainer = document.getElementById('searchResults');
+        resultsContainer.style.display = 'none'; // Zavřít našeptávač
+
+        // Logika navigace podle typu
+        if (hit.type === 'topic') {
+            switchTab('analysis');
+            openModal(hit.id);
+        } 
+        else if (hit.type === 'theory' || hit.type === 'intro' || hit.type === 'scenario') {
+            // Tyto typy otevírají modal přímo (ID už je připraveno ve správném formátu)
+            // Intro je na první záložce, ale otevírá se jako modal
+            if(hit.type === 'scenario') switchTab('scenarios');
+            else switchTab('intro');
+            
+            openModal(hit.id);
+        }
+        else if (hit.type === 'dict') {
+            switchTab('dictionary');
+            // Zde by bylo ideální najít konkrétní kartu a scrollovat k ní
+            // Pro jednoduchost jen přepneme tab
+            setTimeout(() => {
+                // Najít text ve slovníku a zvýraznit (jednoduchá implementace)
+                const terms = document.querySelectorAll('.dict-term');
+                terms.forEach(t => {
+                    if(hit.title.includes(t.innerText)) {
+                        t.parentElement.scrollIntoView({behavior: "smooth", block: "center"});
+                        t.parentElement.style.border = "1px solid var(--primary)";
+                    }
+                });
+            }, 300);
+        }
+    }
+
+    function clearSearch() {
+        document.getElementById('searchInput').value = '';
+        document.getElementById('searchResults').style.display = 'none';
+        document.querySelectorAll('#topics-grid .card').forEach(c => c.style.display = 'flex');
+    }
+
+    // Skrytí výsledků při kliknutí mimo
+    document.addEventListener('click', (e) => {
+        const wrapper = document.querySelector('.search-wrapper');
+        if (!wrapper.contains(e.target)) {
+            document.getElementById('searchResults').style.display = 'none';
+        }
+    });
+
+    // --- GOOGLE TRANSLATE ---
+    function initGoogleTranslate() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'cs',
+            includedLanguages: 'cs,en,de,pl,fr,es,ru',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+
+    // --- INIT ---
+    document.addEventListener('DOMContentLoaded', () => {
+        renderTopics();
+        renderDictionary();
+        renderReferences();
+        renderScenarioTable();
+
+        // Load Translate Script
+        const script = document.createElement('script');
+        script.src = "https://translate.google.com/translate_a/element.js?cb=initGoogleTranslate";
+        document.body.appendChild(script);
+    });
+
+</script>
+
+</body>
+</html>
