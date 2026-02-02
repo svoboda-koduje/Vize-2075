@@ -421,6 +421,7 @@
     <div class="nav-links">
         <button onclick="switchTab('intro')" id="btn-intro" class="active">Úvod & Teorie</button>
         <button onclick="switchTab('analysis')" id="btn-analysis">Analýza 17 tematických oblastí</button>
+        <button onclick="switchTab('recommendations')" id="btn-recommendations" style="border-color: var(--primary); color: white;">DOPORUČENÍ PRO JEDNOTLIVCE</button>
         <button onclick="switchTab('scenarios')" id="btn-scenarios">Scénáře</button>
         <button onclick="switchTab('dictionary')" id="btn-dictionary">Slovník</button>
         <button onclick="document.getElementById('references').scrollIntoView({behavior: 'smooth'})">Zdroje</button>
@@ -606,6 +607,15 @@
         <div class="grid" id="topics-grid">
             </div>
     </div>
+    <div id="recommendations" class="section-content">
+        <h2>Doporučení pro jednotlivce: Strategie odolnosti</h2>
+        <p style="margin-bottom: 30px; color: #888;">
+            Praktický manuál pro střední třídu pro rok 2075. Jak upravit životní styl, stravování a socioekonomické chování v éře nerovnováhy.
+            Vychází z principu „něžného prepperství“ a adaptace na klimatickou realitu „Polabské výhně“.
+        </p>
+        <div class="grid" id="recommendations-grid">
+            </div>
+    </div>
 
     <div id="scenarios" class="section-content">
         <h2>4. Scénáře vývoje pro rok 2075</h2>
@@ -732,8 +742,8 @@
 <h4>Geotermální potenciál</h4>
 <p>Hradec Králové leží v oblasti se zajímavým, byť ne špičkovým, geotermálním potenciálem. V roce 2075 jsou velké administrativní komplexy, jako je centrála ČSOB, úřady či areál Fakultní nemocnice, vytápěny a chlazeny pomocí systémů hlubinných vrtů a tepelných čerpadel země-voda. To výrazně snižuje zátěž na centrální soustavu dálkového vytápění a eliminuje lokální emise. Nicméně, masivní plošné nasazení hlubinné geotermie narazilo na geologické limity a vysokou investiční náročnost, takže zůstává doplňkovým, nikoli dominantním zdrojem.</p>
 <h4>Rizika a zranitelnost</h4>
-<p>Martin Rees ve své knize Naše poslední hodina varuje před extrémní zranitelností technologické infrastruktury. V roce 2075 je energetická síť plně digitální („ Smart Grid“), řízená autonomními algoritmy umělé inteligence. To přináší efektivitu, ale i nové, dosud nepoznané riziko. Kybernetický útok na řídící systémy nebo extrémní sluneční bouře (opakování tzv. Carringtonovy události) by mohly město uvrhnout do tmy na týdny či měsíce. Zatímco „optimistický scénář“ počítá s dokonalou kybernetickou ochranou a redundancí, „realistický scénář“ (ovlivněný Koukolíkovým Homo sapiens stupidus) naznačuje, že údržba a bezpečnostní protokoly mohou být zanedbány kvůli úsporám, korupci či nekompetenci ( deprivanti“ ve vedení energetických firem). Pokud by nastal dlouhodobý blackout v zimě, obyvatelé pasivních domů bez komínů a záložních zdrojů (Cílkova „kamna Petra“) by čelili existenčnímu ohrožení. Právě zde se ukáže, kdo byl prozíravým „prepperem“ a kdo spoléhal na všemocný stát.</p>
-                `
+<p>Martin Rees ve své knize Naše poslední hodina varuje před extrémní zranitelností technologické infrastruktury. V roce 2075 je energetická síť plně digitální („ Smart Grid“), řízená autonomními algoritmy umělé inteligence. To přináší efektivitu, ale i nové, dosud nepoznané riziko. Kybernetický útok na řídící systémy nebo extrémní sluneční bouře (opakování tzv. Carringtonovy události) by mohly město uvrhnout do tmy na týdny či měsíce. Zatímco „optimistický scénář“ počítá s dokonalou kybernetickou ochranou a redundancí, „realistický scénář“ (ovlivněný Koukolíkovým Homo sapiens stupidus) naznačuje, že údržba a bezpečnostní protokoly mohou být zanedbány kvůli úsporám, korupci či nekompetenci (deprivanti“ ve vedení energetických firem). Pokud by nastal dlouhodobý blackout v zimě, obyvatelé pasivních domů bez komínů a záložních zdrojů (Cílkova „kamna Petra“) by čelili existenčnímu ohrožení. Právě zde se ukáže, kdo byl prozíravým „prepperem“ a kdo spoléhal na všemocný stát.</p>
+`
             },
             {
                 id: "klima",
@@ -948,6 +958,110 @@
                 `
             }
         ],
+        recommendations: [
+            {
+                id: "rec-socioekonomika",
+                title: "1. Socioekonomika: Od závislosti k autonomii",
+                icon: "💰",
+                fullText: `
+                    <h4>Filosofie „něžného prepperství“</h4>
+                    <p>V roce 2075 je ekonomická realita definována nestabilitou. Tradiční model „práce za mzdu – nákup v supermarketu“ je v krizích nefunkční. Doporučuje se přechod od systému „just-in-time“ k systému „just-in-case“.</p>
+                    <ul>
+                        <li><strong>Pravidlo 24 hodin:</strong> Buďte připraveni učinit rozhodnutí (zůstat či odejít) a být soběstační prvních 24 hodin krize.</li>
+                        <li><strong>Finanční hotovost a zásoby:</strong> Digitální měna (CBDC) je pod totálním dohledem. Udržujte fyzické zásoby (trvanlivé potraviny, léky, nástroje) jako nejstabilnější formu úspor.</li>
+                        <li><strong>LETS systémy:</strong> Zapojte se do lokálních výměnných kruhů. Výměna dovedností (oprava kola, pěstování) má v krizi větší hodnotu než kredity na účtu.</li>
+                        <li><strong>Investice:</strong> Minimalizujte fixní náklady a dluhy. Investujte do vybavení, zateplení a vlastních zdrojů energie, nikoliv do spekulativních aktiv.</li>
+                    </ul>
+                `
+            },
+            {
+                id: "rec-strava",
+                title: "2. Stravování a voda: Adaptace na „Polabskou výheň“",
+                icon: "🥗",
+                fullText: `
+                    <h4>Nutriční bezpečnost a hydratace</h4>
+                    <p>Tradiční česká kuchyně je neudržitelná. Klima v Polabí připomíná severní Balkán. Voda je strategická surovina.</p>
+                    <ul>
+                        <li><strong>Nové plodiny:</strong> Zaměřte se na plodiny odolné suchu: čirok, proso, cizrna, čočka. Omezte maso (bioakumulace toxinů) a nahraďte ho rostlinnými bílkovinami.</li>
+                        <li><strong>Filtrace vody:</strong> Veřejný vodovod může být nestabilní. Každá domácnost musí mít gravitační filtr (např. na bázi nanovláken) pro čištění dešťové či povrchové vody. Pozor na mikroplasty – vodu převařujte a nechte odstát.</li>
+                        <li><strong>Strategie spižírny:</strong> Udržujte rotující zásobu potravin na 14–30 dní (rýže, luštěniny, konzervy). Naučte se fermentovat a sušit potraviny (konzervace bez elektřiny).</li>
+                        <li><strong>Lokální zdroje:</strong> Nakupujte od lokálních farmářů (patronát), vertikálních farem a sami pěstujte v komunitních zahradách (hyper-lokální produkce).</li>
+                    </ul>
+                `
+            },
+            {
+                id: "rec-doprava",
+                title: "3. Osobní doprava: Konec vlastnictví auta",
+                icon: "🚲",
+                fullText: `
+                    <h4>Post-automobilová éra</h4>
+                    <p>Vlastnictví auta je v roce 2075 ekonomický nesmysl. Město je designováno pro lidi, ne pro stroje.</p>
+                    <ul>
+                        <li><strong>Aktivní mobilita:</strong> Prioritou je chůze a cyklistika. Vlastněte robustní mechanické kolo (nezávislé na baterii) a kvalitní obuv pro dálkové pochody.</li>
+                        <li><strong>MaaS (Mobility as a Service):</strong> Pro delší trasy využívejte sdílené autonomní pody a hromadnou dopravu. Učte se efektivně využívat AI dispečink, ale nespoléhejte na něj slepě.</li>
+                        <li><strong>Analogová navigace:</strong> V případě výpadku GNSS (GPS/Galileo) nebo sítě musíte umět používat papírovou mapu a orientovat se v terénu. Mentální mapa města je nutností.</li>
+                    </ul>
+                `
+            },
+            {
+                id: "rec-digital",
+                title: "4. Digitální hygiena a kognitivní obrana",
+                icon: "🧠",
+                fullText: `
+                    <h4>Obrana proti „digitální demenci“ a manipulaci</h4>
+                    <p>Technologie je dobrý sluha, ale zlý pán. V éře AI a deepfakes je mysl bojištěm.</p>
+                    <ul>
+                        <li><strong>Kognitivní suverenita:</strong> Pravidelně provádějte „analogové intervaly“ – časy bez technologií. Trénujte paměť a počítání z hlavy, nedelegujte vše na AI.</li>
+                        <li><strong>Kritické myšlení:</strong> Ověřujte zdroje („řeka nelže, rybář může“). Pozor na emoční spouštěče a „tekutý hněv“ na sítích. Rozpoznejte propagandu deprivantů.</li>
+                        <li><strong>Analogové zálohy:</strong> Klíčové dokumenty (identita, vlastnictví, zdravotní záznamy) mějte vytištěné na papíře. Kyberútok může smazat vaši digitální stopu.</li>
+                        <li><strong>Soukromí:</strong> Minimalizujte digitální stopu, používejte šifrování, chraňte svá biometrická data.</li>
+                    </ul>
+                `
+            },
+            {
+                id: "rec-prace",
+                title: "5. Práce a vzdělání: Řemeslo a adaptabilita",
+                icon: "🔨",
+                fullText: `
+                    <h4>Kompetence pro post-industriální věk</h4>
+                    <p>Trh práce je polarizován mezi AI elitu a prekarizované služby. Jak nespadnout do „digitálního proletariátu“?</p>
+                    <ul>
+                        <li><strong>Renesance řemesel:</strong> Učte se manuální dovednosti (opravy, šití, zahradničení). Schopnost opravit věci, když nefunguje dodavatelský řetězec, je k nezaplacení.</li>
+                        <li><strong>Human-Centric Skills:</strong> Rozvíjejte to, co AI neumí – empatii, péči, řešení komplexních etických problémů, kreativitu.</li>
+                        <li><strong>Celoživotní učení:</strong> Vzdělání nekončí školou. Využívejte Univerzitu třetího věku, buďte mentálně pružní. Adaptabilita je klíčem k přežití.</li>
+                    </ul>
+                `
+            },
+            {
+                id: "rec-komunita",
+                title: "6. Komunita a společnost: Síla kmene",
+                icon: "🤝",
+                fullText: `
+                    <h4>Budování „nových kmenů“</h4>
+                    <p>V atomizované společnosti je osamělý jedinec zranitelný. Přežití je týmový sport.</p>
+                    <ul>
+                        <li><strong>Sousedské sítě:</strong> Znejte své sousedy. Vědět, kdo je zdravotník a kdo má studnu, je strategická informace. Budujte funkční solidaritu v místě bydliště.</li>
+                        <li><strong>Emoční inteligence:</strong> Učte se řešit konflikty a deeskalovat napětí. Poznejte biologické kořeny agrese („Gen jménem prašť ho“).</li>
+                        <li><strong>Politická orientace:</strong> Volte směry podporující decentralizaci, resilienci a ochranu přírodních zdrojů, nikoliv populistické sliby jednoduchých řešení. Braňte se „skupinové hlouposti“.</li>
+                    </ul>
+                `
+            },
+            {
+                id: "rec-prostredi",
+                title: "7. Environmentální zdraví: Život v horku",
+                icon: "🌡️",
+                fullText: `
+                    <h4>Adaptace na extrémní podmínky</h4>
+                    <p>Město je v létě tepelnou pastí. Musíte změnit své návyky, abyste chránili zdraví.</p>
+                    <ul>
+                        <li><strong>Režim dne:</strong> Přejeďte na model „siesty“. Aktivitu směřujte na ráno a večer. Přes poledne se vyhýbejte rozpáleným plochám (UHI).</li>
+                        <li><strong>Osobní chlazení:</strong> Znejte metody pasivního chlazení (mokré textilie, průvan) pro případ výpadku klimatizace.</li>
+                        <li><strong>Ochrana před chemií:</strong> Minimalizujte plasty v kontaktu s jídlem (endokrinní disruptory). Používejte sklo, nerez, keramiku.</li>
+                        <li><strong>Psychohygiena:</strong> Bojujte proti klimatické úzkosti akcí – péčí o zeleň, zapojením do komunity. Naděje je disciplína.</li>
+                    </ul>
+                `
+            }
+        ],
         scenarios: {
             a: `
                 <h4>Vítězství rozumu, spolupráce a adaptace</h4>
@@ -1117,6 +1231,22 @@
             </div>
         `).join('');
     }
+    function renderRecommendations() {
+        const grid = document.getElementById('recommendations-grid');
+        // Kontrola, zda prvek existuje (pro případ chybějícího HTML)
+        if (!grid) return; 
+        
+        grid.innerHTML = DB.recommendations.map(rec => `
+            <div class="card" onclick="openModal('${rec.id}')" style="border-left: 4px solid var(--primary);">
+                <div class="card-header">
+                    <span class="card-icon">${rec.icon}</span>
+                    <h3>${rec.title}</h3>
+                </div>
+                <div class="card-preview">${rec.fullText.replace(/<[^>]*>?/gm, '').substring(0, 140)}...</div>
+                <div class="read-more-btn">Zobrazit doporučení</div>
+            </div>
+        `).join('');
+    }
 
     function renderDictionary() {
         const grid = document.getElementById('dict-grid');
@@ -1164,6 +1294,15 @@
 
         const topic = DB.topics.find(t => t.id === type);
         
+        let contentObj = DB.topics.find(t => t.id === type);
+        if (!contentObj) {
+            contentObj = DB.recommendations.find(r => r.id === type);
+        }
+        
+        if (contentObj) {
+            document.getElementById('modal-title').innerText = contentObj.title;
+            document.getElementById('modal-body').innerHTML = contentObj.fullText;
+        }
         if (topic) {
             title.innerText = topic.title;
             body.innerHTML = topic.fullText;
@@ -1200,6 +1339,7 @@
         const btnMap = {
             'intro': 'btn-intro',
             'analysis': 'btn-analysis',
+            'recommendations': 'btn-recommendations',
             'scenarios': 'btn-scenarios',
             'dictionary': 'btn-dictionary',
             'downloads': 'btn-downloads'
@@ -1267,6 +1407,17 @@
                     id: topic.id,
                     title: `Analýza: ${topic.title}`,
                     snippet: getSnippet(cleanText, term) || "Nalezeno v názvu"
+                });
+            }
+        });
+        DB.recommendations.forEach(rec => {
+            const cleanText = stripHtml(rec.fullText);
+            if (rec.title.toLowerCase().includes(term) || cleanText.toLowerCase().includes(term)) {
+                hits.push({
+                    type: 'recommendation', // Nový typ
+                    id: rec.id,
+                    title: `Doporučení: ${rec.title}`,
+                    snippet: getSnippet(cleanText, term)
                 });
             }
         });
@@ -1346,6 +1497,10 @@
         if (hit.type === 'topic') {
             switchTab('analysis');
             openModal(hit.id);
+        }
+        else if (hit.type === 'recommendation') { // PŘIDÁNO
+            switchTab('recommendations');
+            openModal(hit.id);
         } 
         else if (hit.type === 'theory' || hit.type === 'intro' || hit.type === 'scenario') {
             // Tyto typy otevírají modal přímo (ID už je připraveno ve správném formátu)
@@ -1399,6 +1554,7 @@
     // --- INIT ---
     document.addEventListener('DOMContentLoaded', () => {
         renderTopics();
+        renderRecommendations()
         renderDictionary();
         renderReferences();
         renderScenarioTable();
