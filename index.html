@@ -103,14 +103,15 @@
             gap: 15px;
             align-items: center;
             flex-grow: 1;
-            max-width: 600px;
+            max-width: 900px;
             justify-content: flex-end;
         }
 
         .search-wrapper {
             position: relative;
             width: 100%;
-            max-width: 400px;
+            max-width: 800px;
+            min-width: 300px;
 }
 .search-results {
     position: absolute;
@@ -327,10 +328,44 @@
         .ref-content { display: flex; flex-direction: column; }
         .ref-title { color: white; font-weight: bold; font-size: 1.1rem; }
         .ref-meta { color: #888; font-style: italic; font-size: 0.95rem; margin-top: 4px;}
+        /* --- ÚPRAVA ODSAZENÍ NADPISŮ --- */
+/* Cílíme pouze na nadpisy a odstavce uvnitř sekcí s obsahem */
+.section-content h2, 
+.section-content > p {
+    margin-left: 30px; /* Posune texty o 30px doprava od kraje */
+    margin-right: 30px; /* Pro symetrii i zprava */
+    max-width: 900px;   /* Omezíme šířku textu, aby se lépe četl (nebude přes celý monitor) */
+}
 
-        @media (max-width: 900px) {
-            .controls { flex-direction: column; align-items: stretch; }
-            .nav-links { justify-content: center; }
+/* Na mobilních telefonech odsazení zmenšíme, abychom neplýtvali místem */
+@media (max-width: 600px) {
+    .section-content h2, 
+    .section-content > p {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
+
+        @media (max-width: 1600px) {
+            .controls { 
+                flex-direction: column; 
+                align-items: stretch; 
+            }
+            
+            /* --- ÚPRAVA TLAČÍTEK PRO MOBIL --- */
+            .nav-links { 
+                flex-direction: column; /* Seřadí tlačítka pod sebe */
+                width: 100%;            /* Kontejner zabere celou šířku */
+                gap: 10px;              /* Trochu větší mezera mezi tlačítky */
+            }
+
+            .nav-links button {
+                width: 100%;            /* Tlačítko se roztáhne přes celou šířku */
+                text-align: center;     /* Text zarovnán na střed */
+                padding: 12px;          /* Větší plocha pro prst */
+            }
+            /* -------------------------------- */
+
             .search-area { max-width: 100%; margin-top: 15px; }
             h1 { font-size: 2rem; }
             .modal-body { padding: 20px; }
@@ -344,6 +379,34 @@
     font-size: 0.85rem;       /* Menší písmo */
     border-top: 1px solid #1a1a1a; /* Jemná linka nahoře */
     letter-spacing: 1px;      /* Jemné rozestupy písmen */
+}
+/* --- SCROLL TO TOP BUTTON --- */
+#scrollTopBtn {
+    display: none; /* Ve výchozím stavu skryté */
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999; /* Aby bylo vždy navrchu */
+    border: none;
+    outline: none;
+    background-color: var(--primary); /* Zelená barva z vašeho tématu */
+    color: black;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%; /* Kulatý tvar */
+    font-size: 2.1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    transition: background-color 0.3s, transform 0.3s;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+#scrollTopBtn:hover {
+    background-color: white; /* Při najetí zbělá */
+    transform: translateY(-3px); /* Jemný efekt nadzvednutí */
 }
     </style>
 </head>
@@ -491,7 +554,7 @@
 </div>
     <div id="intro" class="section-content active">
         <div class="grid">
-            <div class="card" onclick="openModal('intro')" style="grid-column: 1 / -1; border-color: var(--secondary);">
+            <div class="card" onclick="openModal('intro')" style="grid-column: 1 / -1; border-color: var(--secondary); max-width: 1200px; margin: 0 auto;">
                 <div class="card-header">
                     <span class="card-icon">📄</span>
                     <h3>Úvod: Metodologický rámec</h3>
@@ -946,10 +1009,12 @@
 { t: "Hydrologicky integrovaná krajina", d: "Koncept Václava Cílka, který se stal základem územního plánování; vyžaduje schopnost zadržet veškerou vodu v místě dopadu a zajišťuje vodní neutralitu staveb." },
 { t: "Incivility (Politická nezdvořilost)", d: "Koncept popisující hrubnutí politické kultury a chování, které vede k desenzibilizaci voličů vůči vulgaritě a přímo koreluje s radikalizací mládeže." },
 { t: "Kesslerův syndrom", d: "Řetězová reakce na oběžné dráze, kdy srážky kosmického smetí generují další úlomky, což může vést k zamoření orbity a znemožnění využívání satelitních technologií." },
+{ t: "Kognitivní disonance", d: "Jde o nepříjemný stav vnitřního napětí, který vzniká, když jsou postoje, znalosti a chování jedince v rozporu. V kontextu dokumentu tento stav ilustruje chování elit trpících syndromem „hybris“, které navzdory dostupným varovným signálům a datům o kolapsu infrastruktury či klimatu vytěsňují realitu a lpí na neudržitelných projektech, čímž popírají fakta, aby si zachovaly svůj mocenský či psychologický komfort." },
 { t: "Kognitivní suverenita", d: "Schopnost jedince udržet si nezávislé kritické myšlení a hluboké soustředění navzdory tlaku algoritmů a digitálních asistentů; v roce 2075 výsada vzdělanějších vrstev." },
 { t: "Kognitivní válka", d: "Přesun politického boje do sféry lidské mysli, kde se využívají systémy pro mikrotargeting a manipulaci emocí k ovládání veřejného mínění a vytváření „bublin reality“." },
 { t: "Kolaps", d: "Podle Václava Cílka a M. Bárty nejde nutně o konec, ale o zjednodušení příliš složitého systému na udržitelnou úroveň po vyčerpání zdrojů či dosažení limitů složitosti." },
 { t: "Konec fosilní éry", d: "Stav definovaný vyčerpáním levných a všudypřítomných fosilních zdrojů (uhlí, ropa), které byly základem ekonomiky 20. století. Uhelné zdroje vyhasly již ve 30. letech 21. století a zemní plyn se stal geopoliticky rizikovým a drahým palivem, což si vynutilo transformaci na obnovitelné zdroje a energetické využití odpadu. Světové zásoby ropy byly vytěženy okolo poloviny 21. století, což naprosto proměňuje fungování civilizace." },
+{ t: "Konfirmační zkreslení (Confirmation Bias)", d: "Jde o specifické riziko manipulace, kterému čelí zejména skupina „Liberální střed“. Jde o tendenci vyhledávat, interpretovat a pamatovat si informace tak, aby potvrzovaly vlastní již existující názory. Tento jev je spojen s fungováním algoritmů a umělé inteligence, které vytvářejí tzv. „bubliny reality“ a „komnaty ozvěn“ , kde je uživatelům servírován obsah potvrzující jejich vidění světa , což vede k neschopnosti přijímat odlišné argumenty (kognitivní atrofie)." },
 { t: "Krize složitosti", d: "Strukturální stav společnosti, který není jen přechodnou „blbou náladou“, ale hlubokou poruchou systému, jenž se stal příliš složitým na to, aby byl efektivně řízen; předchází často kolapsu." },
 { t: "MaaS", d: "Mobility as a Service. Koncept, kdy lidé nevlastní auta, ale kupují si mobilitu jako službu (sdílená auta, MHD)." },
 
@@ -977,7 +1042,7 @@
 { t: "Tekutý hněv", d: "Emoce snadno zneužitelná v politickém boji a na sociálních sítích, která přispívá k polarizaci společnosti a nástupu populistů." },
 { t: "Too Little Too Late (Příliš málo, příliš pozdě)", d: "Pesimistický scénář iniciativy Earth4All, kde pokračování současných trendů vede k růstu nerovnosti, sociálnímu pnutí a překročení planetárních mezí." },
 { t: "Třetí kultura", d: "Koncept F. Koukolíka, který navrhuje propojení vědeckého poznání se spirituální zkušeností a humanitními obory jako cestu k udržení lidství v technokratické éře." },
-{ t: "UFO/UAP (v kontextu mimozemského života)", d: "Tento fenomén je diskutován v rámci tzv. „Zoo hypotézy“, která naznačuje, že lidstvo může být pozorováno vyspělejšími civilizacemi, aniž by o tom vědělo. Případný kontakt nebo objev mimozemského života je klasifikován jako „Černá labuť“ – statisticky málo pravděpodobná událost, která by však měla devastující či transformační dopad na lidské vnímání existence, filozofii a náboženství." },
+{ t: "UFO/UAP (v kontextu mimozemského života)", d: "UFO (z anglického Unidentified Flying Object = neidentifikovaný létající objekt) je jev, kdy pozorovatel hlásí situaci, ve které pozoroval na obloze předmět, jehož podstatu není schopen racionálně vysvětlit (pozorovatel nemusí mít dostatečné znalosti nebo zkušenosti k tomu, aby daný předmět identifikoval, proto může být například letadlo jako UFO). Lidově je tento jev často označován jako pozorování „létajících talířů/velkých zvláštních objektů“. Britské ministerstvo obrany při výzkumu těchto jevů po roce 1996 začalo používat označení UAP (Unidentified Aerial Phenomena), protože označení UFO bylo již zprofanované. V současné době se používání zkratky UAP stává v této oblasti výzkumu dominantní. Tento fenomén je diskutován v rámci tzv. „Zoo hypotézy“, která naznačuje, že lidstvo může být pozorováno vyspělejšími civilizacemi, aniž by o tom vědělo. Případný kontakt nebo objev mimozemského života je klasifikován jako „Černá labuť“ – statisticky málo pravděpodobná událost, která by však měla devastující či transformační dopad na lidské vnímání existence, filozofii a náboženství." },
 { t: "Věk nerovnováhy", d: "Termín Václava Cílka pro období charakteristické klimatickou nestabilitou, kdy průměrné teploty rostou a dostupnost levné energie a materiálů končí, což nutí společnost redefinovat svou existenci." },
 { t: "Vertikální farmy", d: "High-tech zemědělské provozy umístěné v brownfieldech a na okrajích měst, které využívají hydroponii a LED osvětlení k celoroční produkci potravin nezávisle na počasí, avšak s vysokou energetickou náročností." },
 { t: "Vodní neutralita", d: "Princip územního plánování vyžadující, aby každá nová stavba prokázala schopnost zadržet veškerou vodu, která na pozemek dopadne, a nezatěžovala tak okolí odtokem." },
@@ -988,44 +1053,43 @@
 
         ],
         references: [
-            { id: "1", title: "Mocenská posedlost", meta: "Koukolík, F. (2010), Karolinum", url: "https://www.google.com/search?q=František+Koukolík+Mocenská+posedlost" },
-            { id: "2", title: "Eseje z třetí kultury", meta: "Koukolík, F. (2003)", url: "" },
-            { id: "3", title: "Jak si lidé hrají", meta: "Koukolík, F. (1991)", url: "" },
-            { id: "4", title: "Fyziologický základ chování...", meta: "Koukolík, F. (2004)", url: "" },
-            { id: "5", title: "Ruka noci podaná", meta: "Cílek, V. (2022), Dokořán", url: "https://www.google.com/search?q=Václav+Cílek+Ruka+noci+podaná" },
-            { id: "6", title: "Naše poslední hodina", meta: "Rees, M. (2005), Dokořán", url: "https://www.google.com/search?q=Martin+Rees+Naše+poslední+hodina" },
-            { id: "7", title: "Černá labuť", meta: "Taleb, N. N. (2011), Paseka", url: "https://www.google.com/search?q=Taleb+Černá+labuť" },
-            { id: "8", title: "Model klimatických změn pro Česko", meta: "ČT24", url: "https://ct24.ceskatelevize.cz" },
-            { id: "9", title: "Projekce obyvatelstva ČSÚ", meta: "CzechDemography", url: "https://czechdemography.cz" },
-            { id: "10", title: "Prognóza KHK do 2050", meta: "Rozvoj KHK", url: "https://rozvojkhk.cz" },
-            { id: "11", title: "AGI/Singularity Predictions", meta: "AIMultiple", url: "https://research.aimultiple.com" },
-            { id: "12", title: "Singularity 2025", meta: "ETC Journal", url: "https://etcjournal.com" },
-            { id: "13", title: "Jak přežít globální změnu", meta: "iLiteratura", url: "https://iliteratura.cz" },
-            { id: "14", title: "Cílek o kolapsu", meta: "Krajské listy", url: "https://krajskelisty.cz" },
-            { id: "15", title: "Cílek: Krizové scénáře", meta: "Radiožurnál", url: "https://radiozurnal.rozhlas.cz" },
-            { id: "16", title: "Komunitní zahrada Střelák", meta: "Zahrada Střelák", url: "https://zahradastrelak.cz" },
-            { id: "17", title: "Synthetic Biology Risk", meta: "CDC", url: "https://cdc.gov" },
-            { id: "18", title: "EOP Nová éra", meta: "Elektrárny Opatovice", url: "https://eop.cz" },
-            { id: "19", title: "Konec uhlí 2030", meta: "oEnergetice", url: "https://oenergetice.cz" },
-            { id: "20", title: "ZEVO Opatovice", meta: "Třetí Ruka", url: "https://tretiruka.cz" },
-            { id: "21", title: "Hydrogen Backbone", meta: "Net4Gas", url: "https://net4gas.cz" },
-            { id: "22", title: "Komunitní energetika", meta: "Salonky HK", url: "https://salonkyhk.cz" },
-            { id: "23", title: "Geotermální potenciál ČR", meta: "Ringen", url: "https://rin-gen.cz" },
-            { id: "24", title: "Urban Heat Island", meta: "PLOS One", url: "https://journals.plos.org" },
-            { id: "25", title: "Modro-zelená infrastruktura", meta: "Počítáme s vodou", url: "https://pocitamesvodou.cz" },
-            { id: "26", title: "Úpravna vody Orlice", meta: "KHP", url: "https://khp.cz" },
-            { id: "27", title: "Obnova říčních ramen", meta: "Povodí Labe", url: "https://pla.cz" },
-            { id: "28", title: "Mikroplasty a zdraví", meta: "NIH", url: "https://pmc.ncbi.nlm.nih.gov" },
-            { id: "29", title: "Klimatická změna a zemědělství", meta: "Potraviny AV21", url: "https://potravinyav21.cz" },
-            { id: "30", title: "Vertikální farmy", meta: "Europarl", url: "https://europarl.europa.eu" },
-            { id: "31", title: "Stárnutí populace KHK", meta: "KHK", url: "https://khk.cz" },
-            { id: "32", title: "Digitální demence", meta: "PubMed", url: "https://pubmed.ncbi.nlm.nih.gov" },
-            { id: "33", title: "Autonomní mobilita", meta: "MDČR", url: "https://md.gov.cz" },
-            { id: "34", title: "VRT v Česku", meta: "Ekonomický deník", url: "https://ekonomickydenik.cz" },
-            { id: "35", title: "Cirkulární řešení", meta: "Cyrkl", url: "https://cyrkl.com" },
-            { id: "36", title: "LETS systémy", meta: "CUNI", url: "https://dspace.cuni.cz" },
-            { id: "37", title: "Nová čtvrť Sousedství", meta: "HK City", url: "https://hkcity.cz" },
-            { id: "38", title: "Rozvoj kampusu UHK", meta: "Salonky", url: "https://salonkyhk.cz" }
+            { id: "1", title: "AGI/Singularity Predictions", meta: "AIMultiple", url: "https://research.aimultiple.com/artificial-general-intelligence-singularity-timing/" },
+{ id: "2", title: "Autonomní mobilita", meta: "MDČR", url: "https://md.gov.cz/Uzitecne-odkazy/Autonomni-mobilita" },
+{ id: "3", title: "Cílek: Krizové scénáře", meta: "Radiožurnál", url: "https://radiozurnal.rozhlas.cz/blackout-epidemie-nebo-povoden-vaclav-cilek-vysvetluje-jak-se-pripravit-na-7687891" },
+{ id: "4", title: "Cílek o kolapsu", meta: "Krajské listy", url: "https://www.krajskelisty.cz/praha/11644-migrace-kterou-nekdo-pouziva-jako-zbran-a-muslimske-deti-jez-odmala-uci-nenavisti-ke-krestanum-geolog-a-klimatolog-cilek-ceka-konec-sveta-jak-ho-zname.htm" },
+{ id: "5", title: "Cirkulární řešení", meta: "Cyrkl", url: "https://cyrkl.com/" },
+{ id: "6", title: "Černá labuť", meta: "Taleb, N. N. (2011), Paseka", url: "https://www.databazeknih.cz/prehled-knihy/cerna-labut-94648" },
+{ id: "7", title: "Digitální demence", meta: "PubMed", url: "https://pubmed.ncbi.nlm.nih.gov/35164464/" },
+{ id: "8", title: "EOP Nová éra", meta: "Elektrárny Opatovice", url: "https://www.eop.cz/novinka-elektrarny-opatovice-po-roce-2030" },
+{ id: "9", title: "Eseje z třetí kultury", meta: "Koukolík, F. (2003)", url: "https://www.databazeknih.cz/prehled-knihy/homo-sapiens-stupidus-eseje-ze-treti-kultury-v-roce-2002-2003-25440" },
+{ id: "10", title: "Geotermální potenciál ČR", meta: "Ringen", url: "https://rin-gen.cz/cz/aktualne/ceska-republika-velky-geotermalni-potencial" },
+{ id: "11", title: "Hydrogen Backbone", meta: "Net4Gas", url: "https://www.net4gas.cz/en/projects/hydrogen-projects/" },
+{ id: "12", title: "Jak přežít globální změnu", meta: "iLiteratura", url: "https://www.iliteratura.cz/clanek/41963-cilek-vaclav-vek-nerovnovahy" },
+{ id: "13", title: "Jak si lidé hrají", meta: "Koukolík, F. (1991)", url: "https://www.databazeknih.cz/prehled-knihy/jak-si-lide-hraji-34666" },
+{ id: "14", title: "Klimatická změna a zemědělství", meta: "Potraviny AV21", url: "https://www.avcr.cz/cs/o-nas/aktuality/Zdrave-a-dostupne-potraviny-ktere-neznici-krajinu.-Novy-program-SAV21/" },
+{ id: "15", title: "Komunitní energetika", meta: "Salonky HK", url: "https://www.salonkyhk.cz/energeticke-spolecenstvi-nova-era-komunitni-energetiky/" },
+{ id: "16", title: "Komunitní zahrada Střelák", meta: "Zahrada Střelák", url: "https://www.nadacevia.cz/project/komunitni-zahrada-na-strelaku/" },
+{ id: "17", title: "Konec uhlí 2030", meta: "oEnergetice", url: "https://oenergetice.cz/energetika-v-cr/ceps-cr-bude-od-roku-2030-zavisla-na-dovozu-elektriny-muze-ji-byt-i-nedostatek" },
+{ id: "18", title: "LETS systémy", meta: "CUNI", url: "https://dspace.cuni.cz/handle/20.500.11956/10549" },
+{ id: "19", title: "Mikroplasty a zdraví", meta: "NIH", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11342020/" },
+{ id: "20", title: "Mocenská posedlost", meta: "Koukolík, F. (2010), Karolinum", url: "https://www.databazeknih.cz/prehled-knihy/mocenska-posedlost-38581" },
+{ id: "21", title: "Model klimatických změn pro Česko", meta: "ČT24", url: "https://ct24.ceskatelevize.cz/clanek/veda/sucho-povodne-a-vice-tropickych-dni-vedci-predstavili-nejpresnejsi-model-klimatickych-zmen-pro-cesko-63619z" },
+{ id: "22", title: "Modro-zelená infrastruktura", meta: "Počítáme s vodou", url: "https://www.pocitamesvodou.cz/definice-modro-zelene-infrastruktury/" },
+{ id: "23", title: "Naše poslední hodina", meta: "Rees, M. (2005), Dokořán", url: "https://www.databazeknih.cz/prehled-knihy/nase-posledni-hodina-18756" },
+{ id: "24", title: "Nová čtvrť Sousedství", meta: "HK City / NOHO", url: "https://www.hkcity.cz/2023/02/27/v-hradci-vznikne-nova-ctvrt-sousedstvi-nabidne-150-bytu/" },
+{ id: "25", title: "Obnova říčních ramen", meta: "Povodí Labe", url: "https://www.google.com/search?q=Obnova+%C5%99%C3%AD%C4%8Dn%C3%ADch+ramen+Povod%C3%AD+Labe&oq=Obnova+%C5%99%C3%AD%C4%8Dn%C3%ADch+ramen+Povod%C3%AD+Labe&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIKCAEQABiABBiiBDIHCAIQABjvBTIKCAMQABiABBiiBDIKCAQQABiABBiiBDIHCAUQABjvBdIBCDUyMTNqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8" },
+{ id: "26", title: "Prognóza KHK do 2050", meta: "Rozvoj KHK", url: "https://www.rozvojkhk.cz/prognoza-2050" },
+{ id: "27", title: "Projekce obyvatelstva ČSÚ", meta: "CzechDemography", url: "https://www.czechdemography.cz/akce/kulate-stoly/projekce-obyvatelstva-ceske-republiky-2023-2100-predpoklady-vysledky-souvislosti/" },
+{ id: "28", title: "Rozvoj kampusu UHK", meta: "Salonky HK", url: "https://www.salonkyhk.cz/hradecka-univerzita-investuje-do-rozvoje-kampusu-na-soutoku-stamiliony/" },
+{ id: "29", title: "Ruka noci podaná", meta: "Cílek, V. (2022), Dokořán", url: "https://www.databazeknih.cz/prehled-knihy/ruka-noci-podana-zaklady-rodinne-a-krizove-pripravenosti-391257" },
+{ id: "30", title: "Singularity 2025", meta: "ETC Journal", url: "https://etcjournal.com/2025/10/11/when-will-ai-surpass-humanity-and-what-happens-after-that/" },
+{ id: "31", title: "Stárnutí populace KHK", meta: "Salonky HK", url: "https://www.salonkyhk.cz/hradecky-kraj-kvuli-starnuti-populace-vyrazne-zvysi-pocet-luzek-nasledne-pece/" },
+{ id: "32", title: "Synthetic Biology Risk", meta: "CDC", url: "https://www.cdc.gov/niosh/blogs/2017/synthetic-biology.html" },
+{ id: "33", title: "Úpravna vody Orlice", meta: "KHP", url: "https://www.vakhk.cz/Upravna-vody-Hradec-Kralove.html" },
+{ id: "34", title: "Urban Heat Island", meta: "PLOS Climate", url: "https://journals.plos.org/climate/article?id=10.1371/journal.pclm.0000352" },
+{ id: "35", title: "Vertikální farmy", meta: "Europarl", url: "https://www.europarl.europa.eu/RegData/etudes/ATAG/2022/737130/EPRS_ATAG_737130_What_if_vertical_farming_final.pdf" },
+{ id: "36", title: "VRT v Česku", meta: "Ekonomický deník", url: "https://ekonomickydenik.cz/prvni-vysokorychlostni-trat-ma-razitko/" },
+{ id: "37", title: "ZEVO Opatovice", meta: "Třetí Ruka", url: "https://www.tretiruka.cz/news/elektrarna-opatovice-posunula-spusteni-spalovny-odpadu-na-rok-2030/" }
         ],
         scenariosTableData: [
             ["Energetika", "Decentralizovaná, OZE, sdílení", "Mix, drahá, dovoz", "Kolaps sítě, nedostatek, ostrovy"],
@@ -1072,7 +1136,7 @@
                 <div class="ref-content">
                     <span class="ref-title">${ref.title}</span>
                     <span class="ref-meta">${ref.meta}</span>
-                    ${ref.url ? `<a href="${ref.url}" target="_blank">Otevřít zdroj</a>` : ''}
+                    ${ref.url ? `<a href="${ref.url}" target="_blank">Otevřít odkaz</a>` : ''}
                 </div>
             </div>
         `).join('');
@@ -1344,8 +1408,26 @@
         script.src = "https://translate.google.com/translate_a/element.js?cb=initGoogleTranslate";
         document.body.appendChild(script);
     });
+// --- SCROLL TO TOP LOGIC ---
+// Sledování scrollování stránky
+window.onscroll = function() { scrollFunction() };
 
+function scrollFunction() {
+    const btn = document.getElementById("scrollTopBtn");
+    // Zobrazí tlačítko, pokud je uživatel níže než 300px od vrchu
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btn.style.display = "flex"; // Používáme flex pro vycentrování šipky
+    } else {
+        btn.style.display = "none";
+    }
+}
+
+// Funkce pro plynulý posun nahoru
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 </script>
 
 </body>
+<button onclick="scrollToTop()" id="scrollTopBtn" title="Zpět nahoru">⬆</button>
 </html>
