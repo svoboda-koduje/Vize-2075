@@ -1799,10 +1799,8 @@ function scrollToTop() {
             } 
             
             // SCROLL NAHORU -> Ukázat tlačítka
-            else if (scrollTop < lastScrollTop && controls.classList.contains('collapsed')) {
+            else if (scrollTop + 20 < lastScrollTop && controls.classList.contains('collapsed')) {
                 controls.classList.remove('collapsed');
-                
-                // Zámek
                 isTransitioning = true;
                 setTimeout(() => { isTransitioning = false; }, 400);
             }
