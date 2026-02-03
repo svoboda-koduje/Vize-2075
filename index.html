@@ -79,9 +79,32 @@
             align-items: center;
             gap: 20px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            transition: padding 0.4s ease-in-out;
+        }
+        .controls.collapsed {
+            padding-top: 8px;
+            padding-bottom: 8px;
         }
 
-        .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav-links { display: flex; gap: 8px; flex-wrap: wrap;
+        transition: all 0.4s ease-in-out;
+            max-height: 500px; /* Dostatečná výška pro rozbalené menu */
+            opacity: 1;
+            overflow: hidden;
+        }
+        .controls.collapsed .nav-links {
+            max-height: 0;
+            opacity: 0;
+            margin: 0;
+            padding: 0;
+            pointer-events: none;
+        }
+
+        /* Volitelné: Zmenšení paddingu lišty, když je sbalená, aby byla útlejší */
+        .controls.collapsed {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
         .nav-links button {
             background: transparent;
             border: 1px solid transparent;
@@ -93,6 +116,10 @@
             font-weight: 600;
             text-transform: uppercase;
             transition: all 0.2s;
+        }
+        .controls.collapsed {
+            padding-top: 8px;
+            padding-bottom: 8px;
         }
         .nav-links button:hover { color: white; background: rgba(255,255,255,0.1); }
         .nav-links button.active { color: black; background: var(--primary); box-shadow: 0 0 15px rgba(0, 230, 118, 0.4); }
@@ -442,7 +469,7 @@
         <button onclick="switchTab('intro')" id="btn-intro" class="active">Úvod & Teorie</button>
         <button onclick="switchTab('analysis')" id="btn-analysis">Analýza 17 tematických oblastí</button>
         <button onclick="switchTab('recommendations')" id="btn-recommendations" style="border-color: var(--primary); color: white;">DOPORUČENÍ PRO JEDNOTLIVCE</button>
-        <button onclick="switchTab('scenarios')" id="btn-scenarios">Scénáře</button>
+        <button onclick="switchTab('scenarios')" id="btn-scenarios">Ilustrativní scénáře pro Hradec Králové</button>
         <button onclick="switchTab('dictionary')" id="btn-dictionary">Slovník</button>
         <button onclick="document.getElementById('references').scrollIntoView({behavior: 'smooth'})">Zdroje</button>
         <button onclick="switchTab('downloads')" id="btn-downloads">Dokumenty ke stažení</button>
@@ -640,7 +667,7 @@
                     <h3>Úvod: Metodologický rámec</h3>
                 </div>
                 <div class="card-preview">
-                    Rok 2075 představuje pro Hradec Králové, stejně jako pro celý středoevropský prostor, horizont ležící za hranicí konvenčního strategického plánování, avšak stále v dosahu demografické projekce života současné nejmladší generace. Tato prezentace si klade za cíl analyzovat trajektorie vývoje krajského města na soutoku Labe a Orlice v kontextu globálních megatrendů, lokálních specifik a hlubokých očekávatelných strukturálních změn. Analýza vychází z průniku sedmnácti definovaných tematických oblastí, od energetiky a klimatu po sociální strukturu, psychické zdraví a technologie, a je pevně rámována teoretickými koncepty Františka Koukolíka (sociální patologie, stupidita moci), Václava Cílka (kolaps, regenerace a resilience) a Martina Reese (existenční civilizační rizika). Svět roku 2075 je definován důsledky rozhodnutí – a často nerozhodnutí – učiněných v první polovině 21. století. Klimatické modely pro Českou republiku, které byly v minulosti považovány za varování, se staly fyzickou realitou projevující se výrazným oteplením a dramatickou změnou distribuce srážek. Demografické projekce, jež dlouhodobě avizovaly stárnutí populace, došly svého naplnění, čímž zásadně proměnily sociální a ekonomickou strukturu regionu. Technologický vývoj, směřující k bodu singularity, přinesl nástroje s bezprecedentním potenciálem tvoření i destrukce. V tomto dynamickém a často turbulentním prostředí se Hradec Králové transformoval ze „salonu republiky“ na entitu, jejíž primárním imperativem se stala adaptabilita a přežití v podmínkách, které Václav Cílek trefně nazývá „věkem nerovnováhy“. Předkládaná prezentace není pouhým souhrnem statistických dat, nýbrž pokusem o hloubkovou syntézu, která zohledňuje nelinearitu vývoje a komplexitu interakcí mezi jednotlivými systémy. Vychází z předpokladu, že město není jen souborem budov a infrastruktury, ale živým organismem – sociálním a biologickým systémem, jehož osud je determinován nejen fyzikálními zákony, ale i kvalitou lidského rozhodování. Právě zde, v průsečíku tvrdých dat a měkkých faktorů lidské psychiky, se odehrává drama budoucnosti.
+                    Rok 2075 představuje pro Hradec Králové, stejně jako pro celý středoevropský prostor, horizont ležící za hranicí konvenčního strategického plánování, avšak stále v dosahu demografické projekce života současné nejmladší generace. Tato webová prezentace si klade za cíl analyzovat trajektorie vývoje krajského města na soutoku Labe a Orlice v kontextu globálních megatrendů, lokálních specifik a hlubokých očekávatelných strukturálních změn. Analýza vychází z průniku sedmnácti definovaných tematických oblastí, od energetiky a klimatu po sociální strukturu, psychické zdraví a technologie, a je pevně rámována teoretickými koncepty Františka Koukolíka (sociální patologie, stupidita moci), Václava Cílka (kolaps, regenerace a resilience) a Martina Reese (existenční civilizační rizika). Svět roku 2075 je definován důsledky rozhodnutí – a často nerozhodnutí – učiněných v první polovině 21. století. Klimatické modely pro Českou republiku, které byly v minulosti považovány za varování, se staly fyzickou realitou projevující se výrazným oteplením a dramatickou změnou distribuce srážek. Demografické projekce, jež dlouhodobě avizovaly stárnutí populace, došly svého naplnění, čímž zásadně proměnily sociální a ekonomickou strukturu regionu. Technologický vývoj, směřující k bodu singularity, přinesl nástroje s bezprecedentním potenciálem tvoření i destrukce. V tomto dynamickém a často turbulentním prostředí se Hradec Králové transformoval ze „salonu republiky“ na entitu, jejíž primárním imperativem se stala adaptabilita a přežití v podmínkách, které Václav Cílek trefně nazývá „věkem nerovnováhy“. Předkládaná prezentace není pouhým souhrnem statistických dat, nýbrž pokusem o hloubkovou syntézu, která zohledňuje nelinearitu vývoje a komplexitu interakcí mezi jednotlivými systémy. Vychází z předpokladu, že město není jen souborem budov a infrastruktury, ale živým organismem – sociálním a biologickým systémem, jehož osud je determinován nejen fyzikálními zákony, ale i kvalitou lidského rozhodování. Právě zde, v průsečíku tvrdých dat a měkkých faktorů lidské psychiky, se odehrává drama budoucnosti.
                 </div>
                 <div class="read-more-btn">Číst detailní úvod</div>
             </div>
@@ -697,7 +724,7 @@
     </div>
 
     <div id="scenarios" class="section-content">
-        <h2>4. Scénáře vývoje pro rok 2075</h2>
+        <h2>Scénáře vývoje pro rok 2075</h2>
         <div class="grid">
             <div class="card" onclick="openModal('scenario-a')" style="border-color: var(--primary);">
                 <div class="card-header">
@@ -779,10 +806,10 @@
     const DB = {
         intro: `
             <p>Rok 2075 představuje pro Hradec Králové, stejně jako pro celý středoevropský prostor, horizont ležící za hranicí konvenčního strategického plánování, avšak stále v dosahu demografické projekce života současné nejmladší generace. Tato zpráva si klade za cíl analyzovat trajektorie vývoje krajského města na soutoku Labe a Orlice v kontextu globálních megatrendů, lokálních specifik a hlubokých strukturálních změn.</p>
-            <p>Analýza vychází z průniku šestnácti definovaných tematických oblastí, od energetiky a klimatu po sociální strukturu a technologie, a je pevně rámována teoretickými koncepty Františka Koukolíka (sociální patologie, stupidita moci), Václava Cílka (kolaps, regenerace a resilience) a Martina Reese (existenční rizika).</p>
+            <p>Analýza vychází z průniku sedmnácti definovaných tematických oblastí, od energetiky a klimatu po sociální strukturu a technologie, a je pevně rámována teoretickými koncepty Františka Koukolíka (sociální patologie, stupidita moci), Václava Cílka (kolaps, regenerace a resilience) a Martina Reese (existenční rizika).</p>
             <p>Svět roku 2075 je definován důsledky rozhodnutí – a často nerozhodnutí – učiněných v první polovině 21. století. Klimatické modely pro Českou republiku, které byly v minulosti považovány za varování, se staly fyzickou realitou projevující se výrazným oteplením a dramatickou změnou distribuce srážek. Demografické projekce, jež dlouhodobě avizovaly stárnutí populace, došly svého naplnění, čímž zásadně proměnily sociální a ekonomickou strukturu regionu.</p>
-            <p>Technologický vývoj, směřující k bodu singularity, přinesl nástroje s bezprecedentním potenciálem tvoření i destrukce. V tomto dynamickém a často turbulentním prostředí se Hradec Králové transformoval z „salonu republiky“ na entitu, jejíž primárním imperativem se stala adaptabilita a přežití v podmínkách, které Václav Cílek trefně nazývá „věkem nerovnováhy“.</p>
-            <p>Předkládaná zpráva není pouhým souhrnem statistických dat, nýbrž pokusem o hloubkovou syntézu, která zohledňuje nelinearitu vývoje a komplexitu interakcí mezi jednotlivými systémy. Vychází z předpokladu, že město není jen souborem budov a infrastruktury, ale živým organismem – sociálním a biologickým systémem, jehož osud je determinován nejen fyzikálními zákony, ale i kvalitou lidského rozhodování. Právě zde, v průsečíku tvrdých dat a měkkých faktorů lidské psychiky, se odehrává drama budoucnosti.</p>
+            <p>Technologický vývoj, směřující k bodu singularity, přinesl nástroje s bezprecedentním potenciálem tvoření i destrukce. V tomto dynamickém a často turbulentním prostředí se Hradec Králové transformoval ze „salonu republiky“ na entitu, jejíž primárním imperativem se stala adaptabilita a přežití v podmínkách, které Václav Cílek trefně nazývá „věkem nerovnováhy“.</p>
+            <p>Předkládaná studie není pouhým souhrnem statistických dat, nýbrž pokusem o hloubkovou syntézu, která zohledňuje nelinearitu vývoje a komplexitu interakcí mezi jednotlivými systémy. Vychází z předpokladu, že město není jen souborem budov a infrastruktury, ale živým organismem – sociálním a biologickým systémem, jehož osud je determinován nejen fyzikálními zákony, ale i kvalitou lidského rozhodování. Právě zde, v průsečíku tvrdých dat a měkkých faktorů lidské psychiky, se odehrává drama budoucnosti.</p>
         `,
         theories: {
             koukolik: `
@@ -1011,7 +1038,7 @@
                 fullText: `
                     <p>Město musí být připraveno na události, které jsou statisticky málo pravděpodobné, ale mají devastující dopad (Talebovy „Černé labutě“).</p>
 <p>• Příklady: Náhlý kolaps Golfského proudu, který by paradoxně ochladil Evropu, globální pandemie syntetického viru s vysokou úmrtností, totální selhání internetu, nebo kontakt s mimozemskou civilizací.</p>
-<p>• Připravenost: Jak učí Cílek v Ruce noci podané, na specifické černé labutě se nelze dokonale připravit, ale lze budovat obecnou odolnost – zásoby, diverzifikaci, manuální dovednosti a funkční komunitu.</p>
+<p>• Připravenost: Jak učí Cílek v knize <strong>Ruka noci podaná</strong>, na specifické černé labutě se nelze dokonale připravit, ale lze budovat obecnou odolnost – zásoby, diverzifikaci, manuální dovednosti a funkční komunitu.</p>
                 `
             },
             {
@@ -1316,6 +1343,7 @@
 { id: "33", title: "Úpravna vody Orlice", meta: "KHP", url: "https://www.vakhk.cz/Upravna-vody-Hradec-Kralove.html" },
 { id: "34", title: "Urban Heat Island", meta: "PLOS Climate", url: "https://journals.plos.org/climate/article?id=10.1371/journal.pclm.0000352" },
 { id: "35", title: "Vertikální farmy", meta: "Europarl", url: "https://www.europarl.europa.eu/RegData/etudes/ATAG/2022/737130/EPRS_ATAG_737130_What_if_vertical_farming_final.pdf" },
+{ id: "35", title: "Věda kolem nás", meta: "nakladatelství ACADEMIA", url: "https://www.academia.cz/veda-kolem-nas/" },
 { id: "36", title: "VRT v Česku", meta: "Ekonomický deník", url: "https://ekonomickydenik.cz/prvni-vysokorychlostni-trat-ma-razitko/" },
 { id: "37", title: "ZEVO Opatovice", meta: "Třetí Ruka", url: "https://www.tretiruka.cz/news/elektrarna-opatovice-posunula-spusteni-spalovny-odpadu-na-rok-2030/" }
         ],
@@ -1584,6 +1612,22 @@
                 snippet: getSnippet(introText, term)
             });
         }
+        // --- ZAČÁTEK NOVÉHO KÓDU PRO ZDROJE ---
+        // 6.5 Prohledávání Zdroje (References)
+        if (DB.references) {
+            DB.references.forEach(ref => {
+                const searchStr = (ref.title + " " + ref.meta).toLowerCase();
+                if (searchStr.includes(term)) {
+                    hits.push({
+                        type: 'reference',
+                        id: ref.id,
+                        title: `Zdroj [${ref.id}]: ${ref.title}`,
+                        snippet: ref.meta // Zobrazí autora nebo vydavatele
+                    });
+                }
+            });
+        }
+        // --- KONEC NOVÉHO KÓDU PRO ZDROJE ---
 
         // 7. Vykreslení výsledků
         if (hits.length === 0) {
@@ -1624,6 +1668,34 @@
             
             openModal(hit.id);
         }
+        // --- ZAČÁTEK NOVÉHO KÓDU PRO NAVIGACI ---
+        else if (hit.type === 'reference') {
+            const footer = document.getElementById('references');
+            // Zobrazíme patičku (pokud by byla skrytá, zde je vždy vidět, tak jen scroll)
+            footer.scrollIntoView({ behavior: 'smooth' });
+
+            // Zvýraznění konkrétního řádku po dojetí scrollování
+            setTimeout(() => {
+                const el = document.getElementById(`ref-${hit.id}`);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Vizuální efekt pro upozornění na nalezený zdroj
+                    const originalBorder = el.style.borderBottom;
+                    el.style.transition = "all 0.5s ease";
+                    el.style.border = "1px solid var(--primary)";
+                    el.style.backgroundColor = "#222";
+                    el.style.borderRadius = "4px";
+
+                    // Po 3 sekundách vrátit do původního stavu
+                    setTimeout(() => {
+                        el.style.border = "none";
+                        el.style.borderBottom = "1px solid #1a1a1a";
+                        el.style.backgroundColor = "transparent";
+                    }, 3000);
+                }
+            }, 600);
+        }
+        // --- KONEC NOVÉHO KÓDU PRO NAVIGACI ---
         else if (hit.type === 'dict') {
             switchTab('dictionary');
             // Zde by bylo ideální najít konkrétní kartu a scrollovat k ní
@@ -1696,25 +1768,49 @@ function scrollFunction() {
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-// --- SMART SCROLL HIDING (Inteligentní skrývání menu) ---
+// --- SMART SCROLL HIDING (Sticky Search Bar - Finální) ---
     let lastScrollTop = 0;
     const controls = document.querySelector('.controls');
-    
+    const delta = 10; // Větší tolerance pohybu
+    let isTransitioning = false; // Zámek proti chvění
+
     window.addEventListener('scroll', function() {
+        // 1. Pokud běží animace, ignorujeme scroll (prevence chvění)
+        if (isTransitioning) return;
+
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // Pouze pro mobilní zařízení (šířka menší než 768px)
-        if (window.innerWidth <= 768) {
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Scrollujeme DOLŮ -> Skrýt menu
-                controls.style.transform = 'translateY(-100%)';
-            } else {
-                // Scrollujeme NAHORU -> Zobrazit menu
-                controls.style.transform = 'translateY(0)';
+
+        // Ochrana proti "pružinovému" efektu na iPhonech
+        if (scrollTop < 0) return;
+
+        // Pokud je změna pohybu příliš malá, nic neděláme
+        if (Math.abs(lastScrollTop - scrollTop) <= delta) return;
+
+        // Logika se spustí až po odrolování 100px od vrchu
+        if (scrollTop > 100) {
+            
+            // SCROLL DOLŮ -> Sbalit tlačítka (menu zůstane sticky)
+            if (scrollTop > lastScrollTop && !controls.classList.contains('collapsed')) {
+                controls.classList.add('collapsed');
+                
+                // Zámek na dobu trvání CSS animace (0.4s)
+                isTransitioning = true;
+                setTimeout(() => { isTransitioning = false; }, 400);
+            } 
+            
+            // SCROLL NAHORU -> Ukázat tlačítka
+            else if (scrollTop < lastScrollTop && controls.classList.contains('collapsed')) {
+                controls.classList.remove('collapsed');
+                
+                // Zámek
+                isTransitioning = true;
+                setTimeout(() => { isTransitioning = false; }, 400);
             }
         } else {
-            // Na desktopu vždy zobrazit (reset)
-            controls.style.transform = 'translateY(0)';
+            // Jsme úplně nahoře -> Vždy rozbaleno
+            if (controls.classList.contains('collapsed')) {
+                controls.classList.remove('collapsed');
+            }
         }
         
         lastScrollTop = scrollTop;
