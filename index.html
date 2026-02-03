@@ -338,7 +338,7 @@
 }
 
 /* Na mobilních telefonech odsazení zmenšíme, abychom neplýtvali místem */
-@media (max-width: 600px) {
+@media (max-width: 400px) {
     .section-content h2, 
     .section-content > p {
         margin-left: 5px;
@@ -346,7 +346,7 @@
     }
 }
 
-        @media (max-width: 1600px) {
+        @media (max-width: 1000px) {
             .controls { 
                 flex-direction: column; 
                 align-items: stretch; 
@@ -407,6 +407,26 @@
 #scrollTopBtn:hover {
     background-color: white; /* Při najetí zbělá */
     transform: translateY(-3px); /* Jemný efekt nadzvednutí */
+}
+/* --- OPRAVA MOBILNÍHO ZOBRAZENÍ --- */
+@media (max-width: 768px) {
+    /* Zmenšení paddingu kontejneru */
+    .controls {
+        padding: 10px 15px;
+        gap: 10px;
+        /* Přidáme přechod pro efekt skrývání (viz Řešení 2) */
+        transition: transform 0.3s ease-in-out;
+    }
+
+    /* Úprava vyhledávacího pole */
+    .search-area {
+        margin-top: 0;
+        width: 100%;
+    }
+    .search-wrapper input {
+        padding: 10px 40px 10px 15px; /* Menší padding */
+        font-size: 0.9rem;
+    }
 }
     </style>
 </head>
@@ -502,6 +522,53 @@
             <div style="display: flex; gap: 10px; margin-top: auto;">
                 <a href="anatomie_moci_v_ceske_republice.pdf" target="_blank" class="read-more-btn" style="flex:1">Číst</a>
                 <a href="anatomie_moci_v_ceske_republice.pdf" download class="read-more-btn" style="flex:1; border-color: var(--secondary); color: var(--secondary);">Stáhnout</a>
+            </div>
+        </div>
+        <div class="card pdf-card">
+            <div class="card-header">
+                <span class="card-icon">📜</span>
+                <h3>Pravidla krizového chování</h3>
+            </div>
+            <div class="card-preview">Komplexní příručka Akademie věd ČR (V. Cílek a kol.). Psychologie přežití, evakuační zavazadlo (BOB), energetická bezpečnost a rodinná připravenost.</div>
+            <div style="display: flex; gap: 10px; margin-top: auto;">
+                <a href="pravidla_krizoveho_chovani.pdf" target="_blank" class="read-more-btn" style="flex:1">Číst</a>
+                <a href="pravidla_krizoveho_chovani.pdf" download class="read-more-btn" style="flex:1; border-color: var(--secondary); color: var(--secondary);">Stáhnout</a>
+            </div>
+        </div>
+
+        <div class="card pdf-card">
+            <div class="card-header">
+                <span class="card-icon">🎒</span>
+                <h3>72 hodin: Krizová připravenost</h3>
+            </div>
+            <div class="card-preview">Jak se připravit na prvních 72 hodin krizové situace. Manuál pro zvládnutí chaosu a základní zabezpečení rodiny.</div>
+            <div style="display: flex; gap: 10px; margin-top: auto;">
+                <a href="72-hodin-Jak-se-pripravit-na-krizove-situace-a-spolecne-je-zvladnout_.pdf" target="_blank" class="read-more-btn" style="flex:1">Číst</a>
+                <a href="72-hodin-Jak-se-pripravit-na-krizove-situace-a-spolecne-je-zvladnout_.pdf" download class="read-more-btn" style="flex:1; border-color: var(--secondary); color: var(--secondary);">Stáhnout</a>
+            </div>
+        </div>
+
+        <div class="card pdf-card">
+            <div class="card-header">
+                <span class="card-icon">📋</span>
+                <h3>Vybavení evakuačního zavazadla</h3>
+            </div>
+            <div class="card-preview">Konkrétní seznam (checklist) položek pro Bug-Out-Bag. Co sbalit pro případ rychlého opuštění domova.</div>
+            <div style="display: flex; gap: 10px; margin-top: auto;">
+                <a href="vzor_vybaveni_evakuacniho_zavazadla.pdf" target="_blank" class="read-more-btn" style="flex:1">Číst</a>
+                <a href="vzor_vybaveni_evakuacniho_zavazadla.pdf" download class="read-more-btn" style="flex:1; border-color: var(--secondary); color: var(--secondary);">Stáhnout</a>
+            </div>
+        </div>
+
+        <div class="card pdf-card">
+            <div class="card-header">
+                <span class="card-icon">🥫</span>
+                <h3>6 potravin pro zásoby</h3>
+            </div>
+            <div class="card-preview">Seznam potravin s extrémně dlouhou trvanlivostí (rýže, med, sůl, atd.), které tvoří základ potravinové bezpečnosti (prepper.cz).</div>
+            <div style="display: flex; gap: 10px; margin-top: auto;">
+                <a href="sest_potravin_pro_zasoby.pdf" target="_blank" class="read-more-btn" style="flex:1">Číst</a>
+                <a href="sest_potravin_pro_zasoby.pdf" download class="read-more-btn" style="flex:1; border-color: var(--secondary); color: var(--secondary);">Stáhnout</a>
             </div>
         </div>
         </div>
@@ -998,12 +1065,32 @@
                         <li><strong>Filtrace vody:</strong> Veřejný vodovod může být nestabilní. Každá domácnost musí mít gravitační filtr (např. na bázi nanovláken) pro čištění dešťové či povrchové vody. Pozor na mikroplasty – vodu převařujte a nechte odstát.</li>
                         <li><strong>Strategie spižírny:</strong> Udržujte rotující zásobu potravin na 14–30 dní (rýže, luštěniny, konzervy). Naučte se fermentovat a sušit potraviny (konzervace bez elektřiny).</li>
                         <li><strong>Lokální zdroje:</strong> Nakupujte od lokálních farmářů (patronát), vertikálních farem a sami pěstujte v komunitních zahradách (hyper-lokální produkce).</li>
+                        [cite_start]<li><strong>Klíčové suroviny ("Věčné potraviny"):</strong> Zásobte se bílou rýží (basmati, jasmínová), která má téměř neomezenou životnost[cite: 7]. [cite_start]Med, pokud je skladován správně, vydrží po staletí a zachovává si enzymy[cite: 16, 19]. [cite_start]Mořská sůl je nezbytná pro konzervaci masa a dochucení[cite: 14]. [cite_start]Dále skladujte bílý ocet (trvanlivost, čištění) [cite: 11] [cite_start]a čistý vanilkový extrakt[cite: 24].</li>
+                        [cite_start]<li><strong>Strategie spižírny:</strong> Udržujte rotující zásobu potravin, které běžně jíte[cite: 156]. [cite_start]Zásoby by měly vystačit minimálně na 3 měsíce, ideálně na 2 roky u obilovin[cite: 136, 157].</li>
+                        [cite_start]<li><strong>Filtrace vody:</strong> Mějte k dispozici jodidové tablety nebo mechanické filtry (keramické/mikrovláknové), které odstraní bakterie z povrchových zdrojů[cite: 45, 239]. [cite_start]Voda je důležitější než elektřina – mějte zásobu v barelech na chladném místě[cite: 59].</li>
+                        <li><strong>Vaření bez elektřiny:</strong> Mějte alternativní vařič (plynový, lihový, na dřevo) a dostatek paliva. [cite_start]Nezapomeňte, že vyschnutí surového dřeva trvá 6–12 měsíců[cite: 46, 70].</li>
+                    </ul>
+                    </ul>
+                `
+            },
+            {
+                id: "rec-vybaveni",
+                title: "3. Vybavení a EDC: Co mít stále u sebe",
+                icon: "🎒",
+                fullText: `
+                    <h4>Everyday Carry (EDC) a Evakuační zavazadlo (BOB)</h4>
+                    <p>Připravenost začíná tím, co máte po kapsách, a končí tím, co máte sbaleno pro rychlý odchod.</p>
+                    <ul>
+                        [cite_start]<li><strong>EDC (Everyday Carry):</strong> Mějte u sebe vždy nůž (zavírací nebo multitool), svítilnu (stačí malá s dlouhou výdrží) a spolehlivý zapalovač[cite: 220, 224, 228]. Tato „svatá trojice“ řeší většinu bezprostředních krizí.</li>
+                        [cite_start]<li><strong>Evakuační zavazadlo (BOB):</strong> Pokud musíte opustit dům, BOB by měl obsahovat spací pytel, filtr na vodu, doklady, léky a náhradní oblečení[cite: 299]. [cite_start]Nezapomeňte na hotovost v menších bankovkách a kopie dokumentů na flash disku[cite: 230, 469].</li>
+                        <li><strong>Domácí zásoby (Hromadění vs. Příprava):</strong> Lidé v panice vykupují toaletní papír a pečivo. [cite_start]Vy mějte předem připraveny: baterie (dobíjecí + solární nabíječka) [cite: 96][cite_start], svíčky a knoty do lamp [cite: 48][cite_start], pytle na odpad (hygiena je kritická) [cite: 83] [cite_start]a základní nářadí (pily, sekery)[cite: 79].</li>
+                        [cite_start]<li><strong>Energetická soběstačnost:</strong> Generátor je luxus a lákadlo pro zloděje, pokud nemáte vyřešeno palivo[cite: 42]. [cite_start]Lepší je kvalitní spacák a „teplá místnost“ pro přežití zimy bez vytápění[cite: 537].</li>
                     </ul>
                 `
             },
             {
                 id: "rec-doprava",
-                title: "3. Osobní doprava: Konec vlastnictví auta",
+                title: "4. Osobní doprava: Konec vlastnictví auta",
                 icon: "🚲",
                 fullText: `
                     <h4>Post-automobilová éra</h4>
@@ -1016,8 +1103,23 @@
                 `
             },
             {
+                id: "rec-psychologie",
+                title: "5. Psychologie krize: Od popírání k akci",
+                icon: "🧠",
+                fullText: `
+                    <h4>Mentální odolnost a pravidla chování</h4>
+                    <p>Krize má dvě složky – materiální a psychologickou. Většina lidí selhává v té druhé.</p>
+                    <ul>
+                        [cite_start]<li><strong>Fáze popírání:</strong> Až 80–90 % lidí v první fázi krize odmítá realitu a nereaguje na varování (kognitivní disonance)[cite: 367]. Přijměte fakt, že se „něco děje“, a jednejte dříve než dav.</li>
+                        <li><strong>Pravidlo záchrany:</strong> „Záchrana tonoucích je věcí tonoucích.“ [cite_start]Nečekejte na stát první dny až týdny krize[cite: 213]. Aktivita a péče o druhé snižuje stres a pocit bezmoci.</li>
+                        [cite_start]<li><strong>Chladná hlava (Cool):</strong> Schopnost oddělit emoce od racionálního vyhodnocení (splitting) zvyšuje šanci na přežití[cite: 389]. [cite_start]V krizi nám rychle dochází rozum, proto se řiďte předem naučenými postupy a drily[cite: 206].</li>
+                        <li><strong>Rutina a malé úkoly:</strong> V chaosu pomáhá nastavení řádu (např. pravidelné jídlo, hygiena, úklid). [cite_start]Drobné praktické úkoly a péče o „čistý ubrus“ vrací pocit normálu[cite: 432, 408].</li>
+                    </ul>
+                `
+            },
+            {
                 id: "rec-digital",
-                title: "4. Digitální hygiena a kognitivní obrana",
+                title: "6. Digitální hygiena a kognitivní obrana",
                 icon: "🧠",
                 fullText: `
                     <h4>Obrana proti „digitální demenci“ a manipulaci</h4>
@@ -1032,7 +1134,7 @@
             },
             {
                 id: "rec-prace",
-                title: "5. Práce a vzdělání: Řemeslo a adaptabilita",
+                title: "7. Práce a vzdělání: Řemeslo a adaptabilita",
                 icon: "🔨",
                 fullText: `
                     <h4>Kompetence pro post-industriální věk</h4>
@@ -1046,7 +1148,7 @@
             },
             {
                 id: "rec-komunita",
-                title: "6. Komunita a společnost: Síla kmene",
+                title: "8. Komunita a společnost: Síla kmene",
                 icon: "🤝",
                 fullText: `
                     <h4>Budování „nových kmenů“</h4>
@@ -1060,7 +1162,7 @@
             },
             {
                 id: "rec-prostredi",
-                title: "7. Environmentální zdraví: Život v horku",
+                title: "9. Environmentální zdraví: Život v horku",
                 icon: "🌡️",
                 fullText: `
                     <h4>Adaptace na extrémní podmínky</h4>
@@ -1594,6 +1696,29 @@ function scrollFunction() {
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+// --- SMART SCROLL HIDING (Inteligentní skrývání menu) ---
+    let lastScrollTop = 0;
+    const controls = document.querySelector('.controls');
+    
+    window.addEventListener('scroll', function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Pouze pro mobilní zařízení (šířka menší než 768px)
+        if (window.innerWidth <= 768) {
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrollujeme DOLŮ -> Skrýt menu
+                controls.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrollujeme NAHORU -> Zobrazit menu
+                controls.style.transform = 'translateY(0)';
+            }
+        } else {
+            // Na desktopu vždy zobrazit (reset)
+            controls.style.transform = 'translateY(0)';
+        }
+        
+        lastScrollTop = scrollTop;
+    });
 </script>
 
 </body>
