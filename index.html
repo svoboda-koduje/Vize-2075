@@ -788,7 +788,11 @@
 </footer>
 <div class="copyright-bar">
     <a href="https://www.databazeknih.cz/autori/jaroslav-svoboda-17301" target="_blank">&copy; Jaroslav Svoboda, Hradec Králové</a>
-</div>
+    <span style="color: #333; margin: 0 10px;">|</span>
+    <span style="color: #444; font-size: 0.8rem;" title="Unikátní návštěvy stránky">
+        Čtenářů: <span id="visit-count">...</span>
+    </span>
+    </div>
 
 <div class="modal-overlay" id="modal" onclick="if(event.target === this) closeModal()">
     <div class="modal-content">
@@ -1812,6 +1816,20 @@ function scrollToTop() {
         }
         
         lastScrollTop = scrollTop;
+    });
+    /* --- POČÍTADLO NÁVŠTĚV (CounterAPI) --- */
+    document.addEventListener("DOMContentLoaded", () => {
+        const counterElement = document.getElementById("visit-count");
+        // Používáme unikátní namespace pro váš web: vize-2075-hk
+        fetch("https://api.counterapi.dev/v1/vize-2075-hk/visits/up")
+            .then(response => response.json())
+            .then(data => {
+                counterElement.innerText = data.count;
+            })
+            .catch(error => {
+                console.error("Chyba počitadla:", error);
+                counterElement.innerText = ""; // Při chybě zůstane prázdné
+            });
     });
 </script>
 
