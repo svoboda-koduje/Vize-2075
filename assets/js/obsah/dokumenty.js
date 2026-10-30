@@ -16,6 +16,7 @@ VIZE.dokumenty = [
   { kind: "Kontrolní seznam", file: "sest_potravin_pro_zasoby.pdf", title: "Šest potravin pro zásoby", popis: "Potraviny s velmi dlouhou trvanlivostí jako základ domácí spižírny." }
 ];
 VIZE.audio = [
+  { file: "kolaps_vltavske_kaskady_a_vysychani_krajiny.mp3", title: "Kolaps Vltavské kaskády a vysychání krajiny", popis: "Audio shrnutí ke studii Sucho a voda v Česku 2026: vyčerpávání Orlíku a Slap, mizející mokřady a podzemní voda. Nově přidáno v říjnu 2026.", novy: true },
   { file: "budoucnost_lidstva_mezi_kolapsem_a_obrim_skokem.mp3", title: "Budoucnost lidstva: mezi kolapsem a obřím skokem", popis: "Rozbor civilizačních křižovatek a scénářů Earth4All." },
   { file: "hradec_kralové_2075_v_postfaktickem_a_postdigitalnim_veku.mp3", title: "Hradec Králové v postfaktickém a postdigitálním věku", popis: "Analýza sociálních změn města." },
   { file: "stupidita_moci_a_hrozba_kolapsu_ceska.mp3", title: "Stupidita moci a hrozba kolapsu Česka", popis: "Kritická reflexe rozhodovacích procesů podle F. Koukolíka." },

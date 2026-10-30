@@ -9,6 +9,9 @@ Poslední aktualizace: říjen 2026 (odkazy ověřeny 4. 10. 2026)
 
 ```
 index.html                    kostra stránky (hlavička, navigace, čtecí panel, patička)
+sucho-a-voda-2026.html        samostatná studie Sucho a voda v Česku 2026 (stav k 30. 10. 2026,
+                              grafy, simulace zimy 2026/27 a scénářů do roku 2075); propojena
+                              z navigace, úvodní stránky, sekce Rok 2026 a vyhledávání
 assets/css/vize.css           vzhled webu (barvy, písma, světlý a tmavý režim, rozvržení)
 assets/js/obsah/              TEXTY WEBU – zde se upravuje obsah
   zdroje.js                   seznam zdrojů a stav ověření odkazů
