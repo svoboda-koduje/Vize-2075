@@ -246,6 +246,12 @@ input[type=range]{width:100%;accent-color:var(--labe);margin:6px 0 0}
 .hb-l b{color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
 .hb-t{height:14px;background:var(--surface-2);border-radius:4px;overflow:hidden}
 .hb-f{height:100%;border-radius:4px}
+.audio-box{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--labe);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow)}
+.audio-box .t{flex:1 1 260px}
+.audio-box .t b{display:block;font-family:var(--font-display);font-size:1rem}
+.audio-box .t span{font-size:.85rem;color:var(--ink-2)}
+.audio-box audio{flex:1 1 300px;width:100%;max-width:460px;height:40px}
+.audio-box a{font-size:.85rem;white-space:nowrap}
 /* Zdroje */
 ol.sources{font-size:.86rem;line-height:1.5;padding-left:1.6em;max-width:90ch}
 ol.sources li{margin:.35em 0}
@@ -298,6 +304,12 @@ ol.sources .m{color:var(--muted)}
       <div class="kpi" role="listitem"><div class="v crit">164</div><div class="l">vodoměrných profilů na úrovni historického minima (jako 1947, 2015, 2018 nebo níž)</div><div class="s">ČHMÚ, 14. 8. 2026</div></div>
       <div class="kpi" role="listitem"><div class="v warn">20–25 mld. Kč</div><div class="l">odhadované ztráty českého zemědělství v roce 2026 (tržby, přímé škody)</div><div class="s">Agrární komora ČR; podkladová analýza</div></div>
     </div>
+    <div class="audio-box" id="audio">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="color:var(--labe);flex:none"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z"/></svg>
+      <div class="t"><b>Poslechněte si audio shrnutí</b><span>Kolaps Vltavské kaskády a vysychání krajiny (MP3, 2,9 MB)</span></div>
+      <audio controls preload="none" src="kolaps_vltavske_kaskady_a_vysychani_krajiny.mp3">Váš prohlížeč nepodporuje přehrávání zvuku – <a href="kolaps_vltavske_kaskady_a_vysychani_krajiny.mp3">stáhněte si soubor MP3</a>.</audio>
+      <a href="kolaps_vltavske_kaskady_a_vysychani_krajiny.mp3" download>Stáhnout MP3</a>
+    </div>
   </div>
 </header>
 
@@ -336,7 +348,7 @@ ol.sources .m{color:var(--muted)}
         <li><strong>Krajina vodu nedrží.</strong> Ve sledovaném vzorku nížin a pahorkatin zaniklo od roku 1843 99,5 % mokřadů a v celé zemi je melioracemi odvodněno asi 1,2 mil. ha zemědělské půdy.<sup class="ref"><a href="#z-vtei-mokrady">[x]</a></sup><sup class="ref"><a href="#z-asz-meliorace">[x]</a></sup></li>
         <li><strong>Jaderné elektrárny zatím nejsou ohroženy</strong>, protože mají chladicí věže a vlastní nádrže (Hněvkovice, Dalešice). Nejbližší riziko se týká dolní Vltavy: při vyčerpání Orlíku a Slap by průtok klesl na přirozených 10–15 m³/s a ohrozil odběry Elektrárny Mělník, ÚJV Řež, chemiček v Kralupech i Podolské vodárny.<sup class="ref"><a href="#z-oenergetice-veze">[20]</a></sup><sup class="ref"><a href="#z-seznam-kaskada">[x]</a></sup></li>
         <li><strong>Rozhoduje nadcházející zima.</strong> K úplnému doplnění kaskády by bylo potřeba 250–300 mm zimních srážek, tedy asi dvojnásobek průměru 126 mm. Krátkodobá simulace ukazuje, že při suché zimě se zásoby Orlíku a Slap mohou vyčerpat v létě 2027.<sup class="ref"><a href="#z-seznam-kaskada">[x]</a></sup></li>
-        <li><strong>Simulace ukazuje, že rozhodující není jen množství srážek, ale schopnost krajiny vodu udržet.</strong> Pokud by se roky podobné roku 2026 staly normou, nastane v polovině ze 120 simulovaných průběhů počasí kritický stav (nádrže pod 25 % a mělké podzemní vody pod 45 % normálu) už kolem roku 2031. Při pokračování dnešního trendu je pravděpodobnost kritického stavu do roku 2075 asi 73 %; při stejném klimatu, ale s obnovenou retencí krajiny, úsporami a novými akumulacemi klesá asi na 7 %.</li>
+        <li><strong>Simulace ukazuje, že rozhodující není jen množství srážek, ale schopnost krajiny vodu udržet.</strong> Kritický stav (nádrže pod 25 % a mělké podzemní vody pod 45 % normálu) hrozí v roce 2027 ve všech scénářích, protože se navazuje na vyčerpané zásoby roku 2026 – i při návratu k normálu asi v pětině ze 120 simulovaných průběhů počasí. Dál už rozhoduje klima a krajina: při pokračování dnešního trendu nastává kritický stav asi v 19 % let po roce 2030 a od poloviny století častěji než v každém pátém roce; při stejném klimatu, ale s obnovenou retencí krajiny, úsporami a novými akumulacemi jen asi ve 4 % let. Pokud by se roky podobné roku 2026 staly normou, byl by kritický stav ve většině let (asi 71 %).</li>
       </ul>
     </div>
   </section>
@@ -554,6 +566,7 @@ ol.sources .m{color:var(--muted)}
       <p>V Česku je 165 významných nádrží s celkovým objemem asi 3,36 mld. m³; 47 z nich je vodárenských (628 mil. m³).<sup class="ref"><a href="#z-mze-lapv">[33]</a></sup> Pro srovnání: z území ročně odteče v průměru asi 15,6 mld. m³ vody, v suchém roce 2018 jen 8 mld. m³.<sup class="ref"><a href="#z-ziva">[25]</a></sup> Nádrže tedy pojmou jen malý zlomek ročního odtoku – dokážou překlenout jedno suché léto, ne řadu suchých let.</p>
       <p>Na začátku roku byl zásobní prostor Orlíku naplněn z 94 %. Od 10. dubna do něj přitékalo méně vody, než muselo odtékat, takže hladina klesala – v srpnu přibližně o metr týdně.<sup class="ref"><a href="#z-expats">[34]</a></sup><sup class="ref"><a href="#z-seznam-orlik">[35]</a></sup> Začátkem září byla hladina na 334,96 m n. m., tedy asi 15 m pod obvyklou úrovní 349,9 m n. m., a Orlík přešel do režimu, kdy vypouští jen tolik, kolik přiteče.<sup class="ref"><a href="#z-kudyznudy">[36]</a></sup> V polovině října ztrácely Slapy kolem půl metru za týden (58 % zásobního prostoru).<sup class="ref"><a href="#z-nasregion">[5]</a></sup></p>
       <h3>Vltavská kaskáda: historická zkouška</h3>
+      <p style="font-size:.95rem"><a href="#audio">▶ Téma kaskády si můžete také poslechnout v audio shrnutí.</a></p>
       <p>Kaskádu tvoří devět vodních děl od Lipna po Vrané, skutečnou zásobu vody pro nadlepšování ale mají jen tři: <strong>Lipno I, Orlík a Slapy</strong>; ostatní nádrže jsou vyrovnávací nebo průtočné.<sup class="ref"><a href="#z-pvl-kaskada">[x]</a></sup> Od 10. dubna z kaskády nepřetržitě odtéká víc vody, než přitéká. Do začátku října dodala do Vltavy asi <strong>320 mil. m³</strong> – za zhruba 180 dní v průměru 1,8 mil. m³ denně (asi 20 m³/s nad přítok). To je víc, než pojme celá nádrž Slapy.<sup class="ref"><a href="#z-seznam-kaskada">[x]</a></sup></p>
       <p>Orlík klesl o 15 m a <strong>4. září</strong> přešel do „stop-stavu“, kdy vypouští jen přítok (asi 15 m³/s). Poprvé za více než padesát let provozu kaskády se proto začal vypouštět zásobní prostor Slap: podle Povodí Vltavy klesala jejich hladina v průměru o 1,2 m týdně, v polovině října už pomaleji, kolem 0,5 m týdně.<sup class="ref"><a href="#z-seznam-orlik-slapy">[x]</a></sup><sup class="ref"><a href="#z-seznam-kaskada">[x]</a></sup><sup class="ref"><a href="#z-nasregion">[5]</a></sup> Lipno kleslo z obvyklých 724,90 na 722,16 m n. m. (−2,74 m); v září do něj přitékalo jen 1–2 m³/s, zatímco odtok pro Vltavu a Hněvkovice (chlazení Temelína) se drží na 6 m³/s.<sup class="ref"><a href="#z-info-temelin">[x]</a></sup></p>
       <p>Ke 4. září měly Orlík a Slapy dohromady 47 % objemu. K 8. říjnu by zásoba kaskády včetně Lipna odpovídala 39,4 % a v samotném Orlíku a Slapech chybělo přes 300 mil. m³. Spolu s deficitem asi 50 mm vody v půdě (648 mil. m³) chybí v povodí Vltavy po Slapy téměř <strong>1 mld. m³</strong>. Minimální odtok z Vraného byl snížen ze 40 na 35 m³/s a krajská komise schválila možnost snížit ho v případě potřeby až na 20 m³/s.<sup class="ref"><a href="#z-seznam-kaskada">[x]</a></sup></p>
@@ -614,7 +627,7 @@ ol.sources .m{color:var(--muted)}
   <section class="chap" id="zima">
     <header><span class="eyebrow">07 · Simulace zimy 2026/27</span><h2>Vydrží Vltavská kaskáda do léta 2027?</h2></header>
     <div class="prose">
-      <p>Krátkodobý model počítá měsíc po měsíci od listopadu 2026 do října 2027 zásobu v Lipnu, Orlíku a Slapech (souhrnně asi 827 mil. m³ zásobního prostoru) a průtok Vltavy pod Vraným. Začíná stavem z října 2026: kaskáda na 39,4 %, půdní deficit 50 mm a hluboce vyčerpané podzemní vody. Srážky nejdřív doplňují půdu a podzemní vodu, teprve zbytek odteče do řek a nádrží. Odpovídá tak varování vodohospodářů, že ani průměrná zima kaskádu nenaplní.</p>
+      <p>Krátkodobý model počítá měsíc po měsíci od listopadu 2026 do října 2027 zásobu v Lipnu, Orlíku a Slapech (souhrnně asi 827 mil. m³ zásobního prostoru) a průtok Vltavy pod Vraným. Začíná stavem z října 2026: kaskáda na 39,4 %, půdní deficit 50 mm a hluboce vyčerpané podzemní vody. Srážky nejdřív doplňují půdu a podzemní vodu, teprve zbytek odteče do řek a nádrží. Odpovídá tak varování vodohospodářů, že ani průměrná zima kaskádu nenaplní a k úplnému doplnění je potřeba asi 250–300 mm zimních srážek.</p><p>Model drží vodní bilanci: každý milimetr srážek skončí ve výparu, v půdě, v podzemí, v mokřadech nebo v řece. Víc srážek, víc sněhu i nižší odtok z Vraného proto vždy znamenají víc vody v nádržích. Sníh je počítán jako část zimních srážek. Pomáhá tím, že tlumí zimní výpar a na jaře taje na nasycenou půdu, takže víc vody doteče do nádrží i do podzemí. V zimě musí nádrže držet volný ochranný prostor proti povodním (do 75 % zásobního prostoru), takže velmi bohatá zima část vody propustí dál.</p>
     </div>
     <div class="sim" id="sim2">
       <div class="sim-head">
@@ -628,7 +641,7 @@ ol.sources .m{color:var(--muted)}
           <div class="ctl"><label for="k-snow">Zásoba vody ve sněhu <output id="ko-snow"></output></label><input type="range" id="k-snow" min="0.3" max="2.2" step="0.01"><div class="hint">Leden 2026: 0,67 mld. m³; únor 2019: 2,0 mld. m³.</div></div>
           <div class="ctl"><label for="k-oth">Srážky v ostatních měsících <output id="ko-oth"></output></label><input type="range" id="k-oth" min="60" max="130" step="5"><div class="hint">% normálu pro listopad a březen–říjen 2027.</div></div>
           <div class="ctl"><label for="k-ret">Retence krajiny</label>
-            <select id="k-ret" class="sel"><option value="0">Dnešní stav – 1,2 mil. ha drenáží, zaniklé mokřady</option><option value="0.5">Částečná obnova – regulované drenáže, agrotechnika</option><option value="1">Vysoká – obnovené mokřady a nivy, zdravá půda</option></select></div>
+            <select id="k-ret" class="sel"><option value="0">Dnešní stav – 1,2 mil. ha drenáží, zaniklé mokřady</option><option value="0.5">Částečná obnova – regulované drenáže, agrotechnika</option><option value="1">Vysoká – obnovené mokřady a nivy, zdravá půda</option></select><div class="hint">Retence vodu nepřidá, ale zadrží ji v krajině: jarní plnění nádrží je o pár procent pomalejší, zato v létě a na podzim do nich teče víc vody a půda i podzemí mají větší zásobu.</div></div>
           <div class="ctl"><label for="k-qt">Odtok z Vraného</label>
             <select id="k-qt" class="sel"><option value="40">40 m³/s – manipulační řád</option><option value="35">35 m³/s – snížený odtok (říjen 2026)</option><option value="20">20 m³/s – krizová výjimka</option></select></div>
         </div>
@@ -647,7 +660,8 @@ ol.sources .m{color:var(--muted)}
     <header><span class="eyebrow">08 · Simulace do roku 2075</span><h2>Kdy může Česko ztratit kritickou zásobu vody?</h2></header>
     <div class="prose">
       <p>Simulace počítá měsíc po měsíci vodní bilanci celého území od listopadu 2026 do prosince 2075: srážky, sníh, výpar, dvě vrstvy půdy, mělkou a hlubokou podzemní vodu, odtok do řek a souhrnnou zásobu v nádržích. Výchozí stav odpovídá konci října 2026. Model je zjednodušený a slouží k <strong>porovnání scénářů</strong>, ne k předpovědi konkrétního roku – podrobnosti v kapitole <a href="#metodika">Metodika a limity</a>.</p>
-      <p>Výsledky pro předvolené scénáře (120 průběhů počasí): <em>Návrat k normálu</em> – pravděpodobnost kritického stavu do roku 2075 asi 18 %; <em>Pokračující trend</em> – 73 %; <em>Adaptovaná krajina</em> – 7 %; <em>Opakující se rok 2026</em> a <em>Horký a suchý extrém</em> – prakticky jistě, poprvé typicky kolem let 2028–2031.</p>
+      <p>Výsledky pro předvolené scénáře (120 průběhů počasí; podíl let 2030–2075 s kritickým stavem): <em>Návrat k normálu</em> – asi 1 %; <em>Adaptovaná krajina</em> – asi 4 %; <em>Pokračující trend</em> – asi 19 %, častěji než v každém pátém roce od 50. let; <em>Opakující se rok 2026</em> – asi 71 %; <em>Horký a suchý extrém</em> – asi 95 %. Rok 2027 je rizikový ve všech scénářích (21–86 %), protože začíná z vyčerpaných zásob roku 2026.</p>
+      <p>Každý posuvník působí fyzikálně logickým směrem: víc srážek, víc sněhu, lepší retence krajiny, nižší odběry a nové akumulace riziko snižují; oteplení, přívalovost a rozkolísanost počasí ho zvyšují. Všechny ukazatele se počítají ze stejných 120 průběhů počasí, takže změna nastavení ukazuje jen vliv nastavení, ne náhodu. Tlačítko „Jiný průběh počasí“ mění jen zobrazenou ukázkovou čáru.</p>
       <p><strong>Kritická ztráta zásoby</strong> v modelu nastává, když souhrnná zásoba v nádržích klesne pod 25 % zásobního prostoru a zároveň mělké podzemní vody pod 45 % normálu – tedy když už krajina nemá odkud dotovat řeky ani studny.</p>
     </div>
 
@@ -660,7 +674,7 @@ ol.sources .m{color:var(--muted)}
       <div class="sim-body">
         <div class="controls" id="controls">
           <div class="ctl"><label for="c-pf">Roční srážky <output id="o-pf"></output></label><input type="range" id="c-pf" min="60" max="120" step="1"><div class="hint">% normálu 1991–2020 (≈ 686 mm). Rok 2025: 83 %, 2018: 76 %.</div></div>
-          <div class="ctl"><label for="c-snow">Sněhové srážky <output id="o-snow"></output></label><input type="range" id="c-snow" min="0" max="150" step="5"><div class="hint">Podíl srážek padajících jako sníh vůči dnešku. Sníh dotuje podzemní vodu na jaře.</div></div>
+          <div class="ctl"><label for="c-snow">Sněhové srážky <output id="o-snow"></output></label><input type="range" id="c-snow" min="0" max="150" step="5"><div class="hint">Podíl srážek padajících jako sníh vůči dnešku; celkové srážky se nemění. Sníh tlumí zimní výpar a na jaře pomalu dotuje podzemní vodu.</div></div>
           <div class="ctl"><label for="c-warm">Oteplení v roce 2075 <output id="o-warm"></output></label><input type="range" id="c-warm" min="0" max="4.5" step="0.1"><div class="hint">Vůči normálu 1991–2020; dnes asi +0,8 °C. Každý stupeň zvyšuje výpar zhruba o 7 %.</div></div>
           <div class="ctl"><label for="c-r">Schopnost krajiny zadržet vodu <output id="o-r"></output></label><input type="range" id="c-r" min="0" max="100" step="5"><div class="hint">0 = odvodněná, utužená, zabetonovaná krajina; 35 = dnešní stav (odhad); 100 = obnovené mokřady, rozrušené meliorace, zdravá půda.</div></div>
           <div class="ctl"><label for="c-int">Přívalovost srážek <output id="o-int"></output></label><input type="range" id="c-int" min="0" max="100" step="5"><div class="hint">Jaká část srážek padá v krátkých intenzivních lijácích, které rychle odtečou.</div></div>
@@ -717,7 +731,7 @@ ol.sources .m{color:var(--muted)}
         </tbody>
       </table>
     </div>
-    <div class="callout crit"><b>Kde je skutečná hranice.</b> U elektráren s věžemi rozhoduje hlavně dostupnost odebírané vody v nádrži a teplota vody, ne průtok řeky. Simulace proto jako signál „rizika omezení chlazení“ počítá měsíce, kdy souhrnná zásoba v nádržích klesne pod 15 % a zároveň průtoky velkých řek pod 40 % normálu. V dnešním klimatu se takový stav v modelu prakticky nevyskytuje; při scénáři „Opakující se rok 2026“ se objevuje opakovaně.</div>
+    <div class="callout crit"><b>Kde je skutečná hranice.</b> U elektráren s věžemi rozhoduje hlavně dostupnost odebírané vody v nádrži a teplota vody, ne průtok řeky. Simulace proto jako signál „rizika omezení chlazení“ počítá měsíce, kdy souhrnná zásoba v nádržích klesne pod 15 % a zároveň průtoky velkých řek pod 40 % normálu. Při návratu k normálu jde v modelu v průměru o méně než jeden měsíc za 50 let, při pokračujícím trendu asi o 13 měsíců a při scénáři „Opakující se rok 2026“ asi o 180 měsíců – tedy zhruba každé léto.</div>
   </section>
 
   <!-- 9 -->
@@ -778,16 +792,18 @@ ol.sources .m{color:var(--muted)}
       <p>Model je konceptuální „kbelíkový“ model celého území (1 mm vody = 78,9 mil. m³). Každý měsíc:</p>
       <ul>
         <li>srážky = normál 1991–2020 × nastavené procento × náhodná roční a měsíční odchylka (suché roky se mohou řetězit);</li>
-        <li>podle teploty se část srážek ukládá jako sníh a na jaře taje;</li>
-        <li>část vody odteče rychle (přívalový odtok, drenáže) – tím víc, čím horší je retence krajiny a čím vyšší přívalovost;</li>
+        <li>podle teploty se část srážek ukládá jako sníh; posuvník „Sněhové srážky“ mění podíl sněhu, ne celkové množství vody. Sněhová pokrývka tlumí výpar a voda z tání se vsakuje postupně, bez přívalového odtoku;</li>
+        <li>část deště odteče rychle (přívalový odtok z utužené či zamrzlé půdy, odtok z nasyceného povrchu, drenáže) – tím víc, čím horší je retence krajiny a čím vyšší přívalovost. Bleskové povodňové vlny projdou za hodiny až dny, proto se do „využitelného“ průtoku, který drží řeky v suchu, počítají jen zčásti;</li>
         <li>zbytek doplňuje půdu 0–40 cm, přebytek se vsakuje do vrstvy 40–100 cm a odtud do mělké (doba zdržení měsíce) a hluboké (roky) podzemní vody;</li>
         <li>výpar roste o 7 % na každý stupeň oteplení a je omezen dostupnou vodou v půdě;</li>
         <li>rozkolísanost srážek odpovídá letům 1991–2025 (variační koeficient ročního úhrnu kolem 0,14), suché roky na sebe mohou navazovat;</li>
-        <li>při poklesu zásoby pod 40 % vodohospodáři postupně snižují povinné odtoky (jako v roce 2026 na Vltavě);</li>
-        <li>nádrže zachytávají vodu z části území (30 %) a musí vypouštět povinné minimum + odběry; souhrnný zásobní prostor je 2 000 mil. m³ (modelový odhad využitelné části z celkových 3,36 mld. m³).</li>
+        <li>při poklesu zásoby pod 40 % vodohospodáři postupně snižují povinné odtoky (jako v roce 2026 na Vltavě); v zimě nádrže drží 15 % zásobního prostoru volných jako ochranu před povodněmi;</li>
+        <li>nádrže zachytávají vodu z části území (30 %) a musí vypouštět povinné minimum + odběry; souhrnný zásobní prostor je 2 000 mil. m³ (modelový odhad využitelné části z celkových 3,36 mld. m³). Nádrže nadlepšují průtoky níže po toku jen tolik, kolik chybí do zhruba třetiny průměrného průtoku;</li>
+        <li>opatření se nebudují přes noc: zlepšení retence krajiny nabíhá postupně během 10 let, nové akumulace se budují a plní od 4. do 19. roku simulace.</li>
       </ul>
-      <p>Kalibrace: v normálním klimatu dává model výpar kolem 500 mm a odtok kolem 180 mm ročně (skutečnost 488 a 197 mm), sněhovou zásobu v únoru kolem 50 mm a plné nádrže na jaře. Při zadání skutečných srážek let 2025–2026 klesnou mělké podzemní vody na zhruba 55 % normálu, hlubší půda pod 20 % nasycení a nádrže zhruba na polovinu – to odpovídá pozorování.</p>
-      <p><strong>Krátkodobý model kaskády (kapitola 07)</strong> počítá zásobu Lipna, Orlíku a Slap (827 mil. m³) a průtok pod Vraným po měsících XI/2026–X/2027. Srážky (zimní úhrn XII–II, ostatní měsíce v % normálu) a tání sněhu (březen–duben) nejdřív doplňují půdní deficit 50 mm a deficit podzemní vody, teprve zbytek odtéká – rychle, nebo přes podzemní vodu podle retence krajiny. Kaskáda vypouští zvolený odtok, a pokud přirozený průtok nestačí, dotuje ho ze zásoby, dokud nějaká zbývá. Model je nastaven tak, aby léto 2026 odpovídalo pozorování (čistá dotace asi 20 m³/s) a průměrná zima doplnila kaskádu jen zhruba na polovinu, jak uvádí Povodí Vltavy.</p>
+      <p>Kalibrace: v normálním klimatu dává model výpar kolem 490 mm a odtok kolem 190 mm ročně (skutečnost 488 a 197 mm). Výchozí stav vzniká tak, že model projde skutečnými srážkami let 2025 (83 % normálu) a 2026 po měsících: na konci října 2026 jsou mělké podzemní vody zhruba na polovině normálu daného měsíce a nádrže asi na 55 % – to odpovídá pozorování.</p>
+      <p><strong>Jak se počítá riziko.</strong> Kritický stav nastává, když nádrže klesnou pod 25 % zásobního prostoru a zároveň mělká podzemní voda (včetně vody ve sněhu, která do ní brzy vsákne) pod 45 % normálu daného měsíce. Pro každé nastavení se spočítá 120 průběhů počasí se stejnými „náhodnými“ řadami, takže rozdíly mezi nastaveními nejsou ovlivněné náhodou. Ukazatele: pravděpodobnost v roce 2027, podíl let 2030–2075 s kritickým stavem, rok, od kterého desetiletý průměr překročí 20 % (častěji než v každém 5. roce), a průměrné počty kritických měsíců. Ztráta tržeb zemědělství roste s hloubkou půdního sucha nelineárně (mírné sucho škodí málo, hluboké nepřiměřeně víc) a je průměrem všech průběhů. Model jsme ověřili systematickým posouváním každého posuvníku: všechny ukazatele se mění očekávaným směrem (zbývající odchylky do 1 procentního bodu odpovídají jednomu průběhu ze 120).</p>
+      <p><strong>Krátkodobý model kaskády (kapitola 07)</strong> počítá zásobu Lipna, Orlíku a Slap (827 mil. m³) a průtok pod Vraným po měsících XI/2026–X/2027. Srážky (zimní úhrn XII–II, ostatní měsíce v % normálu) nejdřív doplňují půdní deficit 50 mm a deficit hlubších podzemních vod, teprve zbytek odtéká. Sníh je část zimních srážek: tlumí výpar a taje v březnu a dubnu na nasycenou půdu, takže z něj odteče větší podíl než ze zimního deště. Retence krajiny zadrží část rychlého odtoku v mokřadech a nivách a vrací ho postupně; zdravá půda s pokryvem omezuje neproduktivní výpar. Čtvrtina průtoku ve Vraném přitéká z mezipovodí pod kaskádou (hlavně Sázava). Kaskáda vypouští zvolený odtok, a pokud přirozený průtok nestačí, dotuje ho ze zásoby, dokud nějaká zbývá; v zimě drží volný ochranný prostor. Model je hmotově bilanční a nastavený tak, aby průměrná zima doplnila kaskádu jen zhruba na polovinu a k úplnému doplnění bylo potřeba asi 250–300 mm zimních srážek, jak uvádí Povodí Vltavy.</p>
       <p><strong>Podkladová analýza.</strong> Část údajů v kapitolách 02–10 vychází z dokumentu „Analýza sucha v ČR“ (říjen 2026), který autor webu připravil jako podklad. Klíčová čísla jsme ověřili v primárních zdrojích (ČHMÚ, MZe, Povodí Vltavy); kde se lišila, uvádíme hodnotu z primárního zdroje – například podíl 65 % v povodí Berounky se týká meziročního poklesu hladiny, ne podnormálního stavu, a nádrže Povodí Odry byly podle tabulek MZe naplněny na 81–95 %.</p>
       <p><strong>Limity:</strong> model nerozlišuje regiony (Morava je sušší než hory), nepočítá s kvalitou vody, změnou rozložení srážek během roku ani s krizovými opatřeními. Ekonomický odhad pro zemědělství je přepočet podle hloubky půdního sucha kalibrovaný na odhad −20 mld. Kč v roce 2026. Výsledky proto čtěte jako porovnání „co když“, nikoli jako prognózu. Pro skutečné rozhodování slouží studie ČHMÚ, CzechGlobe a digitální dvojčata povodí.</p>
     </div>
@@ -1040,82 +1056,109 @@ drawDiagrams();
 /* ------------------------------------------------------------------
    SIMULACE – měsíční model vodní bilance ČR
 ------------------------------------------------------------------ */
-const MM = 78.87;                                        // mil. m³ na 1 mm
+const MM = 78.87;                                        // mil. m³ na 1 mm nad územím ČR
 const P_N = [44, 37, 45, 36, 70, 79, 90, 77, 58, 47, 46, 46];   // normál srážek 1991–2020 (mm)
 const T_N = [-1.5, -0.5, 3, 8, 13, 16, 18, 18, 13, 8.5, 3.5, -0.5];
 const PET_N = [5, 9, 22, 45, 75, 88, 96, 83, 52, 26, 10, 5];
 const CAP_T = 70, CAP_D = 110, R_BASE = 2000, PHI_R = 0.30;
 const START_M = 10, START_Y = 2026, MONTHS = 12 * 49 + 2;  // listopad 2026 – prosinec 2075
+const QMEAN = 16.4, NADT = 0.33, RESPX = 4, SFA = 0.10, SFB = 0.15;   // průměrný měsíční odtok (mm), cíl nadlepšení, tvar odezvy půdy
 const MN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
 
 function rng(seed) { let a = seed >>> 0; return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 function gauss(r) { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
 
 function simulate(p, init, months, startM, forcing, rec) {
-  const r = rng(p.seed || 1), cap = R_BASE * (1 + (p.cap || 0));
+  const r = rng(p.seed || 1), capEnd = R_BASE * (1 + (p.cap || 0));
+  let cap = R_BASE;
   const s = Object.assign({}, init);
+  if (s.Rf != null) { s.R = s.Rf * R_BASE; }
   const out = rec ? [] : null;
   let yAR = 0, yf = 1, curY = -1;
-  const rho = 0.4, sdY = 0.09 * p.varia, sdM = 0.40 * p.varia; // roční CV srážek ≈ 0,14 jako v letech 1991–2025
+  const rho = 0.4, sdY = 0.09 * p.varia, sdM = 0.40 * p.varia;
   for (let i = 0; i < months; i++) {
     const m = (startM + i) % 12, yi = Math.floor((startM + i) / 12);
     if (yi !== curY) { curY = yi; yAR = rho * yAR + Math.sqrt(1 - rho * rho) * gauss(r); yf = Math.exp(sdY * yAR - .5 * sdY * sdY); }
     const mf = Math.exp(sdM * gauss(r) - .5 * sdM * sdM);
     const warm = p.w0 + (p.wEnd - p.w0) * Math.min(1, i / Math.max(1, months - 1));
+    // opatření se budují postupně: retence krajiny náběh 10 let, nové nádrže se plní od 4. do 19. roku
+    const tY = i / 12, rr = 0.35 + (p.r - 0.35) * Math.min(1, tY / 10);
+    cap = R_BASE + (capEnd - R_BASE) * Math.max(0, Math.min(1, (tY - 4) / 15));
     const P = forcing ? P_N[m] * forcing[i] / 100 : P_N[m] * p.pf * yf * mf;
     const T = T_N[m] + warm;
-    const sf = Math.min(0.95, Math.max(0, Math.min(0.85, 0.42 - 0.12 * T)) * p.snow);
+    // 1) skupenství: podíl sněhu klesá s teplotou; posuvník mění podíl sněhu, ne celkové množství vody
+    const sf = Math.min(0.95, Math.max(0, 0.32 - 0.11 * T) * p.snow);
     const snowfall = P * sf, rain = P - snowfall;
     s.SN += snowfall;
-    const melt = s.SN * Math.max(0, Math.min(1, 0.22 + 0.14 * T)); s.SN -= melt;
-    const water = rain + melt;
-    const hort = water * (0.02 + 0.10 * p.inten) * (1.25 - p.r);
-    const w2 = water - hort;
-    const resp = w2 * Math.pow(Math.min(1, s.ST / CAP_T), 2);
-    s.ST += w2 - resp;
-    const fastR = resp * (0.08 + 0.30 * (1 - p.r));
-    s.SD += resp - fastR;
-    const PET = PET_N[m] * (1 + 0.07 * warm);
-    const etT = Math.min(s.ST, PET * Math.min(1, s.ST / (0.65 * CAP_T))); s.ST -= etT;
-    const etD = Math.min(s.SD, (PET - etT) * Math.min(1, s.SD / (0.8 * CAP_D)) * 0.45); s.SD -= etD;
-    if (s.ST > CAP_T) { s.SD += s.ST - CAP_T; s.ST = CAP_T; }
+    // 2) tání: postupné (degree-day); voda z tání se vsakuje pomalu, bez přívalového odtoku
+    const melt = T > 0 ? Math.min(s.SN, s.SN * Math.min(1, 0.15 + 0.12 * T)) : 0;
+    s.SN -= melt;
+    // 3) přívalový (hortonovský) odtok jen z deště – zesiluje ho přívalovost, suchá a utužená půda; zamrzlá půda v zimě
+    const dry = 1 - Math.min(1, s.ST / CAP_T);
+    const frozen = (T < 0.5) ? 0.20 : 0;
+    const hFrac = Math.min(0.8, (0.005 + 0.09 * p.inten) * (1.25 - 0.75 * rr) * (1 + 0.5 * dry) + frozen * (1.1 - 0.6 * rr));
+    const hort = rain * hFrac;
+    // nasycený povrch (HBV): část deště, která se do plné svrchní vrstvy nevejde, rychle odteče
+    const rIn = rain - hort + melt;                                  // déšť po odečtení přívalového odtoku + voda z tání
+    const resp = rIn * Math.pow(Math.min(1, s.ST / CAP_T), RESPX);
+    const satFast = resp * (SFA + SFB * (1 - rr));
+    // 4) svrchní vrstva 0–40 cm (déšť + tání), přebytek do 40–100 cm
+    s.ST += rIn - satFast;
+    // sněhová pokrývka tlumí výpar
+    const PET = PET_N[m] * (1 + 0.07 * warm) * (s.SN > 5 ? 0.3 : 1);
+    const etT = Math.min(s.ST, PET * Math.min(1, s.ST / (0.65 * CAP_T)));
+    s.ST -= etT;
+    const etD = Math.min(s.SD, (PET - etT) * Math.min(1, s.SD / (0.8 * CAP_D)) * 0.45);
+    s.SD -= etD;
+    let percT = 0; if (s.ST > CAP_T) { percT = s.ST - CAP_T; s.ST = CAP_T; }
+    percT += 0.15 * Math.max(0, s.ST - 0.55 * CAP_T); s.ST -= 0.15 * Math.max(0, s.ST - 0.55 * CAP_T);
+    s.SD += percT;
+    // 5) průsak do podzemní vody; část zachytí drenáže (meliorace) a odvedou rovnou do toků
     let percD = 0; if (s.SD > CAP_D) { percD = s.SD - CAP_D; s.SD = CAP_D; }
     const slow = 0.40 * s.SD * Math.pow(s.SD / CAP_D, 2); s.SD -= slow; percD += slow;
-    const drain = percD * (0.05 + 0.35 * (1 - p.r)), rech = percD - drain;
-    s.G += 0.6 * rech; s.GD += 0.4 * rech;
-    const bS = 0.07 * s.G, bD = 0.02 * s.GD; s.G -= bS; s.GD -= bD;
-    const fast = hort + fastR + drain, Q = fast + bS + bD;
-    // krizové řízení: při nízké zásobě vodohospodáři snižují povinné odtoky (jako Vrané 40 → 20 m³/s v roce 2026)
-    const fill = s.R / cap, relF = fill >= 0.4 ? 1 : 0.55 + 0.45 * fill / 0.4;
-    const inflow = PHI_R * Q * MM, minRel = 0.66 * PHI_R * (197 / 12) * MM * p.demand * relF;
-    let release;
-    if (s.R + inflow - minRel > cap) release = s.R + inflow - cap;
-    else if (inflow >= minRel) release = minRel;
-    else release = Math.min(minRel, s.R + inflow);
-    s.R = Math.max(0, s.R + inflow - release);
-    if (rec) out.push({ m, y: yi, P, warm, ST: s.ST, SD: s.SD, G: s.G, GD: s.GD, R: s.R, cap, Q, small: hort + fastR + bS * 0.8, big: (1 - PHI_R) * Q * MM + release, AET: etT + etD });
+    const drain = percD * (0.05 + 0.40 * (1 - rr));
+    const rech = percD - drain;
+    s.G += 0.65 * rech; s.GD += 0.35 * rech;
+    const bS = 0.11 * s.G, bD = 0.02 * s.GD; s.G -= bS; s.GD -= bD;
+    const base = bS + bD, fast = hort + satFast + drain, Q = fast + base;   // mm/měsíc za celé území
+    // „užitečný“ průtok: bleskové povodňové vlny projdou za hodiny až dny a minimální průtoky v suchu nedrží
+    const useful = base + 0.5 * drain + 0.3 * satFast;
+    // 6) nádrže: zachytí odtok z 30 % území (povodňové vlny jen zčásti); v zimě drží volný ochranný prostor
+    const capM = (m >= 10 || m <= 1) ? 0.85 * cap : cap;
+    const fill = s.R / cap;
+    const relF = fill >= 0.4 ? 1 : 0.55 + 0.45 * fill / 0.4;                  // krizové řízení odtoků
+    const inflow = PHI_R * (base + drain + satFast + 0.6 * hort) * MM;
+    const Qu = (1 - PHI_R) * useful;                                          // využitelný odtok z neovládaného území (mm)
+    const own = 0.20 * PHI_R * QMEAN * MM;                                    // minimální odtok pod hrázemi
+    const nad = Math.max(0, NADT * QMEAN - Qu) * MM;                          // nadlepšení průtoků níže po toku
+    const odb = 1.0 * MM;                                                     // odběry z nádrží (~0,95 mld. m³/rok)
+    const need = (Math.max(own, nad) + odb) * p.demand * relF;
+    let R = s.R + inflow - need, spill = 0;
+    if (R > capM) { spill = R - capM; R = capM; }
+    let short = 0; if (R < 0) { short = -R; R = 0; }
+    s.R = R;
+    const big = ((1 - PHI_R) * Q + 0.4 * PHI_R * hort) * MM + (need - short - odb * p.demand * relF) + spill;
+    if (rec) out.push({ m, y: yi, P, warm, ST: s.ST, SD: s.SD, G: s.G, GD: s.GD, R: s.R, cap, Q, small: 0.3 * satFast + 0.5 * drain + bS, big: Math.max(0, big), bigU: (1 - PHI_R) * useful * MM + Math.max(0, need - short - odb * p.demand * relF), AET: etT + etD, SN: s.SN });
   }
   return { out, s };
 }
-
-/* Normál (ustálený stav dnešního klimatu) – pro indexy v % normálu */
 const N = (function () {
   const b = { pf: 1, snow: 1, w0: 0, wEnd: 0, r: 0.35, inten: 0.4, demand: 1, varia: 0, seed: 1, cap: 0 };
-  const sp = simulate(b, { SN: 0, ST: 50, SD: 80, G: 40, GD: 150, R: 1800 }, 960, 0, null, true);
-  const last = sp.out.slice(-12);
-  const smallN = [], bigN = [];
-  last.forEach(o => { smallN[o.m] = o.small; bigN[o.m] = o.big; });
+  const sp = simulate(b, { SN: 0, ST: 50, SD: 80, G: 40, GD: 150, R: 1700 }, 960, 0, null, true);
+  const last = sp.out.slice(-12), smallN = [], bigN = [], Gm = [], GDm = [], usefulN = [];
+  last.forEach(o => { smallN[o.m] = o.small; bigN[o.m] = o.big; Gm[o.m] = o.G; GDm[o.m] = o.GD; usefulN[o.m] = o.bigU; });
   const defN = last.slice(3, 9).reduce((a, o) => a + 1 - (o.ST + o.SD) / (CAP_T + CAP_D), 0) / 6;
-  return { G: sp.s.G, GD: sp.s.GD, smallN, bigN, defN, state: sp.s };
+  const yr = { P: 0, AET: 0, Q: 0 }; last.forEach(o => { yr.P += o.P; yr.AET += o.AET; yr.Q += o.Q; });
+  return { G: sp.s.G, GD: sp.s.GD, Gm, GDm, usefulN, smallN, bigN, defN, state: sp.s, last, yr };
 })();
-/* Referenční sucho 2026 pro kalibraci ekonomiky (skutečné srážky 2025–2026) */
-const DEF26 = (function () {
+const F26 = Array(12).fill(83).concat([59, 116, 41, 33, 81, 87, 57, 91, 100, 60]);
+const R26 = (function () {   // skutečné srážky 2025 (83 %) a měsíce 2026 – výchozí stav simulace
   const b = { pf: 1, snow: 1, w0: 0.3, wEnd: 1, r: 0.35, inten: 0.4, demand: 1, varia: 0, seed: 1, cap: 0 };
-  const f = Array(12).fill(83).concat([59, 116, 41, 33, 81, 87, 57, 91, 100, 60]);
-  const o = simulate(b, N.state, 22, 0, f, true).out.slice(12);
-  return o.slice(3, 9).reduce((a, x) => a + 1 - (x.ST + x.SD) / (CAP_T + CAP_D), 0) / 6;
+  return simulate(b, N.state, 22, 0, F26, true).out;
 })();
-const INIT = { SN: 0, ST: 0.45 * CAP_T, SD: 0.2 * CAP_D, G: 0.55 * N.G, GD: 0.8 * N.GD, R: 0.5 * R_BASE };
+const DEF26 = R26.slice(12).slice(3, 9).reduce((a, x) => a + 1 - (x.ST + x.SD) / (CAP_T + CAP_D), 0) / 6;
+const E26 = R26[R26.length - 1];
+const INIT = { SN: 0, ST: E26.ST, SD: E26.SD, G: E26.G, GD: E26.GD, Rf: E26.R / E26.cap };
 
 const PRESETS = {
   normal: { name: "Návrat k normálu", pf: 100, snow: 100, warm: 1.5, r: 50, int: 40, dem: 100, cap: 0, var: 100, desc: "Srážky jako v letech 1991–2020, mírné oteplení, částečné zlepšení retence krajiny. Optimistická, ale ne nereálná varianta." },
@@ -1151,62 +1194,61 @@ function params(sd) {
   const g = k => +document.getElementById(ctl[k]).value;
   return { pf: g("pf") / 100, snow: g("snow") / 100, w0: 0.8, wEnd: g("warm"), r: g("r") / 100, inten: g("int") / 100, demand: g("dem") / 100, cap: g("cap") / 100, varia: g("var") / 100, seed: sd };
 }
-function analyse(out) {
-  let crit = 0, first = null, cool = 0, rMin = 100;
-  const yearsN = Math.ceil(out.length / 12) + 1;
-  const agri = {};
-  out.forEach((o, i) => {
-    const rp = o.R / o.cap * 100, gp = o.G / N.G * 100, bigp = o.big / N.bigN[o.m] * 100;
-    rMin = Math.min(rMin, rp);
-    if (rp < 25 && gp < 45) { crit++; if (first === null) first = START_Y + Math.floor((START_M + i) / 12); }
-    if (rp < 15 && bigp < 40) cool++;
-    if (o.m >= 3 && o.m <= 8) { const y = START_Y + Math.floor((START_M + i) / 12); agri[y] = (agri[y] || 0) + (1 - (o.ST + o.SD) / (CAP_T + CAP_D)) / 6; }
-  });
-  const agriLoss = Object.entries(agri).map(([y, d]) => [+y, Math.max(0, 20 * (d - N.defN) / (DEF26 - N.defN))]);
-  const avgLoss = agriLoss.reduce((a, x) => a + x[1], 0) / agriLoss.length;
-  return { crit, first, cool, rMin, agriLoss, avgLoss };
-}
+/* Kritický stav: nádrže pod 25 % zásobního prostoru a zároveň mělká podzemní voda (včetně vody ve sněhu,
+   která do ní brzy vsákne) pod 45 % normálu daného měsíce. Chlazení: nádrže pod 15 % a využitelný průtok velkých řek pod 40 % normálu. */
+const isCrit = x => x.R / x.cap < .25 && (x.G + 0.5 * x.SN) / N.Gm[x.m] < .45;
+const isCool = x => x.R / x.cap < .15 && x.bigU / N.usefulN[x.m] < .4;
+const agriOf = d => 20 * Math.pow(Math.max(0, (d - N.defN) / (DEF26 - N.defN)), 1.5);   // konvexní: hluboké sucho škodí víc
 function run() {
   Object.keys(ctl).forEach(k => { document.getElementById("o-" + k).textContent = outFmt[k](document.getElementById(ctl[k]).value); });
   document.getElementById("seed-lbl").textContent = "průběh č. " + seed;
-  const p = params(seed);
-  const res = simulate(p, INIT, MONTHS, START_M, null, true);
-  const a = analyse(res.out);
-  // Monte Carlo – 120 průběhů počasí se stejným nastavením
-  const RUNS = 120, nY = 50, probY = new Array(nY).fill(0), rAll = [], firsts = [];
+  const res = simulate(params(seed), INIT, MONTHS, START_M, null, true);
+  // Monte Carlo – 120 průběhů počasí se stejným nastavením (pevná semínka = férové srovnání nastavení)
+  const RUNS = 120, nY = 50, probY = new Array(nY).fill(0), rAll = [], agriY = new Array(nY).fill(0), agriC = new Array(nY).fill(0);
+  let critM = 0, coolM = 0;
   for (let k = 0; k < RUNS; k++) {
     const o = simulate(params(1000 + k * 7919), INIT, MONTHS, START_M, null, true).out;
-    const hit = new Array(nY).fill(0), rY = new Array(nY).fill(0), cnt = new Array(nY).fill(0);
-    let f = null;
-    o.forEach((x, i) => { const yi = Math.floor((START_M + i) / 12); if (x.R / x.cap < .25 && x.G / N.G < .45) { hit[yi] = 1; if (f === null) f = yi; } rY[yi] += x.R / x.cap * 100; cnt[yi]++; });
+    const hit = new Array(nY).fill(0), rY = new Array(nY).fill(0), cnt = new Array(nY).fill(0), dY = new Array(nY).fill(0);
+    o.forEach((x, i) => {
+      const yi = Math.floor((START_M + i) / 12);
+      if (isCrit(x)) { hit[yi] = 1; critM++; }
+      if (isCool(x)) coolM++;
+      rY[yi] += x.R / x.cap * 100; cnt[yi]++;
+      if (x.m >= 3 && x.m <= 8) dY[yi] += (1 - (x.ST + x.SD) / (CAP_T + CAP_D)) / 6;
+    });
     hit.forEach((h, yi) => probY[yi] += h);
     rAll.push(rY.map((v, yi) => cnt[yi] ? v / cnt[yi] : null));
-    firsts.push(f);
+    for (let yi = 1; yi < nY; yi++) { agriY[yi] += agriOf(dY[yi]); agriC[yi]++; }
   }
   const pct = (arr, q) => { const t = arr.filter(v => v != null).sort((x, y) => x - y); return t.length ? t[Math.min(t.length - 1, Math.floor(q * (t.length - 1)))] : null; };
   const band = { lo: [], mid: [], hi: [] };
   for (let yi = 0; yi < nY; yi++) { const c = rAll.map(r => r[yi]); band.lo.push(pct(c, .1)); band.mid.push(pct(c, .5)); band.hi.push(pct(c, .9)); }
-  const cum = Array.from({ length: nY }, (_, yi) => firsts.filter(f => f !== null && f <= yi).length / RUNS * 100);
-  last = { res, a, prob: probY.map(v => v / RUNS * 100), band, cum, p };
+  const prob = probY.map(v => v / RUNS * 100);
+  // desetiletý klouzavý průměr (centrovaný; první roky ovlivněné suchem 2026 se nepočítají)
+  const roll = prob.map((_, i) => (i - 5 >= 4 && i + 4 < nY) ? prob.slice(i - 5, i + 5).reduce((a, b) => a + b, 0) / 10 : null);
+  let thr = null; for (let i = 0; i < nY; i++) if (roll[i] != null && roll[i] > 20) { thr = START_Y + i; break; }
+  const share = prob.slice(4).reduce((a, b) => a + b, 0) / (nY - 4);
+  const agri = []; for (let yi = 1; yi < nY; yi++) agri.push([START_Y + yi, agriY[yi] / agriC[yi]]);
+  const avgLoss = agri.reduce((a, x) => a + x[1], 0) / agri.length;
+  last = { res, prob, roll, thr, share, p27: prob[1], critM: critM / RUNS, coolM: coolM / RUNS, agri, avgLoss, band };
   renderKpis(); drawSim();
 }
 function renderKpis() {
-  const { a, cum } = last;
-  const p50 = cum.findIndex(v => v >= 50);
+  const L = last;
   const k = [
-    { v: a.first ? a.first : "nenastal", cls: a.first ? (a.first < 2040 ? "crit" : "warn") : "water", l: "první kritická ztráta zásoby (tento průběh počasí)" },
-    { v: p50 >= 0 ? (START_Y + p50) : "> 2075", cls: p50 >= 0 ? (START_Y + p50 < 2045 ? "crit" : "warn") : "water", l: "rok, do kdy nastane s pravděpodobností 50 % (120 průběhů)" },
-    { v: fmt(cum[cum.length - 1], 0) + " %", cls: cum[cum.length - 1] > 50 ? "crit" : cum[cum.length - 1] > 15 ? "warn" : "water", l: "pravděpodobnost kritického stavu do roku 2075" },
-    { v: a.crit, cls: a.crit > 24 ? "crit" : a.crit > 0 ? "warn" : "water", l: "měsíců v kritickém stavu (2026–2075)" },
-    { v: a.cool, cls: a.cool > 0 ? "crit" : "water", l: "měsíců s rizikem omezení chlazení elektráren" },
-    { v: fmt(a.avgLoss, 1) + " mld.", cls: a.avgLoss > 10 ? "crit" : a.avgLoss > 4 ? "warn" : "water", l: "průměrná roční ztráta tržeb zemědělství (Kč, ceny 2026)" }];
+    { v: fmt(L.p27, 0) + " %", cls: L.p27 > 50 ? "crit" : L.p27 > 25 ? "warn" : "water", l: "pravděpodobnost kritického stavu v roce 2027 (navazuje na sucho 2026)" },
+    { v: fmt(L.share, 0) + " %", cls: L.share > 30 ? "crit" : L.share > 8 ? "warn" : "water", l: "podíl let 2030–2075 s kritickým stavem (průměr 120 průběhů)" },
+    { v: L.thr ? L.thr : "nenastane", cls: L.thr ? (L.thr < 2045 ? "crit" : "warn") : "water", l: "od kdy kritický stav přichází častěji než v každém 5. roce" },
+    { v: fmt(L.critM, 0), cls: L.critM > 60 ? "crit" : L.critM > 12 ? "warn" : "water", l: "průměrný počet měsíců v kritickém stavu (2026–2075)" },
+    { v: fmt(L.coolM, 0), cls: L.coolM > 12 ? "crit" : L.coolM >= 1 ? "warn" : "water", l: "měsíců s rizikem omezení chlazení elektráren (průměr)" },
+    { v: fmt(L.avgLoss, 1) + " mld.", cls: L.avgLoss > 12 ? "crit" : L.avgLoss > 7 ? "warn" : "water", l: "průměrná roční ztráta tržeb zemědělství (Kč, ceny 2026)" }];
   document.getElementById("res-kpis").innerHTML = k.map(x => `<div class="kpi"><div class="v ${x.cls}">${x.v}</div><div class="l">${x.l}</div></div>`).join("");
-  const c = cum[cum.length - 1];
   const vd = document.getElementById("verdict");
   let cls = "ok", t;
-  if (c > 60) { cls = "crit"; t = `<b>Vysoké riziko.</b> Ve většině simulovaných průběhů počasí Česko do roku 2075 alespoň jednou ztratí kritickou zásobu vody – nádrže se vyprázdní ve chvíli, kdy už je nedoplňuje ani podzemní voda. Zkuste zvýšit „Schopnost krajiny zadržet vodu“ a sledujte, o kolik se riziko posune.`; }
-  else if (c > 20) { cls = "warn"; t = `<b>Střední riziko.</b> Kritický stav není pravidlem, ale v nepříznivé sérii suchých let nastává. Rozhodující je, zda po suchém roce přijde zima se sněhem.`; }
-  else { t = `<b>Nízké riziko.</b> Krajina a nádrže suché roky překlenou; krátkodobá sucha se ale dál objevují v půdě a v drobných tocích.`; }
+  if (L.share > 30) { cls = "crit"; t = `<b>Vysoké riziko.</b> Kritický stav se stává běžnou součástí života: nastává v ${fmt(L.share, 0)} % let po roce 2030. Nádrže se vyprazdňují ve chvíli, kdy je už nedoplňuje ani podzemní voda. Zkuste zvýšit „Schopnost krajiny zadržet vodu“ nebo snížit odběry a sledujte, o kolik riziko klesne.`; }
+  else if (L.share > 8) { cls = "warn"; t = `<b>Střední riziko.</b> Kritický stav není pravidlem, ale v sérii suchých let přichází (${fmt(L.share, 0)} % let po roce 2030). Rozhodující je, zda po suchém roce přijde vlhká zima se sněhem.`; }
+  else { t = `<b>Nízké riziko.</b> Po odeznění dnešního sucha krajina a nádrže suché roky překlenou (kritický stav v ${fmt(L.share, 0)} % let po roce 2030). Krátkodobá sucha se ale dál objevují v půdě a v drobných tocích.`; }
+  if (L.p27 > 25) t += ` Rok 2027 je rizikový v každém scénáři, protože začíná z vyčerpaných zásob roku 2026.`;
   vd.className = "verdict " + cls; vd.innerHTML = t;
 }
 function yearTick(i) { const mm = (START_M + i) % 12, y = START_Y + Math.floor((START_M + i) / 12); return (mm === 0 && y % 10 === 0) ? String(y) : null; }
@@ -1227,40 +1269,42 @@ function drawSim() {
       { name: "Vybraný průběh", values: o.map(v => v.R / v.cap * 100), color: "--labe", width: 1.6 }],
       refs: [{ y: 25, label: "kritická hranice 25 %", color: "--critical", legend: "kritická hranice" }] });
   } else if (tab === "podzemi") {
-    T.textContent = "Půda a podzemní voda";
-    S.textContent = "Půda: % nasycení vrstvy; podzemní voda: % normálu dnešního klimatu.";
+    T.textContent = "Půda a podzemní voda (vybraný průběh počasí)";
+    S.textContent = "Půda: % nasycení vrstvy; podzemní voda: % normálu daného měsíce v dnešním klimatu (sezonní kolísání je odečteno, tříměsíční průměr).";
+    const sm3 = a => a.map((_, i) => { const w = a.slice(Math.max(0, i - 1), i + 2); return w.reduce((x, y) => x + y, 0) / w.length; });
     spec = Object.assign(base, { yMin: 0, unit: "%", series: [
       { name: "Půda 0–40 cm", values: o.map(v => v.ST / CAP_T * 100), color: "--loess-mark", width: 1 },
       { name: "Půda 40–100 cm", values: o.map(v => v.SD / CAP_D * 100), color: "--series-2", width: 1.5 },
-      { name: "Mělká podzemní voda", values: o.map(v => v.G / N.G * 100), color: "--labe", width: 2 },
-      { name: "Hluboká podzemní voda", values: o.map(v => v.GD / N.GD * 100), color: "--series-7", width: 2 }],
-      refs: [{ y: 45, label: "45 % – kritická hranice mělké podzemní vody", color: "--critical" }] });
+      { name: "Mělká podzemní voda", values: sm3(o.map(v => v.G / N.Gm[v.m] * 100)), color: "--labe", width: 2 },
+      { name: "Hluboká podzemní voda", values: sm3(o.map(v => v.GD / N.GDm[v.m] * 100)), color: "--series-7", width: 2 }],
+      refs: [{ y: 45, label: "45 % – kritická hranice mělké podzemní vody", color: "--critical", start: true, below: true }] });
   } else if (tab === "toky") {
-    T.textContent = "Průtoky a mokřady (roční průměry)";
-    S.textContent = "% normálu. Drobné toky závisejí na mělké podzemní vodě; velké řeky drží vypouštění z nádrží. Index mokřadů = kombinace mělké podzemní vody a hlubší půdy.";
+    T.textContent = "Průtoky a mokřady (roční průměry, vybraný průběh)";
+    S.textContent = "% normálu. Drobné toky závisejí na mělké podzemní vodě; velké řeky = využitelný průtok (bez krátkých povodňových vln), který drží i vypouštění z nádrží. Index mokřadů = mělká podzemní voda a vlhkost hlubší půdy.";
     const nY = Math.ceil((START_M + n) / 12), ys = [], sm = [], bg = [], wt = [];
     for (let yi = 0; yi < nY; yi++) {
-      const rows = o.map((v, i) => [v, i]).filter(([v, i]) => Math.floor((START_M + i) / 12) === yi); if (!rows.length) continue;
+      const rows = o.map((v, i) => [v, i]).filter(([v, i]) => Math.floor((START_M + i) / 12) === yi); if (rows.length < 12) continue;
       ys.push(START_Y + yi);
       sm.push(rows.reduce((a, [v]) => a + v.small / N.smallN[v.m] * 100, 0) / rows.length);
-      bg.push(rows.reduce((a, [v]) => a + v.big / N.bigN[v.m] * 100, 0) / rows.length);
-      wt.push(rows.reduce((a, [v]) => a + 100 * Math.pow(v.G / N.G, .7) * (0.5 + 0.5 * v.SD / CAP_D) / (0.5 + 0.5 * 0.45), 0) / rows.length);
+      bg.push(rows.reduce((a, [v]) => a + v.bigU / N.usefulN[v.m] * 100, 0) / rows.length);
+      wt.push(rows.reduce((a, [v]) => a + 100 * Math.pow(v.G / N.Gm[v.m], .7) * (0.4 + 0.6 * v.SD / CAP_D) / (0.4 + 0.6 * N.last[v.m].SD / CAP_D), 0) / rows.length);
     }
     spec = { type: "line", x: ys, xTick: i => ys[i] % 10 === 0 ? ys[i] : null, height: 300, unit: "%", dec: 0, yMin: 0, series: [
       { name: "Drobné toky", values: sm, color: "--series-3" }, { name: "Velké řeky", values: bg, color: "--labe", width: 2.5 }, { name: "Index mokřadů", values: wt, color: "--loess-mark" }],
       refs: [{ y: 100, label: "normál", color: "--ink-2" }] };
   } else if (tab === "riziko") {
     T.textContent = "Pravděpodobnost kritické ztráty zásoby";
-    S.textContent = "Ze 120 náhodných průběhů počasí při stejném nastavení: sloupce = v daném roce, čára = do daného roku alespoň jednou.";
+    S.textContent = "Ze 120 náhodných průběhů počasí při stejném nastavení: sloupce = podíl průběhů s kritickým stavem v daném roce, čára = desetiletý klouzavý průměr.";
     const ys = last.prob.map((_, i) => START_Y + i);
     spec = { type: "bar", x: ys, xTick: i => ys[i] % 10 === 0 ? ys[i] : null, height: 300, unit: "%", dec: 0, yMin: 0, yMax: 100, series: [
-      { name: "V daném roce", values: last.prob, color: "--loess-mark" }, { name: "Kumulativně", values: last.cum, color: "--critical", kind: "line", width: 2.5 }] };
+      { name: "V daném roce", values: last.prob, color: "--loess-mark" }, { name: "Průměr 10 let", values: last.roll, color: "--critical", kind: "line", width: 2.5 }],
+      refs: [{ y: 20, label: "každý 5. rok", color: "--ink-2" }] };
   } else {
     T.textContent = "Odhad ztráty tržeb zemědělství podle hloubky půdního sucha";
-    S.textContent = "mld. Kč ročně (ceny 2026), přepočet kalibrovaný na odhad −20 mld. Kč v roce 2026. Ilustrativní, nezahrnuje lesnictví, energetiku ani vyšší ceny.";
-    const ay = last.a.agriLoss.map(v => v[0]);
+    S.textContent = "mld. Kč ročně (ceny 2026), průměr 120 průběhů počasí; přepočet kalibrovaný na odhad −20 mld. Kč v roce 2026. Ilustrativní, nezahrnuje lesnictví, energetiku ani vyšší ceny.";
+    const ay = last.agri.map(v => v[0]);
     spec = { type: "bar", x: ay, xTick: i => ay[i] % 10 === 0 ? ay[i] : null, height: 300, unit: "mld. Kč", dec: 1, yMin: 0, series: [
-      { name: "Ztráta tržeb", values: last.a.agriLoss.map(v => v[1]), colorFn: v => v >= 20 ? "--critical" : v >= 8 ? "--loess-mark" : "--series-3" }],
+      { name: "Ztráta tržeb", values: last.agri.map(v => v[1]), colorFn: v => v >= 20 ? "--critical" : v >= 8 ? "--loess-mark" : "--series-3" }],
       refs: [{ y: 20, label: "úroveň roku 2026", color: "--ink-2" }] };
   }
   const c = charts.find(c => c.id === "ch-sim");
@@ -1321,28 +1365,41 @@ const K_MON = ["XI/26", "XII/26", "I/27", "II/27", "III/27", "IV/27", "V/27", "V
 const K_PN = [46, 46, 44, 37, 45, 36, 70, 79, 90, 77, 58, 47];
 const K_ET = [8, 4, 4, 7, 18, 40, 70, 85, 95, 80, 48, 22];
 const K_VMAX = 827, K_MMS = 2.63, K_MM = 28;   // mil. m³; 1 m³/s za měsíc = 2,63 mil. m³; 1 mm v povodí = 28 mil. m³
+const K_AU = 0.25, K_MINREL = 5;                // podíl mezipovodí pod kaskádou (Sázava aj.); minimální odtok z kaskády (m³/s)
+const K_GD0 = 250;                              // deficit hlubších podzemních vod na začátku (mm)
+/* Model je hmotově bilanční: každý milimetr srážek skončí ve výparu, v půdě, v podzemní vodě, v krajině (mokřady, nivy)
+   nebo v řece – retence ani sníh vodu „nevyrábějí“, jen mění, kdy a kam doteče. */
 function kSim(o) {
-  let V = 0.394 * K_VMAX, D = 50, G = 14, GD = 150, ex = null;
-  const snowMM = o.snow * 1000 / 78.87, V0 = [], Q0 = [];
+  let V = 0.394 * K_VMAX, D = 50, G = 14, GD = K_GD0, L = 0, SN = 0, ex = null;
+  const snowTot = o.snow * 1000 / 78.87, V0 = [], Q0 = [], LS = [];
   for (let m = 0; m < 12; m++) {
     const winter = m >= 1 && m <= 3;
     const P = winter ? o.win * [46, 44, 37][m - 1] / 127 : K_PN[m] * o.oth / 100;
-    const melt = m === 4 ? snowMM * 0.55 : m === 5 ? snowMM * 0.45 : 0;
-    const W = Math.max(0, P + melt - (winter ? Math.min(P, snowMM / 3) : 0));
-    D += K_ET[m] * 0.9;
-    const a = Math.min(W * 0.92, D); D -= a;
-    const E = W - a;
-    let fast = E * (0.11 - 0.05 * o.r), rech = E - fast;
-    rech *= (1 + 0.4 * o.r); fast *= (1 - 0.3 * o.r);
-    const f = Math.min(rech, GD); GD -= f; G += rech - f + f * 0.15;
+    // sníh je část zimních srážek (nejvýš 80 %); taje v březnu a dubnu
+    const snowfall = winter ? Math.min(0.8 * P, snowTot * [46, 44, 37][m - 1] / 127) : 0;
+    const rain = P - snowfall; SN += snowfall;
+    const melt = m === 4 ? 0.6 * SN : m === 5 ? SN : 0; SN -= melt;
+    // výpar: sněhová pokrývka ho tlumí, zdravá půda s pokryvem omezuje neproduktivní výpar z holé půdy
+    D += K_ET[m] * 0.9 * (1 - 0.7 * Math.min(1, SN / 8)) * (1 - 0.08 * o.r);
+    const W = rain + melt, a = Math.min(W * 0.96, D); D -= a;
+    const E = W - a, ER = W > 0 ? E * rain / W : 0, EM = E - ER;
+    // rychlý odtok: tání na nasycené půdě 25 %, zimní déšť 11 %, ostatní 6 %; retence část zadrží v mokřadech a nivách
+    const fast0 = ER * (winter ? 0.11 : 0.06) + EM * 0.25;
+    const held = fast0 * 0.5 * o.r, fast = fast0 - held; L += held;
+    const rech = E - fast0;
+    const f = Math.min(rech, GD); GD -= f; G += rech - f + f * 0.15;   // nejdřív se doplňuje deficit hlubších podzemních vod
     const base = 0.06 * G; G -= base;
-    const Qn = (fast + base) * K_MM / K_MMS;
-    let Q;
-    if (Qn >= o.qt) { const add = (Qn - o.qt) * K_MMS, st = Math.min(add, K_VMAX - V); V += st; Q = o.qt + (add - st) / K_MMS; }
-    else { const need = (o.qt - Qn) * K_MMS, take = Math.min(need, V); V -= take; Q = Qn + take / K_MMS; if (V < 1 && ex === null) ex = m; }
-    V0.push(V / K_VMAX * 100); Q0.push(Q);
+    const lo = 0.35 * L; L -= lo;                                      // krajina vrací zadrženou vodu postupně
+    const Qn = (fast + base + lo) * K_MM / K_MMS;                      // přirozený průtok ve Vraném (m³/s)
+    const Qu = K_AU * Qn, Qc = Qn - Qu;
+    const capM = (m >= 1 && m <= 3 ? 0.75 : m === 4 ? 0.85 : 1) * K_VMAX; // v zimě ochranný prostor proti povodním
+    let rel = Math.max(K_MINREL, o.qt - Qu), dV = (Qc - rel) * K_MMS;
+    if (V + dV > capM) { const s = V + dV - Math.max(capM, V); if (s > 0) { rel += s / K_MMS; dV -= s; } }
+    if (V + dV < 0) { rel += (V + dV) / K_MMS; dV = -V; }
+    V += dV; if (V < 1 && ex === null) ex = m;
+    V0.push(V / K_VMAX * 100); Q0.push(Qu + rel); LS.push(G + L + (K_GD0 - GD) - D);
   }
-  return { V: V0, Q: Q0, ex };
+  return { V: V0, Q: Q0, ex, land: LS[10] - (14 - 50) };
 }
 const K_PRE = {
   sucha: { name: "Suchá zima", win: 80, snow: 0.67, oth: 85, ret: "0", qt: "35", desc: "Zima jako 2025/26: 80 mm srážek, málo sněhu, podprůměrné jaro a léto, dnešní odvodněná krajina." },
@@ -1384,10 +1441,11 @@ function kRun() {
     { v: fmt(r.V[5], 0) + " %", c: r.V[5] < 30 ? "crit" : r.V[5] < 60 ? "warn" : "water", l: "zásoba kaskády na konci dubna 2027" },
     { v: fmt(vMin, 0) + " %", c: vMin < 15 ? "crit" : vMin < 35 ? "warn" : "water", l: "minimum zásoby (" + K_MON[iMin] + ")" },
     { v: r.ex === null ? "nenastane" : K_MON[r.ex], c: r.ex === null ? "water" : "crit", l: "vyčerpání zásobního prostoru" },
-    { v: odbery[0], c: odbery[1], l: odbery[2] }].map(x => `<div class="kpi"><div class="v ${x.c}">${x.v}</div><div class="l">${x.l}</div></div>`).join("");
+    { v: odbery[0], c: odbery[1], l: odbery[2] },
+    { v: "+" + fmt(r.land, 0) + " mm", c: r.land < 80 ? "crit" : r.land < 160 ? "warn" : "water", l: "voda doplněná do půdy, podzemí a mokřadů povodí (XI/26–IX/27)" }].map(x => `<div class="kpi"><div class="v ${x.c}">${x.v}</div><div class="l">${x.l}</div></div>`).join("");
   const vd = document.getElementById("k-verdict");
-  if (r.ex !== null) { vd.className = "verdict crit"; vd.innerHTML = `<b>Kritický stav.</b> Zásobní prostor Lipna, Orlíku a Slap se vyčerpá v měsíci ${K_MON[r.ex]}. Poté Vltava klesne na přirozený průtok a dolní Vltava i Labe ztratí pojistku. Zkuste snížit odtok na 20 m³/s nebo zlepšit retenci krajiny.`; }
-  else if (vMin < 35 || r.V[11] < 40) { vd.className = "verdict warn"; vd.innerHTML = `<b>Trvající deficit.</b> Kaskáda léto 2027 přečká, ale do další zimy vstoupí s nízkou zásobou – další suchý rok by už nezvládla.`; }
+  if (r.ex !== null) { vd.className = "verdict crit"; vd.innerHTML = `<b>Kritický stav.</b> Zásobní prostor Lipna, Orlíku a Slap se vyčerpá v měsíci ${K_MON[r.ex]}. Poté Vltava klesne na přirozený průtok a dolní Vltava i Labe ztratí pojistku. Pomůže hlavně snížení odtoku na 20 m³/s; obnova krajiny se v jediném roce projeví spíš v půdě a podzemí než v nádržích.`; }
+  else if (Math.min(...r.V.slice(6)) < 35 || r.V[11] < 40) { vd.className = "verdict warn"; vd.innerHTML = `<b>Trvající deficit.</b> Kaskáda léto 2027 přečká, ale do další zimy vstoupí s nízkou zásobou – další suchý rok by už nezvládla.`; }
   else { vd.className = "verdict ok"; vd.innerHTML = `<b>Obnova zásob.</b> Zima doplní půdu, podzemní vodu i nádrže a kaskáda vstoupí do léta 2027 s dostatečnou rezervou.`; }
   kDraw();
 }
