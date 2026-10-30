@@ -658,7 +658,6 @@
 
   $("#upd").textContent = V.aktualizace;
   $("#chk").textContent = V.overeno;
-  fetch("https://api.counterapi.dev/v1/vize-2075-hk/visits/up").then((r) => r.json()).then((d) => { $("#visit-count").textContent = d.count; }).catch(() => { $("#visit-count").textContent = "–"; });
 
   /* ---------- Start ---------- */
   renderPrehled(); renderRok(); renderOblasti(); renderGrafy(); renderPripravenost();
