@@ -277,8 +277,12 @@ ol.sources .m{color:var(--muted)}
 :root[data-theme="dark"]{--r0:#24322c;--r1:#2f6b45;--r2:#9a7d1c;--r3:#b4661f;--r4:#c24a23;--r5:#e0473f;--r-ink:#edf1ee}
 
 /* --- Hlavička a úvod --- */
-.topbar .ttl{font-family:var(--font-display);font-weight:700;font-size:.95rem;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-@media (max-width:560px){.topbar .ttl{display:none}}
+.topbar .ttl{font-family:var(--font-display);font-weight:700;font-size:.95rem;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none;padding:6px 8px;border-radius:8px;transition:background .15s,color .15s}
+.topbar .ttl-sep{color:var(--muted);margin-left:-4px}
+.topbar .back{padding:6px 8px;border-radius:8px;margin-left:-8px;transition:background .15s}
+.topbar .back:hover,.topbar .ttl:hover{background:var(--surface-2);color:var(--ink);text-decoration:underline;text-underline-offset:.2em}
+.topbar .back:hover span,.topbar .ttl:hover{color:var(--labe-ink)}
+@media (max-width:560px){.topbar .ttl,.topbar .ttl-sep{display:none}}
 .hero{position:relative;overflow:hidden;border-bottom:0;padding-block:clamp(28px,5vw,56px) 22px;background:
   radial-gradient(1200px 380px at 85% -10%,color-mix(in srgb,var(--loess-mark) 22%,transparent),transparent 70%),
   radial-gradient(900px 420px at 0% 110%,color-mix(in srgb,var(--labe) 20%,transparent),transparent 70%),var(--paper)}
@@ -629,7 +633,7 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
       Vize <span>2075</span>
     </a>
-    <span class="ttl">· Sucho a voda v Česku 2026</span>
+    <span class="ttl-sep" aria-hidden="true">·</span><a class="ttl" href="sucho-a-voda-2026.html" title="Na začátek stránky Sucho a voda v Česku 2026">Sucho a voda v Česku 2026</a>
     <div class="spacer"></div>
     <button class="icon-btn" id="theme-btn" type="button" aria-label="Přepnout světlý / tmavý režim" title="Světlý / tmavý režim">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
