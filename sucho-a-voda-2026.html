@@ -1647,6 +1647,9 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
       <li id="z-expats-150">Czechia records third-driest start to year since 1961 (≈ 150 mm pod normálem do konce září). <span class="m">Expats.cz, říjen 2026.</span> <a href="https://www.expats.cz/czech-news/article/czechia-records-third-driest-start-to-year-since-1961" target="_blank" rel="noopener">expats.cz</a></li>
       <li id="z-eagri-30ha">MZe v boji se suchem (omezení plochy jedné plodiny na erozně ohrožené půdě na 30 ha). <a href="https://eagri.cz/public/portal/-q2397---MJNqW8qm/priloha" target="_blank" rel="noopener">eagri.cz</a></li>
       <li id="z-khk-plan">Plán pro zvládání sucha a stavu nedostatku vody na území Královéhradeckého kraje – textová část. <span class="m">GEOtest, a.s., prosinec 2022.</span> <a href="https://www.khk.cz/system/files/2025-03/Pl__n_pro_sucho_Khkraj_text.pdf" target="_blank" rel="noopener">khk.cz</a></li>
+      <li id="z-ctk-doksany">Noc na dnešek byla pravděpodobně nejteplejší v této vlně veder (Doksany 41,9 °C, 28. 6. 2026). <span class="m">ČTK / České noviny, 29. 6. 2026.</span> <a href="https://www.ceskenoviny.cz/zpravy/noc-na-dnesek-byla-pravdepodobne-nejteplejsi-v-teto-vlne-veder/2844925" target="_blank" rel="noopener">ceskenoviny.cz</a></li>
+      <li id="z-ct-vedra-48">Polovina stanic překonala či dorovnala absolutní teplotní rekord. Nejvíce naměřili v Plzni (41,5 °C, 4. 8. 2026). <span class="m">ČT24, 4. 8. 2026.</span> <a href="https://ct24.ceskatelevize.cz/clanek/pocasi/prvni-rekord-padl-uz-pred-devatou-sledujte-jak-rostou-teploty-376243" target="_blank" rel="noopener">ct24.ceskatelevize.cz</a></li>
+      <li id="z-ctk-straznice">Ve Strážnici je 41 °C, rekord pro Moravu padl třetí den po sobě. <span class="m">ČTK / České noviny, 5. 8. 2026.</span> <a href="https://www.ceskenoviny.cz/zpravy/ve-straznici-je-41%C2%B0c-rekord-pro-moravu-padl-treti-den-po-sobe/2858874" target="_blank" rel="noopener">ceskenoviny.cz</a></li>
       <li id="z-rizika27">Rizika sucha v ČR 2027 – komplexní analýza hydrologického sucha a krizové výhledy. <span class="m">Listopad 2026, nepublikovaný podkladový dokument autora webu; údaje ověřeny – viz Kontrola dat.</span></li>
     </ol>
   </section>
@@ -2259,8 +2262,8 @@ const KRAJE = {
     problem: "Extrémní a výjimečné sucho v hlubších vrstvách půdy, úbytek podzemních vod.",
     nums: [["Nejhorší stupeň 0–100 cm", "extrémní"], ["Riziko zásobování", "vysoké"]],
     places: ["Domažlicko a Klatovsko – extrémní sucho 0–100 cm", "Plzeňsko – výjimečné sucho", "Bezdružice – zásobované ze Žlutic (Karlovarský kraj)"],
-    infra: ["Skupinový vodovod Žlutice – Toužim – Bezdružice", "Plzeň: teplotní rekord 39,4 °C v červenci 2026"],
-    src: ["z-is-811", "z-rizika27"] },
+    infra: ["Skupinový vodovod Žlutice – Toužim – Bezdružice", "Plzeň-Bolevec: 41,5 °C 4. 8. 2026 – na 12 stanicích v Česku přes 40 °C"],
+    src: ["z-is-811", "z-rizika27", "z-ct-vedra-48"] },
   KVK: { n: "Karlovarský", supply: 4, soil: 4, label: [0, 0],
     problem: "Výjimečné sucho téměř plošně v hlubších vrstvách půdy; strategická nádrž Žlutice zásobuje i Plzeňsko.",
     nums: [["Mariánské Lázně (VIII)", "52 %"], ["Nejhorší stupeň 0–100 cm", "výjimečné"]],
@@ -2433,7 +2436,7 @@ const HZ = [
       ["i-wave", "Řeky a příroda", 4, "Historická minima průtoků na čtvrtině toků, vysychavé potoky, úhyny ryb.", "Jihlava místy suchou nohou, v tocích převládá voda z čistíren, v Nových Mlýnech přemnožené sinice. Dunaj u Bratislavy 8. 10. nejníže od roku 1900.", ["z-nase-voda-314", "z-vuv-media", "z-dunaj"]],
       ["i-bolt", "Energetika", 3, "Jádro bez omezení, vodní elektrárny na minimu, malé vodní elektrárny stojí.", "Orlík vypouští jen přítok, Slapy poprvé dotují Vltavu. ČIŽP při kontrolách malých vodních elektráren zjistila pochybení u více než 20 %.", ["z-oenergetice-veze", "z-ct-orlik", "z-expats-1000"]],
       ["i-truck", "Doprava a rekreace", 3, "Plavba do Českých Budějovic přerušena, rekreační sezona na Orlíku a Slapech skončila dřív.", "Vodáci rušili odemykání řek, převoz lodí přes hráz Slap byl ukončen.", ["z-forbes-vodaci", "z-seznam-orlik-slapy"]],
-      ["i-city", "Města a zdraví", 3, "Rekordní tropické noci a nejvyšší požární riziko v srpnu.", "Léto 2026 druhé nejteplejší od roku 1961 (19,4 °C), teplotní rekord 39,4 °C v Plzni-Bolevci.", ["z-is-akt"]]
+      ["i-city", "Města a zdraví", 4, "Nový absolutní teplotní rekord Česka 41,9 °C, rekordní tropické noci a nejvyšší požární riziko v srpnu.", "Stanice Doksany na Litoměřicku naměřila 28. 6. 2026 41,9 °C – nový absolutní rekord Česka, o 1,5 °C nad dosavadním maximem 40,4 °C (Dobřichovice, 2012). Teploty 40 °C a vyšší byly letos naměřeny v pěti dnech, dříve spolehlivě jen ve třech. Dne 4. 8. bylo v Plzni-Bolevci 41,5 °C a přes 40 °C se teplota dostala na 12 místech včetně centra Prahy; 5. 8. padl rekord Moravy a Slezska (Strážnice 41,0 °C). Léto 2026 bylo druhé nejteplejší od roku 1961 (19,4 °C).", ["z-ctk-doksany", "z-ct-vedra-48", "z-ctk-straznice", "z-is-akt"]]
     ] },
   { k: "2027s", t: "2027", s: "suchá zima", sev: 5,
     intro: "<b>Kritický scénář: zima pod průměrem a bez sněhu, po ní teplé jaro.</b> Povodí Vltavy ani ČVUT nevylučují vyčerpání zásob Orlíku a Slap ještě před jarem; krátkodobá simulace na tomto webu ukazuje vyčerpání nejpozději v létě 2027. Římov má při trvání sucha zásobu asi na 9 měsíců.",
