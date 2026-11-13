@@ -307,8 +307,24 @@ ol.sources .m{color:var(--muted)}
 /* --- Hlavní menu (tlačítka) --- */
 .appnav{position:sticky;top:56px;z-index:45;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-block:1px solid var(--line)}
 .appnav .wrap{display:flex;align-items:center;gap:8px;min-height:58px}
-.navlist{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:8px 2px;flex:1;scroll-behavior:smooth}
-.navlist::-webkit-scrollbar{display:none}
+.navwrap{position:relative;flex:1;min-width:0;display:flex;align-items:center;gap:6px}
+.navlist{display:flex;gap:6px;overflow-x:auto;padding:8px 2px 6px;flex:1;min-width:0;scroll-behavior:smooth;cursor:grab;
+  scrollbar-width:thin;scrollbar-color:var(--labe) var(--surface-2);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18px,#000 calc(100% - 18px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 18px,#000 calc(100% - 18px),transparent 100%)}
+.navlist.at-start{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 18px),transparent 100%);mask-image:linear-gradient(90deg,#000 calc(100% - 18px),transparent 100%)}
+.navlist.at-end{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18px);mask-image:linear-gradient(90deg,transparent 0,#000 18px)}
+.navlist.at-start.at-end{-webkit-mask-image:none;mask-image:none}
+.navlist.drag{cursor:grabbing;scroll-behavior:auto;user-select:none}
+.navlist.drag a{pointer-events:none}
+.navlist::-webkit-scrollbar{height:8px}
+.navlist::-webkit-scrollbar-track{background:var(--surface-2);border-radius:999px;margin:0 14px}
+.navlist::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--labe) 70%,transparent);border-radius:999px;border:2px solid var(--surface-2)}
+.navlist::-webkit-scrollbar-thumb:hover{background:var(--labe)}
+.navarrow{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:opacity .15s,border-color .15s}
+.navarrow:hover{border-color:var(--labe);color:var(--labe-ink)}
+.navarrow svg{width:16px;height:16px}
+.navarrow[disabled]{opacity:.3;cursor:default}
+.navarrow.hide{display:none}
 .navbtn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:.86rem;font-weight:650;white-space:nowrap;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:7px 12px;cursor:pointer;min-height:40px;text-decoration:none;transition:background .15s,border-color .15s,color .15s}
 .navbtn svg{width:18px;height:18px;flex:none}
 .navbtn .num{font-family:var(--font-mono);font-size:.68rem;color:var(--muted)}
@@ -319,7 +335,7 @@ ol.sources .m{color:var(--muted)}
 .navbtn.hot:not([aria-current="page"]) svg{color:var(--critical)}
 .menu-toggle{display:none}
 @media (max-width:760px){
-  .appnav .navlist{display:none}
+  .appnav .navwrap{display:none}
   .menu-toggle{display:inline-flex;flex:1;justify-content:space-between}
   .appnav.open .sheet{display:grid}
 }
@@ -684,7 +700,11 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
 
 <nav class="appnav" id="appnav" aria-label="Kapitoly studie">
   <div class="wrap">
-    <div class="navlist" id="navlist" role="list"></div>
+    <div class="navwrap">
+      <button class="navarrow" id="nav-prev" type="button" aria-label="Posunout menu doleva"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="navlist" id="navlist" role="list"></div>
+      <button class="navarrow" id="nav-next" type="button" aria-label="Posunout menu doprava"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
     <button class="navbtn menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="sheet"><span id="menu-cur">Přehled</span><svg><use href="#i-menu"/></svg></button>
   </div>
   <div class="sheet" id="sheet"></div>
@@ -2552,6 +2572,28 @@ panels.forEach((p, i) => {
   if (i < panels.length - 1) nav.innerHTML += `<a class="next" href="#${panels[i + 1].id}"><span>další ›</span><b>${panels[i + 1].dataset.title}</b></a>`;
   p.appendChild(nav);
 });
+/* Posuvník menu: šipky, tažení myší, kolečko */
+(function () {
+  const prev = $("#nav-prev"), next = $("#nav-next");
+  function upd() {
+    const max = navlist.scrollWidth - navlist.clientWidth, x = navlist.scrollLeft, over = max > 2;
+    prev.classList.toggle("hide", !over); next.classList.toggle("hide", !over);
+    prev.disabled = x <= 2; next.disabled = x >= max - 2;
+    navlist.classList.toggle("at-start", x <= 2); navlist.classList.toggle("at-end", x >= max - 2);
+  }
+  const step = () => Math.max(160, navlist.clientWidth * 0.7);
+  prev.addEventListener("click", () => navlist.scrollBy({ left: -step(), behavior: "smooth" }));
+  next.addEventListener("click", () => navlist.scrollBy({ left: step(), behavior: "smooth" }));
+  navlist.addEventListener("scroll", upd, { passive: true });
+  addEventListener("resize", upd);
+  navlist.addEventListener("wheel", e => { if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return; const max = navlist.scrollWidth - navlist.clientWidth, x = navlist.scrollLeft; if (max <= 2 || (e.deltaY < 0 && x <= 0) || (e.deltaY > 0 && x >= max - 1)) return; e.preventDefault(); navlist.scrollLeft += e.deltaY; }, { passive: false });
+  let down = false, sx = 0, sl = 0, moved = false;
+  navlist.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse" || e.button !== 0) return; down = true; moved = false; sx = e.clientX; sl = navlist.scrollLeft; });
+  addEventListener("pointermove", e => { if (!down) return; const dx = e.clientX - sx; if (!moved && Math.abs(dx) > 5) { moved = true; navlist.classList.add("drag"); } if (moved) navlist.scrollLeft = sl - dx; });
+  addEventListener("pointerup", () => { if (!down) return; down = false; setTimeout(() => navlist.classList.remove("drag"), 0); });
+  navlist.addEventListener("click", e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+  upd(); setTimeout(upd, 300); if (document.fonts) document.fonts.ready.then(upd);
+})();
 $("#menu-toggle").addEventListener("click", () => { const o = appnav.classList.toggle("open"); $("#menu-toggle").setAttribute("aria-expanded", o ? "true" : "false"); });
 let curPanel = null;
 const onShow = {};
