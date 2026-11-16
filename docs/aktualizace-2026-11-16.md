@@ -167,3 +167,94 @@ HTML bez nepárových značek, žádné vodorovné přetečení stránky.
 Na hranici 1279/1280 px se rozvržení přepíná z jednoho sloupce na dva. Mapa se
 přitom zúží (1158 → 708 px), protože vedle ní nastoupí diagnostický panel.
 Je to záměr: od 1280 px výš vidí uživatel mapu i výsledky najednou bez rolování.
+
+## Srážkový schodek při oteplení o 2 °C (16. 11. 2026, třetí kolo)
+
+Mapa dostala druhou polohu a pod ní přibyl samostatný výpočet. Odpovídá na otázku
+„o kolik srážek ročně přijdeme“, aniž by předstíral, že roční úhrny budou klesat –
+podstatou schodku je rostoucí výpar.
+
+### Co přibylo
+1. **Dva nové režimy mapy** – přepínač „Mapa ukazuje“ v liště pod mapou, u legendy:
+   *riziko ve vrstvě* (dosavadní chování), *vláhová bilance dnes* a *bilance při
+   +2 °C*. V režimu bilance se barví rozdíl srážek a výparu v mm (stejná stupnice
+   jako u rizika, zelená = přebytek, karmínová = schodek), legenda se přepíše na
+   „přebytek +270 mm … schodek −270 mm“, pruh vrstev se ztlumí a u časové osy se
+   objeví poznámka, že se v tomto režimu neuplatní. Klepnutí na vrstvu vrátí mapu
+   zpět na riziko.
+2. **Sekce „Kolik srážek bude scházet při oteplení o 2 °C“** pod ovládáním mapy:
+   shrnutí za ČR, čtyřřádkový výpočet pro vybrané místo (srážky / výpar / bilance
+   dnes a při +2 °C), převod na procenta úhrnu, m³ na hektar a litry na m², objem
+   za celý kraj a tabulka všech 14 krajů. Vše reaguje na zvolený scénář i na
+   vybrané místo; rozbalovací blok „Jak se k číslům dochází“ popisuje metodu
+   a meze výpočtu.
+
+### Jak se počítá
+- `rok2C(scénář)` najde interpolací mezi horizonty rok, kdy scénář dosáhne +2 °C:
+  **optimistický 2065, realistický trend 2044, krizový 2037** – a k němu
+  odpovídající změnu letních a zimních srážek.
+- Výpar: `PET = max(350; 560 + 36 × (T − 8))`, tedy **+72 mm za 2 °C**. Hodnota
+  36 mm na stupeň je **předpoklad modelu**, ne číslo doložené měřením, a je to
+  hlavní nejistota výpočtu: schodek se s ní mění přímo úměrně (při 45 mm/°C vyjde
+  o 23 % vyšší, při 30 mm/°C o 15 % nižší). Údaje z lesních povodí GEOMON
+  (Hruška a kol., Ochrana přírody 6/2020) **nelze** brát jako potvrzení této
+  hodnoty – viz oprava níže.
+- Srážky: roční úhrn se dělí na letní (61 %) a zimní (39 %) půlrok, každý se mění
+  podle scénáře zvlášť (stejně jako ve zbytku modelu).
+- **Schodek = ΔPET − ΔP**, tedy o kolik mm srážek by muselo ročně spadnout navíc,
+  aby vláhová bilance zůstala na dnešní hodnotě.
+- Objem: 1 mm na 1 km² = 1 000 m³. Plošné průměry T a P uvnitř krajů se spočítaly
+  vzorkováním pole 109 stanic po ~0,9 km; součet vzorkovaných ploch vyšel
+  78 791 km² proti 78 868 km² podle ČSÚ (0,1 %).
+
+### Výsledky (realistický trend, +2 °C kolem roku 2044)
+| | schodek | podíl úhrnu | za kraj |
+|---|---|---|---|
+| Praha | 77 mm | 14,8 % | 38 mil. m³ |
+| Jihomoravský | 77 mm | 14,5 % | 555 mil. m³ |
+| Středočeský | 77 mm | 13,7 % | 853 mil. m³ |
+| Liberecký | 80 mm | 9,3 % | 254 mil. m³ |
+| **ČR celkem** | **78 mm** | | **6,2 mld. m³** |
+
+Záporná vláhová bilance platí dnes pro 4 ze 14 krajů, při +2 °C pro 6
+(v krizovém scénáři pro 9). Nárůst výparu je po celé republice skoro stejný –
+rozdíl mezi kraji dělá to, z jak velkého úhrnu se schodek ukrajuje a jak je na tom
+kraj dnes. Tato věta je v sekci explicitně uvedena, aby skoro shodný sloupec
+„Schází za rok“ nemátl.
+
+### Nové soubory a zdroje
+- `assets/js/sucho-schodek.js` (12 kB) – výpočet i vykreslení, `SM.schodek`
+- `SM.krajPlocha`, `SM.krajKlima`, `SM.vodaOsoba`, `SM.srazkyCR` v datech
+- `SM.model.PET0` nově vystaven ven
+- zdroje `z-geomon`, `z-nas`, `z-csu-voda`, `z-csu-plocha` v Metodice
+
+### Ověření
+- Mapa je při otevření stejně vysoko jako před úpravou (509–601 px od horního
+  okraje, 43–100 % výšky vidět) – přepínač je proto pod mapou, ne nad ní.
+- Plná regrese na 11 konfiguracích: 0 chyb konzole, 11 panelů / 16 podkaret /
+  9 otázek / 8 řádků / 8 dlaždic, 14 řádků tabulky krajů.
+- Kontrola překryvů a čitelnosti: 0 nálezů; na mobilu se tabulka krajů mění
+  na karty, takže nikde nevzniká vodorovné rolování.
+- Překreslení mapy po přepnutí režimu: 230–330 ms.
+
+
+### Oprava po nezávislé kontrole zdroje (16. 11. 2026)
+Nezávislá kontrola článku Hruška, Oulehle, Lamačová (*Ochrana přírody* 6/2020)
+našla v první verzi textu tři vady, všechny opravené:
+
+1. **Neplatné odůvodnění.** Text tvrdil, že 36 mm/°C je „spíš opatrný odhad",
+   protože skutečný výpar nemůže překročit potenciální. Nerovnost mezi hodnotami
+   ale neříká nic o jejich derivacích, a hlavně jde o nesouměřitelné veličiny:
+   článek uvádí skutečnou (vodou limitovanou) evapotranspiraci lesních povodí,
+   model referenční výpar. Článek žádnou citlivost potenciálního výparu v mm/°C
+   neudává, takže model nepotvrzuje ani nevyvrací. Tvrzení je ze stránky
+   odstraněno a nahrazeno přiznáním, že jde o nejistý předpoklad modelu.
+2. **„Měření dávají"** – evapotranspirace v povodích GEOMON se neměří, dopočítává
+   se z vodní bilance (srážky minus odtok). Opraveno.
+3. **Chybné srovnávací období a chybějící výhrady.** Pokles srážek o 14 % je
+   proti „období před 25 lety, kdy monitoring začal", ne proti 1994–1999 (to
+   platí jen pro pokles odtoku o 42 %). Doplněno také, že autoři nenašli
+   v srážkách statisticky významný trend, že pokles průtoků přisuzují kombinaci
+   nižších srážek a vyšší teploty a že nárůst nároků na transpiraci platí pro
+   povodí nad 600 m n. m., zatímco pod 600 m transpirace v letech 2014–2018
+   klesla kvůli chřadnutí porostů.

@@ -324,6 +324,6 @@
 
   SM.model = {
     profil: profil, profilBase: profilBase, klima: klima, indexy: indexy, hodnota: hodnota,
-    kat: kat, KAT: KAT, YRS: YRS, uhiAt: uhiAt, dist2: dist2
+    kat: kat, KAT: KAT, YRS: YRS, uhiAt: uhiAt, dist2: dist2, PET0: PET0
   };
 })();

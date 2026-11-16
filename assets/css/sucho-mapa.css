@@ -454,3 +454,122 @@
 
 /* vyhledávání nesmí zajíždět pod ovládání měřítka vpravo nahoře */
 @media (max-width:620px){.sm-mapbox .sm-find{width:calc(100% - 72px)}}
+
+/* ==========================================================================
+   SRÁŽKOVÝ SCHODEK PŘI +2 °C
+   ========================================================================== */
+
+/* přepínač „co mapa ukazuje“ – v liště pod mapou, u legendy */
+.sm-maptools .sm-modestrip{display:flex;align-items:center;gap:9px;flex:1 1 100%;min-width:0;
+  border-bottom:1px dashed var(--line);padding-bottom:8px}
+.sm-modes{display:flex;gap:5px;flex:1;min-width:0;overflow-x:auto;padding:1px;scrollbar-width:thin}
+.sm-mode{flex:none;white-space:nowrap;font:inherit;font-size:.8rem;padding:5px 11px;border-radius:999px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer;line-height:1.2}
+.sm-mode:hover{border-color:var(--line-strong);color:var(--ink)}
+.sm-mode[aria-pressed="true"]{background:var(--labe-soft);border-color:var(--labe);color:var(--ink);font-weight:600}
+.sm-layers.dim{opacity:.45}
+.sm-layers.dim .sm-lay[aria-pressed="true"]{font-weight:500}
+.sm-hznote{border-top:1px dashed var(--line-strong);padding-top:7px}
+
+.sch{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:15px 16px 14px;box-shadow:var(--shadow);margin:0 0 14px}
+.sch h3{font-size:.98rem;font-weight:720;margin-bottom:4px}
+.sch-lead{font-size:.88rem;color:var(--ink-2);line-height:1.5;max-width:92ch;margin-bottom:12px}
+.sch-cr{font-size:.9rem;line-height:1.55;background:var(--labe-soft);border-left:3px solid var(--labe);
+  border-radius:0 var(--radius-s) var(--radius-s) 0;padding:10px 13px;margin-bottom:13px}
+.sch-cr p{margin:0}
+.sch-empty{font-size:.86rem;color:var(--ink-2);background:var(--surface-2);border-radius:var(--radius-s);
+  padding:10px 12px;line-height:1.5;margin:0}
+.sch-kde{font-size:.84rem;color:var(--ink-2);margin:0 0 8px}
+
+/* tabulka výpočtu pro vybrané místo */
+.sch-tab{width:100%;border-collapse:collapse;font-size:.88rem;margin-bottom:12px}
+.sch-tab th,.sch-tab td{text-align:right;padding:7px 9px;border-bottom:1px solid var(--line)}
+.sch-tab th,.sch-kraje th{background:transparent}
+.sch-tab thead th{font-family:var(--font-mono);font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);font-weight:500;border-bottom:1px solid var(--line-strong)}
+.sch-tab tbody th{text-align:left;font-weight:700;white-space:nowrap}
+.sch-tab tbody th small{display:block;font-family:var(--font-mono);font-size:.7rem;font-weight:400;color:var(--muted)}
+.sch-tab td{font-variant-numeric:tabular-nums;white-space:nowrap}
+.sch-tab td small{font-size:.74rem;color:var(--muted)}
+.sch-tab td i{display:block;font-style:normal;font-family:var(--font-mono);font-size:.72rem;color:var(--muted)}
+.sch-tab tbody tr:last-child td,.sch-tab tbody tr:last-child th{border-bottom:0}
+.sch-zap{color:var(--critical);font-weight:700}
+.sch-kla{color:var(--good);font-weight:700}
+
+/* výsledek */
+.sch-vysl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:12px;align-items:center;
+  background:var(--surface-2);border-radius:var(--radius-s);padding:12px 14px;margin-bottom:10px}
+.sch-big b{display:block;font-size:1.9rem;font-weight:760;line-height:1.05;color:var(--critical);
+  font-variant-numeric:tabular-nums}
+.sch-big span{display:block;font-size:.82rem;color:var(--ink-2);line-height:1.4;margin-top:3px}
+.sch-prevod{list-style:none;margin:0;padding:0;display:grid;gap:5px;font-size:.85rem;color:var(--ink-2)}
+.sch-prevod li{display:flex;gap:7px;align-items:baseline}
+.sch-prevod b{font-variant-numeric:tabular-nums;color:var(--ink);min-width:86px;text-align:right;flex:none}
+.sch-pocet{font-size:.82rem;color:var(--ink-2);line-height:1.5;margin:0 0 8px}
+.sch-kraj{font-size:.88rem;line-height:1.5;margin:0 0 4px}
+
+/* tabulka krajů */
+.sch-tabwrap{margin-top:14px;overflow-x:auto;scrollbar-width:thin}
+.sch-kraje{width:100%;border-collapse:collapse;font-size:.84rem;min-width:620px}
+.sch-cap{text-align:left;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);padding-bottom:7px}
+.sch-kraje th,.sch-kraje td{padding:6px 9px;text-align:right;border-bottom:1px solid var(--line);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.sch-kraje thead th{font-size:.7rem;color:var(--muted);font-weight:500;line-height:1.25;
+  border-bottom:1px solid var(--line-strong);white-space:normal}
+.sch-kraje tbody th{text-align:left;font-weight:600;white-space:nowrap}
+.sch-kraje tbody tr.on{background:var(--labe-soft)}
+.sch-kraje tbody tr.on th{font-weight:760}
+.sch-kraje tbody tr:last-child th,.sch-kraje tbody tr:last-child td{border-bottom:0}
+.sch-bar{min-width:136px}
+.sch-bar .sch-wrap{display:flex;align-items:center;justify-content:flex-end;gap:9px}
+.sch-bar .trk{display:block;width:64px;height:8px;border-radius:999px;background:var(--surface-2);
+  overflow:hidden;flex:none}
+.sch-bar .trk i{display:block;height:100%;border-radius:999px;opacity:.85}
+.sch-bar b{font-weight:600;font-variant-numeric:tabular-nums;min-width:48px;text-align:right}
+.sch-pozn{font-size:.8rem;color:var(--ink-2);line-height:1.5;margin:8px 0 0;max-width:96ch}
+
+.sch-metod{margin-top:12px;border-top:1px solid var(--line);padding-top:9px}
+.sch-metod summary{cursor:pointer;font-size:.84rem;font-weight:620;color:var(--ink-2);list-style:none;
+  display:flex;align-items:center;gap:7px}
+.sch-metod summary::-webkit-details-marker{display:none}
+.sch-metod summary::before{content:"+";font-family:var(--font-mono);width:17px;height:17px;flex:none;
+  display:grid;place-items:center;border:1px solid var(--line-strong);border-radius:4px;font-size:.8rem}
+.sch-metod[open] summary::before{content:"\2212"}
+.sch-metod[open] summary{margin-bottom:8px}
+.sch-metod p{font-size:.84rem;color:var(--ink-2);line-height:1.55;margin:0 0 8px;max-width:96ch}
+.sch-metod p:last-child{margin-bottom:2px}
+
+@media (max-width:620px){
+  .sch{padding:13px 13px 12px}
+  .sch-vysl{grid-template-columns:minmax(0,1fr);gap:9px}
+  .sch-big b{font-size:1.6rem}
+  .sch-prevod b{min-width:76px}
+  .sch-tab{font-size:.82rem}
+  .sch-tab th,.sch-tab td{padding:6px 5px}
+  .sm-modes{width:100%}
+}
+
+/* tabulka krajů na mobilu: místo vodorovného rolování karty pod sebou */
+@media (max-width:620px){
+  .sch-tabwrap{overflow-x:visible}
+  .sch-kraje{min-width:0;display:block;font-size:.82rem}
+  .sch-kraje thead{display:none}
+  .sch-kraje caption{display:block}
+  .sch-kraje tbody,.sch-kraje tbody tr,.sch-kraje tbody th,.sch-kraje tbody td{display:block;width:auto}
+  .sch-kraje tbody tr{border:1px solid var(--line);border-radius:var(--radius-s);
+    padding:8px 11px 9px;margin-bottom:7px}
+  .sch-kraje tbody tr.on{border-color:var(--labe)}
+  .sch-kraje tbody th{font-size:.94rem;font-weight:700;border:0;padding:0 0 5px;white-space:normal}
+  .sch-kraje tbody td{border:0;padding:2px 0;text-align:right;display:flex;align-items:baseline;
+    justify-content:space-between;gap:12px;white-space:nowrap}
+  .sch-kraje tbody td::before{content:attr(data-l);color:var(--muted);font-weight:400;
+    font-size:.78rem;text-align:left;white-space:normal}
+  .sch-bar{min-width:0}
+  .sch-bar .trk{width:52px}
+  .sch-bar b{min-width:0}
+}
+.sch-kap{font-size:.86rem;color:var(--ink-2);line-height:1.5;margin:10px 0 0}
+.sch-vypocet{margin:6px 0 8px;padding-left:19px;font-size:.84rem;color:var(--ink-2);line-height:1.55}
+.sch-vypocet li{margin-bottom:2px}

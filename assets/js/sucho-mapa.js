@@ -9,7 +9,7 @@
   var SM = window.SM, M = SM.model;
   var $ = function (s) { return document.querySelector(s); };
 
-  var state = { layer: "podzemi", sc: "trend", hz: "h2027", p: null, marker: null };
+  var state = { layer: "podzemi", sc: "trend", hz: "h2027", p: null, marker: null, mode: "risk" };
 
   /* ---------- barevná stupnice rizika ---------- */
   var STOPS = [[8, [31, 122, 92]], [28, [122, 160, 58]], [46, [216, 164, 22]],
@@ -52,7 +52,13 @@
         for (var y = 0; y < size.y; y += step) {
           for (var x = 0; x < size.x; x += step) {
             var ll = map.unproject(org.add([x + step / 2, y + step / 2]), coords.z);
-            var v = M.hodnota(ll.lat, ll.lng, state.layer, state.sc, state.hz);
+            var v;
+            if (state.mode === "risk") {
+              v = M.hodnota(ll.lat, ll.lng, state.layer, state.sc, state.hz);
+            } else {
+              var kv = SM.schodek.kvbAt(ll.lat, ll.lng, state.sc, state.mode === "kvb2");
+              v = kv === null ? null : SM.schodek.kvbRisk(kv);
+            }
             if (v === null) continue;
             ctx.fillStyle = rgba(v, 0.82);
             ctx.fillRect(x, y, step + 1, step + 1);
@@ -145,6 +151,7 @@
     }).addTo(map);
     if (zoomTo) { userMoved = true; map.setView([la, lo], Math.max(map.getZoom(), 9)); }
     renderPanel();
+    renderSchodek();
     var pw = $("#sm-panel-wrap");
     if (pw && window.matchMedia("(max-width:900px)").matches) pw.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -163,14 +170,48 @@
   }
 
   /* ---------- ovládání ---------- */
-  function setLayer(id) {
-    state.layer = id;
-    $$(".sm-lay").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.lay === id ? "true" : "false"); });
-    var l = SM.layers.filter(function (x) { return x.id === id; })[0];
-    $("#sm-layerinfo").innerHTML = "<b>" + l.n + ".</b> " + l.popis
+  /* Režim mapy: riziko ve zvolené vrstvě, nebo vláhová bilance (dnes / při +2 °C).
+     Bilance je pevně vázaná na oteplení o 2 °C, časová osa se v ní neuplatní. */
+  function setMode(m) {
+    state.mode = m;
+    $$(".sm-mode").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.mode === m ? "true" : "false"); });
+    var lay = $("#sm-layers");
+    if (lay) lay.classList.toggle("dim", m !== "risk");
+    var hz = $("#sm-hz-note");
+    if (hz) hz.hidden = (m === "risk");
+    layerInfo();
+    refresh();
+  }
+
+  function layerInfo() {
+    var box = $("#sm-layerinfo");
+    if (!box) return;
+    if (state.mode !== "risk") {
+      var pri2 = state.mode === "kvb2";
+      var r = SM.schodek.rok2C(state.sc);
+      box.innerHTML = "<b>Vláhová bilance " + (pri2 ? "při oteplení o 2 °C" : "dnes") + ".</b> "
+        + "Rozdíl mezi ročním úhrnem srážek a výparem v mm. Modrozelená znamená přebytek, "
+        + "karmínová schodek – tedy o kolik milimetrů srážek ročně nestačí na pokrytí výparu."
+        + (pri2 ? " Platí pevně oteplení o 2 °C proti normálu 1991–2020; zvolený scénář určuje jen"
+            + " změnu srážek a rok, kdy k oteplení dojde (" + r.rok + ")." : "")
+        + ' <a class="sm-kaplink" href="#sm-schodek">Celý výpočet i tabulka krajů ↓</a>'
+        + '<span class="sm-src">Zdroje: ČHMÚ – normály teploty a srážek 1991–2020 · '
+        + 'CzechGlobe/InterSucho – vláhová bilance · Hruška a kol., Ochrana přírody 6/2020 – '
+        + 'nárůst výparu s teplotou</span>';
+      return;
+    }
+    var l = SM.layers.filter(function (x) { return x.id === state.layer; })[0];
+    box.innerHTML = "<b>" + l.n + ".</b> " + l.popis
       + (l.kap ? '<br><a class="sm-kaplink" href="#' + l.kap[0] + '">Podrobně v kapitole '
           + l.kap[1] + '</a>' : "")
       + '<span class="sm-src">Zdroje vrstvy: ' + l.zdroje.join(" · ") + "</span>";
+  }
+
+  function setLayer(id) {
+    state.layer = id;
+    if (state.mode !== "risk") setMode("risk");
+    $$(".sm-lay").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.lay === id ? "true" : "false"); });
+    layerInfo();
     refresh();
   }
   function setSc(id) {
@@ -192,7 +233,17 @@
     if (fieldLayer) fieldLayer.redraw();
     updateLegend();
     if (state.p) renderPanel();
+    renderSchodek();
   }
+
+  /* blok „kolik srážek bude scházet“ pod mapou */
+  function renderSchodek() {
+    if (!SM.schodek) return;
+    SM.schodek.renderCR($("#sm-sch-cr"), state.sc);
+    SM.schodek.renderBod($("#sm-sch-bod"), state.p, state.sc);
+    SM.schodek.renderKraje($("#sm-sch-kraje"), state.sc, state.p && state.p.kraj);
+  }
+  SM.renderSchodek = renderSchodek;
   function $$(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
 
   function updateLegend() {
@@ -201,6 +252,12 @@
     var st = [];
     for (var v = 0; v <= 100; v += 2) st.push(rgba(v, 1) + " " + v + "%");
     g.style.background = "linear-gradient(90deg," + st.join(",") + ")";
+    var a = $("#sm-leg-a"), b = $("#sm-leg-b");
+    if (a && b) {
+      var bil = state.mode !== "risk";
+      a.textContent = bil ? "přebytek +270 mm" : "nízké riziko";
+      b.textContent = bil ? "schodek \u2212270 mm" : "kritické";
+    }
   }
 
   /* ---------- vyhledávání ---------- */
@@ -301,6 +358,10 @@
     $$(".sm-lay").forEach(function (b) {
       b.addEventListener("click", function () { setLayer(b.dataset.lay); });
     });
+    /* co mapa ukazuje */
+    $$(".sm-mode").forEach(function (b) {
+      b.addEventListener("click", function () { setMode(b.dataset.mode); });
+    });
     /* scénáře */
     var sb = $("#sm-scen");
     sb.innerHTML = Object.keys(SM.scenarios).map(function (k) {
@@ -326,7 +387,7 @@
     if (bm) bm.addEventListener("change", function () { toggleBase(bm.checked); });
 
     initSearch();
-    setLayer("podzemi"); setSc("trend"); setHz(0);
+    setLayer("podzemi"); setSc("trend"); setHz(0); setMode("risk");
     SM.panel.render($("#sm-panel"), null);
   }
 
