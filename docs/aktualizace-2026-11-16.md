@@ -96,3 +96,32 @@ a otevřít `http://localhost:8000/sucho-a-voda-2026.html`.
 
 Otestováno v Chrome na šířkách 390, 820, 1440 a 1920 px, ve světlém i tmavém režimu,
 bez chyb v konzoli.
+
+## Přestavba rozvržení (druhá iterace, 16. 11. 2026 odpoledne)
+
+Mapa je teď **první obsah stránky**:
+
+- **Mapový simulátor je panel 01** a otevírá se jako výchozí. Číslování kapitol se posunulo:
+  01 Mapový simulátor, 02 Přehled, 03 Stav teď, 04 Mapa ohrožení; zbytek beze změny.
+- **Hlavička je kompaktní.** KPI dlaždice, audio shrnutí, ilustrace a řádek s metadaty se
+  přesunuly z hlavičky do panelu Přehled (nic se nesmazalo). Na mapovém panelu se perex
+  a stavové odznaky skládají vedle titulku. Mapa tak začíná asi 515–600 px od horního
+  okraje místo původních 1570 px – při načtení je vidět 45–75 % mapy podle velikosti okna.
+- **Mapa na maximální ergonomické šířce.** Nad 1280 px se dashboard rozšiřuje mimo hlavní
+  sloupec textu na `min(1760px, 100vw − 72px)`; mapa dostává 1,5–1,62 dílu šířky proti
+  1 dílu diagnostického panelu. Vyhledávání se přesunulo dovnitř mapového rámu,
+  ovládání měřítka je vpravo nahoře.
+- **Prostor na popisky a nápovědu.** Pod mapou je blok „Jak mapu používat“ se čtyřmi kroky,
+  legenda barevné stupnice, popis vrstvy s odkazem na kapitolu a teprve pak ovládání
+  scénářů a času. Prázdný diagnostický panel nabízí pět ukázkových lokalit.
+- **Vazby na kapitoly.** Každá vrstva má odkaz „Podrobně v kapitole …“, panel ukazuje,
+  která kapitola vysvětluje vrstvu s nejvyšším rizikem, a pod mapou je mřížka osmi
+  dlaždic „Odkud se čísla v mapě berou“ se štítkem, kterou vrstvu kapitola vysvětluje.
+- **Nadpis vs. tlačítko.** Názvy částí studie v navigaci jsou šedé verzálky s oddělovačem
+  a `cursor:default`; kapitoly jsou orámovaná tlačítka se stínem. Nad menu je vysvětlivka
+  „Šedé popisky jsou názvy částí studie, rámečky jsou kapitoly“. Dlaždice kapitol mají
+  výzvu „Otevřít kapitolu →“.
+
+Kontrola po přestavbě: 0 chyb v konzoli ve světlém i tmavém režimu na 390, 1280, 1440
+a 1920 px, všech 11 panelů a jejich podkarty se vykreslují, všech 8 dlaždic kapitol vede
+na správný panel i podkartu, 0 nefunkčních kotev, HTML bez nepárových značek.

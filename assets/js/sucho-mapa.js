@@ -35,9 +35,10 @@
     map = L.map("sm-map", {
       center: [49.82, 15.47], zoom: 7, minZoom: 5.5, maxZoom: 12,
       zoomSnap: 0.1, zoomDelta: 0.5, wheelPxPerZoomLevel: 90,
-      maxBounds: BOUNDS.pad(0.45), zoomControl: true, attributionControl: false,
+      maxBounds: BOUNDS.pad(0.45), zoomControl: false, attributionControl: false,
       preferCanvas: true
     });
+    L.control.zoom({ position: 'topright' }).addTo(map);
     prog++; map.fitBounds(BOUNDS, { padding: [6, 6], animate: false });
     setTimeout(function () { prog = Math.max(0, prog - 1); }, 60);
 
@@ -95,8 +96,9 @@
     labelLayer = L.layerGroup().addTo(map);
     function drawLabels() {
       labelLayer.clearLayers();
+      /* pozor: zoom je desetinný (zoomSnap 0.1), proto porovnáváme intervaly */
       var z = map.getZoom();
-      var lim = z <= 7 ? 90 : z === 8 ? 40 : z === 9 ? 18 : z === 10 ? 8 : 0;
+      var lim = z < 7.6 ? 90 : z < 8.6 ? 40 : z < 9.6 ? 18 : z < 10.6 ? 6 : 0;
       SM.places.forEach(function (pl) {
         if (pl[4] < lim) return;
         L.marker([pl[1], pl[2]], {
@@ -108,6 +110,7 @@
     }
     drawLabels();
     map.on("zoomend", drawLabels);
+    map.on("resize", drawLabels);
 
     map.on("click", function (e) { select(e.latlng.lat, e.latlng.lng); });
     /* Dokud uživatel mapou sám nepohnul, drží se výřez na celé ČR. Panel se
@@ -165,6 +168,8 @@
     $$(".sm-lay").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.lay === id ? "true" : "false"); });
     var l = SM.layers.filter(function (x) { return x.id === id; })[0];
     $("#sm-layerinfo").innerHTML = "<b>" + l.n + ".</b> " + l.popis
+      + (l.kap ? '<br><a class="sm-kaplink" href="#' + l.kap[0] + '">Podrobně v kapitole '
+          + l.kap[1] + '</a>' : "")
       + '<span class="sm-src">Zdroje vrstvy: ' + l.zdroje.join(" · ") + "</span>";
     refresh();
   }
@@ -289,8 +294,9 @@
     /* vrstvy */
     var lb = $("#sm-layers");
     lb.innerHTML = SM.layers.map(function (l, i) {
-      return '<button class="sm-lay" data-lay="' + l.id + '" aria-pressed="false"><b>'
-        + (i + 1) + '</b> ' + l.n + "</button>";
+      return '<button class="sm-lay" data-lay="' + l.id + '" aria-pressed="false" title="' + l.n
+        + '" aria-label="Vrstva ' + (i + 1) + ': ' + l.n + '"><b>'
+        + (i + 1) + '</b> ' + (l.zkr || l.n) + "</button>";
     }).join("");
     $$(".sm-lay").forEach(function (b) {
       b.addEventListener("click", function () { setLayer(b.dataset.lay); });

@@ -217,11 +217,27 @@
   /* ---------- SESTAVENÍ PANELU ---------- */
   function render(el, p, scKey, hId, activeLayer, onLayer) {
     if (!p || !p.kraj) {
+      var UK = [["Hradec Králové", 50.2092, 15.8328, "křídová pánev, dnes bez půdního sucha"],
+                ["Břeclav", 48.7587, 16.8818, "nejsušší část státu"],
+                ["Domažlice", 49.4408, 12.9298, "extrémní sucho v celém profilu"],
+                ["Liberec", 50.7663, 15.0562, "nejpříznivější stav v republice"],
+                ["Praha", 50.0755, 14.4378, "největší tepelný ostrov"]];
       el.innerHTML = '<div class="sm-empty"><h3>Klepněte do mapy</h3>'
         + '<p>Vyberte místo na území České republiky – nebo vyhledejte obec či PSČ. '
         + 'Zobrazí se profil lokality, osm indexů ohrožení a odpovědi na devět praktických otázek '
         + 'pro zvolený rok a scénář.</p>'
-        + '<p class="sm-note">Mapa počítá pro libovolný bod, ne jen pro obce ze seznamu.</p></div>';
+        + '<p class="sm-note">Mapa počítá pro libovolný bod, ne jen pro obce ze seznamu.</p>'
+        + '<h4 class="sm-h4">Nebo zkuste rovnou</h4><div class="sm-try">'
+        + UK.map(function (u, i) {
+            return '<button data-i="' + i + '"><b>' + u[0] + '</b><span>' + u[3] + '</span></button>';
+          }).join("")
+        + '</div></div>';
+      el.querySelectorAll(".sm-try button").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var u = UK[+b.dataset.i];
+          if (SM.selectPoint) SM.selectPoint(u[1], u[2], false);
+        });
+      });
       return;
     }
     var ix = M.indexy(p, scKey, hId);
@@ -254,6 +270,12 @@
     html += '<div class="sm-rows">' + SM.layers.map(function (l) {
       return radek(p, l, ix, scKey, activeLayer);
     }).join("") + '</div>';
+    /* vazba na kapitolu, která vrstvu s nejvyšším rizikem vysvětluje */
+    var poradi = SM.layers.slice().sort(function (a, b) { return ix[b.id] - ix[a.id]; });
+    html += '<p class="sm-topkap">Nejvyšší riziko má u vás <b>' + esc(poradi[0].n.toLowerCase())
+      + '</b>. Podrobně to rozebírá kapitola <a href="#' + poradi[0].kap[0] + '">'
+      + esc(poradi[0].kap[1]) + '</a>; druhá v pořadí je <a href="#' + poradi[1].kap[0] + '">'
+      + esc(poradi[1].kap[1]) + '</a>.</p>';
 
     /* devět otázek */
     html += '<h4 class="sm-h4">Co to znamená pro mě? <small>odpovědi pro tuto lokalitu, rok ' + esc(ix.h.lbl) + ' a scénář „' + esc(ix.sc.n) + '“</small></h4>';

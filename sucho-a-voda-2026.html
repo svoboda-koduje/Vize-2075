@@ -656,7 +656,151 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
           <span class="badge new">Nové: mapa ohrožení, výhled 2027–2075, opatření</span>
         </div>
       </div>
-      <div class="hero-art" aria-hidden="true">
+      <aside class="hero-cta">
+        <a class="hero-go" href="#p-simulator">
+          <b>Otevřít mapu pro vaše místo</b>
+          <span>Klepněte kamkoli na mapu ČR – dostanete profil lokality, osm dimenzí ohrožení a devět odpovědí pro roky 2027 až 2075.</span>
+        </a>
+        <p class="hero-meta">Analytická studie Jaroslava Svobody · základní analýza 30. 10. 2026, aktualizace 16. 11. 2026</p>
+      </aside>
+    </div>
+  </div>
+</header>
+
+<nav class="appnav" id="appnav" aria-label="Kapitoly studie">
+  <div class="wrap">
+    <p class="nav-hint"><b>Šedé popisky</b> jsou názvy částí studie, <em>rámečky</em> jsou kapitoly – klepnutím je otevřete.</p>
+    <div class="navwrap">
+      <button class="navarrow" id="nav-prev" type="button" aria-label="Posunout menu doleva"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="navlist" id="navlist" role="list"></div>
+      <button class="navarrow" id="nav-next" type="button" aria-label="Posunout menu doprava"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+    <button class="navbtn menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="sheet"><span id="menu-cur">Přehled</span><svg><use href="#i-menu"/></svg></button>
+  </div>
+  <div class="sheet" id="sheet"></div>
+  <div class="progress"><i id="progress" style="width:11%"></i></div>
+</nav>
+
+<main class="wrap panels" id="obsah">
+
+<!-- =============================== 1 MAPOVÝ SIMULÁTOR =============================== -->
+<section class="panel" id="p-simulator" data-title="Mapový simulátor" data-icon="i-map" data-area="mapa" data-hot="1" aria-labelledby="h-simulator">
+  <div class="panel-head">
+    <div><span class="eyebrow">01 · Lokální diagnostika</span><h2 id="h-simulator">Interaktivní environmentální mapa: co čeká konkrétně vaše místo</h2>
+    <p class="sm-lead-one">Klepněte kamkoli na mapu – pro vybraný bod se spočítá profil lokality, osm dimenzí ohrožení a odpovědi na devět praktických otázek. <a href="#sm-jak">Jak mapu používat ↓</a></p></div>
+  </div>
+
+  <div class="sm-app">
+    <div class="sm-dash">
+      <div class="sm-mapcol">
+
+        <div class="sm-laystrip">
+          <span class="sm-laystrip-l" id="sm-lay-label">Vrstva</span>
+          <div class="sm-layers" id="sm-layers" role="group" aria-labelledby="sm-lay-label"></div>
+        </div>
+
+        <div class="sm-mapbox">
+          <div id="sm-map" role="application" aria-label="Interaktivní mapa ohrožení suchem v České republice. Klepnutím vyberte lokalitu."></div>
+          <div class="sm-find">
+            <input id="sm-search" type="search" placeholder="Hledat obec, PSČ nebo vodní dílo…" autocomplete="off" aria-label="Vyhledat obec, PSČ nebo vodní dílo">
+            <div id="sm-results" role="listbox"></div>
+          </div>
+          <div id="sm-flash" role="status"></div>
+          <div class="sm-maptools">
+            <div class="sm-legend">
+              <span>nízké riziko</span>
+              <div id="sm-legend-bar" aria-hidden="true"></div>
+              <span>kritické</span>
+            </div>
+            <label><input type="checkbox" id="sm-basemap"> podkladová mapa (OpenStreetMap)</label>
+          </div>
+        </div>
+
+        <p class="sm-info sm-info-lay" id="sm-layerinfo"></p>
+
+        <div class="sm-ctrl2">
+          <div class="sm-bar">
+            <h4>Klimatický scénář</h4>
+            <div class="sm-scen" id="sm-scen"></div>
+            <p class="sm-info" id="sm-scinfo"></p>
+          </div>
+          <div class="sm-bar">
+            <h4>Časový horizont</h4>
+            <div class="sm-hz-wrap">
+              <input type="range" id="sm-hz" min="0" max="4" step="1" value="0" aria-label="Časový horizont simulace">
+              <div id="sm-hz-lbl"></div>
+            </div>
+            <div class="sm-hz-ticks" id="sm-hz-ticks"></div>
+            <p class="sm-info" id="sm-hzinfo"></p>
+          </div>
+        </div>
+
+        <div class="sm-help" id="sm-jak">
+          <h3>Jak mapu používat</h3>
+          <p>Mapa počítá pro <b>libovolný bod na území ČR</b>, nejen pro obce ze seznamu. Barva plochy ukazuje míru ohrožení ve zvolené vrstvě: od zelené (nízké) přes jantarovou po karmínovou (kritické). Kolečka jsou vodní díla – velikost odpovídá zranitelnosti, čárkovaná jsou teprve plánovaná.</p>
+          <ol class="sm-steps">
+            <li><b>Vyberte místo</b><span>Klepněte do mapy, nebo nahoře vyhledejte obec, PSČ či vodní dílo.</span></li>
+            <li><b>Zvolte vrstvu</b><span>Osm dimenzí od srážek po zdraví. Přepnout je lze i klepnutím na řádek v pravém panelu.</span></li>
+            <li><b>Posuňte čas</b><span>Od nejbližší zimy po rok 2075. Sloupce u každé dimenze ukazují celý vývoj naráz.</span></li>
+            <li><b>Porovnejte scénáře</b><span>Rozdíl mezi optimistickým a krizovým scénářem je to podstatné – ukazuje, co je ještě v naší moci.</span></li>
+          </ol>
+        </div>
+
+        <div class="callout water sm-callout">
+          <p><b>Co mapa je a co není.</b> Je to <b>diagnostický a scénářový nástroj</b>: ukazuje, jak se riziko mění mezi lokalitami, mezi scénáři a v čase. Není to předpověď pro konkrétní rok a konkrétní studnu. Vrstvy stojí na reálných datech ČHMÚ, InterSucho, VÚV TGM, ČGS, SZÚ a správců povodí, ale pole mezi měřicími body se interpoluje a hydrogeologické struktury i povodí jsou zjednodušené. Pro rozhodnutí o zdroji vody použijte data ČHMÚ a krajský plán pro zvládání sucha – odkazy najdete v <a href="#metodika">Metodice</a> a u každé vrstvy.</p>
+        </div>
+
+      </div>
+
+      <div id="sm-panel-wrap">
+        <div id="sm-panel" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sm-navazky">
+    <h3>Odkud se čísla v mapě berou</h3>
+    <p>Každá vrstva mapy stojí na jedné hloubkové kapitole této studie. Dlaždice níže jsou odkazy – klepnutím otevřete kapitolu i s grafy, tabulkami a zdroji. Štítek pod názvem říká, kterou vrstvu mapy kapitola vysvětluje.</p>
+    <div class="kap-grid">
+    <a class="kap-card" href="#klima"><span class="kap-n">Kapitola 06</span><b>Klima, půda, podzemí, mokřady a řeky</b><span class="kap-d">Proč je sucho i při „normálních“ srážkách, o kolik vody ubývá výparem a co ukazují družice pod povrchem.</span><span class="kap-lay"><i>Srážky a výpar</i></span><span class="kap-go">Otevřít kapitolu</span></a>
+    <a class="kap-card" href="#povrch"><span class="kap-n">Kapitola 06</span><b>Mokřady, drobné toky a velké řeky</b><span class="kap-d">Ztráta 99,5 % mokřadů, vysychající potoky, rybníky v roce 2026 a dva typy povodní.</span><span class="kap-lay"><i>Stav povrchové vody</i></span><span class="kap-go">Otevřít kapitolu</span></a>
+    <a class="kap-card" href="#podzemi"><span class="kap-n">Kapitola 06</span><b>Půda a podzemní voda</b><span class="kap-d">Jak hluboko sucho sahá, proč se zvodně nedoplní jednou zimou a co je půdní past.</span><span class="kap-lay"><i>Podpovrchová a podzemní voda</i></span><span class="kap-go">Otevřít kapitolu</span></a>
+    <a class="kap-card" href="#obce"><span class="kap-n">Kapitola 04</span><b>Tisícovka nejohroženějších území</b><span class="kap-d">Kde už voda chybí, proč jsou malé obce nejzranitelnější a která infrastruktura je ohrožená.</span><span class="kap-lay"><i>Zásobování pitnou vodou</i></span><span class="kap-go">Otevřít kapitolu</span></a>
+    <a class="kap-card" href="#puda-banka"><span class="kap-n">Kapitola 06</span><b>Půda jako banka na vodu</b><span class="kap-d">Kolik vody krajina zadrží dnes, kolik by mohla a proč je stav půdy důležitější než beton.</span><span class="kap-lay"><i>Krajina a péče o ni</i></span><span class="kap-go">Otevřít kapitolu</span></a>
+    <a class="kap-card" href="#rok2026-ukazal"><span class="kap-n">Kapitola 05</span><b>Co suchý rok 2026 ukázal v krajině</b><span class="kap-d">Sklizeň po plodinách, stav lesů a píce, terénní bilance roku 2026.</span><span class="kap-lay"><i>Zemědělství a chov dobytka</i></span><span class="kap-go">Otevřít kapitolu</span></a>
+    <a class="kap-card" href="#energetika"><span class="kap-n">Kapitola 08</span><b>Energetika a chlazení</b><span class="kap-d">Chladicí voda jaderných elektráren, odběry pod Vltavskou kaskádou a zranitelnost odvětví.</span><span class="kap-lay"><i>Průmysl a ekonomika</i></span><span class="kap-go">Otevřít kapitolu</span></a>
+    <a class="kap-card" href="#zdravi"><span class="kap-n">Kapitola 08</span><b>Zdraví a vlny veder</b><span class="kap-d">Nadúmrtí v roce 2026, městský tepelný ostrov a tepelný stres hospodářských zvířat.</span><span class="kap-lay"><i>Fyzické a psychické zdraví</i></span><span class="kap-go">Otevřít kapitolu</span></a>
+    </div>
+  </div>
+
+  <section class="chap" id="sm-metodika">
+    <header><span class="eyebrow">Jak mapa počítá</span><h2>Metodika mapového simulátoru</h2></header>
+    <div class="prose">
+      <p>Mapa je prostorovým doplňkem bilančního modelu z kapitoly <a href="#p-nadrze">Nádrže a simulace</a>. Ten počítá vodní bilanci celého území měsíc po měsíci; tato mapa naopak počítá <b>jeden rok v jednom bodě</b> – zato pro libovolné místo a v osmi dimenzích.</p>
+    </div>
+    <div class="sm-meth">
+      <div><h4>1 · Klimatické pole</h4>Teplota, srážky a výška terénu se interpolují metodou inverzních vzdáleností ze sítě 109 referenčních bodů, jejichž hodnoty odpovídají řádově normálu 1991–2020. <b>Nejde o oficiální staniční normály ČHMÚ</b> ani o klimatologickou mapu: v konkrétním bodě se skutečnost může lišit o desetiny °C a o desítky mm. Potenciální výpar se počítá z teploty tak, aby při normálním klimatu vycházela skutečná evapotranspirace kolem 490 mm a odtok kolem 190 mm ročně – stejná kalibrace jako u hlavní simulace.</div>
+      <div><h4>2 · Klimatická vodní bilance</h4>Klíčová veličina celé mapy: <code>srážky − potenciální výpar</code>. Vysvětluje, proč je sucho i při „normálních“ srážkách. Podle MZe znamená oteplení o 1 °C ztrátu asi 40 mm vody výparem ročně, tedy kolem 3,1 mld. m³ – i při nezměněných srážkách. Václav Cílek uvádí, že k náhradě vody ztracené odparem při oteplení o 1 °C by bylo potřeba o 80–100 mm vyšší srážky; ve středních Čechách se od roku 1961 teplota zvýšila asi o 2,1 °C, takže zde setrvale schází něco mezi 100 a 140 mm ročních srážek.</div>
+      <div><h4>3 · Hydrogeologie</h4>Každý bod se přiřadí k jednomu ze šesti typů prostředí (křídová pánev, permokarbonské a terciérní pánve, hydrogeologický masiv, flyš, neogén, kvartérní náplavy) podle nejbližšího z 126 uzlů. <b>Nejsou to hranice hydrogeologických rajonů ČGS</b> – ty jsou mnohem členitější. Každý typ má jinou setrvačnost: v krystaliniku se zásoba vyčerpá za týdny a doplní za měsíce, v křídové pánvi se vyčerpává roky a doplňuje desítky let. Právě tento rozdíl model záměrně modeluje.</div>
+      <div><h4>4 · Povodí a nádrže</h4>Bod se přiřadí k jedné z 18 vodohospodářských soustav. U zásobování pitnou vodou se nepočítá s řekou pod okny, ale s povodím, <b>ze kterého kraj vodu skutečně bere</b> – Praha nebere pitnou vodu z Vltavy, ale ze Želivky a z Káraného. Podíl povrchových a podzemních zdrojů vychází z krajských plánů pro sucho a ze statistik SZÚ a ČSÚ.</div>
+      <div><h4>5 · Aktuální stav sucha</h4>Vrstva pro nejbližší horizont (2026/27) přepisuje textový souhrn InterSucho k 8.–10. 11. 2026 do mapy: 110 uzlů se stupněm 0–5 podle toho, jaký nejvyšší stupeň sucha v profilu 0–100 cm InterSucho v dané oblasti uvádí. Čím dál do budoucnosti, tím menší váhu aktuální stav má – u roku 2075 už jen 3 %.</div>
+      <div><h4>6 · Scénáře</h4>Oteplení a změny srážek vycházejí z ansámblu CMIP6 pro Česko (ČHMÚ a CzechGlobe, <i>Hodnocení změny klimatu a adaptačních potřeb ČR</i>, 2025): medián +2,0 °C k roku 2045 a +3,1 °C k roku 2075 proti období 1981–2010, roční srážky asi +3 %, ale léto −2 až −6 % a zima s jarem +3 až +12 %. Krizový scénář odpovídá horní části ansámblu (SSP5-8.5; podle regionálního modelu ALADIN-CLIMATE/CZ až +5 °C ke konci století) a krajině, která dál ztrácí retenci. Optimistický scénář kombinuje dolní část ansámblu s obnovenou retencí krajiny, úsporami a novými akumulacemi.</div>
+      <div><h4>7 · Index ohrožení</h4>Každá vrstva dává číslo 1–99: <b>není to procento ani pravděpodobnost</b>, ale relativní míra ohrožení srovnatelná mezi místy, scénáři a roky. Barevná stupnice jde od zelené (nízké) přes jantarovou po karmínovou (kritické). Souhrnné riziko je vážený průměr osmi vrstev s dvojnásobnou vahou podzemní vody a zásobování, protože na nich závisí obyvatelnost místa.</div>
+      <div><h4>8 · Co model nedělá</h4>Nepočítá jednotlivé vrty ani obecní vodovody, neumí odhadnout konkrétní rok, nepracuje s denním počasím, s kvalitou vody v konkrétním zdroji ani s krizovými opatřeními, která se dají přijmout. Odhady cen, pravděpodobnosti zákazů a rizika nadúmrtí jsou odvozené z indexů, nikoli měřené. Pro skutečné rozhodování slouží studie ČHMÚ, CzechGlobe, ČGS a digitální dvojčata povodí.</div>
+    </div>
+    <p class="fig-src" style="margin-top:12px">Zdroje vrstev a dat: ČHMÚ (srážky, teploty, průtoky, mělké a hluboké vrty, HAMR, seznam ≈ 1 000 nejohroženějších území) · InterSucho / CzechGlobe AV ČR a MENDELU (intenzita sucha v profilu 0–100 cm) · VÚV TGM (mokřady, vysychavé toky, bilance) · ČGS (Rebilance zásob podzemních vod) · SZÚ (zásobování a kvalita pitné vody) · Povodí Vltavy, Labe, Ohře, Moravy a Odry (nádrže a manipulace) · MZe a MŽP (opatření, dotace) · ČHMÚ + CzechGlobe (klimatické scénáře CMIP6) · Barnes et al., Nature Health 2026 (nadúmrtí při vlnách veder) · V. Cílek, Epilog: suchý rok 2026 (rukopis, 2026).</p>
+  </section>
+</section>
+
+<!-- =============================== 2 PŘEHLED =============================== -->
+<section class="panel" id="p-prehled" data-title="Přehled" data-icon="i-home" data-area="uvod" aria-labelledby="h-prehled">
+  <div class="panel-head">
+    <div><span class="eyebrow">02 · Přehled</span><h2 id="h-prehled">Sucho se přesunulo z povrchu do hloubky</h2>
+    <p>Devět hlavních zjištění na jednom místě. Klepnutím na kartu zobrazíte celé znění se zdroji, rozcestník níže vede do podrobných kapitol.</p></div>
+  </div>
+
+  <div class="hero-moved">
+    <div class="hero-art" aria-hidden="true">
         <svg viewBox="0 0 360 260">
           <defs>
             <linearGradient id="hg-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--loess-soft)"/><stop offset="1" style="stop-color:var(--surface)"/></linearGradient>
@@ -682,9 +826,13 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
           </g>
         </svg>
       </div>
+    <div class="hero-moved-t">
+      <h3>Devět čísel, která shrnují rok 2026</h3>
+      <p>Klíčové hodnoty studie. Co znamenají pro konkrétní místo, ukáže <a href="#p-simulator">mapový simulátor</a>.</p>
     </div>
+  </div>
 
-    <div class="kpis" role="list">
+  <div class="kpis" role="list">
       <div class="kpi new" role="listitem"><svg class="ic"><use href="#i-layers"/></svg><div class="v crit">74 %</div><div class="l">území s odchylkou sucha v půdním profilu 0–100 cm; povrch se po deštích zlepšil, hloubka ne</div><div class="bar"><i style="width:74%;--c:var(--critical)"></i></div><div class="s">InterSucho, 8. 11. 2026</div></div>
       <div class="kpi new" role="listitem"><svg class="ic"><use href="#i-map"/></svg><div class="v crit">≈ 1 000</div><div class="l">katastrálních území nejvíce ohrožených suchem; stát pro ně vyčlenil 500 mil. Kč</div><div class="s">ČHMÚ, MŽP; srpen–říjen 2026</div></div>
       <div class="kpi new" role="listitem"><svg class="ic"><use href="#i-dam"/></svg><div class="v crit">≈ 50 %</div><div class="l">zásobního prostoru Římova – zdroje pitné vody pro asi 400 tis. Jihočechů; zásoba zhruba na 9 měsíců</div><div class="bar"><i style="width:50%;--c:var(--critical)"></i></div><div class="s">Povodí Vltavy / ČRo, 8.–12. 11. 2026</div></div>
@@ -694,37 +842,15 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
       <div class="kpi" role="listitem"><svg class="ic"><use href="#i-plant"/></svg><div class="v warn">20–25 mld. Kč</div><div class="l">odhadované ztráty českého zemědělství v roce 2026</div><div class="s">Agrární komora ČR; podkladová analýza</div></div>
       <div class="kpi" role="listitem"><svg class="ic"><use href="#i-leaf"/></svg><div class="v crit">99,5 %</div><div class="l">historických mokřadů zaniklo ve sledovaném území nížin (1843 → 2015)</div><div class="bar"><i style="width:99.5%;--c:var(--critical)"></i></div><div class="s">VÚV TGM, VTEI</div></div>
     </div>
-    <div class="audio-box" id="audio">
+
+  <div class="audio-box" id="audio">
       <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="color:var(--labe);flex:none"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z"/></svg>
       <div class="t"><b>Poslechněte si audio shrnutí</b><span>Kolaps Vltavské kaskády a vysychání krajiny (MP3, 2,9 MB)</span></div>
       <audio controls preload="none" src="kolaps_vltavske_kaskady_a_vysychani_krajiny.mp3">Váš prohlížeč nepodporuje přehrávání zvuku – <a href="kolaps_vltavske_kaskady_a_vysychani_krajiny.mp3">stáhněte si soubor MP3</a>.</audio>
       <a href="kolaps_vltavske_kaskady_a_vysychani_krajiny.mp3" download>Stáhnout MP3</a>
     </div>
-    <p class="meta-row"><span>Autor webu: Jaroslav Svoboda</span><span>Základní analýza: 30. 10. 2026 · aktualizace: 16. 11. 2026</span><span>Data: ČHMÚ, InterSucho (CzechGlobe AV ČR), státní podniky Povodí, MZe, MŽP, ČEZ</span></p>
-  </div>
-</header>
 
-<nav class="appnav" id="appnav" aria-label="Kapitoly studie">
-  <div class="wrap">
-    <div class="navwrap">
-      <button class="navarrow" id="nav-prev" type="button" aria-label="Posunout menu doleva"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
-      <div class="navlist" id="navlist" role="list"></div>
-      <button class="navarrow" id="nav-next" type="button" aria-label="Posunout menu doprava"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
-    </div>
-    <button class="navbtn menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="sheet"><span id="menu-cur">Přehled</span><svg><use href="#i-menu"/></svg></button>
-  </div>
-  <div class="sheet" id="sheet"></div>
-  <div class="progress"><i id="progress" style="width:11%"></i></div>
-</nav>
-
-<main class="wrap panels" id="obsah">
-
-<!-- =============================== 1 PŘEHLED =============================== -->
-<section class="panel" id="p-prehled" data-title="Přehled" data-icon="i-home" data-area="uvod" aria-labelledby="h-prehled">
-  <div class="panel-head">
-    <div><span class="eyebrow">01 · Přehled</span><h2 id="h-prehled">Sucho se přesunulo z povrchu do hloubky</h2>
-    <p>Devět hlavních zjištění na jednom místě. Klepnutím na kartu zobrazíte celé znění se zdroji, rozcestník níže vede do podrobných kapitol.</p></div>
-  </div>
+  <p class="meta-row"><span>Autor webu: Jaroslav Svoboda</span><span>Základní analýza: 30. 10. 2026 · aktualizace: 16. 11. 2026</span><span>Data: ČHMÚ, InterSucho (CzechGlobe AV ČR), státní podniky Povodí, MZe, MŽP, ČEZ</span></p>
 
   <div class="update" id="aktualizace">
     <div class="ui"><svg><use href="#i-refresh"/></svg></div>
@@ -787,10 +913,10 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
   </div>
 </section>
 
-<!-- =============================== 2 STAV =============================== -->
+<!-- =============================== 3 STAV =============================== -->
 <section class="panel" id="p-stav" data-title="Stav teď" data-icon="i-gauge" data-area="uvod" aria-labelledby="h-stav">
   <div class="panel-head">
-    <div><span class="eyebrow">02 · Aktuální stav</span><h2 id="h-stav">Stav sucha v listopadu 2026</h2>
+    <div><span class="eyebrow">03 · Aktuální stav</span><h2 id="h-stav">Stav sucha v listopadu 2026</h2>
     <p>Povrch se po deštích zlepšuje, hlubší vrstvy půdy a podzemní vody zůstávají vyčerpané. Jak to vypadá v číslech a kde voda chybí.</p></div>
   </div>
 
@@ -870,91 +996,9 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
   </section>
 </section>
 
-<!-- =============================== 3 MAPOVÝ SIMULÁTOR =============================== -->
-<section class="panel" id="p-simulator" data-title="Mapový simulátor" data-icon="i-map" data-area="mapa" data-hot="1" aria-labelledby="h-simulator">
-  <div class="panel-head">
-    <div><span class="eyebrow">03 · Lokální diagnostika</span><h2 id="h-simulator">Interaktivní environmentální mapa: co čeká konkrétně vaše místo</h2>
-    <p>Klepněte kamkoli na mapu České republiky – nebo vyhledejte svou obec či PSČ. Pro vybraný bod se spočítá profil lokality, osm dimenzí ohrožení a odpovědi na devět praktických otázek. Posuvníkem měníte časový horizont od nejbližší zimy po rok 2075, tlačítky klimatický scénář.</p></div>
-  </div>
-
-  <div class="callout water">
-    <p><b>Co mapa je a co není.</b> Je to <b>diagnostický a scénářový nástroj</b>: ukazuje, jak se riziko mění mezi lokalitami, mezi scénáři a v čase. Není to předpověď pro konkrétní rok a konkrétní studnu. Vrstvy stojí na reálných datech ČHMÚ, InterSucho, VÚV TGM, ČGS, SZÚ a správců povodí, ale pole mezi měřicími body se interpoluje a hydrogeologické struktury i povodí jsou zjednodušené. Pro rozhodnutí o zdroji vody použijte data ČHMÚ a krajský plán pro zvládání sucha – odkazy najdete v <a href="#metodika">Metodice</a> a u každé vrstvy.</p>
-  </div>
-
-  <div class="sm-app">
-    <div class="sm-bar">
-      <h4>Vyhledat místo</h4>
-      <div class="sm-find">
-        <input id="sm-search" type="search" placeholder="Obec, město, PSČ nebo vodní dílo – např. Hradec Králové, 500 02, Římov" autocomplete="off" aria-label="Vyhledat obec, PSČ nebo vodní dílo">
-        <div id="sm-results" role="listbox"></div>
-      </div>
-    </div>
-
-    <div class="sm-dash">
-      <div class="sm-mapcol">
-        <div class="sm-bar">
-          <h4>Sledovaná vrstva</h4>
-          <div class="sm-layers" id="sm-layers"></div>
-          <p class="sm-info" id="sm-layerinfo"></p>
-        </div>
-
-        <div class="sm-mapbox">
-          <div id="sm-map" role="application" aria-label="Interaktivní mapa ohrožení suchem v České republice. Klepnutím vyberte lokalitu."></div>
-          <div id="sm-flash" role="status"></div>
-          <div class="sm-maptools">
-            <div class="sm-legend">
-              <span>nízké riziko</span>
-              <div id="sm-legend-bar" aria-hidden="true"></div>
-              <span>kritické</span>
-            </div>
-            <label><input type="checkbox" id="sm-basemap"> podkladová mapa (OpenStreetMap)</label>
-          </div>
-        </div>
-
-        <div class="sm-bar">
-          <h4>Klimatický scénář</h4>
-          <div class="sm-scen" id="sm-scen"></div>
-          <p class="sm-info" id="sm-scinfo"></p>
-        </div>
-
-        <div class="sm-bar">
-          <h4>Časový horizont</h4>
-          <div class="sm-hz-wrap">
-            <input type="range" id="sm-hz" min="0" max="4" step="1" value="0" aria-label="Časový horizont simulace">
-            <div id="sm-hz-lbl"></div>
-          </div>
-          <div class="sm-hz-ticks" id="sm-hz-ticks"></div>
-          <p class="sm-info" id="sm-hzinfo"></p>
-        </div>
-      </div>
-
-      <div id="sm-panel-wrap">
-        <div id="sm-panel" aria-live="polite"></div>
-      </div>
-    </div>
-  </div>
-
-  <section class="chap" id="sm-metodika">
-    <header><span class="eyebrow">Jak mapa počítá</span><h2>Metodika mapového simulátoru</h2></header>
-    <div class="prose">
-      <p>Mapa je prostorovým doplňkem bilančního modelu z kapitoly <a href="#p-nadrze">Nádrže a simulace</a>. Ten počítá vodní bilanci celého území měsíc po měsíci; tato mapa naopak počítá <b>jeden rok v jednom bodě</b> – zato pro libovolné místo a v osmi dimenzích.</p>
-    </div>
-    <div class="sm-meth">
-      <div><h4>1 · Klimatické pole</h4>Teplota, srážky a výška terénu se interpolují metodou inverzních vzdáleností ze sítě 109 referenčních bodů, jejichž hodnoty odpovídají řádově normálu 1991–2020. <b>Nejde o oficiální staniční normály ČHMÚ</b> ani o klimatologickou mapu: v konkrétním bodě se skutečnost může lišit o desetiny °C a o desítky mm. Potenciální výpar se počítá z teploty tak, aby při normálním klimatu vycházela skutečná evapotranspirace kolem 490 mm a odtok kolem 190 mm ročně – stejná kalibrace jako u hlavní simulace.</div>
-      <div><h4>2 · Klimatická vodní bilance</h4>Klíčová veličina celé mapy: <code>srážky − potenciální výpar</code>. Vysvětluje, proč je sucho i při „normálních“ srážkách. Podle MZe znamená oteplení o 1 °C ztrátu asi 40 mm vody výparem ročně, tedy kolem 3,1 mld. m³ – i při nezměněných srážkách. Václav Cílek uvádí, že k náhradě vody ztracené odparem při oteplení o 1 °C by bylo potřeba o 80–100 mm vyšší srážky; ve středních Čechách se od roku 1961 teplota zvýšila asi o 2,1 °C, takže zde setrvale schází něco mezi 100 a 140 mm ročních srážek.</div>
-      <div><h4>3 · Hydrogeologie</h4>Každý bod se přiřadí k jednomu ze šesti typů prostředí (křídová pánev, permokarbonské a terciérní pánve, hydrogeologický masiv, flyš, neogén, kvartérní náplavy) podle nejbližšího z 126 uzlů. <b>Nejsou to hranice hydrogeologických rajonů ČGS</b> – ty jsou mnohem členitější. Každý typ má jinou setrvačnost: v krystaliniku se zásoba vyčerpá za týdny a doplní za měsíce, v křídové pánvi se vyčerpává roky a doplňuje desítky let. Právě tento rozdíl model záměrně modeluje.</div>
-      <div><h4>4 · Povodí a nádrže</h4>Bod se přiřadí k jedné z 18 vodohospodářských soustav. U zásobování pitnou vodou se nepočítá s řekou pod okny, ale s povodím, <b>ze kterého kraj vodu skutečně bere</b> – Praha nebere pitnou vodu z Vltavy, ale ze Želivky a z Káraného. Podíl povrchových a podzemních zdrojů vychází z krajských plánů pro sucho a ze statistik SZÚ a ČSÚ.</div>
-      <div><h4>5 · Aktuální stav sucha</h4>Vrstva pro nejbližší horizont (2026/27) přepisuje textový souhrn InterSucho k 8.–10. 11. 2026 do mapy: 110 uzlů se stupněm 0–5 podle toho, jaký nejvyšší stupeň sucha v profilu 0–100 cm InterSucho v dané oblasti uvádí. Čím dál do budoucnosti, tím menší váhu aktuální stav má – u roku 2075 už jen 3 %.</div>
-      <div><h4>6 · Scénáře</h4>Oteplení a změny srážek vycházejí z ansámblu CMIP6 pro Česko (ČHMÚ a CzechGlobe, <i>Hodnocení změny klimatu a adaptačních potřeb ČR</i>, 2025): medián +2,0 °C k roku 2045 a +3,1 °C k roku 2075 proti období 1981–2010, roční srážky asi +3 %, ale léto −2 až −6 % a zima s jarem +3 až +12 %. Krizový scénář odpovídá horní části ansámblu (SSP5-8.5; podle regionálního modelu ALADIN-CLIMATE/CZ až +5 °C ke konci století) a krajině, která dál ztrácí retenci. Optimistický scénář kombinuje dolní část ansámblu s obnovenou retencí krajiny, úsporami a novými akumulacemi.</div>
-      <div><h4>7 · Index ohrožení</h4>Každá vrstva dává číslo 1–99: <b>není to procento ani pravděpodobnost</b>, ale relativní míra ohrožení srovnatelná mezi místy, scénáři a roky. Barevná stupnice jde od zelené (nízké) přes jantarovou po karmínovou (kritické). Souhrnné riziko je vážený průměr osmi vrstev s dvojnásobnou vahou podzemní vody a zásobování, protože na nich závisí obyvatelnost místa.</div>
-      <div><h4>8 · Co model nedělá</h4>Nepočítá jednotlivé vrty ani obecní vodovody, neumí odhadnout konkrétní rok, nepracuje s denním počasím, s kvalitou vody v konkrétním zdroji ani s krizovými opatřeními, která se dají přijmout. Odhady cen, pravděpodobnosti zákazů a rizika nadúmrtí jsou odvozené z indexů, nikoli měřené. Pro skutečné rozhodování slouží studie ČHMÚ, CzechGlobe, ČGS a digitální dvojčata povodí.</div>
-    </div>
-    <p class="fig-src" style="margin-top:12px">Zdroje vrstev a dat: ČHMÚ (srážky, teploty, průtoky, mělké a hluboké vrty, HAMR, seznam ≈ 1 000 nejohroženějších území) · InterSucho / CzechGlobe AV ČR a MENDELU (intenzita sucha v profilu 0–100 cm) · VÚV TGM (mokřady, vysychavé toky, bilance) · ČGS (Rebilance zásob podzemních vod) · SZÚ (zásobování a kvalita pitné vody) · Povodí Vltavy, Labe, Ohře, Moravy a Odry (nádrže a manipulace) · MZe a MŽP (opatření, dotace) · ČHMÚ + CzechGlobe (klimatické scénáře CMIP6) · Barnes et al., Nature Health 2026 (nadúmrtí při vlnách veder) · V. Cílek, Epilog: suchý rok 2026 (rukopis, 2026).</p>
-  </section>
-</section>
 
 <!-- =============================== 4 MAPA OHROŽENÍ =============================== -->
-<section class="panel" id="p-mapa" data-title="Mapa ohrožení" data-icon="i-map" data-area="mapa" data-hot="1" aria-labelledby="h-mapa">
+<section class="panel" id="p-mapa" data-title="Mapa ohrožení" data-icon="i-map" data-area="uvod" data-hot="1" aria-labelledby="h-mapa">
   <div class="panel-head">
     <div><span class="eyebrow">04 · Kdo je ohrožen</span><h2 id="h-mapa">Ohrožené kraje, obce a infrastruktura</h2>
     <p>Sucho v Česku nepůsobí všude stejně. Mapa ukazuje, kde chybí voda v půdě, kde je ohrožené zásobování a které stavby, na nichž stojí hospodářství státu, jsou na vodě závislé. Klepněte na kraj nebo na značku.</p></div>
@@ -1896,7 +1940,7 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
     </div>
     <div id="prog-list"></div>
     <div class="callout water">
-      <p><b>Pozor na jednu změnu, kterou většina textů o dotacích ještě neuvádí.</b> Samostatný program Dešťovka skončil a podpora na nádrž je dnes podprogramem Nové zelené úsporám. V etapě 2026+ už na samotnou nádrž žádat nelze – musí být součástí širší renovace domu, případně financovaná bezúročným úvěrem, který také nelze čerpat samostatně. Než začnete plánovat, ověřte podmínky na <a href="https://novazelenausporam.cz/" target="_blank" rel="noopener">novazelenausporam.cz</a>.</p>
+      <p><b>Pozor na jednu podmínku, kterou většina textů o dotacích neuvádí.</b> Samostatný program Dešťovka skončil a podpora je dnes podoblastí D.2 „Hospodaření s vodou“ v Nové zelené úsporám. O opatření v oblasti D ale <b>nelze žádat samostatně</b>: podle závazných pokynů pro rodinné domy platných od 28. 5. 2026 se podporují pouze v kombinaci s oblastí A (zateplení) nebo C (zdroje energie), a to formou zvýhodněného úvěru s kompenzací úroků – nejvýše 100 000 Kč na systém „dešťová voda + WC“ a 150 000 Kč na „šedou vodu“. Výše i forma podpory se přitom liší mezi variantami programu a v posledních letech se opakovaně měnily; starší přehledy s pevnou dotací 50 000 nebo 105 000 Kč se k dnešním pravidlům pro rodinné domy nevztahují. Než začnete plánovat, ověřte si závazné pokyny pro svou variantu na <a href="https://novazelenausporam.cz/" target="_blank" rel="noopener">novazelenausporam.cz</a>.</p>
     </div>
   </section>
   </div>
@@ -2064,7 +2108,7 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
       <li id="z-szu-voda">Zpráva o kvalitě pitné vody v ČR za rok 2024. <span class="m">Státní zdravotní ústav, 2025. Z podzemních zdrojů bylo zásobeno 38,97 % obyvatel, z povrchových 37,44 % a ze smíšených 23,59 %.</span> <a href="https://szu.gov.cz/wp-content/uploads/2025/08/voda_2024.pdf" target="_blank" rel="noopener">szu.gov.cz (PDF)</a></li>
       <li id="z-opzp-vyzvy">Operační program Životní prostředí – nabídka dotací (výzvy 73, 104, 105 a 109). <span class="m">MŽP a SFŽP ČR, stav k 16. 11. 2026. 105. výzva: zachytávání srážkových a šedých vod, 200 mil. Kč, příjem do 17. 12. 2026. 109. výzva: protipovodňová opatření a retence krajiny, 2,6 mld. Kč, příjem do 17. 12. 2026.</span> <a href="https://opzp.cz/nabidka-dotaci/" target="_blank" rel="noopener">opzp.cz</a></li>
       <li id="z-opzp-tune">Vzniknou další tůně, mokřady, remízky či stromořadí – MŽP uvolňuje 330 milionů na zadržení vody v krajině a více zeleně v obcích. <span class="m">MŽP, 2026.</span> <a href="https://opzp.cz/tiskova-zprava/72" target="_blank" rel="noopener">opzp.cz</a></li>
-      <li id="z-nzu">Nová zelená úsporám 2026+ – podpora akumulace srážkové a přečištěné odpadní vody (dříve samostatný program Dešťovka). <span class="m">MŽP a SFŽP ČR; v roce 2026 nelze o podporu nádrže žádat samostatně, jen v rámci širší renovace domu.</span> <a href="https://novazelenausporam.cz/" target="_blank" rel="noopener">novazelenausporam.cz</a></li>
+      <li id="z-nzu">Nová zelená úsporám – Závazné pokyny pro žadatele a příjemce podpory, rodinné domy, platné od 28. 5. 2026 (podoblast D.2 Hospodaření s vodou, dříve samostatný program Dešťovka). <span class="m">MŽP a SFŽP ČR. Opatření v oblasti D nelze podpořit samostatně, pouze v kombinaci s oblastí A (zateplení) nebo C (zdroje energie); podpora formou zvýhodněného úvěru s kompenzací úroků, nejvýše 100 000 Kč (dešťová voda + WC) a 150 000 Kč (šedá voda); minimální objem nádrže 2 m³.</span> <a href="https://novazelenausporam.cz/" target="_blank" rel="noopener">novazelenausporam.cz</a></li>
       <li id="z-mze-poplatky">Ministerstvo zemědělství plánuje skokové zdražení podzemních vod. <span class="m">ČTK / České noviny, listopad 2026. Poplatky za odběr podzemních vod se neměnily 20 let; výnosy mají financovat propojování vodárenských soustav, čistírny a nové zdroje.</span> <a href="https://www.ceskenoviny.cz/zpravy/ministerstvo-zemedelstvi-planuje-skokove-zdrazeni-podzemnich-vod/2897651" target="_blank" rel="noopener">ceskenoviny.cz</a></li>
       <li id="z-chmu-rieder">Sucho se prohlubuje. Řeky mají historicky nejnižší průtoky, říká šéf hydrometeorologického ústavu. <span class="m">iROZHLAS, 7. 11. 2026. Z asi 550 vodoměrných stanic bylo zhruba 180 pod úrovní hydrologického sucha; listopad podle dlouhodobého výhledu srážkově podprůměrný až průměrný.</span> <a href="https://www.irozhlas.cz/veda-technologie/priroda/sucho-se-prohlubuje-reky-maji-historicky-nejnizsi-prutoky-rika-sef_2611070010_jos" target="_blank" rel="noopener">irozhlas.cz</a></li>
       <li id="z-brno-zdroje">Potoky mizí, kohoutky tečou dál. Jak dlouho Česko podrží přehrady? <span class="m">INFO.CZ, 2026. Brno: za prvních sedm měsíců 2026 tvořila podzemní voda z prameniště Březová ≈ 63 % a povrchová voda z nádrže Vír ≈ 37 % dodávky.</span> <a href="https://www.info.cz/zpravodajstvi-a-komentare/sucho-cesko-prehrady-pitna-voda" target="_blank" rel="noopener">info.cz</a></li>
@@ -2987,7 +3031,7 @@ wireRefs(document);
 /* ---------- Panely a menu ---------- */
 const panels = $$(".panel");
 const navlist = $("#navlist"), sheet = $("#sheet"), appnav = $("#appnav");
-const AREAS = { uvod: "Úvod a varování", mapa: "Mapa a lokální diagnostika", kapitoly: "Hloubkové kapitoly", resit: "Co dělat a odkud data" };
+const AREAS = { mapa: "Mapa pro vaše místo", uvod: "Přehled a aktuální stav", kapitoly: "Hloubkové kapitoly", resit: "Co dělat a odkud data" };
 let lastArea = null;
 panels.forEach((p, i) => {
   const mkBtn = () => { const a = document.createElement("a"); a.className = "navbtn" + (p.dataset.hot ? " hot" : ""); a.href = "#" + p.id; a.dataset.p = p.id;
@@ -3033,6 +3077,7 @@ function showPanel(p, sub) {
   if (!p) return;
   if (curPanel !== p) {
     panels.forEach(x => x.classList.toggle("on", x === p));
+    document.documentElement.dataset.panel = p.id;
     $$(".navbtn[data-p]").forEach(b => { if (b.dataset.p === p.id) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current"); });
     const idx = panels.indexOf(p);
     $("#progress").style.width = ((idx + 1) / panels.length * 100) + "%";
