@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sucho a voda v Česku 2026 | Vize 2075</title>
-<meta name="description" content="Analytická studie sucha v Česku (aktualizace 13. 11. 2026): stav půdy, podzemních vod a přehrad, interaktivní mapa ohrožených krajů, obcí a infrastruktury, výhled dopadů 2027–2075, simulace a opatření, která v Česku vznikají.">
+<meta name="description" content="Analytická studie sucha v Česku (aktualizace 16. 11. 2026) s interaktivní environmentální mapou a lokální diagnostikou pro libovolné místo: stav půdy, podzemních vod a přehrad, interaktivní mapa ohrožených krajů, obcí a infrastruktury, výhled dopadů 2027–2075, simulace a opatření, která v Česku vznikají.">
 <meta name="author" content="Jaroslav Svoboda">
 <meta name="theme-color" content="#f4f5f1" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0d1311" media="(prefers-color-scheme: dark)">
@@ -15,6 +15,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..800;1,62..125,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400&display=swap&subset=latin-ext">
+<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="assets/css/sucho-mapa.css">
 <script>
   /* Sdílené nastavení motivu s hlavním webem Vize 2075 */
   document.documentElement.classList.add("js");
@@ -645,7 +647,7 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <span class="eyebrow">Analytická studie · Vize 2075 · aktualizováno 13. 11. 2026</span>
+        <span class="eyebrow">Analytická studie · Vize 2075 · aktualizováno 16. 11. 2026</span>
         <h1>Sucho a voda v Česku: <em>krajina, která přestává zadržovat vodu</em></h1>
         <p class="lede-short">Rok 2026 patří k nejsušším od roku 1961. Říjnové deště zvlhčily povrch, ale v hloubce půdy, pod zemí a v přehradách voda dál chybí. O tom, jak bude vypadat rok 2027, rozhodne nadcházející zima.</p>
         <div class="badge-row">
@@ -698,7 +700,7 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
       <audio controls preload="none" src="kolaps_vltavske_kaskady_a_vysychani_krajiny.mp3">Váš prohlížeč nepodporuje přehrávání zvuku – <a href="kolaps_vltavske_kaskady_a_vysychani_krajiny.mp3">stáhněte si soubor MP3</a>.</audio>
       <a href="kolaps_vltavske_kaskady_a_vysychani_krajiny.mp3" download>Stáhnout MP3</a>
     </div>
-    <p class="meta-row"><span>Autor webu: Jaroslav Svoboda</span><span>Základní analýza: 30. 10. 2026 · aktualizace: 13. 11. 2026</span><span>Data: ČHMÚ, InterSucho (CzechGlobe AV ČR), státní podniky Povodí, MZe, MŽP, ČEZ</span></p>
+    <p class="meta-row"><span>Autor webu: Jaroslav Svoboda</span><span>Základní analýza: 30. 10. 2026 · aktualizace: 16. 11. 2026</span><span>Data: ČHMÚ, InterSucho (CzechGlobe AV ČR), státní podniky Povodí, MZe, MŽP, ČEZ</span></p>
   </div>
 </header>
 
@@ -718,7 +720,7 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
 <main class="wrap panels" id="obsah">
 
 <!-- =============================== 1 PŘEHLED =============================== -->
-<section class="panel" id="p-prehled" data-title="Přehled" data-icon="i-home" aria-labelledby="h-prehled">
+<section class="panel" id="p-prehled" data-title="Přehled" data-icon="i-home" data-area="uvod" aria-labelledby="h-prehled">
   <div class="panel-head">
     <div><span class="eyebrow">01 · Přehled</span><h2 id="h-prehled">Sucho se přesunulo z povrchu do hloubky</h2>
     <p>Devět hlavních zjištění na jednom místě. Klepnutím na kartu zobrazíte celé znění se zdroji, rozcestník níže vede do podrobných kapitol.</p></div>
@@ -732,7 +734,18 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
         <li><b>Povrch se zlepšil, hloubka ne.</b> Po deštích koncem října ubylo nejhorších stupňů sucha (extrémní a výjimečné sucho k 8. 11. pokrývá méně než 5 % území), odchylku od normálu v profilu 0–100 cm ale stále vykazuje asi 74 % Česka.<sup class="ref"><a href="#z-is-811">[x]</a></sup></li>
         <li><b>Pitná voda na jihu Čech:</b> Římov je naplněn jen asi z poloviny, hladina je podobná suchým letům 1983–1984; odtok do Malše byl snížen na 250 l/s.<sup class="ref"><a href="#z-rozhlas-rimov">[x]</a></sup></li>
         <li><b>ČHMÚ určil asi 1 000 nejohroženějších území</b> a MŽP pro ně vyčlenilo 500 mil. Kč na zadržení vody v krajině.<sup class="ref"><a href="#z-ctk-1000">[x]</a></sup><sup class="ref"><a href="#z-expats-1000">[x]</a></sup></li>
-        <li><b>Nové kapitoly:</b> <a href="#p-mapa">interaktivní mapa ohrožených krajů a infrastruktury</a>, <a href="#p-vyhled">výhled dopadů 2027–2075</a> a <a href="#p-opatreni">katalog opatření, která už vznikají</a>.</li>
+        <li><b>Nové (16. 11.): interaktivní environmentální mapa ČR.</b> Klepnutím na libovolné místo
+          dostanete profil lokality, osm dimenzí ohrožení a odpovědi na devět praktických otázek – pro horizonty
+          od nejbližší zimy po rok 2075 a tři klimatické scénáře. <a href="#p-simulator">Otevřít simulátor</a>.</li>
+        <li><b>Nové (16. 11.): manuál připravenosti a přehled dotací.</b> Co může udělat domácnost, obec a vlastník
+          pozemku, včetně aktuálního stavu programů k nakládání s vodou (Dešťovka v NZÚ, výzvy OPŽP 105 a 109).
+          <a href="#p-pripravenost">Otevřít manuál</a>.</li>
+        <li><b>Nové (16. 11.): zdraví a vlny veder.</b> Studie v Nature Health vyčíslila pro léto 2026 v českých
+          sledovaných městech 701 nadměrných úmrtí, z toho asi 425 připsaných oteplování způsobenému člověkem;
+          CzechGlobe uvádí +573 úmrtí během červnové a červencové vlny. <a href="#p-energie">Otevřít kapitolu</a>.</li>
+        <li><b>Nové (16. 11.): terénní bilance roku 2026</b> podle rukopisu Václava Cílka – sklizeň po plodinách,
+          stav lesů, rybníků a půdy, neviditelné sucho z družic GRACE a kontinentální vysušování.</li>
+        <li><b>Starší kapitoly:</b> <a href="#p-mapa">interaktivní mapa ohrožených krajů a infrastruktury</a>, <a href="#p-vyhled">výhled dopadů 2027–2075</a> a <a href="#p-opatreni">katalog opatření, která už vznikají</a>.</li>
       </ul>
     </div>
   </div>
@@ -775,7 +788,7 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
 </section>
 
 <!-- =============================== 2 STAV =============================== -->
-<section class="panel" id="p-stav" data-title="Stav teď" data-icon="i-gauge" aria-labelledby="h-stav">
+<section class="panel" id="p-stav" data-title="Stav teď" data-icon="i-gauge" data-area="uvod" aria-labelledby="h-stav">
   <div class="panel-head">
     <div><span class="eyebrow">02 · Aktuální stav</span><h2 id="h-stav">Stav sucha v listopadu 2026</h2>
     <p>Povrch se po deštích zlepšuje, hlubší vrstvy půdy a podzemní vody zůstávají vyčerpané. Jak to vypadá v číslech a kde voda chybí.</p></div>
@@ -857,10 +870,93 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
   </section>
 </section>
 
-<!-- =============================== 3 MAPA OHROŽENÍ =============================== -->
-<section class="panel" id="p-mapa" data-title="Mapa ohrožení" data-icon="i-map" data-hot="1" aria-labelledby="h-mapa">
+<!-- =============================== 3 MAPOVÝ SIMULÁTOR =============================== -->
+<section class="panel" id="p-simulator" data-title="Mapový simulátor" data-icon="i-map" data-area="mapa" data-hot="1" aria-labelledby="h-simulator">
   <div class="panel-head">
-    <div><span class="eyebrow">03 · Kdo je ohrožen</span><h2 id="h-mapa">Ohrožené kraje, obce a infrastruktura</h2>
+    <div><span class="eyebrow">03 · Lokální diagnostika</span><h2 id="h-simulator">Interaktivní environmentální mapa: co čeká konkrétně vaše místo</h2>
+    <p>Klepněte kamkoli na mapu České republiky – nebo vyhledejte svou obec či PSČ. Pro vybraný bod se spočítá profil lokality, osm dimenzí ohrožení a odpovědi na devět praktických otázek. Posuvníkem měníte časový horizont od nejbližší zimy po rok 2075, tlačítky klimatický scénář.</p></div>
+  </div>
+
+  <div class="callout water">
+    <p><b>Co mapa je a co není.</b> Je to <b>diagnostický a scénářový nástroj</b>: ukazuje, jak se riziko mění mezi lokalitami, mezi scénáři a v čase. Není to předpověď pro konkrétní rok a konkrétní studnu. Vrstvy stojí na reálných datech ČHMÚ, InterSucho, VÚV TGM, ČGS, SZÚ a správců povodí, ale pole mezi měřicími body se interpoluje a hydrogeologické struktury i povodí jsou zjednodušené. Pro rozhodnutí o zdroji vody použijte data ČHMÚ a krajský plán pro zvládání sucha – odkazy najdete v <a href="#metodika">Metodice</a> a u každé vrstvy.</p>
+  </div>
+
+  <div class="sm-app">
+    <div class="sm-bar">
+      <h4>Vyhledat místo</h4>
+      <div class="sm-find">
+        <input id="sm-search" type="search" placeholder="Obec, město, PSČ nebo vodní dílo – např. Hradec Králové, 500 02, Římov" autocomplete="off" aria-label="Vyhledat obec, PSČ nebo vodní dílo">
+        <div id="sm-results" role="listbox"></div>
+      </div>
+    </div>
+
+    <div class="sm-dash">
+      <div class="sm-mapcol">
+        <div class="sm-bar">
+          <h4>Sledovaná vrstva</h4>
+          <div class="sm-layers" id="sm-layers"></div>
+          <p class="sm-info" id="sm-layerinfo"></p>
+        </div>
+
+        <div class="sm-mapbox">
+          <div id="sm-map" role="application" aria-label="Interaktivní mapa ohrožení suchem v České republice. Klepnutím vyberte lokalitu."></div>
+          <div id="sm-flash" role="status"></div>
+          <div class="sm-maptools">
+            <div class="sm-legend">
+              <span>nízké riziko</span>
+              <div id="sm-legend-bar" aria-hidden="true"></div>
+              <span>kritické</span>
+            </div>
+            <label><input type="checkbox" id="sm-basemap"> podkladová mapa (OpenStreetMap)</label>
+          </div>
+        </div>
+
+        <div class="sm-bar">
+          <h4>Klimatický scénář</h4>
+          <div class="sm-scen" id="sm-scen"></div>
+          <p class="sm-info" id="sm-scinfo"></p>
+        </div>
+
+        <div class="sm-bar">
+          <h4>Časový horizont</h4>
+          <div class="sm-hz-wrap">
+            <input type="range" id="sm-hz" min="0" max="4" step="1" value="0" aria-label="Časový horizont simulace">
+            <div id="sm-hz-lbl"></div>
+          </div>
+          <div class="sm-hz-ticks" id="sm-hz-ticks"></div>
+          <p class="sm-info" id="sm-hzinfo"></p>
+        </div>
+      </div>
+
+      <div id="sm-panel-wrap">
+        <div id="sm-panel" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="chap" id="sm-metodika">
+    <header><span class="eyebrow">Jak mapa počítá</span><h2>Metodika mapového simulátoru</h2></header>
+    <div class="prose">
+      <p>Mapa je prostorovým doplňkem bilančního modelu z kapitoly <a href="#p-nadrze">Nádrže a simulace</a>. Ten počítá vodní bilanci celého území měsíc po měsíci; tato mapa naopak počítá <b>jeden rok v jednom bodě</b> – zato pro libovolné místo a v osmi dimenzích.</p>
+    </div>
+    <div class="sm-meth">
+      <div><h4>1 · Klimatické pole</h4>Teplota, srážky a výška terénu se interpolují metodou inverzních vzdáleností ze sítě 109 referenčních bodů, jejichž hodnoty odpovídají řádově normálu 1991–2020. <b>Nejde o oficiální staniční normály ČHMÚ</b> ani o klimatologickou mapu: v konkrétním bodě se skutečnost může lišit o desetiny °C a o desítky mm. Potenciální výpar se počítá z teploty tak, aby při normálním klimatu vycházela skutečná evapotranspirace kolem 490 mm a odtok kolem 190 mm ročně – stejná kalibrace jako u hlavní simulace.</div>
+      <div><h4>2 · Klimatická vodní bilance</h4>Klíčová veličina celé mapy: <code>srážky − potenciální výpar</code>. Vysvětluje, proč je sucho i při „normálních“ srážkách. Podle MZe znamená oteplení o 1 °C ztrátu asi 40 mm vody výparem ročně, tedy kolem 3,1 mld. m³ – i při nezměněných srážkách. Václav Cílek uvádí, že k náhradě vody ztracené odparem při oteplení o 1 °C by bylo potřeba o 80–100 mm vyšší srážky; ve středních Čechách se od roku 1961 teplota zvýšila asi o 2,1 °C, takže zde setrvale schází něco mezi 100 a 140 mm ročních srážek.</div>
+      <div><h4>3 · Hydrogeologie</h4>Každý bod se přiřadí k jednomu ze šesti typů prostředí (křídová pánev, permokarbonské a terciérní pánve, hydrogeologický masiv, flyš, neogén, kvartérní náplavy) podle nejbližšího z 126 uzlů. <b>Nejsou to hranice hydrogeologických rajonů ČGS</b> – ty jsou mnohem členitější. Každý typ má jinou setrvačnost: v krystaliniku se zásoba vyčerpá za týdny a doplní za měsíce, v křídové pánvi se vyčerpává roky a doplňuje desítky let. Právě tento rozdíl model záměrně modeluje.</div>
+      <div><h4>4 · Povodí a nádrže</h4>Bod se přiřadí k jedné z 18 vodohospodářských soustav. U zásobování pitnou vodou se nepočítá s řekou pod okny, ale s povodím, <b>ze kterého kraj vodu skutečně bere</b> – Praha nebere pitnou vodu z Vltavy, ale ze Želivky a z Káraného. Podíl povrchových a podzemních zdrojů vychází z krajských plánů pro sucho a ze statistik SZÚ a ČSÚ.</div>
+      <div><h4>5 · Aktuální stav sucha</h4>Vrstva pro nejbližší horizont (2026/27) přepisuje textový souhrn InterSucho k 8.–10. 11. 2026 do mapy: 110 uzlů se stupněm 0–5 podle toho, jaký nejvyšší stupeň sucha v profilu 0–100 cm InterSucho v dané oblasti uvádí. Čím dál do budoucnosti, tím menší váhu aktuální stav má – u roku 2075 už jen 3 %.</div>
+      <div><h4>6 · Scénáře</h4>Oteplení a změny srážek vycházejí z ansámblu CMIP6 pro Česko (ČHMÚ a CzechGlobe, <i>Hodnocení změny klimatu a adaptačních potřeb ČR</i>, 2025): medián +2,0 °C k roku 2045 a +3,1 °C k roku 2075 proti období 1981–2010, roční srážky asi +3 %, ale léto −2 až −6 % a zima s jarem +3 až +12 %. Krizový scénář odpovídá horní části ansámblu (SSP5-8.5; podle regionálního modelu ALADIN-CLIMATE/CZ až +5 °C ke konci století) a krajině, která dál ztrácí retenci. Optimistický scénář kombinuje dolní část ansámblu s obnovenou retencí krajiny, úsporami a novými akumulacemi.</div>
+      <div><h4>7 · Index ohrožení</h4>Každá vrstva dává číslo 1–99: <b>není to procento ani pravděpodobnost</b>, ale relativní míra ohrožení srovnatelná mezi místy, scénáři a roky. Barevná stupnice jde od zelené (nízké) přes jantarovou po karmínovou (kritické). Souhrnné riziko je vážený průměr osmi vrstev s dvojnásobnou vahou podzemní vody a zásobování, protože na nich závisí obyvatelnost místa.</div>
+      <div><h4>8 · Co model nedělá</h4>Nepočítá jednotlivé vrty ani obecní vodovody, neumí odhadnout konkrétní rok, nepracuje s denním počasím, s kvalitou vody v konkrétním zdroji ani s krizovými opatřeními, která se dají přijmout. Odhady cen, pravděpodobnosti zákazů a rizika nadúmrtí jsou odvozené z indexů, nikoli měřené. Pro skutečné rozhodování slouží studie ČHMÚ, CzechGlobe, ČGS a digitální dvojčata povodí.</div>
+    </div>
+    <p class="fig-src" style="margin-top:12px">Zdroje vrstev a dat: ČHMÚ (srážky, teploty, průtoky, mělké a hluboké vrty, HAMR, seznam ≈ 1 000 nejohroženějších území) · InterSucho / CzechGlobe AV ČR a MENDELU (intenzita sucha v profilu 0–100 cm) · VÚV TGM (mokřady, vysychavé toky, bilance) · ČGS (Rebilance zásob podzemních vod) · SZÚ (zásobování a kvalita pitné vody) · Povodí Vltavy, Labe, Ohře, Moravy a Odry (nádrže a manipulace) · MZe a MŽP (opatření, dotace) · ČHMÚ + CzechGlobe (klimatické scénáře CMIP6) · Barnes et al., Nature Health 2026 (nadúmrtí při vlnách veder) · V. Cílek, Epilog: suchý rok 2026 (rukopis, 2026).</p>
+  </section>
+</section>
+
+<!-- =============================== 4 MAPA OHROŽENÍ =============================== -->
+<section class="panel" id="p-mapa" data-title="Mapa ohrožení" data-icon="i-map" data-area="mapa" data-hot="1" aria-labelledby="h-mapa">
+  <div class="panel-head">
+    <div><span class="eyebrow">04 · Kdo je ohrožen</span><h2 id="h-mapa">Ohrožené kraje, obce a infrastruktura</h2>
     <p>Sucho v Česku nepůsobí všude stejně. Mapa ukazuje, kde chybí voda v půdě, kde je ohrožené zásobování a které stavby, na nichž stojí hospodářství státu, jsou na vodě závislé. Klepněte na kraj nebo na značku.</p></div>
   </div>
 
@@ -949,9 +1045,9 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
 </section>
 
 <!-- =============================== 4 VÝHLED =============================== -->
-<section class="panel" id="p-vyhled" data-title="Dopady a výhled" data-icon="i-clock" data-hot="1" aria-labelledby="h-vyhled">
+<section class="panel" id="p-vyhled" data-title="Dopady a výhled" data-icon="i-clock" data-area="kapitoly" data-hot="1" aria-labelledby="h-vyhled">
   <div class="panel-head">
-    <div><span class="eyebrow">04 · Dopady v čase</span><h2 id="h-vyhled">Co už sucho způsobilo a co přinese rok 2027 a dál</h2>
+    <div><span class="eyebrow">05 · Dopady v čase</span><h2 id="h-vyhled">Co už sucho způsobilo a co přinese rok 2027 a dál</h2>
     <p>Přepínejte časové horizonty: od dopadů pozorovaných v roce 2026 přes dva scénáře zimy 2026/27 až po výhled při pokračování dnešního trendu srážek a teplot. Kritická rizika jsou zvýrazněna.</p></div>
   </div>
 
@@ -999,14 +1095,48 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
       <div class="lt"><div class="jar"><i style="height:16.7%"></i></div><div><b>10–15 l</b><span>nouzový příděl od 3. dne krize – pití, studená strava, základní hygiena</span></div></div>
       <div class="lt"><div class="jar"><i style="height:5.6%"></i></div><div><b>5 l</b><span>nouzový příděl první dva dny krize na osobu a den</span></div></div>
     </div>
-    <p class="note">Zdroje: Krizport HZS ČR / koncepce MZe<sup class="ref"><a href="#z-krizport">[x]</a></sup>; ČSÚ<sup class="ref"><a href="#z-csu-voda">[x]</a></sup>. Doporučení pro domácnosti najdete v sekci <a href="index.html#pripravenost">Připravenost</a> na hlavní stránce Vize 2075.</p>
+    <p class="note">Zdroje: Krizport HZS ČR / koncepce MZe<sup class="ref"><a href="#z-krizport">[x]</a></sup>; ČSÚ<sup class="ref"><a href="#z-csu-voda">[x]</a></sup>. Doporučení pro domácnosti najdete v sekci <a href="#p-pripravenost">Připravenost</a> v této studii i na <a href="index.html#pripravenost">hlavní stránce Vize 2075</a>.</p>
+  </section>
+
+  <section class="chap" id="rok2026-ukazal">
+    <header><span class="eyebrow">Terénní bilance</span><h2>Co suchý rok 2026 ukázal v krajině</h2>
+    <p>Modely a statistiky říkají jedno. Druhou polovinu obrazu dává pohled na konkrétní místa – a ten mění závěry, protože ukazuje, jak nerovnoměrně sucho dopadá.</p></header>
+
+    <div class="prose">
+      <p><b>Hlavní poznatek je dobrá i špatná zpráva zároveň.</b> Reakce na sucho se lišila region od regionu, místo od místa a někdy i v rámci jednoho pozemku. To je do jisté míry nadějné, protože vždy budou místa, kde se něco urodí. Zároveň to znamená, že některé pozemky bude nutné obhospodařovat jinak a s nižšími výnosy – a že jakékoli ministerské vyhlášky budou muset být neurčité, protože i blízké sousední regiony se chovaly odlišně a nelze je zahrnout pod jednu metodiku.</p>
+      <p>Také <b>analýza zranitelnosti se lišila místo od místa</b>, a ne vždy tak, jak by člověk čekal. Na Vysočině byly celkově méně ohrožené lesy, ale mnohem víc vodárenské zdroje vázané na puklinové prameny. Právě tuto logiku – „jiné prostředí, jiné slabé místo“ – se snaží zachytit <a href="#p-simulator">mapový simulátor</a>.</p>
+      <p><b>Varovný je trend, který sucho 2026 jen zvýraznilo.</b> Někde asi od roku 2000, jinde po roce 2010 či 2015–2018 probíhá vysušování krajiny, u kterého zatím nevidíme konec. Jde o proces, který se dá dobře pozorovat na výnosech sena: z jedné louky dřív 25 balíků, pak 12–15 a v roce 2026 už jen 8. Nebo na jednom konkrétním místě pod Kašperkem, kde bylo možné „utopit traktor“, před pěti lety se začalo měnit na běžnou louku a dnes je vyprahlé.</p>
+    </div>
+
+    <h3>Sklizeň 2026 po plodinách</h3>
+    <div class="prose">
+      <p>Úroda obilovin byla v průměru nižší o <b>17 %</b>. Výrazně byly jarním suchem zasaženy všechny plodiny, ale sklizeň ječmene klesla o <b>24 %</b> a sklizeň jarního ovsa dokonce o <b>43 %</b>. Jarní lesní výsadba trpěla suchem na některých místech z 90–100 %. Na řepce se podepsalo nejen sucho, ale i dubnové mrazy. U cukrové řepy bylo pozorováno zavadnutí a snížení váhy. Kukuřice se chovala odlišně místo od místa, ale celkově byly pozorovány zakrnělé klasy s hluchými místy; někde vytvořila jen lem semen v dolní části klasu, což snižuje kvalitu siláže, kde škrob z klasů tvoří důležitou složku potravy. Místy bylo nutné zaorat celou úrodu cibule, zelí a další zeleniny.</p>
+      <p><b>Chmel a vinná réva.</b> V klíčových oblastech, třeba na Žatecku, klesla produkce chmele až o 30 % a zároveň vysoké letní teploty snížily produkci látek, které způsobují hořkost piva – šišek bylo dost, ale byly drobné a lehké. U vinné révy byly bobule drobné, cukernaté a mají méně šťávy. Vinaři to shrnují lapidárně: dříve museli dovážet cukr, dnes kyselinu. Přirozené kyseliny se totiž rychle odbourávají zejména během teplých nocí. Mladé výsadby do čtyř let trpěly usycháním.</p>
+      <p><b>Nejzávažnějším problémem je ale píce.</b> První květnová seč byla dobrá, pak došlo k propadu produkce, takže někteří farmáři začali skrmovat zimní zásoby už v srpnu. Němci povolili pastvu i na přirozených, jindy nesekaných či nespásaných plochách. Vysoké ceny nedostatkové píce, kterou je obtížné dopravit z Polska, musí dovést víc skotu k podzimní porážce a v druhém kroku vedou ke zvýšení cen masa. Z hlediska vodní stopy jsou náklady na 1 kg pšenice v průměru 1 800 litrů, ale na 1 kg vepřového masa asi 6 000 litrů a na 1 kg hovězího asi 15 000 litrů vody – to je jeden z argumentů nikoliv pro vegetariánství, ale pro snížení spotřeby masa, a také vysvětlení, proč hovězí zdražuje rychleji než vepřové.</p>
+      <p class="src">Zdroj: V. Cílek, Epilog: suchý rok 2026 (rukopis, 2026); Agrární komora ČR, ČSÚ – viz kapitola <a href="#ekonomika">Ekonomika</a>.</p>
+    </div>
+
+    <details class="more wide"><summary>Co se dělo s lesy a stromy: osm pozorování, která mění úvahy o obnově<span>4 odstavce</span></summary>
+      <div class="prose">
+        <p><b>Stromy byly celkově prořídlé a působily zaprášeně.</b> Javorům na okrajích zasychaly listy, jehličnany ztrácely jehličí. Přesto – nebo právě proto – řada stromů investovala do potomků a plodila jako o závod, jenže šišky i bukvice byly menší. Velmi časté byly zaschlé solitérní jehličnany, zejména smrky; velké poškození bylo téměř všude patrné u modřínů s jejich měkkým jehličím. Ukázalo se, že <b>smrk potřebuje společnost dalších smrků</b>. Pozitivní stránkou usychajících modřínů bylo, že výrazně snižovaly korunové teploty, a tím alespoň zpočátku chránily povrch země před přehříváním; pak začaly šetřit vodou a jehlice shodily.</p>
+        <p><b>Sdílené kořeny jsou za sucha rizikem.</b> Podle skupinového odumírání borů (třeba kolem Krásné Hory na žulovém substrátu, kde odcházely celé borové kotlíky o průměru 30–60 m) šlo odvodit, že stromy v lese se nějak navzájem podporují. Klíč poskytla Anglie, kde na grafiózu odumírají oslabené jilmy a správci parků kácejí i zdánlivě zdravé jilmy, protože nákaza se šíří sdílenými kořeny. Funkce sdílených kořenů jako informačních i látkových sítí, která stromy v dobách běžného chodu podporuje, se za sucha stává rizikem. To bude zřejmě i klíčem k lesním porostům budoucnosti, kde lepší šanci přežít budou mít <b>přirozené biocenózy s různě odolnými dřevinami</b>.</p>
+        <p><b>Záleží na podloží, a to hodně.</b> Na Českolipsku bylo napočítáno 50 zaschlých bříz z celkových 60 – břízy spotřebují hodně vody a na mnoha místech hromadně odcházejí při dosažení 15–20 let věku; v teplém vápencovém kaňonu Českého krasu ale byly v dobré kondici. Na Českolipsku vyrostla během vlhkého září šťavnatá, „jarní“ tráva až 20 cm dlouhá, kdežto na Třebíčsku na půdách na písčitě se rozpadající žule zůstala tráva suchá a zahnědlá bez stop regenerace. Na Třebíčsku byl dojem, že je vidět „budoucnost“ naší krajiny: rozvolněné lesy podrostlé žlutohnědou travou jako někde ve Středozemí. I zde ale byla překvapení, například zdravé smrkové porosty tam, kde by obklopené akátinami a doubravami vůbec neměly růst. Expanze akátu směrem od Strakonic podél Volyňky k šumavskému hřebeni klimatickou důvěru nevzbuzuje.</p>
+        <p><b>Kde hledat odolný materiál – a co funguje.</b> Dřevorubec, který kácel kůrovcové smrčiny, běžně nalézal na každém hektaru pár úplně zdravých stromů; podle délky genomu je smrk jeden z „nejchytřejších“ stromů s širokou možností adaptability. Zakrslé doubravy na tenkých půdách kolem Dobříše, duby pýřité z Českého krasu nebo doubravy milovických lesů na Pálavě by mohly být dobrým semenným materiálem pro jiné regiony; duby zasychaly od nejvyšší části koruny, ale vcelku se držely dobře a jejich strategie je zjevná: za sucha snižovat svoji výšku, za lepších let růst nahoru. Douglaskový porost založený v roce 1906 na lokalitě Jubileum u Tišnova nejevil na rozdíl od místních smrků a modřínů žádné proschnutí. A optimistickým příkladem je hospodaření Vojenských lesů a statků v Brdech, kde se budují mokřady, zaslepují a změlčují staré meliorační kanály a voda se odvádí do lesa, kde se vsakuje; porosty se prořeďují a vzniká prostor pro samovolně se zmlazující jedli. Brdské lesy se představily v nečekaně dobré formě – i když s kůrovcem v zádech vyhráno není.</p>
+        <p class="src">Zdroj: V. Cílek, Epilog: suchý rok 2026 (rukopis, 2026).</p>
+      </div>
+    </details>
+
+    <div class="callout water">
+      <p><b>Jeden nový pojem, který stojí za zvážení: prediktivní ochranářství.</b> Ochrana přírody se vždy upínala k méně narušené krajině 18.–19. století. Při vědomí rychlosti současných změn by ale měla začít rozvíjet obor, který by se dal nazvat prediktivní ochranářství: uvažování o krajině, kde dřívější hodnotné biotopy už v úplné historické podobě nemohou přežít, a je tedy nutné samovolnou sukcesi směrovat k nějakému kompromisnímu, ale stále ještě cennému stavu.</p>
+      <p style="margin-top:.6em">Zdroj: V. Cílek, Epilog: suchý rok 2026 (rukopis, 2026).</p>
+    </div>
   </section>
 </section>
 
 <!-- =============================== 5 VODA V KRAJINĚ =============================== -->
-<section class="panel" id="p-krajina" data-title="Voda v krajině" data-icon="i-leaf" aria-labelledby="h-krajina">
+<section class="panel" id="p-krajina" data-title="Voda v krajině" data-icon="i-leaf" data-area="kapitoly" aria-labelledby="h-krajina">
   <div class="panel-head">
-    <div><span class="eyebrow">05 · Voda v krajině</span><h2 id="h-krajina">Klima, půda, podzemí, mokřady a řeky</h2>
+    <div><span class="eyebrow">06 · Voda v krajině</span><h2 id="h-krajina">Klima, půda, podzemí, mokřady a řeky</h2>
     <p>Proč je sucho i při „normálních“ srážkách, jak hluboko sahá a v jakém pořadí z krajiny mizí voda – od mokřadů po velké řeky.</p></div>
   </div>
   <div class="subtabs" role="tablist" aria-label="Části kapitoly">
@@ -1086,6 +1216,56 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
       <div class="chart" id="ch-pojisteni"></div>
       <p class="src">Zdroj: E15 / ČTK podle České asociace pojišťoven, 2024.</p>
     </figure>
+
+    <h3 id="neviditelne-sucho">Neviditelné sucho: co vidí družice a co ještě nevidíme my</h3>
+    <div class="prose">
+      <p>Hydrologické vrty měří kolísání hladiny většinou do hloubek 40–120 m. Gravimetrické družice GRACE, vypuštěné v roce 2002 a od té doby dvakrát nahrazené novou generací, „vidí“ pod povrch nejméně 2 km a někdy i hlouběji – měří totiž změny hmotnosti, tedy celkový objem zadržené vody. Máme tak přes dvacet let měření toho, co z vrtů poznat nelze.</p>
+      <p>A právě tam se ukazuje jev, pro který se vžilo označení <b>neviditelné sucho</b>: na povrchu může být všechno zelené, protože trávy a některé stromy se adaptovaly na využívání vlhkosti do 40 cm, ale v hloubce zásoba setrvale ubývá. Od roku 2014 se podle družicových dat rychle a zatím nevratně vysušuje nejméně polovina sledovaných zásobníků podzemních vod. Jde zejména o široký pás od pásma Gazy přes Sýrii, Írán, Irák a Pákistán do severní Indie a Bangladéše. K doplnění by bylo zapotřebí několik abnormálně vlhkých let a pak setrvale zvýšené srážky, které by kompenzovaly vyšší teploty a tím i vyšší odpar.</p>
+      <p><b>Kde je problém v Evropě.</b> Největší potíže má Itálie, zejména jižně od Říma, ale nově i Pádská nížina jako italská obilnice. Sucho zasahuje jižní třetinu až polovinu Francie a Španělska, tureckou Anatolii, částečně Bulharsko, Rumunsko a Panonskou nížinu – <b>na jejímž severním okraji leží jižní Morava</b>. Nově se ukazuje další, méně výrazná suchá oblast ve středním Polsku a mezi Baltským mořem a jižními Čechami. Výsledky družic GRACE se započítávají do evropských ukazatelů sucha i do nástrojů, jako je Evropská observatoř sucha.</p>
+      <p>Intenzivnější čerpání vody na povrch, kde se větším dílem odpaří, přispívá k jevu zvanému <b>kontinentální vysušování</b>: kontinenty systematicky přicházejí o vodu, která pak končí v oceánu a přispívá ke zvyšování hladiny. V jižní Evropě i v Indii se studny a vrty, které bývaly sotva 20–40 m hluboké, prohlubují na víc než 120 m. Energie je dražší, a tak sucho posouvá rolníky do dluhové pasti.</p>
+      <p class="src">Zdroj: V. Cílek, Epilog a kapitoly o klimatických rizicích (rukopis, 2026) – kapitoly vycházejí z institucionálního projektu Geologického ústavu AV ČR, RVO 67985939; data GRACE, Evropská observatoř sucha.</p>
+    </div>
+
+    <h3 id="o-kolik-chybi">Čím tepleji, tím víc vody chybí – i když prší stejně</h3>
+    <div class="prose">
+      <p>Fyzikální jádro celého problému se dá zapsat několika čísly. Podle Clausius-Clapeyronovy rovnice vzroste kapacita vzduchu pohltit vodní páru asi o 7 % na každý stupeň Celsia (ve skutečnosti o něco méně). Když teplota vzduchu v létě dosahuje 3 °C nad dlouhodobým průměrem, odpar se zvyšuje až o přibližně 20 % – pokud je v okolním vysušeném prostředí ještě kde brát.</p>
+      <p>Průměrné srážky v české kotlině se pohybují kolem 550–650 mm. Aby se nahradila voda ztracená odparem, bylo by při oteplení o 1 °C potřeba srážky vyšší alespoň o 80–100 mm. Kdyby se roční teplota zvýšila o 3 °C, musely by celkové srážky vzrůst alespoň o 180 mm – <b>což je mimo realitu</b>.</p>
+      <p>A teď, co z toho plyne pro nás. Současné oteplení je na globální úrovni asi 1,5 °C, ale nad oceánem, který pokrývá většinu Země, jen asi 0,8–1,0 °C, protože voda je dobrý výměník tepla. Ve vnitrozemí je vyšší – a to se přesně týká našeho území. <b>Ve středních Čechách se od roku 1961 teplota zvýšila asi o 2,1 °C, takže zde setrvale schází něco mezi 100 a 140 mm ročních srážek.</b> Ve skutečnosti spíš dvojnásobek, protože část srážek se odehraje jako silné deště, které odtečou. A krajina navíc přišla o část své retenční schopnosti, především následkem špatného stavu půd.</p>
+      <p>To je důvod, proč je nutné počítat s <b>chronickým suchem na další desetiletí</b>, i přes některé vlhké roky. Projeví se takto:</p>
+      <ul>
+        <li>Některé potoky budou často vysychat a zmenší se průtok vody řekami.</li>
+        <li>Nejběžnější příčinou oslabení lesa je sucho – kůrovec a vítr vyvracející oslabené stromy přicházejí teprve potom.</li>
+        <li>Zásobníky podzemních vod budou zaklesávat běžně o 20–40 m.</li>
+        <li>Obilí je citlivé na jarní vlhkost, ale umí si poradit i se suchými týdny. Hlad nehrozí, ale snížení sklizně ano.</li>
+        <li>Dobytek bude mít méně píce, ta bude dražší a ceny domácího masa porostou.</li>
+        <li>Z hlediska sídel se velkým problémem stává zásobování pitnou vodou, zejména u lokálních vodovodů vázaných na málo vydatné puklinové prameny – ale další zdroje vody nemají ani obce napojené na prameny v Mělnické Vrutici a na dalších místech.</li>
+      </ul>
+      <p class="src">Zdroj: V. Cílek, Epilog: suchý rok 2026 (rukopis, 2026).</p>
+    </div>
+
+    <details class="more wide"><summary>Rekordy roku 2026 a jeden zvláštní jev, kvůli kterému „meteorologové lhali“<span>3 odstavce</span></summary>
+      <div class="prose">
+        <p><b>Zima bez sněhu.</b> Zima 2025/26 byla teplotně celkem průměrná, ale nebyl sníh, takže spadly asi dvě třetiny běžných srážek a patřila mezi nejsušší za 50 let; už prosinec 2025 měl zhruba třetinu běžných srážek. Koncem února se najednou zvýšila teplota, takže v Českých Budějovicích bylo skoro 21 °C. Dne 23. března přišel o týdny dřív oproti běžnému chodu první tropický den. Pak ale nastal květen: teploty běžně dosahovaly kolem 25 °C, ale od konce dubna se na některých územích odehrávaly mrazivé noci, které asi z 50 % – a někde zcela – poškodily úrodu jablek, meruněk a dalšího ovoce. Jde o typický efekt <b>falešných jar</b>, kdy po suché, spíš teplé zimě teploty rychle vzrostou až na letní úroveň a pak přijdou mrazy. Domy byly vychladlé od zimy, a tak se na venkově běžně topilo až do konce května.</p>
+        <p><b>Virga.</b> Lidé už počátkem léta začali mít dojem, že se meteorologové často pletou. Nejvíc za to mohla u nás málo známá situace zvaná virga: odpoledne to vypadá na déšť, mraky houstnou a tmavnou, začíná být dusno – ale místo bouřky se mraky rozpustí a ze srážkového příslibu nezbude nic. Od země totiž stoupá horký, velmi suchý vzduch, který je schopen ještě ve vzduchu „zastavit“ mrholení a rozpustit kapičky v mracích zpět na páru. Bylo to k uzoufání, protože třeba pětkrát za sebou nezapršelo. Dny byly dlouhé a kvůli kumulaci tepla se nejvyšší teploty někdy dostavily až kolem šesté hodiny odpolední.</p>
+        <p><b>Kroupy a supercely.</b> Červnové počasí spíš připomínalo půlku července: v Čechách nad 30 °C, na Moravě o několik stupňů výš, a do toho obávané supercely s vysokými lokálními srážkami a kroupami. Kroupy jsou schopné poškodit desetitisíce automobilů, a mohou tak způsobit větší pojistné škody než povodně. Krupobití v lužním lese Úpor na soutoku Vltavy a Labe trvalo 14 minut; po něm se les projasnil, menší stromky byly oholené a mnoho starších stromků včetně borovic bylo nutné vykácet, protože kroupy poškodily kůru a zlámaly větve. Vítr ohýbal koruny jasanů až k zemi, až se stromy hroutily. Kroupy zabily několik kusů srnčí zvěře – dokázaly by tedy zabít i člověka. Rekord 41,9 °C z Doksan (červen 2026) je přitom zvlášť varovný tím, že předchozí rekord 40,4 °C z Dobřichovic nebyl překročen o desetiny stupně, jak je obvyklé, ale o celý 1,5 °C.</p>
+        <p class="src">Zdroj: V. Cílek, Epilog: suchý rok 2026 (rukopis, 2026); ČHMÚ, ČTK.</p>
+      </div>
+    </details>
+
+    <details class="more wide"><summary>Co může oteplování zvrátit: atlantský výměník a „chladná skvrna“<span>2 odstavce</span></summary>
+      <div class="prose">
+        <p>Nové počasí nemusí nutně všude znamenat další oteplování. Tavné vody arktických ledovců mohou omezit oceánské proudění, a to naopak může vést k ochlazování severní a střední Evropy – podle klimatických modelů případně po roce 2030. Atlantský výměník (AMOC) přenáší obrovské množství energie: Golfský proud je oceánská „řeka“ široká asi 100 km a hluboká 1 km, která u Newfoundlandu přenáší každou sekundu asi 150 milionů m³ vody, tedy asi milionkrát víc než Vltava v Praze. Několik respektovaných prací dokládá, že chod výměníku poklesl od roku 1950 asi o 20 %, jiné výzkumy měřitelné změny nenalezly; rozumný konsensus zní, že se s ním něco děje a že o přímá měření se opřít nelze – teploty oceánu v různých hloubkách se začaly měřit až v roce 1751.</p>
+        <p>Je přitom rozdíl mezi oslabením výměníku a jeho zhroucením. Realisticky lze očekávat, že grónské ledovce budou dál ubývat a tavné vody s malým obsahem solí zablokují cesty teplých proudů dál na sever. Řada modelů proto jižně od Grónska vykresluje chladnou skvrnu („cold blob“). Na první pohled dobrá zpráva – jenže chladná skvrna by měla způsobit teplejší počasí zejména od ledna do května v jižní Evropě, a <b>středoevropská oblast včetně Česka by se ocitla v „mlýnici“ mnohem teplejšího jihu a poněkud chladnějšího severu</b>. To by vedlo k silným, zejména zimním vichřicím: teplé a studené počasí by si nad námi s velkou razancí hrálo na přetahovanou. Ostatně právě to se stalo na jaře roku 2026, kdy lidé topili ještě v květnu, aby o měsíc později přišla zatím největší u nás zaznamenaná vlna veder.</p>
+        <p class="src">Zdroj: V. Cílek, kapitola o oceánském proudění (rukopis, 2026); IPCC AR6.</p>
+      </div>
+    </details>
+
+    <details class="more wide"><summary>Proč se o sucho začínají zajímat banky a pojišťovny<span>1 odstavec</span></summary>
+      <div class="prose">
+        <p>Výsledky družicových měření se promítají do finanční praxe. Banky a pojišťovny u velkých investic hodnotí klimatické riziko – jak sucho, tak poškození domů postavených na jílovitém podloží. (Drobné praskliny ve zdivu způsobené objemovými změnami podloží při střídavém suchu jsou zaznamenány na mnoha místech, například v Sopřeči na Přeloučsku.) Pokud satelity potvrdí, že v daném regionu dochází k nevratnému vyčerpávání podzemních zásobáren vody, tržní hodnota pozemků klesá, protože bez vody je jejich výnosnost omezená; banky tam vyžadují vyšší podíl vlastních financí a nabízejí méně výhodné úvěry. Pokud pojišťovna vyhodnotí oblast jako nepojistitelnou, banka na nemovitost nepůjčí, protože nemá kryté riziko – a to vede k prudkému propadu cen v dané lokalitě. Na našem území se v této oblasti zatím skoro nic neděje, ale situace se může rychle změnit. Pro srovnání: evropské pojišťovny dnes kryjí jen asi třetinu povodňových škod. Výhodu bude mít ten, kdo se naučí pracovat se zadržováním vody – v Izraeli fungují olivovníkové háje v Negevu s méně než 350 mm ročních srážek, přičemž až 90 % půdy leží ladem a slouží jen ke sběru vody pro produktivních 10 % pozemků.</p>
+        <p class="src">Zdroj: V. Cílek, kapitoly o klimatických rizicích (rukopis, 2026).</p>
+      </div>
+    </details>
   </section>
   </div>
 
@@ -1131,6 +1311,34 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
       <div class="chart" id="ch-podzemni"></div>
       <p class="src">Zdroj: Ústav územního rozvoje – Vodní režim (aktualizace 2025) <a href="#z-uur">[x]</a>.</p>
     </figure>
+
+    <h3 id="puda-banka">Půda jako banka na vodu: kolik jsme už ztratili</h3>
+    <div class="prose">
+      <p>O podzemní vodě se mluví jako o zásobě, kterou buď máme, nebo nemáme. Jde ale hlavně o to, kolik vody se do ní vůbec dostane – a to rozhoduje půda. Na půdu se lze dívat jako na banku, do které v dobách hojnosti ukládáme vodu, abychom ji využili, až nebude pršet: pokud je půda erodovaná, není kam ukládat; pokud je znehodnocená, je zisk malý.</p>
+      <p><b>Kolik vody půda unese.</b> Při optimálním stavu zadrží půda až 360 litrů na m³. Většina našich půd má kapacitu nižší, asi 120–240 l/m³; tenké a kamenité lesní půdy jen 40–80 l/m³. Lesní půda má jinou roli: vodu moc nezachytí, zato ji „pošle“ dál do hlubších zásobníků – pokud je její povrch pokrytý kyprou hrabankou, která podobně jako rašelina rychle saje vodu a pak ji pozvolna propouští do hlubších horizontů.</p>
+      <p><b>A teď čísla, která staví celou debatu o přehradách do perspektivy.</b> Zdravá půda o mocnosti 1 m na ploše 1 km² dokáže zadržet v průměru 200 000 m³ vody. Potenciální celková retence našich zemědělských a lesních půd je asi <b>8,4 mld. m³</b>. Protože máme velké části krajiny a především jejich půdního pokryvu nemocné, je momentální potenciál nižší o více než 3,3 mld. m³ – jsme tedy asi na <b>5,04 mld. m³</b>. Pro srovnání: první nová plánovaná přehrada má mít objem v řádu asi 15 mil. m³. Přirozená retenční schopnost půd vysoko předčí kapacity všech vybudovaných i plánovaných nádrží.</p>
+      <p>Z toho ale neplyne, že nádrže nepotřebujeme. Pracujeme se dvěma různými věcmi: nádrže jsou body a řeky linie, a potřebujeme je kvůli dostatku pitné a užitkové vody; <b>zelenou vodu</b> využitelnou pro rostliny je naopak potřeba zachytit na každém hektaru, tedy na ploše celé krajiny. Skandinávští ekologové zavedli užitečné dělení na tři barvy vody: modrá je v řekách a nádržích, zelená v půdě a šedá ve městě. Zhruba 60 % vody se zachytává v půdě – proto by mělo nejméně 60 % všech snah a financí mířit tímto směrem.</p>
+      <p>Když expertní komise nedávno navrhovaly asi 400 opatření, jak zlepšit vodní hospodářství, a dostaly otázku, který jediný faktor je nejdůležitější, odpověď zněla: <b>zlepšit stav půdy</b>.</p>
+      <p class="src">Zdroj: V. Cílek, kapitoly o vodě a půdě (rukopis, 2026); mapy retenční a využitelné vodní kapacity půd ČR (2018).</p>
+    </div>
+
+    <details class="more wide"><summary>Půdní past: dvě zhutnění, která vypadají stejně a léčí se jinak<span>3 odstavce</span></summary>
+      <div class="prose">
+        <p>Aby se voda mohla gravitačně pohybovat dolů a doplnit zásobníky podzemních vod, potřebuje vlhkou, pokud možno drobtovitou půdu, která saje vodu do velkých pórů. V krychlovém metru půdy je přitom vzduchu někde mezi třetinou a polovinou objemu, zatímco vody jen průměrně 150–300 litrů. Roční srážky se na většině našeho území pohybují kolem 650 litrů na m² – kdyby se podařilo zvýšit schopnost půdy ukládat vodu, mohlo by celý den pršet a hladina řek by se ani nezachvěla. Staří vodohospodáři si pamatují dobu, kdy se hladiny řek začaly zvedat teprve po třídenním dešti.</p>
+        <p>Dnes je jedním z největších problémů tzv. <b>půdní past</b>, a je potřeba rozlišovat dva typy zhutnění. První je <b>mechanické</b> zhutnění a zatmelení na povrchu podorničí, způsobené pojezdem těžké techniky. Opětovné načechrání se děje buď přirozeně za velkých mrazů, nebo různými způsoby hluboké orby; výsledný stav se udržuje technikou jezdící ve vlastní stopě pomocí GPS, případně traktory s širokými pneumatikami, a pomáhají i hluboce kořenící plodiny.</p>
+        <p>Druhý typ je <b>biochemicky podmíněné</b> zhutnění, při kterém průmyslová hnojiva a pesticidy způsobují rozvrat půdního života a rozpad půdních agregátů. Částečky půdy pak hůř drží při sobě, rozplavují se a do degradované hmoty se vplavují nejjemnější částice a zejména jílové minerály. Proces lze přirovnat k výrobě betonu: základ tvořený štěrkem zalijeme kašovitou hmotou. Na povrchu podorničí pak někdy krystalizují karbonáty, které rovněž brání průsaku srážkových vod – jako bychom beton ještě natřeli penetračním nátěrem. Protože část dusičnanů padá ve formě srážek, může se méně intenzivní, „děravá“ půdní past vyvinout i na lesních pozemcích; i tam půdní monitoring zaznamenává zmenšování počtu větších pórů a horší propustnost. A protože stabilní půdní agregáty udržují v mikrobiálních slizech zbytkovou vodu dostupnou rostlinám přes spolupracující vláknité houby, jejich rozpad je nejen hydrologický, ale i biologický problém.</p>
+        <p class="src">Zdroj: V. Cílek, kapitoly o vodě a půdě (rukopis, 2026).</p>
+      </div>
+    </details>
+
+    <details class="more wide"><summary>Proč se v některých oblastech podzemní voda nedoplní ani za několik průměrných měsíců<span>2 odstavce</span></summary>
+      <div class="prose">
+        <p>Během sucha roku 2015 a pak ještě mnohokrát se stalo, že zapršelo, ale za pár dní bylo zase sucho a voda ve studnách se nedoplnila ani po několika srážkově průměrných měsících. V některých oblastech středních a severních Čech ukázala hydrologická měření, že k doplnění podzemních vod dojde až za 2–3 roky. Dešťová voda často proniká jen nehluboko pod povrch, pak následuje dlouhodobě nenasycená oblast a teprve mnohem hlouběji leží polohy s podzemní vodou – cesta vody do podzemí tak bývá někde v půli přerušená.</p>
+        <p>Jednou ze základních dovedností zemědělce je „sklidit či uložit“ co největší množství spadlé vody do podzemního zásobníku. Pokud se tak nestane, voda stéká po povrchu a eroduje – ale děje se ještě další škoda: voda, která je sice v půdě, ale blíž povrchu, je v létě vystavena mnohem vyšším teplotám a lépe se odpařuje. Na povrchu českých půd běžně v létě naměříte kolem 50 °C; teploty sice do hloubky rychle klesají, ale přesto se horních 10–20 cm půdy přehřívá a rychle ztrácí vodu. Je to jev, který dobře známe: spadne poměrně velký déšť, ale druhý nebo třetí den jdete na pole či do lesa a z půdy se práší, jako by ani nepršelo.</p>
+        <p>K tomu se přidávají <b>výsušné praskliny</b>, které u nás běžně dosahují hloubky 30–40 cm. Zvětšuje se tím odparná plocha, někdy vzniká „komínový efekt“, který vynáší vlhký a tedy lehčí vzduch rychleji na povrch, a narušuje se tmelící povrchová vrstva, která hlubší půdní partie částečně izoluje. Pomáhají stínící meziplodiny nebo rostliny s hlubokými kořeny, například vojtěška, které půdu „svazují“ dohromady a do určité míry brání jejímu trhání. A ještě jedna drobnost, která ukazuje, jak málo rezerv krajina má: role rosy by měla aspoň trochu chladit dopolední teploty, ale v roce 2026 byla půda většinou tak proschlá, že se rosa vůbec nevyskytovala. Měření na nepromokavé plachtě dalo při nočních 10 °C a denních 25 °C méně než 0,1 litru na m², což odpovídá 1 mm srážek za deset dní; v ČR se celkový podíl rosy udává kolem 10–30 mm za rok.</p>
+        <p class="src">Zdroj: V. Cílek, Epilog: suchý rok 2026 a kapitoly o půdě (rukopis, 2026).</p>
+      </div>
+    </details>
   </section>
   </div>
 
@@ -1175,14 +1383,31 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
     <details class="more"><summary>Drobné a střední toky – týdny až měsíce<span>2 odstavce</span></summary><div class="prose">      <p>Kde zanikly mokřady, byla napřímena koryta a klesla mělká podzemní voda, mění se dřív trvalé potoky ve <strong>vysychavé toky</strong>; tam, kde před desítkami let tekly potůčky, zůstávají suché zarostlé rýhy.<sup class="ref"><a href="#z-is-monografie">[x]</a></sup> Výzkumem vysychavých toků se zabývá projekt VÚV TGM EKOSVYST.<sup class="ref"><a href="#z-vuv-heis">[x]</a></sup> V tocích, které nevyschly, tvoří v létě a na podzim podstatnou část průtoku vyčištěná voda z čistíren odpadních vod. Bez ředění a při vysoké teplotě vody klesá obsah kyslíku a hromadí se znečištění, což ohrožuje i chráněné druhy, například raky.<sup class="ref"><a href="#z-vuv-media">[x]</a></sup></p>
       <p>V létě 2026 dosáhly průtoky na čtvrtině toků minim, která nemají za zhruba 60 let měření obdobu. Na mnoha profilech Povodí Vltavy byla zaznamenána historická minima pro dané období.<sup class="ref"><a href="#z-nase-voda-314">[14]</a></sup> Počet profilů se stavem sucha (z asi 500 sledovaných) během září kolísal mezi 200 a 300.<sup class="ref"><a href="#z-chmu-zari">[19]</a></sup> V červenci se průtoky pohybovaly jen na 5–60 % dlouhodobých červencových průměrů a hydrologické sucho (průtok pod Q<sub>355d</sub>) bylo indikováno asi na 40 % profilů; v září byly průtoky převážně na 15–55 % zářijových průměrů.<sup class="ref"><a href="#z-hamr30">[x]</a></sup><sup class="ref"><a href="#z-chmu-zari">[19]</a></sup></p></div></details>
     <details class="more"><summary>Velké řeky – drží je přehrady<span>1 odstavec</span></summary><div class="prose">      <p>Vltava v Praze tekla v létě jen díky vypouštění z kaskády; bez Orlíku a Slap by průtok klesl na přirozených 10–15 m³/s. Protože nadlepšená Vltava drží i Labe pod Mělníkem, každé omezení odtoku z kaskády se projeví až po Děčín, kde se při nízkých stavech odhalují hladové kameny.<sup class="ref"><a href="#z-seznam-kaskada">[x]</a></sup> V září převzala tuto roli poprvé v historii nádrž Slapy a odtok z Vraného byl snížen z minimálních 40 m³/s nejprve na 35 a pak zhruba na 20 m³/s, tedy asi na polovinu letního průtoku.<sup class="ref"><a href="#z-rybolov">[17]</a></sup> Jak křehká je tato pojistka, ukázal Dunaj: u Bratislavy dosáhl 8. 10. 2026 nejnižšího průtoku od roku 1900.<sup class="ref"><a href="#z-dunaj">[18]</a></sup></p></div></details>
+
+    <h3 id="rybniky-2026">Rybníky, sádky a vyschlé potoky v roce 2026</h3>
+    <div class="prose">
+      <p>Už koncem jara 2026 vyschly některé toky – například Klejnárka na Kolínsku. Život se stahoval do tůněk a ve vzduchu byla cítit rybina z uhynulých zvířat. Postupně vyschlo velké množství zejména malých toků a voda se ztratila i z pramenů, kde nikdo sucho nepamatoval.</p>
+      <p><b>Rybníky reagovaly podle své polohy a způsobu napájení.</b> „Nebesáky“ sycené jen deštěm často ztratily i víc než 60 % vody. Na mnoha velkých rybnících voda klesla o 1–1,5 m, běžnější byl ale úbytek asi 60 cm. Na Třeboňsku dosáhly ztráty vody v rybnících skoro 40 % dřívějšího objemu. Rybáři museli přehodnotit výlovy a místy volili, snad poprvé v životě, výlov z loděk při plné hladině; voda scházela i v sádkách, takže se některé výlovy plánovaly až těsně před Vánocemi.</p>
+      <p><b>Ryby reagovaly podobně jako domácí zvířata.</b> Za horka přestávají žrát a šetří pohybem, protože ve vodě schází kyslík; nepřirůstají a jsou náchylnější k nemocem. Produkční ztráty u kaprů se odhadovaly asi na 20 %, u chladnomilných ryb na desítky procent. Někdy se osvědčuje vyhloubit ve dně rybníka hlubší jámu, tůni či zimoviště, kde je voda studenější – hrozí tam však riziko anoxické pasti, takže tůň by měla být tam, kde voda cirkuluje (na přítoku či odtoku), a mít pozvolný sklon, aby se v ní voda vyměňovala.</p>
+      <p><b>Co v debatě chybělo.</b> U rybničních soustav docházelo ke složitému přepouštění vody stokami, ale málo se mluvilo o tom, že rybníky jsou přeplněné sedimenty a že jednou z účinných cest je odbahnění, které zvětší objem nádrže. Je to drahá cesta – odbahnění táborského Jordánu v letech 2011–2014 stálo kolem 400 milionů korun –, byť například v Polsku se začíná používat bakteriální likvidace organické hmoty v bahnu, kterou lze objem jemných sedimentů snížit až na polovinu. Podobně zástupci velkých zemědělských podniků raději hovořili o stavbě nových nádrží než o dlouhodobém zlepšování stavu půd, na kterých hospodaří a jež pak zachytí víc srážkové vody.</p>
+      <p class="src">Zdroj: V. Cílek, Epilog: suchý rok 2026 (rukopis, 2026). Odbahnění Labské přehrady v roce 2026 (36 600 m³ sedimentů) je příkladem, že se tato cesta u nás používá – viz kapitola <a href="#hradec">Hradec Králové a kraj</a>.</p>
+    </div>
+
+    <details class="more wide"><summary>Dva typy povodní – a proč těch druhých přibývá<span>2 odstavce</span></summary>
+      <div class="prose">
+        <p>Po povodních roku 2010 na Liberecku bylo překvapivé, že voda přišla z hor a zaplavovala domy z kopců nad sídly. Od té doby se rozlišují (1) povodně přicházející z údolí, kdy voda obvykle velkých řek vcelku poklidně stoupá a zaplavuje říční nivu, a (2) bouřlivě se projevující a rychle nastupující povodně z lokálních či regionálních přívalových srážek, které často vznikají na malých tocích a úpatích kopcovité krajiny. Evropští meteorologové je rozdělují na <b>fluviální</b> (říční) a <b>pluviální</b> (dešťové) – a těch druhých přibývá, dnes už tvoří asi polovinu všech povodňových událostí. Povodně tak začínají stále víc ohrožovat sídla u malých toků daleko od velkých řek.</p>
+        <p>Počátkem července 2026 spadlo během velkých bouřek v povodí Bečvy asi 100 mm srážek (místy pravděpodobně více, ale nebyla tam měřicí stanice). Povodňová vlna se pak valila řekou rychlostí asi 8 km/h a rychlost, s jakou se z běžného toku stal povodňový, byla neuvěřitelná – probíhalo to v rámci minut. Platí tedy staré přísloví: <b>za sucha mysli na povodeň</b>. Při pohledu na počasí ve střední Evropě z hlediska dvou- až tříletého průměru totiž dostáváme podobné, průměrné hodnoty: po chladném či suchém období může přijít kompenzační sezona, ale nedá se odhadnout kdy – často to bývá až v příštím roce.</p>
+        <p class="src">Zdroj: V. Cílek, kapitoly o vodě (rukopis, 2026); ČHMÚ.</p>
+      </div>
+    </details>
   </section>
   </div>
 </section>
 
 <!-- =============================== 6 NÁDRŽE A SIMULACE =============================== -->
-<section class="panel" id="p-nadrze" data-title="Nádrže a simulace" data-icon="i-dam" aria-labelledby="h-nadrze">
+<section class="panel" id="p-nadrze" data-title="Nádrže a simulace" data-icon="i-dam" data-area="kapitoly" aria-labelledby="h-nadrze">
   <div class="panel-head">
-    <div><span class="eyebrow">06 · Nádrže a simulace</span><h2 id="h-nadrze">Tempo ubývání vody v přehradách a co bude dál</h2>
+    <div><span class="eyebrow">07 · Nádrže a simulace</span><h2 id="h-nadrze">Tempo ubývání vody v přehradách a co bude dál</h2>
     <p>Aktuální stav nádrží a dvě interaktivní simulace: nejbližší zima pro Vltavskou kaskádu a dlouhodobé scénáře do roku 2075.</p></div>
   </div>
   <div class="subtabs" role="tablist" aria-label="Části kapitoly">
@@ -1353,14 +1578,15 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
 </section>
 
 <!-- =============================== 7 ENERGETIKA A EKONOMIKA =============================== -->
-<section class="panel" id="p-energie" data-title="Energetika a ekonomika" data-icon="i-bolt" aria-labelledby="h-energie">
+<section class="panel" id="p-energie" data-title="Energetika a ekonomika" data-icon="i-bolt" data-area="kapitoly" aria-labelledby="h-energie">
   <div class="panel-head">
-    <div><span class="eyebrow">07 · Energetika a ekonomika</span><h2 id="h-energie">Chlazení elektráren, zemědělství, lesy a život ve městech</h2>
+    <div><span class="eyebrow">08 · Energetika, ekonomika a zdraví</span><h2 id="h-energie">Chlazení elektráren, zemědělství, lesy a život ve městech</h2>
     <p>Co sucho stojí, kde hrozí výpadky a proč jaderné elektrárny zatím nejsou v ohrožení.</p></div>
   </div>
   <div class="subtabs" role="tablist" aria-label="Části kapitoly">
     <button class="subtab" role="tab" data-sub="sp-energetika" aria-selected="true">Energetika a chlazení</button>
     <button class="subtab" role="tab" data-sub="sp-ekonomika" aria-selected="false">Ekonomika a kvalita života</button>
+    <button class="subtab" role="tab" data-sub="sp-zdravi" aria-selected="false">Zdraví a vlny veder</button>
   </div>
 
   <div class="subpanel on" id="sp-energetika" role="tabpanel">
@@ -1425,12 +1651,54 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
     </div>
   </section>
   </div>
+
+  <div class="subpanel" id="sp-zdravi" role="tabpanel">
+  <section class="chap" id="zdravi">
+    <ul class="points">
+      <li class="c"><span class="pi"><svg><use href="#i-warn"/></svg></span><span><b>701 nadměrných úmrtí v českých městech</b>Léto 2026; asi 425 z nich (62 %) je připsáno oteplování způsobenému člověkem.</span></li>
+      <li class="c"><span class="pi"><svg><use href="#i-thermo"/></svg></span><span><b>+573 lidí během dvou vln veder</b>Červen a červenec 2026 v Česku podle CzechGlobe. Zvýšená úmrtnost pak pokračuje měsíce.</span></li>
+      <li class="w"><span class="pi"><svg><use href="#i-city"/></svg></span><span><b>Město je o 8 °C teplejší</b>Při teplotách nad 30 °C. Meteorologické stanice přitom stojí mimo zastavěné plochy.</span></li>
+      <li class="w"><span class="pi"><svg><use href="#i-shield"/></svg></span><span><b>Plán pro vlny veder má jedno město</b>Z krajských měst jen Praha.</span></li>
+    </ul>
+
+    <details class="more wide" open><summary>Nadúmrtí při vlnách veder: co o roce 2026 víme<span>5 odstavců</span></summary>
+      <div class="prose">
+        <p><b>Jak se to měří.</b> Nadbytečná úmrtí se měří podle schválené metodiky: srovnává se stav vázaný na určité datum s dlouhodobým průměrem. Jde o situaci známou z covidu, kdy virus či jiný stresor urychlí příchod nemoci či smrti. Pro rok 2003 se uvádí, že při vlně veder zemřelo zejména v Itálii a Francii navíc asi 70 tisíc lidí, horké léto roku 2022 si vyžádalo asi 60 tisíc obětí.</p>
+        <p><b>Rok 2026 je rekordní.</b> Podle dvou recenzovaných studií v časopise Nature Health (Imperial College London a London School of Hygiene &amp; Tropical Medicine) si vlny veder v létě 2026 vyžádaly v 854 evropských městech ve 30 zemích přibližně <b>50 391 nadměrných úmrtí</b> – nejvíc v historii měření a téměř dvojnásobek let 2003 a 2022. Asi dvě třetiny z toho (32 619) studie připisuje oteplování způsobenému člověkem; na začátku století to bylo asi 40 %, v roce 2026 už kolem dvou třetin. Průměrná sezonní teplota ve sledovaných městech byla asi o 2,4 °C vyšší než v období 1991–2020, v některých dnech až o 12 °C.<sup class="ref"><a href="#z-nature-heat">[x]</a></sup></p>
+        <p><b>Česko.</b> Ve sledovaných českých městech vyčíslili vědci <b>701 nadměrných úmrtí</b> spojených s horkem, z toho asi 425 (62 %) spojili přímo s oteplováním způsobeným člověkem.<sup class="ref"><a href="#z-irozhlas-heat">[x]</a></sup> Ústav výzkumu globální změny (CzechGlobe) uvádí, že během červnové a červencové vlny veder zemřelo v Česku o <b>573 lidí víc</b> než obvykle.<sup class="ref"><a href="#z-czechglobe-nadumrti">[x]</a></sup> Václav Cílek ve svém shrnutí roku 2026 uvádí, že během dvou teplých týdnů na přelomu června a července umřelo asi o 500 lidí víc – nezávislý odhad ze stejného období, který s oficiálními daty dobře souhlasí. Podle dlouhodobých statistických řad přitom <b>zvýšená úmrtnost pokračuje několik dalších měsíců až půl roku</b> po odeznění vln veder.</p>
+        <p><b>Srovnání se zahraničím.</b> Podle systému EuroMOMO zemřelo mezi 22. a 28. červnem 2026 ve 27 zemích více než 10 650 lidí nad obvyklý průměr a více než 9 000 z nich byli lidé starší 65 let. V Německu, které má vyšší věkový průměr a hodně lidí v rozpálených městech, dosáhl podle Institutu Roberta Kocha počet nadměrných úmrtí spojených s horkem za sezonu asi 11 900; během jediného týdne na konci června, kdy teploty překročily 40 °C, zemřelo asi 9 600 lidí. To odpovídá běžné smrtnosti během vln veder 120–170 lidí na milion obyvatel.</p>
+        <p><b>Co se dělo v nemocnicích.</b> Připravenost zdravotnictví na vlny veder je u nás téma, o kterém se mluví málo. Z jedné velké české okresní nemocnice je popsána situace, kdy pacientů bylo tolik, že leželi na pojízdných lůžkách na chodbě a někteří naříkali, protože je přetížený personál nestačil ošetřovat. Ekonomický rozměr není zanedbatelný: podle odhadů mohou vedra stát Česko miliardy a škody odpovídají menší až střední povodni.</p>
+        <p class="src">Zdroje: Barnes et al., Nature Health, 2026 (Imperial College London, LSHTM) · iROZHLAS, 23. 10. 2026 · CzechGlobe · EuroMOMO / ECDC · Institut Roberta Kocha · V. Cílek, Epilog: suchý rok 2026 (rukopis, 2026).</p>
+      </div>
+    </details>
+
+    <h3>Proč sucho a vedro jde ruku v ruce</h3>
+    <div class="prose">
+      <p>Oteplování daného místa se dá zapsat jednoduchou rovnicí: <b>teplota místa = teplota regionu − chlazení</b>. Chlazení je nejúčinnější, když je dost vody na výparné ochlazování, tedy když je půda vlhká a stromy mají dostatek vláhy. Suchá půda se zahřeje snadno: při měření v poledne na předměstí Prahy měl zastíněný trávník 24 °C, ale betonový chodník o několik metrů dál 45 °C. Vypasená země může dosáhnout až 52 °C, tmavé střechy nad 70 °C. Vyschlá krajina se tedy rychleji přehřívá – a přehřátá krajina rychleji vysušuje. To je smyčka, ve které se obě krize navzájem posilují.</p>
+      <p><b>Město jako past.</b> Meteorologické stanice stojí mimo zastavěné plochy, aby měřily přirozený chod počasí. Jenže těch asi 60 % lidí, kteří žijí v městských aglomeracích, je vystaveno „nepřirozenému“ chodu počasí způsobenému kumulací tepla v budovách a silnicích: ve městě bývá při teplotách nad 30 °C až o 8 °C víc. V jihomoravském Mikulově nebyly výjimkou sklepy, kde teplota vystoupala na 21 °C. Pařížský městský plán už před několika lety počítal s teplotami 50 °C, přestože tehdy byla největší naměřená teplota ve střední Francii 42,6 °C. Rozdíly jsou přitom měřitelné na metrech: tmavé části přechodu pro chodce jsou o 2–3 °C teplejší než ty světlé, vyšší tráva má povrch až o 10 °C chladnější než holá zem a strom s dostatkem vody ochlazuje okolí o 6–12 °C.</p>
+      <p><b>Rok 2026 v číslech.</b> Léto 2026 bylo druhé nejteplejší od roku 1961 (19,4 °C, +1,8 °C proti normálu 1991–2020) s rekordním počtem tropických nocí. Tropických dní bylo v Čechách na většině míst kolem 25, ale na jižní Moravě až 50. Rekord 41,9 °C z Doksan padl 28. června, v Plzni-Bolevci naměřili 41,5 °C (4. 8.) a na dvanácti stanicích přes 40 °C; ve Strážnici byl moravský rekord překonán třetí den po sobě.</p>
+      <p><b>Kam to povede.</b> Podle ansámblu klimatických modelů CMIP6 pro Česko (ČHMÚ a CzechGlobe) vzroste počet tropických dní z průměru asi 7 za rok (1981–2010) na medián 22 dní kolem roku 2045 a 30 dní kolem roku 2075, s horní hranicí přes 50 dní. Tropických nocí má být z 0,1 za rok 1,8 (2045) a 5,6 (2075) – a to jsou celostátní mediány, takže ve velkých městech budou čísla výrazně vyšší. Ve <a href="#p-simulator">mapovém simulátoru</a> si můžete nechat spočítat odhad pro vlastní obec.<sup class="ref"><a href="#z-mzp-hodnoceni">[x]</a></sup></p>
+    </div>
+
+    <h3>Zvířata to mají horší než my</h3>
+    <div class="prose">
+      <p>Člověk mohl osídlit skoro celou planetu i proto, že má dobrý systém chlazení: na metr povrchu kůže uchladí víc než kůň a méně než velbloud. Při odpaření jednoho litru potu je z těla odvedeno asi 2,4 MJ energie. Pokud je tedy horko nám, dobytek je na tom mnohem hůř – a je nutné mu pomoct, třeba jen mlžítky.</p>
+      <p><b>Komfortní zóna pro dojnice končí už při teplotách nad 20 °C.</b> Krávy pak omezují příjem potravy a tím produkci mléka. Rovněž prasata a drůbež jsou na teplotu velice citlivé, takže ve velkochovech může dojít k hromadnému úhynu. Světlá krytina na kravínu může o trochu zlepšit welfare a ušetřit náklady na klimatizaci. Tím ale stres pro zvířata nekončí: vyrostlo méně kvalitní píce, kterou zvířata potřebují před chladnými měsíci podzimu a zimy.</p>
+      <p>Kůň chladí nejenom hůř než člověk, ale jeho pot je slanější, takže mu dříve hrozí minerální nerovnováha. Závěr je jednoznačný: <b>za horka potřebují domácí zvířata větší péči než člověk.</b></p>
+      <p class="src">Zdroj: V. Cílek, Epilog: suchý rok 2026 (rukopis, 2026).</p>
+    </div>
+
+    <div class="callout">
+      <p><b>Psychické dopady.</b> Environmentální stres, solastalgie (tíseň ze ztráty známé krajiny) a úzkost z nejistoty zdrojů nejsou módní pojmy – jsou to popisy toho, co lidé v krajině zažívají. Farmářka pod Kašperkem popsala, jak se místo, kde šlo utopit traktor, změnilo za pět let na běžnou louku a dnes je vyprahlé. Sedláci na dotaz po roce 2026 odpovídali věcmi jako „tohle sucho byla nejhorší situace mého života“ nebo „dívám se kolem a jsem vyděšený“. Zároveň platí, že strach z neviditelného bývá horší než samotné riziko a že spolehlivé informace strach zmenšují. Na úzkost z budoucnosti funguje nejlépe činnost: péče o zeleň, zapojení do komunity, praktická příprava – viz kapitola <a href="#p-pripravenost">Připravenost</a>. Pokud vás úzkost nebo smutek dlouhodobě ochromují, obraťte se na odborníka nebo na linku pomoci.</p>
+    </div>
+  </section>
+  </div>
 </section>
 
 <!-- =============================== 8 OPATŘENÍ =============================== -->
-<section class="panel" id="p-opatreni" data-title="Opatření" data-icon="i-tool" aria-labelledby="h-opatreni">
+<section class="panel" id="p-opatreni" data-title="Opatření" data-icon="i-tool" data-area="resit" aria-labelledby="h-opatreni">
   <div class="panel-head">
-    <div><span class="eyebrow">08 · Co se už děje</span><h2 id="h-opatreni">Opatření, která v Česku vznikají v reakci na sucho</h2>
+    <div><span class="eyebrow">09 · Co se už děje</span><h2 id="h-opatreni">Opatření, která v Česku vznikají v reakci na sucho</h2>
     <p>Od tůní a meandrů přes změny hospodaření, propojování vodovodů a manipulace na přehradách až po nové nádrže a zákony. Filtrujte podle typu opatření.</p></div>
   </div>
 
@@ -1469,11 +1737,12 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
     <details class="more wide" open><summary>Krajina, infrastruktura, řízení a domácnosti<span>5 oblastí</span></summary>
       <div class="prose">      <p>Simulace i odborníci se shodují, že samotné přehrady nestačí. M. Trnka upozorňuje, že při dnešní spotřebě se Česko neobejde bez nových nádrží v horních částech povodí, ale nesmí rezignovat na zadržování vody přírodě blízkými opatřeními.<sup class="ref"><a href="#z-is-akt">[2]</a></sup></p>
       <ul>
+        <li><strong>Půda především.</strong> Když expertní komise navrhovaly asi 400 opatření pro vodní hospodářství a dostaly otázku, který jediný faktor je nejdůležitější, odpověď zněla: zlepšit stav půdy. Zdravá půda o mocnosti 1 m na ploše 1 km² zadrží v průměru 200 000 m³ vody; potenciální retence všech zemědělských a lesních půd je asi 8,4 mld. m³, dnes jsme asi na 5 mld. m³. Pro srovnání: první nová plánovaná přehrada má mít objem v řádu 15 mil. m³. Nejde o argument proti nádržím – ty potřebujeme pro pitnou a užitkovou vodu –, ale o pořadí, v jakém se mají peníze a úsilí rozdělovat: asi 60 % vody se zachytává v půdě.</li>
         <li><strong>Půda:</strong> obnova vsaku přímo tam, kam prší – více organické hmoty, rozrušení utuženého podorničí, vrstevnicové hospodaření, remízky, meze a zatravněné údolnice, aby půda pojala i přívalovou srážku desítek milimetrů bez splachu ornice.</li>
         <li><strong>Krajina:</strong> konec neřízeného odvodňování – přestavba 1,2 mil. ha drenáží na regulační systémy nebo jejich odstranění v prameništích a nivách, obnova mokřadů, mokrých luk a meandrů podle map Stabilního katastru.</li>
         <li><strong>Infrastruktura:</strong> ochrana a budování víceúčelových akumulací (LAPV), propojování vodárenských soustav, terciární čištění a opětovné využití vyčištěné vody, hybridní chlazení nových energetických zdrojů.</li>
         <li><strong>Řízení:</strong> aktualizace manipulačních řádů velkých nádrží s prioritou pitné vody a chlazení jaderných zdrojů i při víceletém deficitu, včasné vyhlašování stavu nedostatku vody, digitální dvojčata povodí (Dyje, Želivka).</li>
-        <li><strong>Domácnosti:</strong> zásoba pitné vody pro 72 hodin, zachytávání dešťové vody, nezalévat v poledne, při vlastní studni sledovat hladinu a mít plán náhradního zdroje.</li>
+        <li><strong>Domácnosti:</strong> zásoba pitné vody pro 72 hodin, zachytávání dešťové vody, nezalévat v poledne, při vlastní studni sledovat hladinu a mít plán náhradního zdroje. Podrobný akční manuál je v kapitole <a href="#p-pripravenost">Připravenost</a>.</li>
       </ul></div>
     </details>
   </section>
@@ -1502,10 +1771,141 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
   </section>
 </section>
 
-<!-- =============================== 9 METODIKA A ZDROJE =============================== -->
-<section class="panel" id="p-zdroje" data-title="Metodika a zdroje" data-icon="i-book" aria-labelledby="h-zdroje">
+<!-- =============================== 10 PŘIPRAVENOST =============================== -->
+<section class="panel" id="p-pripravenost" data-title="Připravenost" data-icon="i-shield" data-area="resit" data-hot="1" aria-labelledby="h-pripravenost">
   <div class="panel-head">
-    <div><span class="eyebrow">09 · Metodika, kontrola dat a zdroje</span><h2 id="h-zdroje">Jak jsme pracovali a odkud data pochází</h2>
+    <div><span class="eyebrow">10 · Manuál domácnosti</span><h2 id="h-pripravenost">Co může udělat domácnost, obec a vlastník pozemku</h2>
+    <p>Od zásoby vody na tři dny přes dešťovou nádrž a stínění po obnovu půdy a vsaku. Praktická část navazuje na sekci <a href="index.html#pripravenost">Připravenost</a> na hlavní stránce Vize 2075 a doplňuje ji o aktualizované poznatky o nakládání s vodou.</p></div>
+  </div>
+
+  <div class="subtabs" role="tablist" aria-label="Části manuálu">
+    <button class="subtab" role="tab" data-sub="sp-prip-voda" aria-selected="true">Voda v domácnosti</button>
+    <button class="subtab" role="tab" data-sub="sp-prip-pozemek" aria-selected="false">Pozemek, dvůr a ulice</button>
+    <button class="subtab" role="tab" data-sub="sp-prip-horko" aria-selected="false">Horko a zdraví</button>
+    <button class="subtab" role="tab" data-sub="sp-prip-programy" aria-selected="false">Programy a dotace</button>
+  </div>
+
+  <!-- ---------- VODA V DOMÁCNOSTI ---------- -->
+  <div class="subpanel on" id="sp-prip-voda" role="tabpanel">
+  <section class="chap" id="prip-zaklad">
+    <div class="cards">
+      <div class="card"><h3>Pravidlo 72 hodin</h3><p>Při výpadku vody, elektřiny nebo zásobování by měl každý zvládnout první tři dny sám. Záchranné složky se pak mohou věnovat těm, kdo jsou v ohrožení života.</p></div>
+      <div class="card"><h3>5 a 10–15 litrů</h3><p>Nouzový příděl na osobu a den: 5 l první dva dny krize, 10–15 l od třetího dne. Běžná spotřeba domácností je 89,7 l na osobu a den.</p></div>
+      <div class="card"><h3>Na cisterny nelze spoléhat</h3><p>Při rozsáhlém výpadku jich není dost ani ve státních rezervách. Vlastní uzavíratelné nádoby jsou proto základ, ne luxus.</p></div>
+      <div class="card"><h3>Něžné prepperství</h3><p>Připravenost není strach z konce světa. Hlavním motivem je láska k blízkým, ne panika – a většina kroků níže zlepší život i v běžných časech.</p></div>
+    </div>
+
+    <h3>Zásoba, úprava a šetření vody</h3>
+    <div class="prose">
+      <p><b>Zásoba.</b> Balená voda nejméně na tři dny – nouzově 2 l na osobu a den, ideálně 3–4 l, protože do spotřeby patří i vaření a základní hygiena. K tomu uzavíratelné kanystry na odběr z cisterny a z náhradního zdroje. Zásobu je potřeba rotovat, ne skladovat navždy.</p>
+      <p><b>Úprava.</b> Vodu z neznámého zdroje je nutné převařit (stačí uvést do varu), filtrovat nebo dezinfikovat; vhodný je gravitační nebo ruční filtr, chemické přípravky přesně podle návodu výrobce. Po obnovení dodávky po rozsáhlém výpadku nepijte vodu z kohoutku bez úpravy, dokud to vodárna nepovolí – do potrubí mohla proniknout kontaminace. Po opětovném napuštění vyschlé studny je nutné nechat vodu laboratorně ověřit, protože se do ní splachují nečistoty.</p>
+      <p><b>Toaleta bez vody.</b> Kbelík s víkem a dvěma pytli, posyp pilinami nebo hlínou; oddělení moči a výkalů výrazně omezí zápach. Zásoba pytlů a toaletního papíru se vyplatí – v roce 2026 obce omezovaly spíš zalévání než splachování, ale při výpadku tlaku ve vyšších patrech je to první, co přestane fungovat.</p>
+      <p><b>Šetření v suchu.</b> Sprcha místo vany, plně naložená myčka, zachytávání „studené“ vody před sprchováním do kbelíku na zálivku, zalévání ráno nebo večer a ke kořenům. Řada obcí v roce 2026 omezila napouštění bazénů a zalévání pitnou vodou; Šindelová na Sokolovsku povolila bazény jen po dohodě s úřadem pod pokutou až 50 tisíc korun.</p>
+      <p><b>Dešťová a šedá voda.</b> Sud na okapu, zahradní nebo akumulační nádrž s využitím na splachování. Dešťové vodě nevadí, že není pitná – a každý litr, který nepotečete z vodovodu, je litr, který zůstane v soustavě pro ostatní. Opětovné využití vody z koupelny (šedá voda) sníží spotřebu pitné vody v domě nejvíc ze všech opatření. Na obojí lze žádat o podporu, viz <a href="#prip-programy">Programy a dotace</a>.</p>
+      <p><b>Náhradní zdroje.</b> Zjistěte, kde jsou ve vašem okolí studny a prameny a jakou mají kvalitu; voda z pramene je pro úpravu lepší než voda z rybníka. A hlavně: zjistěte, <b>odkud bere vodu vaše obec</b> – jestli jste na velké propojené soustavě, nebo na místním vrtu. V nejohroženějších obcích je podle ministra zemědělství přes 90 % obyvatel odkázáno na místní studny a vrty, nikoli na velké soustavy.</p>
+    </div>
+
+    <div class="callout water">
+      <h3 style="font-size:1rem;margin-bottom:6px">Máte vlastní studnu nebo vrt? Tři věci, které mají největší cenu</h3>
+      <ol style="margin:0;padding-left:1.2em;font-size:.95rem;line-height:1.55">
+        <li><b>Měřte hladinu.</b> Jednou měsíčně, do tabulky nebo na papír u studny. Dva roky vlastního měření vám o vašem zdroji řeknou víc než jakákoli mapa – poznáte, jestli hladina kolísá sezonně, nebo setrvale klesá.</li>
+        <li><b>Nespoléhejte na prohloubení.</b> Odborníci VÚV TGM varují, že prohlubování soukromých vrtů si navzájem strhává hladinu a problém nevyřeší; řešením je propojování vodárenských soustav. Václav Cílek k tomu dodává, že zásobníky podzemních vod běžně zaklesávají o 20–40 m – tam, kde se vrty prohlubují, se jen posouvá hranice, kdo vodu vyčerpá dřív.</li>
+        <li><b>Zjistěte, v jakém prostředí jste.</b> V puklinovém krystaliniku (Vysočina, Šumava, Brdy, horské oblasti) studna vyschne v suchém roce jako první, ale po vydatných srážkách se vrátí za týdny až měsíce. V křídové pánvi (Polabí, východní Čechy) poznáte sucho později – zato se zásoba nedoplní jednou vlhkou zimou. Své prostředí si najdete v <a href="#p-simulator">mapovém simulátoru</a>.</li>
+      </ol>
+    </div>
+
+    <h3>Kontrolní seznam 72 hodin</h3>
+    <p class="fig-src" style="margin-bottom:10px">Podle příručky 72 hodin (Ministerstvo vnitra a HZS ČR). Zaškrtnuté položky si pamatuje váš prohlížeč – nikam se neposílají.</p>
+    <div id="prip-check"></div>
+  </section>
+  </div>
+
+  <!-- ---------- POZEMEK ---------- -->
+  <div class="subpanel" id="sp-prip-pozemek" role="tabpanel">
+  <section class="chap" id="prip-pozemek">
+    <header><h2>Zadržte vodu tam, kde spadne</h2>
+    <p class="lede" style="font-size:1.05rem">Každý pozemek, dvůr i balkon může pomoci krajině. Drobná opatření, opakovaná tisíci lidmi, mění vodní bilanci celého města.</p></header>
+
+    <div class="cards">
+      <div class="card"><h3>200 000 m³ na km²</h3><p>Tolik vody zadrží v průměru zdravá půda o mocnosti 1 m na ploše jednoho kilometru čtverečního.</p></div>
+      <div class="card"><h3>8,4 vs. 5,0 mld. m³</h3><p>Potenciální retence všech zemědělských a lesních půd proti dnešnímu stavu. Chybějící 3,3 mld. m³ je důsledek stavu půdy, ne klimatu.</p></div>
+      <div class="card"><h3>15 mil. m³</h3><p>Objem první z nově plánovaných přehrad. Přirozená retenční schopnost půd vysoko předčí kapacitu všech postavených i plánovaných nádrží.</p></div>
+      <div class="card"><h3>60 % vody je v půdě</h3><p>Proto by tam mělo mířit nejméně 60 % úsilí a financí. Modrá voda je v řekách a nádržích, zelená v půdě, šedá ve městě.</p></div>
+    </div>
+
+    <h3>Tři zásady, které platí na každém pozemku</h3>
+    <div class="prose">
+      <ol>
+        <li><b>Zpomalte dráhu vodní kapky.</b> Stromy, keře nebo tráva roztříští velkou kapku na jemný sprej, který postupně sedá do okolí. I nízká hrázka nebo systém hrázek vodu rozlije a zpomalí.</li>
+        <li><b>Prodlužte její cestu.</b> Meandry, přelivy, systém vsakovacích mis, které mají odtok směrovaný do další misy. Přirozené potoky vybřežovaly každé dva roky, a tím podstatně zvyšovaly plochu vsakování.</li>
+        <li><b>Zvětšete zasakovací plochu a zabraňte soustředěnému odtoku.</b> Plánování vždy začíná nahoře – na střeše nebo na svahu nad pozemkem – a pokračuje dolů. Začněte v malém a pozorujte, jak se to osvědčí.</li>
+      </ol>
+      <p>Zadržování vody má tři různé situace a každá potřebuje jinou strategii. <b>Nejúčinnější je zadržet vodu tam, kde spadla</b> – na poli, v lese, na zahradě; nejlépe to umí zdravé půdy a v lese nakypřená hrabanka. <b>Na svazích</b> se zadržování kombinuje s protierozní ochranou: terasy, vsakovací příkopy a rýhy (svejly) a přerušování dlouhých svahů remízky. <b>V údolích</b> jde o revitalizaci toků: prodloužit a zpomalit dráhu vody.</p>
+      <p><b>Travní pásy fungují měřitelně.</b> V různých terénech bylo naměřeno, že snižují rychlost odtoku a zvětšují zasakování o 10–60 %, průměrně asi o třetinu. Český zemědělec se zasakovacími a protierozními pásy přitom často nepočítá – v USA i v Toskánsku bývá zatravněná i spádnice na svahu o malém sklonu a kolem potoka pás široký i deset metrů.</p>
+      <p><b>Co dělá půda.</b> Většina našich půd pojme 120–240 l vody na m³, optimální stav je až 360 l/m³, tenké a kamenité lesní půdy jen 40–80 l/m³. Lesní půda má jinou roli: vodu moc nezadrží, ale posílá ji dál do hlubších zásobníků – pokud je jejich povrch pokrytý kyprou hrabankou, která saje vodu a pozvolna ji propouští.</p>
+      <p><b>Půdní past.</b> Dva typy zhutnění vypadají stejně, ale léčí se jinak. <i>Mechanické</i> zhutnění od těžké techniky se dá rozrušit mrazem nebo hlubokou orbou a udržet jízdou ve vlastní stopě podle GPS. <i>Biochemicky podmíněné</i> zhutnění vzniká tam, kde průmyslová hnojiva a pesticidy rozvrátí půdní život a rozpadnou se půdní agregáty: nejjemnější částice se vplaví do mezer a na povrchu podorničí se vytvoří tmel, který brání průsaku. Je to jako natřít beton penetračním nátěrem. Proto expertní komise na otázku, který jediný faktor je nejdůležitější, odpověděly: <b>zlepšit stav půdy</b>.</p>
+      <p><b>Praskliny.</b> Výsušné praskliny u nás běžně dosahují hloubky 30–40 cm. Zvětšuje se tím odparná plocha, vzniká „komínový efekt“, který vynáší vlhký vzduch rychleji na povrch, a narušuje se tmelící povrchová vrstva, která izoluje hlubší půdní partie. Pomáhají stínící meziplodiny a rostliny s hlubokými kořeny, například vojtěška, které půdu svazují dohromady.</p>
+      <p><b>Podzimní výsadba.</b> Rostliny vysazené na podzim si vybudují větší kořenový systém, lépe snášejí sucho a za vlny veder lépe uchladí nadzemní část. U obilí se dokonce doporučuje podzimní hnojení, protože dusíkatá hnojiva podpoří během teplejší zimy růst kořenů.</p>
+      <p><b>Na zahradě a na dvoře:</b> odpojte okap do nádrže, dešťové zahrady nebo vsakovacího průlehu; kompost, mulč a trvalý porost; propustná dlažba, štěrk nebo zatravňovací tvárnice místo betonu a asfaltu; listnatý strom na jižní straně domu, který v létě stíní a v zimě propouští světlo; nesekat nakrátko – vyšší tráva má povrch až o 10 °C chladnější než holá zem a lépe snáší sucho.</p>
+    </div>
+
+    <div class="callout">
+      <p><b>Co o krajině ukázal rok 2026.</b> Reakce na sucho se lišila region od regionu, a někdy i v rámci jednoho pozemku. Na Českolipsku vyrostla během vlhkého září šťavnatá tráva o délce až 20 cm, kdežto na Třebíčsku na písčitě se rozpadající žule zůstala tráva suchá a zahnědlá bez stop po regeneraci. Z osmi kaštanů na jednom místě mělo sedm napůl zaschlé listy a ten největší byl celý zelený. To je do jisté míry naděje – vždy budou místa, kde se něco urodí. Zároveň je to varování: tam, kde farmářka pod Kašperkem popsala, jak se místo, kde šlo utopit traktor, změnilo za pět let na běžnou louku a dnes je vyprahlé, jde o rychlé vysušování krajiny i v celkově vlhké oblasti. Výnos sena z téže louky klesl z 25 balíků na 12–15 a letos na 8.</p>
+      <p style="margin-top:.6em">Zdroj: V. Cílek, Epilog: suchý rok 2026 (rukopis, 2026).</p>
+    </div>
+  </section>
+  </div>
+
+  <!-- ---------- HORKO A ZDRAVÍ ---------- -->
+  <div class="subpanel" id="sp-prip-horko" role="tabpanel">
+  <section class="chap" id="prip-horko">
+    <header><h2>Horko doma, ve městě a ve stáji</h2>
+    <p class="lede" style="font-size:1.05rem">Vedra zabíjejí tiše, hlavně seniory a osamělé lidi. Pasivní chlazení je levnější a spolehlivější než klimatizace a funguje i při výpadku proudu.</p></header>
+
+    <div class="cards">
+      <div class="card crit"><h3>701 nadměrných úmrtí</h3><p>V českých sledovaných městech v létě 2026; asi 425 z nich (62 %) studie připisuje oteplování způsobenému člověkem.</p></div>
+      <div class="card crit"><h3>+573 lidí</h3><p>Zemřelo v Česku navíc během červnové a červencové vlny veder podle CzechGlobe. Zvýšená úmrtnost pak pokračuje měsíce až půl roku.</p></div>
+      <div class="card"><h3>až +8 °C</h3><p>O tolik bývá ve městě při teplotách nad 30 °C víc než na meteorologické stanici za městem. Měřicí stanice jsou mimo zastavěné plochy.</p></div>
+      <div class="card"><h3>1 z 14</h3><p>Z krajských měst má plán pro vlny veder jen Praha.</p></div>
+    </div>
+
+    <div class="prose">
+      <p><b>Rovnice, která vysvětluje všechno ostatní.</b> Teplota místa = teplota regionu − chlazení. Chlazení je nejúčinnější, když je dost vody na výparné ochlazování, tedy když je půda vlhká a stromy mají dostatek vláhy. Při měření v poledne na předměstí Prahy měl zastíněný trávník 24 °C, ale betonový chodník o několik metrů dál 45 °C. Suchá země se zahřeje snadno: vypasená půda dosahuje až 52 °C, tmavé střechy nad 70 °C. I tmavé pruhy přechodu pro chodce jsou o 2–3 °C teplejší než ty světlé.</p>
+      <p><b>Co dělat v bytě.</b> Větrejte v noci a brzy ráno, pak zavřete okna a zatáhněte závěsy nebo venkovní žaluzie: až 40 % tepla přichází okny a dobře nastavené žaluzie snižují tepelnou zátěž jižní strany až o 70 %. Ráno, dokud se beton neprohřeje, polijte vodou plochu před vchodem nebo balkon – betonová dlažba vodu nasaje a pak chladí. Navlhčené závěsy pomáhají jen při suchém vzduchu.</p>
+      <p><b>Režim dne.</b> Aktivity na ráno a večer, v poledne se vyhýbat rozpáleným plochám, průběžně pít a doplňovat minerály. Volné světlé oblečení zakrývající tělo chrání nad 36 °C lépe než tričko a šortky. Při odpaření jednoho litru potu odvede tělo asi 2,4 MJ energie – proto je dostatek vody doslova chladicí systém.</p>
+      <p><b>Strom je nejlepší klimatizace.</b> Strom s dostatkem vody ochlazuje okolí o 6–12 °C. V suchu proto zalévejte stromy před domem: bez vody tuto funkci ztrácí a sám odumírá. Totéž platí v krajině – usychající modříny v roce 2026 nejdřív výrazně snižovaly korunové teploty, a tím alespoň zpočátku chránily povrch země před přehříváním, pak začaly šetřit vodou a jehlice shodily.</p>
+      <p><b>Sousedská kontrola.</b> Při vlně veder se ozvěte starším sousedům a příbuzným, kteří žijí sami. Více než devět z deseti obětí vln veder v Evropě byli lidé nad 65 let. Rizikem jsou osamělí senioři, lidé s kardiovaskulárním onemocněním, malé děti a lidé pracující venku. V jedné české okresní nemocnici během vlny veder ležela část pacientů na pojízdných lůžkách na chodbě, protože přetížený personál je nestačil ošetřovat.</p>
+      <p><b>Hospodářská zvířata to mají horší než my.</b> Člověk uchladí na metr povrchu kůže víc než kůň a méně než velbloud – a dobytek je na tom mnohem hůř. Komfortní zóna dojnic končí už nad 20 °C: krávy pak omezují příjem potravy a klesá produkce mléka. Prasata a drůbež jsou na teplotu velmi citlivé a ve velkochovech může dojít k hromadnému úhynu. Pomáhají mlžítka, světlá krytina stájí (zlepší welfare a ušetří náklady na klimatizaci) a dostatek napájecí vody. Stres zvířat navíc nekončí letem: vyrostlo méně kvalitní píce, kterou potřebují před chladnými měsíci.</p>
+      <p><b>Psychika.</b> Environmentální stres a solastalgie – tíseň ze ztráty známé krajiny – nejsou módní pojmy. Na úzkost z budoucnosti funguje nejlépe činnost: péče o zeleň, zapojení do komunity, praktická příprava. Naděje je disciplína, ne nálada. Pokud vás úzkost nebo smutek dlouhodobě ochromují, obraťte se na odborníka nebo linku pomoci.</p>
+      <p class="fig-src">Zdroje: Barnes et al., Nature Health (Imperial College London a LSHTM), 2026 · CzechGlobe · EuroMOMO / ECDC · ČHMÚ · V. Cílek, Epilog: suchý rok 2026 (rukopis, 2026) · sekce Připravenost na hlavní stránce Vize 2075.</p>
+    </div>
+  </section>
+  </div>
+
+  <!-- ---------- PROGRAMY ---------- -->
+  <div class="subpanel" id="sp-prip-programy" role="tabpanel">
+  <section class="chap" id="prip-programy">
+    <header><h2>Programy, dotace a projekty – stav k 16. 11. 2026</h2>
+    <p class="lede" style="font-size:1.05rem">Co může využít domácnost, obec, zemědělec a nestátní organizace. Podmínky se v roce 2026 několikrát změnily, proto u každého programu ověřte stav na oficiálním webu.</p></header>
+    <div class="sm-filter" id="prog-filter" role="group" aria-label="Filtr podle toho, kdo může žádat">
+      <button data-kdo="vse" aria-pressed="true">Vše</button>
+      <button data-kdo="domacnost" aria-pressed="false">Domácnost</button>
+      <button data-kdo="obec" aria-pressed="false">Obec a instituce</button>
+      <button data-kdo="zemedelec" aria-pressed="false">Zemědělec a vlastník</button>
+      <button data-kdo="nno" aria-pressed="false">Spolky a NNO</button>
+    </div>
+    <div id="prog-list"></div>
+    <div class="callout water">
+      <p><b>Pozor na jednu změnu, kterou většina textů o dotacích ještě neuvádí.</b> Samostatný program Dešťovka skončil a podpora na nádrž je dnes podprogramem Nové zelené úsporám. V etapě 2026+ už na samotnou nádrž žádat nelze – musí být součástí širší renovace domu, případně financovaná bezúročným úvěrem, který také nelze čerpat samostatně. Než začnete plánovat, ověřte podmínky na <a href="https://novazelenausporam.cz/" target="_blank" rel="noopener">novazelenausporam.cz</a>.</p>
+    </div>
+  </section>
+  </div>
+</section>
+
+<!-- =============================== 11 METODIKA A ZDROJE =============================== -->
+<section class="panel" id="p-zdroje" data-title="Metodika a zdroje" data-icon="i-book" data-area="resit" aria-labelledby="h-zdroje">
+  <div class="panel-head">
+    <div><span class="eyebrow">11 · Metodika, kontrola dat a zdroje</span><h2 id="h-zdroje">Jak jsme pracovali a odkud data pochází</h2>
     <p>Ověření podkladových analýz, popis simulací, jejich limity a úplný seznam zdrojů.</p></div>
   </div>
   <div class="subtabs" role="tablist" aria-label="Části kapitoly">
@@ -1546,8 +1946,8 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
       <p><strong>Krátkodobý model kaskády (kapitola 07)</strong> počítá zásobu Lipna, Orlíku a Slap (827 mil. m³) a průtok pod Vraným po měsících XI/2026–X/2027. Srážky (zimní úhrn XII–II, ostatní měsíce v % normálu) nejdřív doplňují půdní deficit 50 mm a deficit hlubších podzemních vod, teprve zbytek odtéká. Sníh je část zimních srážek: tlumí výpar a taje v březnu a dubnu na nasycenou půdu, takže z něj odteče větší podíl než ze zimního deště. Retence krajiny zadrží část rychlého odtoku v mokřadech a nivách a vrací ho postupně; zdravá půda s pokryvem omezuje neproduktivní výpar. Čtvrtina průtoku ve Vraném přitéká z mezipovodí pod kaskádou (hlavně Sázava). Kaskáda vypouští zvolený odtok, a pokud přirozený průtok nestačí, dotuje ho ze zásoby, dokud nějaká zbývá; v zimě drží volný ochranný prostor. Model je hmotově bilanční a nastavený tak, aby průměrná zima doplnila kaskádu jen zhruba na polovinu a k úplnému doplnění bylo potřeba asi 250–300 mm zimních srážek, jak uvádí Povodí Vltavy.</p>
       <p><strong>Podkladová analýza.</strong> Část údajů v kapitolách 02–10 vychází z dokumentu „Analýza sucha v ČR“ (říjen 2026), který autor webu připravil jako podklad. Klíčová čísla jsme ověřili v primárních zdrojích (ČHMÚ, MZe, Povodí Vltavy); kde se lišila, uvádíme hodnotu z primárního zdroje – například podíl 65 % v povodí Berounky se týká meziročního poklesu hladiny, ne podnormálního stavu, a nádrže Povodí Odry byly podle tabulek MZe naplněny na 81–95 %.</p>
       <p><strong>Limity:</strong> model nerozlišuje regiony (Morava je sušší než hory), nepočítá s kvalitou vody, změnou rozložení srážek během roku ani s krizovými opatřeními. Ekonomický odhad pro zemědělství je přepočet podle hloubky půdního sucha kalibrovaný na odhad −20 mld. Kč v roce 2026. Výsledky proto čtěte jako porovnání „co když“, nikoli jako prognózu. Pro skutečné rozhodování slouží studie ČHMÚ, CzechGlobe a digitální dvojčata povodí.</p>
-      <p><strong>Mapa ohrožení (kapitola 03).</strong> Vrstva „Půdní sucho“ přepisuje textový souhrn InterSucho k 8. 11. 2026 do krajů: barva udává nejvyšší stupeň sucha v profilu 0–100 cm, který InterSucho v části kraje uvádí. Vrstva „Ohrožení zásobování vodou“ vychází ze stupnice 1–5 v podkladové analýze „Rizika sucha v ČR 2027“, opravené podle aktuálních dat (viz Kontrola dat). Matice infrastruktury a výhled dopadů jsou kvalitativní syntézou autora webu ze zdrojů a ze simulace; nejde o oficiální hodnocení státu.</p>
-      <p><strong>Výhled 2027–2075 (kapitola 04).</strong> Graf četnosti kritických let se počítá ve stránce stejným modelem jako simulace do roku 2075 pro předvolené scénáře „Návrat k normálu“, „Pokračující trend“, „Adaptovaná krajina“ a „Opakující se rok 2026“ (vždy 120 průběhů počasí).</p>
+      <p><strong>Mapa ohrožení (kapitola 04).</strong> Vrstva „Půdní sucho“ přepisuje textový souhrn InterSucho k 8. 11. 2026 do krajů: barva udává nejvyšší stupeň sucha v profilu 0–100 cm, který InterSucho v části kraje uvádí. Vrstva „Ohrožení zásobování vodou“ vychází ze stupnice 1–5 v podkladové analýze „Rizika sucha v ČR 2027“, opravené podle aktuálních dat (viz Kontrola dat). Matice infrastruktury a výhled dopadů jsou kvalitativní syntézou autora webu ze zdrojů a ze simulace; nejde o oficiální hodnocení státu.</p>
+      <p><strong>Výhled 2027–2075 (kapitola 05).</strong> Graf četnosti kritických let se počítá ve stránce stejným modelem jako simulace do roku 2075 pro předvolené scénáře „Návrat k normálu“, „Pokračující trend“, „Adaptovaná krajina“ a „Opakující se rok 2026“ (vždy 120 průběhů počasí).</p>
     </div>
   </section>
   </div>
@@ -1654,6 +2054,23 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
       <li id="z-ctk-doksany">Noc na dnešek byla pravděpodobně nejteplejší v této vlně veder (Doksany 41,9 °C, 28. 6. 2026). <span class="m">ČTK / České noviny, 29. 6. 2026.</span> <a href="https://www.ceskenoviny.cz/zpravy/noc-na-dnesek-byla-pravdepodobne-nejteplejsi-v-teto-vlne-veder/2844925" target="_blank" rel="noopener">ceskenoviny.cz</a></li>
       <li id="z-ct-vedra-48">Polovina stanic překonala či dorovnala absolutní teplotní rekord. Nejvíce naměřili v Plzni (41,5 °C, 4. 8. 2026). <span class="m">ČT24, 4. 8. 2026.</span> <a href="https://ct24.ceskatelevize.cz/clanek/pocasi/prvni-rekord-padl-uz-pred-devatou-sledujte-jak-rostou-teploty-376243" target="_blank" rel="noopener">ct24.ceskatelevize.cz</a></li>
       <li id="z-ctk-straznice">Ve Strážnici je 41 °C, rekord pro Moravu padl třetí den po sobě. <span class="m">ČTK / České noviny, 5. 8. 2026.</span> <a href="https://www.ceskenoviny.cz/zpravy/ve-straznici-je-41%C2%B0c-rekord-pro-moravu-padl-treti-den-po-sobe/2858874" target="_blank" rel="noopener">ceskenoviny.cz</a></li>
+      <li id="z-nature-heat">Barnes, C. et al.: Nadúmrtí při vlnách veder v evropských městech v létě 2026. <span class="m">Nature Health, 2026 (Imperial College London a London School of Hygiene &amp; Tropical Medicine); 854 měst ve 30 zemích, ≈ 50 391 nadměrných úmrtí, z toho ≈ 32 619 připsáno změně klimatu.</span></li>
+      <li id="z-irozhlas-heat">V Česku zemřelo přes 400 lidí kvůli horkům zesíleným změnou klimatu. <span class="m">iROZHLAS, 23. 10. 2026 (701 nadměrných úmrtí v českých sledovaných městech, ≈ 425 připsáno změně klimatu).</span> <a href="https://www.irozhlas.cz/zivotni-styl/zdravi/v-cesku-zemrelo-pres-400-lidi-kvuli-horkum-zesilenym-zmenou-klimatu-v-evrope_2610230732_ako" target="_blank" rel="noopener">irozhlas.cz</a></li>
+      <li id="z-czechglobe-nadumrti">Při červnové vlně veder zemřelo v Česku více lidí, než je obvyklé (CzechGlobe: +573 úmrtí během červnové a červencové vlny). <span class="m">ČT24, 2026.</span> <a href="https://ct24.ceskatelevize.cz/clanek/veda/pri-cervnove-vlne-veder-zemrelo-v-cesku-vic-lidi-nez-je-obvykle-376485" target="_blank" rel="noopener">ct24.ceskatelevize.cz</a></li>
+      <li id="z-ct-veder50">Letošní vlny veder zabily v evropských městech 50 tisíc lidí, ukazuje model. <span class="m">ČT24, 2026.</span> <a href="https://ct24.ceskatelevize.cz/clanek/veda/letosni-vlny-veder-zabily-v-evropskych-mestech-50-tisic-lidi-ukazuje-model-378945" target="_blank" rel="noopener">ct24.ceskatelevize.cz</a></li>
+      <li id="z-mzp-hodnoceni">Hodnocení změny klimatu a adaptačních potřeb ČR 2025 (doplnění Komplexní studie dopadů). <span class="m">ČHMÚ ve spolupráci s Ústavem výzkumu globální změny AV ČR; vydalo MŽP, 2026. Ansámbl CMIP6: medián +2,0 °C k roku 2045 a +3,1 °C k roku 2075 proti 1981–2010; tropické dny 7 → 22 → 30; tropické noci 0,1 → 1,8 → 5,6.</span> <a href="https://mzp.gov.cz/system/files/2026-03/OAZK_Hodnoceni_zmeny_klimatu_a_adaptacnich_potreb_CR_2025-20260301.pdf" target="_blank" rel="noopener">mzp.gov.cz (PDF)</a></li>
+      <li id="z-opk">Politika ochrany klimatu v České republice – aktualizace pro období 2025 až 2050. <span class="m">MŽP, 2025.</span> <a href="https://mzp.gov.cz/system/files/2025-11/OPOK-POK-Aktualizace-20251106.pdf" target="_blank" rel="noopener">mzp.gov.cz (PDF)</a></li>
+      <li id="z-cgs-rebilance">Rebilance zásob podzemních vod – závěrečné zprávy hydrogeologických rajonů. <span class="m">Česká geologická služba, 2016.</span> <a href="https://www.cgs.gov.cz/" target="_blank" rel="noopener">cgs.gov.cz</a></li>
+      <li id="z-szu-voda">Zpráva o kvalitě pitné vody v ČR za rok 2024. <span class="m">Státní zdravotní ústav, 2025. Z podzemních zdrojů bylo zásobeno 38,97 % obyvatel, z povrchových 37,44 % a ze smíšených 23,59 %.</span> <a href="https://szu.gov.cz/wp-content/uploads/2025/08/voda_2024.pdf" target="_blank" rel="noopener">szu.gov.cz (PDF)</a></li>
+      <li id="z-opzp-vyzvy">Operační program Životní prostředí – nabídka dotací (výzvy 73, 104, 105 a 109). <span class="m">MŽP a SFŽP ČR, stav k 16. 11. 2026. 105. výzva: zachytávání srážkových a šedých vod, 200 mil. Kč, příjem do 17. 12. 2026. 109. výzva: protipovodňová opatření a retence krajiny, 2,6 mld. Kč, příjem do 17. 12. 2026.</span> <a href="https://opzp.cz/nabidka-dotaci/" target="_blank" rel="noopener">opzp.cz</a></li>
+      <li id="z-opzp-tune">Vzniknou další tůně, mokřady, remízky či stromořadí – MŽP uvolňuje 330 milionů na zadržení vody v krajině a více zeleně v obcích. <span class="m">MŽP, 2026.</span> <a href="https://opzp.cz/tiskova-zprava/72" target="_blank" rel="noopener">opzp.cz</a></li>
+      <li id="z-nzu">Nová zelená úsporám 2026+ – podpora akumulace srážkové a přečištěné odpadní vody (dříve samostatný program Dešťovka). <span class="m">MŽP a SFŽP ČR; v roce 2026 nelze o podporu nádrže žádat samostatně, jen v rámci širší renovace domu.</span> <a href="https://novazelenausporam.cz/" target="_blank" rel="noopener">novazelenausporam.cz</a></li>
+      <li id="z-mze-poplatky">Ministerstvo zemědělství plánuje skokové zdražení podzemních vod. <span class="m">ČTK / České noviny, listopad 2026. Poplatky za odběr podzemních vod se neměnily 20 let; výnosy mají financovat propojování vodárenských soustav, čistírny a nové zdroje.</span> <a href="https://www.ceskenoviny.cz/zpravy/ministerstvo-zemedelstvi-planuje-skokove-zdrazeni-podzemnich-vod/2897651" target="_blank" rel="noopener">ceskenoviny.cz</a></li>
+      <li id="z-chmu-rieder">Sucho se prohlubuje. Řeky mají historicky nejnižší průtoky, říká šéf hydrometeorologického ústavu. <span class="m">iROZHLAS, 7. 11. 2026. Z asi 550 vodoměrných stanic bylo zhruba 180 pod úrovní hydrologického sucha; listopad podle dlouhodobého výhledu srážkově podprůměrný až průměrný.</span> <a href="https://www.irozhlas.cz/veda-technologie/priroda/sucho-se-prohlubuje-reky-maji-historicky-nejnizsi-prutoky-rika-sef_2611070010_jos" target="_blank" rel="noopener">irozhlas.cz</a></li>
+      <li id="z-brno-zdroje">Potoky mizí, kohoutky tečou dál. Jak dlouho Česko podrží přehrady? <span class="m">INFO.CZ, 2026. Brno: za prvních sedm měsíců 2026 tvořila podzemní voda z prameniště Březová ≈ 63 % a povrchová voda z nádrže Vír ≈ 37 % dodávky.</span> <a href="https://www.info.cz/zpravodajstvi-a-komentare/sucho-cesko-prehrady-pitna-voda" target="_blank" rel="noopener">info.cz</a></li>
+      <li id="z-msk-plan">Plán pro zvládání sucha a nedostatku vody Moravskoslezského kraje. <span class="m">1. verze, 2022. Povrchová voda zásobuje ≈ 74 % obyvatel kraje, podzemní ≈ 12 %.</span> <a href="https://www.msk.cz/assets/temata/zivotni_prostredi/plan_pro_sucho_msk_verejna_1.pdf" target="_blank" rel="noopener">msk.cz (PDF)</a></li>
+      <li id="z-khk-sucho">Plán pro sucho Královéhradeckého kraje (GEOtest, prosinec 2022) – podklad pro kapitolu o Hradci Králové a pro vrstvu zásobování v mapě. <a href="https://www.khk.cz/" target="_blank" rel="noopener">khk.cz</a></li>
+      <li id="z-cilek-epilog">CÍLEK, Václav: <i>Epilog: suchý rok 2026</i> a kapitoly o klimatických a environmentálních rizicích. <span class="m">Rukopis, 2026 (dosud nepublikováno; kniha vychází v roce 2027, proto zde odkazujeme na jednotlivé kapitoly, nikoli na publikaci). Kapitoly vycházejí z institucionálního projektu Geologického ústavu AV ČR, RVO 67985939. Z tohoto zdroje pochází terénní bilance roku 2026, čísla ke Clausius-Clapeyronově rovnici a chybějícím srážkám, neviditelné sucho a data GRACE, oceánské proudění, retenční kapacity půd, půdní past a pozorování o lesích, rybnících a hospodářských zvířatech.</span> <a href="https://cs.wikipedia.org/wiki/V%C3%A1clav_C%C3%ADlek" target="_blank" rel="noopener">o autorovi</a></li>
       <li id="z-rizika27">Rizika sucha v ČR 2027 – komplexní analýza hydrologického sucha a krizové výhledy. <span class="m">Listopad 2026, nepublikovaný podkladový dokument autora webu; údaje ověřeny – viz Kontrola dat.</span></li>
     </ol>
   </section>
@@ -1666,7 +2083,7 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
 
 <footer class="foot">
   <div class="wrap">
-    <a href="https://www.databazeknih.cz/autori/jaroslav-svoboda-17301" target="_blank" rel="noopener"><strong>© Jaroslav Svoboda</strong></a>, Hradec Králové 2026 · součást webu <a href="index.html">Vize 2075</a> · s technickou podporou <a href="https://www.spse.cz/" target="_blank" rel="noopener"><strong>SPŠE a VOŠ Pardubice</strong></a> · základní analýza k 30. 10. 2026, aktualizace k 13. 11. 2026
+    <a href="https://www.databazeknih.cz/autori/jaroslav-svoboda-17301" target="_blank" rel="noopener"><strong>© Jaroslav Svoboda</strong></a>, Hradec Králové 2026 · součást webu <a href="index.html">Vize 2075</a> · s technickou podporou <a href="https://www.spse.cz/" target="_blank" rel="noopener"><strong>SPŠE a VOŠ Pardubice</strong></a> · základní analýza k 30. 10. 2026, aktualizace k 16. 11. 2026
   </div>
 </footer>
 
@@ -2570,9 +2987,16 @@ wireRefs(document);
 /* ---------- Panely a menu ---------- */
 const panels = $$(".panel");
 const navlist = $("#navlist"), sheet = $("#sheet"), appnav = $("#appnav");
+const AREAS = { uvod: "Úvod a varování", mapa: "Mapa a lokální diagnostika", kapitoly: "Hloubkové kapitoly", resit: "Co dělat a odkud data" };
+let lastArea = null;
 panels.forEach((p, i) => {
   const mkBtn = () => { const a = document.createElement("a"); a.className = "navbtn" + (p.dataset.hot ? " hot" : ""); a.href = "#" + p.id; a.dataset.p = p.id;
     a.innerHTML = `<svg aria-hidden="true"><use href="#${p.dataset.icon}"/></svg><span class="num">${String(i + 1).padStart(2, "0")}</span>${p.dataset.title}`; return a; };
+  if (p.dataset.area && p.dataset.area !== lastArea) {
+    lastArea = p.dataset.area;
+    const mkArea = () => { const e = document.createElement("span"); e.className = "navarea"; e.textContent = AREAS[lastArea] || lastArea; return e; };
+    navlist.appendChild(mkArea()); sheet.appendChild(mkArea());
+  }
   navlist.appendChild(mkBtn()); sheet.appendChild(mkBtn());
   const nav = document.createElement("nav"); nav.className = "pnav"; nav.setAttribute("aria-label", "Předchozí a další kapitola");
   if (i > 0) nav.innerHTML += `<a class="prev" href="#${panels[i - 1].id}"><span>‹ předchozí</span><b>${panels[i - 1].dataset.title}</b></a>`;
@@ -2604,6 +3028,7 @@ panels.forEach((p, i) => {
 $("#menu-toggle").addEventListener("click", () => { const o = appnav.classList.toggle("open"); $("#menu-toggle").setAttribute("aria-expanded", o ? "true" : "false"); });
 let curPanel = null;
 const onShow = {};
+window.__suchoOnShow = onShow;
 function showPanel(p, sub) {
   if (!p) return;
   if (curPanel !== p) {
@@ -2815,6 +3240,25 @@ redrawAll = function () { _redraw2(); if (curPanel && curPanel.id === "p-mapa") 
 resetDetail(); paintMap(); drawMarkers(); wireRefs(document);
 route(location.hash ? "load" : null);
 
+})();
+</script>
+<script src="assets/vendor/leaflet/leaflet.js"></script>
+<script src="assets/js/sucho-mapa-data.js"></script>
+<script src="assets/js/sucho-model.js"></script>
+<script src="assets/js/sucho-panel.js"></script>
+<script src="assets/js/sucho-mapa.js"></script>
+<script src="assets/js/sucho-prip.js"></script>
+<script>
+/* Mapa se inicializuje teprve ve chvíli, kdy je její panel poprvé vidět –
+   Leaflet potřebuje viditelný kontejner se známými rozměry. */
+(function () {
+  var hook = window.__suchoOnShow;
+  if (!hook || !window.SM) return;
+  var done = false;
+  hook["p-simulator"] = function () {
+    if (!done) { done = true; if (SM.boot) SM.boot(); }
+    if (SM.fit) { setTimeout(SM.fit, 60); setTimeout(SM.fit, 320); }
+  };
 })();
 </script>
 </body>
