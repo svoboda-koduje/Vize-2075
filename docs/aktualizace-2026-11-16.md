@@ -105,11 +105,14 @@ Mapa je teď **první obsah stránky**:
   01 Mapový simulátor, 02 Přehled, 03 Stav teď, 04 Mapa ohrožení; zbytek beze změny.
 - **Hlavička je kompaktní.** KPI dlaždice, audio shrnutí, ilustrace a řádek s metadaty se
   přesunuly z hlavičky do panelu Přehled (nic se nesmazalo). Na mapovém panelu se perex
-  a stavové odznaky skládají vedle titulku. Mapa tak začíná asi 515–600 px od horního
-  okraje místo původních 1570 px – při načtení je vidět 45–75 % mapy podle velikosti okna.
-- **Mapa na maximální ergonomické šířce.** Nad 1280 px se dashboard rozšiřuje mimo hlavní
-  sloupec textu na `min(1760px, 100vw − 72px)`; mapa dostává 1,5–1,62 dílu šířky proti
-  1 dílu diagnostického panelu. Vyhledávání se přesunulo dovnitř mapového rámu,
+  a stavové odznaky skládají vedle titulku. Mapa tak začíná **509–601 px** od horního
+  okraje místo původních 1570 px – při načtení je podle velikosti okna vidět 43–100 % mapy
+  (naměřeno na 390, 768, 1024, 1280, 1440, 1600, 1920 a 2560 px).
+- **Mapa na maximální ergonomické šířce.** Do 1279 px je rozvržení jednosloupcové a mapa
+  zabírá celou šířku (958 px při okně 1040 px, 1158 px při 1279 px). Od 1280 px se dashboard
+  rozšiřuje mimo hlavní sloupec textu na `min(1760px, 100vw − 72px)` a mapa dostává
+  1,5–1,62 dílu šířky proti 1 dílu diagnostického panelu, který je tak vidět vedle mapy
+  bez posouvání (708 px při 1280, 804 px při 1440, 1071 px od 1920 px výš). Vyhledávání se přesunulo dovnitř mapového rámu,
   ovládání měřítka je vpravo nahoře.
 - **Prostor na popisky a nápovědu.** Pod mapou je blok „Jak mapu používat“ se čtyřmi kroky,
   legenda barevné stupnice, popis vrstvy s odkazem na kapitolu a teprve pak ovládání
@@ -122,6 +125,45 @@ Mapa je teď **první obsah stránky**:
   „Šedé popisky jsou názvy částí studie, rámečky jsou kapitoly“. Dlaždice kapitol mají
   výzvu „Otevřít kapitolu →“.
 
-Kontrola po přestavbě: 0 chyb v konzoli ve světlém i tmavém režimu na 390, 1280, 1440
-a 1920 px, všech 11 panelů a jejich podkarty se vykreslují, všech 8 dlaždic kapitol vede
-na správný panel i podkartu, 0 nefunkčních kotev, HTML bez nepárových značek.
+Kontrola po přestavbě: 0 chyb v konzoli v **11 konfiguracích** – 390, 768, 1024, 1280,
+1440, 1920 a 2560 px, z toho 390, 1280, 1440 a 1920 px i v tmavém režimu. V každé z nich
+se prošlo všech 11 panelů a 16 podkaret, všech 8 vrstev mapy, 3 scénáře a 5 časových
+horizontů. Všech 8 dlaždic kapitol vede na správný panel i podkartu, 0 nefunkčních kotev,
+HTML bez nepárových značek, žádné vodorovné přetečení stránky.
+
+## Kontrola překryvů a čitelnosti (16. 11. 2026, druhé kolo)
+
+### Co se opravovalo
+1. **Blok „Jak mapu používat" vyčníval přes sousední prvky.** Při přestavbě
+   rozvržení se nápověda přesunula dovnitř sloupce mapy (`.sm-app`), ale pravidlo
+   pro rozšíření mimo textový sloupec na ni stále mířilo. Posun
+   `margin-left:50%; transform:translateX(-50%)` se tak uplatnil podruhé a blok
+   přesahoval doleva přes rámeček s popisem vrstvy i přes upozornění pod ním.
+   Pravidlo je nově omezeno na přímé potomky panelu:
+   `#p-simulator>.sm-app, #p-simulator>.sm-navazky`.
+2. **Rozbalená nabídka na mobilu přetékala pod spodní okraj okna.** Poslední
+   položka (11 · Metodika a zdroje) byla nedosažitelná. Nabídka se nyní při
+   otevření přišpendlí k hornímu okraji a má `max-height:calc(100dvh - 150px)`
+   s vlastním rolováním.
+3. **Drobné popisky pod hranicí čitelnosti.** Zvětšeno: `.sm-laystrip-l` a
+   `.sm-find-l` z .62 na .68 rem, `.sm-score small` a `.sm-row-v small` z .64 na
+   .69 rem, mobilní `.kpi .s` z .6 na .68 rem (9,6 → 10,9 px).
+
+### Jak se to ověřovalo
+- `test/audit.py` – 11 panelů × 16 podkaret při 1920 tmavý / 1440 / 1280 / 1024 /
+  390 px, s rozbalenými všemi `<details>` a všemi devíti otázkami. Sleduje
+  překryvy textu, vyjetí z okna, ořezaný text a písmo pod 10,5 px.
+  Výsledek: **0 nálezů.** (Jediný zbylý údaj – text 10 jednotek v ilustraci
+  v Přehledu – je planý poplach: SVG se zvětšuje, text se vykresluje na 15,1 px
+  při 1920 px a 12,2 px při 1024 px, na mobilu je ilustrace skrytá.)
+- `test/overlay.py` – výsuvné a plovoucí prvky: nabídka vyhledávání nad mapou,
+  bublina vodního díla, tlačítko Nahoru, lepivá navigace, mobilní nabídka
+  a diagnostický panel vůči lepivému sloupci mapy, ve čtyřech kombinacích šířky
+  a světlého/tmavého režimu. Výsledek: **0 problémů.**
+- `test/reg2.py` – plná regrese na 11 konfiguracích: 0 chyb konzole, 11 panelů /
+  16 podkaret / 9 otázek / 8 řádků / 8 dlaždic všude.
+
+### Známé chování, které není chyba
+Na hranici 1279/1280 px se rozvržení přepíná z jednoho sloupce na dva. Mapa se
+přitom zúží (1158 → 708 px), protože vedle ní nastoupí diagnostický panel.
+Je to záměr: od 1280 px výš vidí uživatel mapu i výsledky najednou bez rolování.

@@ -18,10 +18,10 @@
 /* ---------- rozvržení dashboardu ---------- */
 .sm-app{margin-top:18px}
 .sm-dash{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,1fr);gap:20px;align-items:start}
-@media (max-width:1040px){.sm-dash{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:1279px){.sm-dash{grid-template-columns:minmax(0,1fr)}}
 
 .sm-mapcol{position:sticky;top:104px}
-@media (max-width:1040px){.sm-mapcol{position:static}}
+@media (max-width:1279px){.sm-mapcol{position:static}}
 
 /* ---------- ovládací pruh ---------- */
 .sm-bar{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
@@ -81,7 +81,8 @@
 .sm-mapbox{position:relative;border:1px solid var(--line-strong);border-radius:var(--radius);
   overflow:hidden;box-shadow:var(--shadow);background:var(--surface-2)}
 #sm-map{height:min(56vh,500px);min-height:330px;background:var(--surface-2)}
-@media (max-width:1040px){#sm-map{height:min(52vh,420px);min-height:300px}}
+@media (max-width:1279px){#sm-map{height:min(56vh,520px);min-height:300px}}
+@media (max-width:620px){#sm-map{height:min(52vh,420px)}}
 #sm-map.has-base .sm-field{opacity:.74}
 .sm-field{image-rendering:auto}
 .sm-lab{font-family:var(--font-ui);font-size:.68rem;font-weight:600;color:var(--ink);
@@ -123,7 +124,7 @@
   padding:6px 10px;min-width:84px}
 .sm-score b{display:block;font-family:var(--font-display);font-size:1.7rem;font-weight:760;line-height:1;
   font-variant-numeric:tabular-nums}
-.sm-score small{display:block;font-size:.64rem;color:var(--ink-2);margin-top:3px;line-height:1.25}
+.sm-score small{display:block;font-size:.69rem;color:var(--ink-2);margin-top:3px;line-height:1.25}
 
 .sm-grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px;margin:12px 0}
 .sm-grid4>div{background:var(--surface-2);border-radius:var(--radius-s);padding:8px 10px}
@@ -150,7 +151,7 @@
 .sm-row-n small{display:block;font-size:.7rem;color:var(--muted);font-weight:400}
 .sm-row-v{text-align:right}
 .sm-row-v b{font-family:var(--font-display);font-size:1.05rem;font-weight:740;font-variant-numeric:tabular-nums}
-.sm-row-v small{display:block;font-size:.64rem;color:var(--ink-2)}
+.sm-row-v small{display:block;font-size:.69rem;color:var(--ink-2)}
 .sm-spark{display:flex;align-items:flex-end;gap:2px;height:26px}
 .sm-spark i{display:block;flex:1;min-width:4px;border-radius:1px 1px 0 0;background:currentColor;opacity:.85}
 
@@ -270,9 +271,11 @@
 
 /* ---------- mapa na maximální ergonomické šířce ---------- */
 @media (min-width:1280px){
-  #p-simulator .sm-app{width:min(1760px,calc(100vw - 72px));margin-left:50%;transform:translateX(-50%)}
-  #p-simulator .sm-help,
-  #p-simulator .sm-navazky{width:min(1760px,calc(100vw - 72px));margin-left:50%;transform:translateX(-50%)}
+  /* Rozšíření mimo textový sloupec se smí použít JEN na přímé potomky panelu.
+     Blok nápovědy je uvnitř .sm-app, takže by se posun aplikoval podruhé
+     a panel by vyčníval doleva přes okolní obsah. */
+  #p-simulator>.sm-app,
+  #p-simulator>.sm-navazky{width:min(1760px,calc(100vw - 72px));margin-left:50%;transform:translateX(-50%)}
   .sm-dash{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px}
 }
 @media (min-width:1700px){.sm-dash{grid-template-columns:minmax(0,1.62fr) minmax(0,1fr)}}
@@ -357,11 +360,11 @@
 
 .sm-toolrow{display:flex;gap:10px;align-items:flex-end}
 .sm-find{flex:1;position:relative}
-.sm-find-l{display:block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;
+.sm-find-l{display:block;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;
   text-transform:uppercase;color:var(--muted);margin-bottom:4px}
 
 .sm-laystrip{display:flex;align-items:center;gap:9px;min-width:0}
-.sm-laystrip-l{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+.sm-laystrip-l{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
   color:var(--muted);flex:none}
 .sm-laystrip .sm-layers{display:flex;gap:5px;overflow-x:auto;padding:2px 2px 6px;flex:1;min-width:0;
   scrollbar-width:thin}
