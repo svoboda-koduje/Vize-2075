@@ -260,6 +260,7 @@ ol.sources{font-size:.86rem;line-height:1.5;padding-left:1.6em;max-width:90ch}
 ol.sources li{margin:.35em 0}
 ol.sources .m{color:var(--muted)}
 .foot{padding-block:26px;border-top:1px solid var(--line);font-size:.86rem;color:var(--ink-2)}
+.foot-counter{margin-top:10px;font-family:var(--font-mono);font-size:.78rem;color:var(--muted)}.foot-counter strong{color:var(--ink-2);font-variant-numeric:tabular-nums}
 .linkcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:14px}
 .linkcards a{display:block;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-s);padding:12px 14px}
 .linkcards a:hover{border-color:var(--labe)}
@@ -2171,6 +2172,7 @@ html:not(.js) .appnav,html:not(.js) .subtabs{display:none}
 <footer class="foot">
   <div class="wrap">
     <a href="https://www.databazeknih.cz/autori/jaroslav-svoboda-17301" target="_blank" rel="noopener"><strong>© Jaroslav Svoboda</strong></a>, Hradec Králové 2026 · součást webu <a href="index.html">Vize 2075</a> · s technickou podporou <a href="https://www.spse.cz/" target="_blank" rel="noopener"><strong>SPŠE a VOŠ Pardubice</strong></a> · základní analýza k 30. 10. 2026, aktualizace k 16. 11. 2026
+    <div class="foot-counter" id="visit-counter" hidden>Počet návštěv: <strong id="visit-count">–</strong></div>
   </div>
 </footer>
 
@@ -3348,6 +3350,26 @@ route(location.hash ? "load" : null);
     if (!done) { done = true; if (SM.boot) SM.boot(); }
     if (SM.fit) { setTimeout(SM.fit, 60); setTimeout(SM.fit, 320); }
   };
+})();
+</script>
+<script>
+/* Počitadlo návštěv (counterapi.dev) – navýší se max. jednou za relaci prohlížeče, jinak jen čte. */
+(function () {
+  var NS = "svoboda-koduje-vize-2075", KEY = "sucho-a-voda-2026";
+  var box = document.getElementById("visit-counter"), out = document.getElementById("visit-count");
+  if (!box || !out || !window.fetch) return;
+  var counted = false;
+  try { counted = sessionStorage.getItem("vize2075-sucho-visit") === "1"; } catch (e) {}
+  var url = "https://api.counterapi.dev/v1/" + NS + "/" + KEY + (counted ? "" : "/up");
+  fetch(url, { cache: "no-store" })
+    .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+    .then(function (d) {
+      if (typeof d.count !== "number") throw 0;
+      out.textContent = d.count.toLocaleString("cs-CZ");
+      box.hidden = false;
+      try { sessionStorage.setItem("vize2075-sucho-visit", "1"); } catch (e) {}
+    })
+    .catch(function () { /* služba nedostupná – počitadlo zůstane skryté */ });
 })();
 </script>
 </body>
